@@ -38,12 +38,9 @@
     		<name>Beatriz</name>
     		<email>beallasai@alum.us.es</email>
     		<roles>
-    			<role>team member</role>
+    			<role>Team member</role>
     		</roles>
     	</developer>
-    </developers>
-
-	<developers>
  		<developer>
  			<id>isadede</id>
  			<name>Isabel</name>
@@ -52,7 +49,38 @@
  				<role>Team member</role>
  			</roles>
  		</developer>
-
+ 		<developer>
+ 			<id>Alesancab1</id>
+ 			<name>Alejandro</name>
+ 			<email>alesancab@alum.us.es</email>
+ 			<roles>
+ 				<role>Team member</role>
+ 			</roles>
+ 		</developer>
+ 		<developer>
+ 			<id>fergongar1</id>
+ 			<name>Fernando José González García</name>
+			<email>fergongar1@alum.us.es</email>
+ 			<roles>
+				<role>Team member</role>
+ 			</roles>
+ 		</developer>
+ 		 		<developer>
+ 			<id>ivaromcos</id>
+ 			<name>Iván Romero Costa</name>
+			<email>ivaromcos@alum.us.es</email>
+ 			<roles>
+				<role>Team member</role>
+ 			</roles>
+ 		</developer>
+ 		<developer>
+ 			<id>jorruirui1</id>
+ 			<name>Jorge Luis Ruiz-Henestrosa Ruiz</name>
+			<email>jorruirui1@alum.us.es</email>
+ 			<roles>
+				<role>Team member</role>
+ 			</roles>
+ 		</developer>
 	</developers>
 
     <dependencies>
