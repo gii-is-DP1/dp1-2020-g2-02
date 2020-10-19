@@ -254,6 +254,18 @@
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
         </license>
     </licenses>
+    
+	<developers>
+ 		<developer>
+ 			<id>Alesancab1</id>
+ 			<name>Alejandro</name>
+ 			<email>alesancab@alum.us.es</email>
+ 			<roles>
+ 				<role>Team member</role>
+ 			</roles>
+ 		</developer>
+
+	</developers>
 
 
 
