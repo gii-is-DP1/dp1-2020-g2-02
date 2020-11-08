@@ -41,6 +41,7 @@ public class BibliotecarioController {
 		}else {
 			bibliotecariosService.save(bibliotecario);
 			modelmap.addAttribute("message", "Bibliotecario guardado correctamente");
+			vista = listBibliotecarios(modelmap);
 		}
 		return vista;
 	}
@@ -61,67 +62,8 @@ public class BibliotecarioController {
 			modelmap.addAttribute("message", "Bibliotecario eliminado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Bibliotecario no encontrado");
+			vista = listBibliotecarios(modelmap);
 		}
 		return vista;
-	}
-	
-	
-	
-	
-	
-
-	
-
-
-	/*public static final String BIBLIOTECARIOS_FORM="bibliotecarios/createOrUpdateBibliotecarioForm";
-	public static final String BIBLIOTECARIOS_LISTING="bibliotecarios/BibliotecariosListing";
-
-	@Autowired
-	BibliotecarioService bibliotecariosService;
-
-	@GetMapping
-	public String listBibliotecarios(ModelMap model)
-	{
-		model.addAttribute("bibliotecarios",bibliotecariosService.findAll());
-		return BIBLIOTECARIOS_LISTING;
-	}
-
-	@GetMapping("/{id}/edit")
-	public String editBibliotecario(@PathVariable("id") int id,ModelMap model) {
-		Optional<Bibliotecario> bibliotecario=bibliotecariosService.findById(id);
-		if(bibliotecario.isPresent()) {
-			model.addAttribute("bibliotecario",bibliotecario.get());
-			return BIBLIOTECARIOS_FORM;
-		}else {
-			model.addAttribute("message","We cannot find the bibliotecario you tried to edit!");
-			return listBibliotecarios(model);
-		}
-	}
-
-	@PostMapping("/{id}/edit")
-	public String editBibliotecario(@PathVariable("id") int id, @Valid Bibliotecario modifiedBibliotecario, BindingResult binding, ModelMap model) {
-		Optional<Bibliotecario> bibliotecario=bibliotecariosService.findById(id);
-		if(binding.hasErrors()) {			
-			return BIBLIOTECARIOS_FORM;
-		}else {
-			BeanUtils.copyProperties(modifiedBibliotecario, bibliotecario.get(), "id");
-			bibliotecariosService.save(bibliotecario.get());
-			model.addAttribute("message","Bibliotecario updated succesfully!");
-			return listBibliotecarios(model);
-		}
-	}
-
-	@GetMapping("/{id}/delete")
-	public String deleteBibliotecario(@PathVariable("id") int id,ModelMap model) {
-		Optional<Bibliotecario> bibliotecario=bibliotecariosService.findById(id);
-		if(bibliotecario.isPresent()) {
-			bibliotecariosService.delete(bibliotecario.get());
-			model.addAttribute("message","The bibliotecario was deleted successfully!");
-			return listBibliotecarios(model);
-		}else {
-			model.addAttribute("message","We cannot find the bibliotecario you tried to delete!");
-			return listBibliotecarios(model);
-		}
-	}*/
-	
+	}	
 }
