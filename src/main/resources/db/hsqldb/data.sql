@@ -65,3 +65,5 @@ INSERT INTO visits(id,pet_id,visit_date,description) VALUES (4, 7, '2013-01-04',
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,pass) VALUES (0, 'Fernando', 'Romero Ruiz', '49387441P', 650606544, 'ferr@gmail.com', 'Hola1234');
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,pass) VALUES (1, 'Lola', 'Atienza Ruiz', '49388441P', 650606604, 'lola@gmail.com', 'Hola1234');
 
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11');
