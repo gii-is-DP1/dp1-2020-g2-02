@@ -68,5 +68,5 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,pass) VALUES (
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11');
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11');
 
-INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES (false,'Bien',1);
-INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES (true,'Dañado',2);
+INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('DISPONIBLE','Bien',1);
+INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('RESERVADO','Dañado',2);
