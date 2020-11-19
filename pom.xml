@@ -12,7 +12,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.2.4.RELEASE</version>
     </parent>
-    <name>Grupo 02</name>
+    <name>Biblionet</name>
 
     <properties>
 
