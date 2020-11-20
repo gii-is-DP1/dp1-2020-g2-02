@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
-<biblionet:layout pageName="bibliotecarios">
+<petclinic:layout pageName="bibliotecarios">
     <h2>Bibliotecarios</h2>
         <table id="bibliotecariosTable" class="table table-striped">
         <thead>
@@ -47,4 +47,4 @@
         </tbody>
     </table>
 
-</biblionet:layout>
+</petclinic:layout>

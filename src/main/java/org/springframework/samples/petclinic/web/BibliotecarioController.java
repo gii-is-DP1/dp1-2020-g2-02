@@ -55,11 +55,12 @@ public class BibliotecarioController {
 	
 	@GetMapping(path="/delete/{bibliotecarioId}")
 	public String borrarBibliotecario(@PathVariable("bibliotecarioId") int bibliotecarioId, ModelMap modelmap) {
-		String vista = "bibliotecarios/listBibliotecario"; 
+		String vista = "bibliotecarios/listBibliotecario";
 		Optional<Bibliotecario> bibliotecario = bibliotecariosService.findById(bibliotecarioId);
 		if(bibliotecario.isPresent()) {
 			bibliotecariosService.delete(bibliotecario.get());
 			modelmap.addAttribute("message", "Bibliotecario eliminado correctamente");
+			vista = listBibliotecarios(modelmap);
 		}else {
 			modelmap.addAttribute("message", "Bibliotecario no encontrado");
 			vista = listBibliotecarios(modelmap);
