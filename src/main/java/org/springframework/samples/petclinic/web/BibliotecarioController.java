@@ -62,8 +62,8 @@ public class BibliotecarioController {
 			modelmap.addAttribute("message", "Bibliotecario eliminado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Bibliotecario no encontrado");
-			vista = listBibliotecarios(modelmap);
 		}
+		vista = listBibliotecarios(modelmap);
 		return vista;
 	}	
 }
