@@ -12,7 +12,9 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "Miembros")
 
