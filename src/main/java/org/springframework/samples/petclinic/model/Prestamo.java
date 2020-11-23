@@ -14,24 +14,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name= "prestamos")
-public class Prestamo extends BaseEntity{
-	
+@Table(name = "prestamos")
+public class Prestamo extends BaseEntity {
+
 	@Column(name = "fecha_prestamo")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate fechaPrestamo;
-	
-	@Column(name= "fecha_devolucion")
+
+	@Column(name = "fecha_devolucion")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate fechaDevolucion;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "bibliotecario_id")
 	private Bibliotecario bibliotecario;
+	@ManyToOne
 	@JoinColumn(name = "miembro_id")
 	private Miembro miembro;
-	@JoinColumn( name = "ejemplar_id")
+	@ManyToOne
+	@JoinColumn(name = "ejemplar_id")
 	private Ejemplar ejemplar;
 }
-
-
