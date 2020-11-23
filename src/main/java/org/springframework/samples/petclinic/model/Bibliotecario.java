@@ -43,11 +43,6 @@ public class Bibliotecario extends BaseEntity {
 		@NotEmpty
 		@Email
 		private String email;
-
-		@OneToOne(cascade = CascadeType.ALL)
-		@JoinColumn(name = "pass", referencedColumnName = "pass")
-		private String pass;
-
 		
 		@OneToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "username", referencedColumnName = "username")
