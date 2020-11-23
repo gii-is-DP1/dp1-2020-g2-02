@@ -10,8 +10,9 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALU
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11');
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11');
 
-INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('DISPONIBLE','Bien',1);
-INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('RESERVADO','Dañado',2);
+INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Bien','DISPONIBLE');
+INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Dañado','RESERVADO');
+INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (2,'Bien','EN_PRESTAMO');
 
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Otra novedad', 'Se me acabo la imaginación para novedades.','2020-11-18',1);
