@@ -5,13 +5,9 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Libro;
-import org.springframework.samples.petclinic.model.Owner;
-import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.LibroService;
-import org.springframework.samples.petclinic.service.exceptions.DuplicatedPetNameException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,8 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/libros")
 public class LibroController {
 
-	private static final String VIEWS_LIBROS_CREATE_OR_UPDATE_FORM = "libros/createOrUpdateLibroForm";
-	
 	@Autowired
 	LibroService librosService;
 
@@ -71,30 +65,4 @@ public class LibroController {
 		vista = listLibros(modelmap);
 		return vista;
 	}
-	/*
-	@GetMapping(value = "/pets/{petId}/edit")
-	public String initUpdateForm(@PathVariable("libroId") int libroId, ModelMap model) {
-		Optional<Libro> libro = this.librosService.findById(libroId);
-		model.put("libro", libro);
-		return VIEWS_LIBROS_CREATE_OR_UPDATE_FORM;
-	}
-	
-    @PostMapping(value = "/pets/{petId}/edit")
-	public String processUpdateForm(@Valid Libro libro, BindingResult result,@PathVariable("libroId") int libroId, ModelMap model) {
-		if (result.hasErrors()) {
-			model.put("libro", libro);
-			return VIEWS_LIBROS_CREATE_OR_UPDATE_FORM;
-		}
-		else {
-                        Optional<Libro> libroToUpdate=this.librosService.findById(libroId);
-			BeanUtils.copyProperties(libro, libroToUpdate, "id","owner","visits");                                                                                  
-                    try {                    
-                        this.librosService.save(libroToUpdate);                    
-                    } catch (DuplicatedPetNameException ex) {
-                        result.rejectValue("name", "duplicate", "already exists");
-                        return VIEWS_LIBROS_CREATE_OR_UPDATE_FORM;
-                    }
-			return "redirect:/owners/{ownerId}";
-		}
-	}*/
 }
