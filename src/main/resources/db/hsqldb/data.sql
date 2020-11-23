@@ -1,3 +1,23 @@
+-- BiblioNET --
+INSERT INTO users(username,password,enabled) VALUES ('ferror1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (4,'ferror1','bibliotecario');
+INSERT INTO users(username,password,enabled) VALUES ('lolati1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (5,'lolati1','bibliotecario');
+
+INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Fernando', 'Romero Ruiz', '49387441P', 650606544, 'ferr@gmail.com', 'ferror1');
+INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Lola', 'Atienza Ruiz', '49388441P', 650606604, 'lola@gmail.com', 'lolati1');
+
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11');
+
+INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('DISPONIBLE','Bien',1);
+INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('RESERVADO','Dañado',2);
+
+INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
+INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Otra novedad', 'Se me acabo la imaginación para novedades.','2020-11-18',1);
+
+-- Petclinic --
+
 -- One admin user, named admin1 with passwor 4dm1n and authority admin
 INSERT INTO users(username,password,enabled) VALUES ('admin1','4dm1n',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'admin1','admin');
