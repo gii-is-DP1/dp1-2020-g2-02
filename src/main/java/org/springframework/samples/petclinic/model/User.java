@@ -20,7 +20,6 @@ public class User{
 	@Id
 	String username;
 	
-	@Column(name = "pass")
 	@NotEmpty
 	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$") //Contraseña con minúsculas, mayúsculas, números y entre 8 y 32 caracteres
 	String password;

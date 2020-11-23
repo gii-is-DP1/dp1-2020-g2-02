@@ -28,8 +28,12 @@ public class Prestamo extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "bibliotecario_id")
 	private Bibliotecario bibliotecario;
+	
+	@ManyToOne
 	@JoinColumn(name = "miembro_id")
 	private Miembro miembro;
+	
+	@ManyToOne
 	@JoinColumn( name = "ejemplar_id")
 	private Ejemplar ejemplar;
 }

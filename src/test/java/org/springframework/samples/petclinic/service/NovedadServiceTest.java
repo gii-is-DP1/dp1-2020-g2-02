@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
@@ -24,6 +23,11 @@ public class NovedadServiceTest {
 	public void testCountWithInitialData() {
 		int count=novedadService.novedadCount();
 		assertTrue(count==2);
+	}
+	@Test
+	public void testFindAll() {
+		Iterable<Novedad> novedades = novedadService.findAll();
+		assertTrue(novedades.iterator().next().getTitulo().equals("Nuevos ejemplares"));
 	}
 	
 	@Test
