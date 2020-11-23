@@ -13,8 +13,8 @@ INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Ju
 INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('DISPONIBLE','Bien',1);
 INSERT INTO ejemplares(disponibilidad,estado,libro_id) VALUES ('RESERVADO','Dañado',2);
 
-INSERT INTO novedades(id,titulo,contenido,fecha_publicacion) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17');
-INSERT INTO novedades(id,titulo,contenido,fecha_publicacion) VALUES (1,'Otra novedad', 'Se me acabo la imaginación para novedades.','2020-11-18');
+INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
+INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Otra novedad', 'Se me acabo la imaginación para novedades.','2020-11-18',1);
 
 -- Petclinic --
 
