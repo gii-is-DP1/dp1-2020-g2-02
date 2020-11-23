@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Bibliotecario;
-
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.BibliotecarioRepository;
 import org.springframework.stereotype.Service;
 @Service
@@ -44,6 +44,11 @@ public class BibliotecarioService {
 		
 		authoritiesService.saveAuthorities(bibliotecario.getUser().getUsername(), "bibliotecario");
 
+	}
+
+	public Bibliotecario findByUser(User user) {
+		// TODO Auto-generated method stub
+		return BibliotecarioRepo.findByUser(user);
 	}
 	
 }
