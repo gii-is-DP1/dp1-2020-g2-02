@@ -38,7 +38,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/users/new").permitAll()
 				.antMatchers("/bibliotecarios/**").hasAnyAuthority("admin")
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.antMatchers("/miembros/**").hasAnyAuthority("bibliotecario", "admin")
+=======
+>>>>>>> parent of af356ce... Añadido autores
 =======
 >>>>>>> parent of af356ce... Añadido autores
 				.antMatchers("/libros/**").permitAll()
@@ -47,9 +50,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/admin/**").hasAnyAuthority("admin")
 				.antMatchers("/bibliotecarios/**").hasAnyAuthority("admin")
 <<<<<<< HEAD
+<<<<<<< HEAD
 				.antMatchers("/libros/**").hasAnyAuthority("admin")
 				.antMatchers("/owners/**").hasAnyAuthority("owner", "admin")				
 =======
+=======
+>>>>>>> parent of af356ce... Añadido autores
 				.antMatchers("/owners/**").hasAnyAuthority("owner","admin")				
 >>>>>>> parent of af356ce... Añadido autores
 				.antMatchers("/vets/**").authenticated()
