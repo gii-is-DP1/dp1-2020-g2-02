@@ -7,28 +7,22 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="libros">
-	<jsp:attribute name="customScript">
-        <script>
-            $(function () {
-                $("#fecha_publicacion").datepicker({dateFormat: 'dd/mm/yy'});
-            });
-        </script>
-    </jsp:attribute>
+<petclinic:layout pageName="novedades">
 <jsp:body>
     <h2>
-        Libro
+        Publicar novedad
     </h2>
-    <form:form modelAttribute="libro" class="form-horizontal" id="add-libro-form" action="/libros/save">
+    <form:form modelAttribute="novedad" class="form-horizontal" id="add-novedad-form" action="/novedades/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="ISBN" name="ISBN"/>
             <petclinic:inputField label="Título" name="titulo"/>
-            <petclinic:inputField label="Idioma" name="idioma"/>
-            <petclinic:inputField label="Fecha de publicación" name="fecha_publicacion"/>
+            <petclinic:inputField label="Contenido" name="contenido"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-               <input type="hidden" name="id" value="${libro.id}"/>
+            
+            <c:set var = "now" value = "<%= new java.util.Date()%>" />
+            
+               <input type="hidden" name="fechaPublicacion" value="<fmt:formatDate pattern = "yyyy/MM/dd" value = "${now}" />"/>
                <button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
