@@ -16,12 +16,6 @@ public class BibliotecarioService {
 	@Autowired
 	BibliotecarioRepository BibliotecarioRepo;
 	
-	@Autowired
-	private UserService userService;
-	
-	@Autowired
-	private AuthoritiesService authoritiesService;
-	
 	public Collection<Bibliotecario> findAll(){
 		return BibliotecarioRepo.findAll();
 	}
@@ -37,12 +31,8 @@ public class BibliotecarioService {
 
 	}
 
-	public void save(@Valid Bibliotecario bibliotecario) {
-		BibliotecarioRepo.save(bibliotecario);
-		
-		userService.saveUser(bibliotecario.getUser());
-		
-		authoritiesService.saveAuthorities(bibliotecario.getUser().getUsername(), "bibliotecario");
+	public void save(@Valid Bibliotecario Bibliotecario) {
+		BibliotecarioRepo.save(Bibliotecario);
 
 	}
 	

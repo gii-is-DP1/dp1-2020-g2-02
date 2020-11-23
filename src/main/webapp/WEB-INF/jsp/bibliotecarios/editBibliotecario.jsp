@@ -19,8 +19,7 @@
             <petclinic:inputField label="DNI" name="dni"/>
             <petclinic:inputField label="Telephone" name="telefono"/>
             <petclinic:inputField label="Email" name="email"/>
-            <petclinic:inputField label="Nombre de usuario" name="user.username"/>
-            <petclinic:inputField label="Password" name="user.password"/>
+            <petclinic:inputField label="Password" name="pass"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
