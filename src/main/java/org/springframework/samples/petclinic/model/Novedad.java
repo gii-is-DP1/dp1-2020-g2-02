@@ -28,7 +28,4 @@ public class Novedad extends BaseEntity{
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate fechaPublicacion;
 	
-	@ManyToOne
-	@JoinColumn(name = "bibliotecario_id")
-	private Bibliotecario bibliotecario;
 }
