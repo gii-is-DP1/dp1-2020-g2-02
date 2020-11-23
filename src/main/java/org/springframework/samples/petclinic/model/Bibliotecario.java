@@ -53,10 +53,7 @@ public class Bibliotecario extends BaseEntity {
 	    @JoinColumn(name = "username", referencedColumnName = "username")
 		private User user;
 		
-		@OneToMany(cascade = CascadeType.REMOVE, mappedBy = "bibliotecario")
+		@OneToMany(cascade = CascadeType.ALL, mappedBy = "bibliotecario")
 		private Set<Novedad> novedades;
-		
-		/*@OneToOne(cascade = CascadeType.ALL)
-	    @JoinColumn(name = "username", referencedColumnName = "username")
-		private User user;*/
+
 }
