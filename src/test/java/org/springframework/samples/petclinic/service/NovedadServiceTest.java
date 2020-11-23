@@ -39,7 +39,7 @@ public class NovedadServiceTest {
 		novedad.setContenido("Novedad de test");
 		novedad.setFechaPublicacion(LocalDate.now());
 		Bibliotecario bibliotecario = bibliotecarioService.findById(1).get();
-		novedad.setBibliotecario(bibliotecario);
+		//novedad.setBibliotecario(bibliotecario);
 		novedadService.save(novedad);
 		int count=novedadService.novedadCount();
 		assertTrue(count==3);
