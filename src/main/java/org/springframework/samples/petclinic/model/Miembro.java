@@ -44,8 +44,8 @@ public class Miembro extends BaseEntity {
 		private String email;
 		
 		@OneToOne(cascade = CascadeType.ALL)
-		@JoinColumn(name = "pass", referencedColumnName = "pass")
-		private String pass;
+	    @JoinColumn(name = "username", referencedColumnName = "username")
+		private User user;
 
 		
 }
