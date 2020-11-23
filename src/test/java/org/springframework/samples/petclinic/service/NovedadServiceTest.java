@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
@@ -12,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Novedad;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class NovedadServiceTest {
@@ -24,6 +24,12 @@ public class NovedadServiceTest {
 	public void testCountWithInitialData() {
 		int count=novedadService.novedadCount();
 		assertTrue(count==2);
+	}
+	@Test
+	@Transactional
+	public void testFindAll() {
+		Iterable<Novedad> novedades = novedadService.findAll();
+		assertTrue(novedades.iterator().next().getTitulo().equals("Nuevos ejemplares"));
 	}
 	
 	@Test
