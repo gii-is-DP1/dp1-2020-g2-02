@@ -6,14 +6,16 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="Libros">
+	
     <h2>Libros</h2>
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 18%;">ISBN</th>
-            <th style="width: 18%;">Título</th>
-            <th style="width: 18%;">Idioma</th>   
-            <th style="width: 5%;">Fecha de publicación</th>              
+            <th style="width: 25%;">ISBN</th>
+            <th style="width: 25%;">Título</th>
+            <th style="width: 20%;">Idioma</th>   
+            <th style="width: 20%;">Fecha de publicación</th> 
+            <th style="width: 10%;">Acciones</th>              
         </tr>
         </thead>
         <tbody>
@@ -31,6 +33,12 @@
                 <td>
                     <c:out value="${libro.fecha_publicacion}"/>
                 </td> 
+                <td>
+                	<spring:url value="/libros/delete/{libroId}" var="libroUrl">
+                        <spring:param name="libroId" value="${libro.id}"/>
+                    </spring:url>
+                    <a href ="${fn:escapeXml(libroUrl)}">Borrar</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
