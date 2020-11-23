@@ -109,7 +109,7 @@ class OwnerServiceTests {
 		owner.setTelephone("4444444444");
                 User user=new User();
                 user.setUsername("Sam");
-                user.setPassword("Supersecretpassword1");
+                user.setPassword("supersecretpassword");
                 user.setEnabled(true);
                 owner.setUser(user);                
                 
