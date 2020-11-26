@@ -3,12 +3,12 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,10 +19,12 @@ import lombok.Data;
 @Table(name= "novedades")
 public class Novedad extends BaseEntity{
 	
-	@Column(name = "titulo")   
+	@Column(name = "titulo") 
+	@NotEmpty
 	private String titulo;
 	
-	@Column(name = "contenido")   
+	@Column(name = "contenido")
+	@NotEmpty
 	private String contenido;
 	
 	@Column(name = "fecha_publicacion")        
