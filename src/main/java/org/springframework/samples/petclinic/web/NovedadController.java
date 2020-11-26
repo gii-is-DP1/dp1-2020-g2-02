@@ -47,13 +47,14 @@ public class NovedadController {
 		if(result.hasErrors()) {
 			modelmap.addAttribute("message", result.toString());
 			modelmap.addAttribute("novedad", novedad);
+			modelmap.addAttribute("message", "Hay fallos en el formulario.");
 			return "novedades/editNovedad";
 		}else {
 			User user = userService.findByUsername(principal.getName());
 			Bibliotecario biblio = bibliotecarioService.findByUser(user);
 			novedad.setBibliotecario(biblio);
 			novedadService.save(novedad);
-			modelmap.addAttribute("message", "Novedad guardada correctamente");
+			modelmap.addAttribute("message", "Novedad guardada correctamente.");
 			vista = listNovedades(modelmap);
 		}
 		return vista;
