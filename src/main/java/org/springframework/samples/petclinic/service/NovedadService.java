@@ -18,7 +18,7 @@ public class NovedadService {
 	
 	@Transactional
 	public Iterable<Novedad> findAll() {
-		return novedadRepo.findAll();
+		return novedadRepo.findAllByOrderByFechaPublicacionDesc();
 	}
 
 	public void save(Novedad novedad) {
