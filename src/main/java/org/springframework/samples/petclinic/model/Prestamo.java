@@ -1,3 +1,4 @@
+
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
@@ -37,5 +38,3 @@ public class Prestamo extends BaseEntity{
 	@JoinColumn( name = "ejemplar_id")
 	private Ejemplar ejemplar;
 }
-
-

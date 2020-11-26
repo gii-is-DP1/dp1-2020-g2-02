@@ -7,22 +7,23 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="novedades">
+<petclinic:layout pageName="miembros">
 <jsp:body>
     <h2>
-        Publicar novedad
+        Miembro
     </h2>
-    <form:form modelAttribute="novedad" class="form-horizontal" id="add-novedad-form" action="/novedades/save">
+    <form:form modelAttribute="miembro" class="form-horizontal" id="add-miembro-form" action="/miembros/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Título" name="titulo"/>
-            <petclinic:areaField label="Contenido" name="contenido"/>
+            <petclinic:inputField label="First Name" name="nombre"/>
+            <petclinic:inputField label="Last Name" name="apellidos"/>
+            <petclinic:inputField label="DNI" name="dni"/>
+            <petclinic:inputField label="Telephone" name="telefono"/>
+            <petclinic:inputField label="Email" name="email"/>
+            <petclinic:inputField label="Password" name="pass"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-            
-            <c:set var = "now" value = "<%= new java.util.Date()%>" />
-               ${novedad.bibliotecario.nombre}
-               <input type="hidden" name="fechaPublicacion" value="<fmt:formatDate pattern = "yyyy/MM/dd" value = "${now}" />"/>
+               <input type="hidden" name="id" value="${miembro.id}"/>
                <button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
