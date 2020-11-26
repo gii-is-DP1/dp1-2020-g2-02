@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,4 +41,8 @@ public class Libro extends BaseEntity {
 	@JoinColumn(name = "autor_id")
 	private Autor autor;
 	
+
+	@ManyToOne
+	@JoinColumn(name = "genero_id")
+	private Genero genero;
 }
