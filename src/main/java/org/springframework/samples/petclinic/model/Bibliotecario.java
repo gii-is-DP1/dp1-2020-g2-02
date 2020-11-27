@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import lombok.Data;
@@ -35,7 +36,7 @@ public class Bibliotecario extends BaseEntity {
 		private String dni;
 		
 		@Column(name = "telefono")
-		@NotEmpty
+		@NotNull
 		@Digits(fraction = 0, integer = 10)
 		private Integer telefono;
 		
@@ -48,7 +49,7 @@ public class Bibliotecario extends BaseEntity {
 	    @JoinColumn(name = "username", referencedColumnName = "username")
 		private User user;
 		
-		@OneToMany(cascade = CascadeType.ALL)
+		@OneToMany(cascade = CascadeType.ALL, mappedBy = "bibliotecario")
 		private Set<Novedad> novedades;
 
 }

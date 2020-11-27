@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
@@ -34,4 +36,13 @@ public class Libro extends BaseEntity {
 	@Column(name = "fecha_publicacion")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_publicacion;
+	
+	@ManyToOne       
+	@JoinColumn(name = "autor_id")
+	private Autor autor;
+	
+
+	@ManyToOne
+	@JoinColumn(name = "genero_id")
+	private Genero genero;
 }
