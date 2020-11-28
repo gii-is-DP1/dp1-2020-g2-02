@@ -31,6 +31,9 @@ INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Bien','DISPONI
 INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Dañado','RESERVADO');
 INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (2,'Bien','EN_PRESTAMO');
 
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id) VALUES (0,'2020-11-15', '2020-12-01', 1, 1,1);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id) VALUES (1,'2020-11-20', '2020-12-06', 1, 0,2);
+
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
