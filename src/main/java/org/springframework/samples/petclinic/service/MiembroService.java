@@ -22,6 +22,10 @@ public class MiembroService {
 	@Autowired
 	private AuthoritiesService authoritiesService;
 	
+	public int miembroCount() {
+		return (int) MiembroRepo.count();
+	}
+	
 	public Collection<Miembro> findAll(){
 		return MiembroRepo.findAll();
 	}
