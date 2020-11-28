@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 <petclinic:layout pageName="Libros">
 	
@@ -12,11 +13,11 @@
         <thead>
         <tr>
             <th >ISBN</th>
-            <th >Tï¿½tulo</th>
+            <th >Título</th>
             <th >Autor</th>
             <th >Idioma</th>   
-            <th>Gï¿½nero</th>
-            <th>Fecha de publicaciï¿½n</th>
+            <th>Género</th>
+            <th>Fecha de publicación</th>
             <th>Acciones</th>              
         </tr>
         </thead>
@@ -30,6 +31,9 @@
                     <c:out value="${libro.titulo}"/>
                 </td>
                 <td>
+                    <c:out value="${libro.autor.nombre} ${libro.autor.apellidos}"/>
+                </td>                 
+                <td>
                     <c:out value="${libro.idioma}"/>
                 </td>  
                 <td>
@@ -42,11 +46,16 @@
                 	<spring:url value="/libros/delete/{libroId}" var="libroUrl">
                         <spring:param name="libroId" value="${libro.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(libroUrl)}">Borrar</a>
+                    <a href ="${fn:escapeXml(libroUrl)}">Borrar libro</a>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
 
+
+    <br/> 
+    <sec:authorize access="hasAuthority('admin')">
+		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
+	</sec:authorize>
 </petclinic:layout>

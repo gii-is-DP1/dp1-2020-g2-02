@@ -14,7 +14,7 @@
     </h2>
     <form:form modelAttribute="novedad" class="form-horizontal" id="add-novedad-form" action="/novedades/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Tï¿½tulo" name="titulo"/>
+            <petclinic:inputField label="Título" name="titulo"/>
             <petclinic:areaField label="Contenido" name="contenido"/>
         </div>
         <div class="form-group">
