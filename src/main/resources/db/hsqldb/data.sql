@@ -9,8 +9,17 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'ferror1','bibliotecari
 INSERT INTO users(username,password,enabled) VALUES ('lolati1','Pass1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'lolati1','bibliotecario');
 
+INSERT INTO users(username,password,enabled) VALUES ('jorgon1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (6,'jorgon1','miembro');
+INSERT INTO users(username,password,enabled) VALUES ('raulla1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (7,'raulla1','miembro');
+
+
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Fernando', 'Romero Ruiz', '49387441P', 650606544, 'ferr@gmail.com', 'ferror1');
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Lola', 'Atienza Ruiz', '49388441P', 650606604, 'lola@gmail.com', 'lolati1');
+
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388441P', 650606604, 'rauw@gmail.com', 'raulla1');
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
