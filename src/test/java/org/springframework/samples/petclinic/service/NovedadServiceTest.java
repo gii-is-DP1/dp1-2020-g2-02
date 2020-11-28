@@ -27,13 +27,19 @@ public class NovedadServiceTest {
 		assertTrue(count==2);
 	}
 	@Test
-	@Transactional
 	public void testFindAll() {
 		Iterable<Novedad> novedades = novedadService.findAll();
-		assertTrue(novedades.iterator().next().getTitulo().equals("Nuevos ejemplares"));
+		assertTrue(novedades.iterator().next().getTitulo().equals("Biblioteca cerrada"));
 	}
 	
 	@Test
+	public void testFindById() {
+		Novedad novedad = novedadService.findById(0).get();
+		assertTrue(novedad.getTitulo().equals("Nuevos ejemplares"));
+	}
+	
+	@Test
+	@Transactional
 	public void testAddNovedad() {
 		Novedad novedad = new Novedad();
 		novedad.setTitulo("Test");
@@ -45,4 +51,6 @@ public class NovedadServiceTest {
 		int count=novedadService.novedadCount();
 		assertTrue(count==3);
 	}
+	
+	
 }

@@ -12,12 +12,13 @@
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 15%;">ISBN</th>
-            <th style="width: 25%;">Título</th>
-            <th style="width: 25%;">Autor</th>
-            <th style="width: 15%;">Idioma</th>   
-            <th style="width: 10%;">Fecha de publicación</th>
-            <th style="width: 10%;">Acciones</th>              
+            <th >ISBN</th>
+            <th >Título</th>
+            <th >Autor</th>
+            <th >Idioma</th>   
+            <th>Género</th>
+            <th>Fecha de publicación</th>
+            <th>Acciones</th>              
         </tr>
         </thead>
         <tbody>
@@ -31,9 +32,12 @@
                 </td>
                 <td>
                     <c:out value="${libro.autor.nombre} ${libro.autor.apellidos}"/>
-                </td> 
+                </td>                 
                 <td>
                     <c:out value="${libro.idioma}"/>
+                </td>  
+                <td>
+                    <c:out value="${libro.genero}"/>
                 </td>  
                 <td>
                     <c:out value="${libro.fecha_publicacion}"/>
@@ -48,10 +52,10 @@
         </c:forEach>
         </tbody>
     </table>
-    
+
+
     <br/> 
     <sec:authorize access="hasAuthority('admin')">
 		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
 	</sec:authorize>
-
 </petclinic:layout>
