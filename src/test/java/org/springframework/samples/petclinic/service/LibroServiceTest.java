@@ -24,6 +24,6 @@ public class LibroServiceTest {
 	@Test
 	private void testFindById() {
 		Libro libro = libroService.findById(1).get();
-		assertTrue(libro.getTitulo().equals("El adversario"));
+		assertTrue(libro.getTitulo().equals("El adversario")); 
 	}
 }
