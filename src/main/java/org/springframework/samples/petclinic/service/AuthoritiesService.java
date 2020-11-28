@@ -38,6 +38,10 @@ public class AuthoritiesService {
 	private AuthoritiesRepository authoritiesRepository;
 	private UserService userService;
 
+	public int authorityCount() {
+		return (int) authoritiesRepository.count();
+	}
+	
 	@Autowired
 	public AuthoritiesService(AuthoritiesRepository authoritiesRepository,UserService userService) {
 		this.authoritiesRepository = authoritiesRepository;

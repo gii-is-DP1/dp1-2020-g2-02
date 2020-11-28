@@ -32,7 +32,7 @@
                 </td>
                 <td>
                     <c:out value="${libro.autor.nombre} ${libro.autor.apellidos}"/>
-                </td> 
+                </td>                 
                 <td>
                     <c:out value="${libro.idioma}"/>
                 </td>  
@@ -52,10 +52,10 @@
         </c:forEach>
         </tbody>
     </table>
-    
+
+
     <br/> 
     <sec:authorize access="hasAuthority('admin')">
 		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
 	</sec:authorize>
-
 </petclinic:layout>

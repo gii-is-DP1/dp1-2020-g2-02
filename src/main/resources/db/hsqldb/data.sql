@@ -9,8 +9,17 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'ferror1','bibliotecari
 INSERT INTO users(username,password,enabled) VALUES ('lolati1','Pass1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'lolati1','bibliotecario');
 
+INSERT INTO users(username,password,enabled) VALUES ('jorgon1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (6,'jorgon1','miembro');
+INSERT INTO users(username,password,enabled) VALUES ('raulla1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (7,'raulla1','miembro');
+
+
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Fernando', 'Romero Ruiz', '49387441P', 650606544, 'ferr@gmail.com', 'ferror1');
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Lola', 'Atienza Ruiz', '49388441P', 650606604, 'lola@gmail.com', 'lolati1');
+
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388441P', 650606604, 'rauw@gmail.com', 'raulla1');
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
@@ -23,7 +32,7 @@ INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Dañado','RESE
 INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (2,'Bien','EN_PRESTAMO');
 
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
-INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Otra novedad', 'Se me acabo la imaginación para novedades.','2020-11-18',1);
+INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
 -- Petclinic --
 
