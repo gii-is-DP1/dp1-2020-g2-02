@@ -14,14 +14,14 @@
     </h2>
     <form:form modelAttribute="novedad" class="form-horizontal" id="add-novedad-form" action="/novedades/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Título" name="titulo"/>
-            <petclinic:inputField label="Contenido" name="contenido"/>
+            <petclinic:inputField label="Tï¿½tulo" name="titulo"/>
+            <petclinic:areaField label="Contenido" name="contenido"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             
             <c:set var = "now" value = "<%= new java.util.Date()%>" />
-            
+               ${novedad.bibliotecario.nombre}
                <input type="hidden" name="fechaPublicacion" value="<fmt:formatDate pattern = "yyyy/MM/dd" value = "${now}" />"/>
                <button class="btn btn-default" type="submit">Guardar</button>
             </div>

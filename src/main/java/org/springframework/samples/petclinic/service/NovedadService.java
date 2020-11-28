@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Novedad;
 import org.springframework.samples.petclinic.repository.NovedadRepository;
@@ -18,11 +20,16 @@ public class NovedadService {
 	
 	@Transactional
 	public Iterable<Novedad> findAll() {
-		return novedadRepo.findAll();
+		return novedadRepo.findAllByOrderByFechaPublicacionDesc();
 	}
 
 	public void save(Novedad novedad) {
 		novedadRepo.save(novedad);
+	}
+
+	public Optional<Novedad> findById(int id) {
+		// TODO Auto-generated method stub
+		return novedadRepo.findById(id);
 	}
 
 }

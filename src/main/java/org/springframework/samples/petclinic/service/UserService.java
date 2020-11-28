@@ -50,4 +50,9 @@ public class UserService {
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
 	}
+
+	public User findByUsername(String name) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUsername(name);
+	}
 }

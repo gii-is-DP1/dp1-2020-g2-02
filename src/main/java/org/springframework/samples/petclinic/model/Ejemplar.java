@@ -16,6 +16,10 @@ import lombok.Data;
 
 public class Ejemplar extends BaseEntity {
 
+	@ManyToOne
+	@JoinColumn(name = "libro_id")
+	private Libro libro;
+	
 	@Column(name = "disponibilidad")
 	@Enumerated(EnumType.STRING)
 	private Disponibilidad disponibilidad;
@@ -24,9 +28,7 @@ public class Ejemplar extends BaseEntity {
 	@Column(name = "estado")
 	private String estado;
 	
-	@ManyToOne
-	@JoinColumn(name = "libro_id")
-	private Libro libro;
+	
 	
 
 }

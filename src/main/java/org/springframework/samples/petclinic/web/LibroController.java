@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/libros")
 public class LibroController {
 
+	
 	@Autowired
 	LibroService librosService;
 
@@ -65,4 +66,5 @@ public class LibroController {
 		vista = listLibros(modelmap);
 		return vista;
 	}
+	
 }

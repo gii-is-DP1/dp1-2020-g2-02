@@ -11,11 +11,13 @@
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 25%;">ISBN</th>
-            <th style="width: 25%;">Título</th>
-            <th style="width: 20%;">Idioma</th>   
-            <th style="width: 20%;">Fecha de publicación</th> 
-            <th style="width: 10%;">Acciones</th>              
+            <th >ISBN</th>
+            <th >Tï¿½tulo</th>
+            <th >Autor</th>
+            <th >Idioma</th>   
+            <th>Gï¿½nero</th>
+            <th>Fecha de publicaciï¿½n</th>
+            <th>Acciones</th>              
         </tr>
         </thead>
         <tbody>
@@ -29,6 +31,9 @@
                 </td>
                 <td>
                     <c:out value="${libro.idioma}"/>
+                </td>  
+                <td>
+                    <c:out value="${libro.genero}"/>
                 </td>  
                 <td>
                     <c:out value="${libro.fecha_publicacion}"/>
