@@ -49,14 +49,15 @@ public class BibliotecarioServiceTests {
 	@Test
 	@Transactional
 	public void testAddBibliotecario() {
-		//int cuentaInicial = bibliotecarioService.bibliotecarioCount();
+		int cuentaInicial = bibliotecarioService.bibliotecarioCount();
 		Bibliotecario bibliotecario = new Bibliotecario();
-		//bibliotecario.setId(cuentaInicial);
+		bibliotecario.setId(cuentaInicial);
 		bibliotecario.setNombre("Alejandro");;
 		bibliotecario.setApellidos("Ruiz Costa");
 		bibliotecario.setDni("49387456P");
 		bibliotecario.setTelefono(650606444);
 		bibliotecario.setEmail("ruco@gmail.com");
+		
 		User user = new User();
 		user.setUsername("aleruco");
 		user.setPassword("Pass1234");
