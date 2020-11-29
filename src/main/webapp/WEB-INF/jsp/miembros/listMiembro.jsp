@@ -15,7 +15,7 @@
             <th style="width: 18%;">DNI</th>
             <th style="width: 18%;">Teléfono</th>
             <th style="width: 18%;">Email</th>   
-            <th style="width: 5%;">Editar</th>              
+            <th style="width: 5%;">Editar</th>                 
         </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                 </td> 
                 <td>
                     <c:out value="${miembro.email}"/>
-                </td>
+                </td>              
                 <td>
                 	<spring:url value="/miembros/delete/{miembroId}" var="miembroUrl">
                         <spring:param name="miembroId" value="${miembro.id}"/>
@@ -46,5 +46,8 @@
         </c:forEach>
         </tbody>
     </table>
+    <sec:authorize access="hasAuthority('admin')">
+        <a class="btn btn-default" href='<spring:url value="/bibliotecarios/new" htmlEscape="true"/>'>Añadir bibliotecario</a>
+    </sec:authorize>
 
 </petclinic:layout>
