@@ -2,18 +2,31 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Bibliotecario;
+import org.springframework.samples.petclinic.model.Novedad;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
-public class BibliotecarioServiceTest {
+public class BibliotecarioServiceTests {
 	@Autowired
 	private BibliotecarioService bibliotecarioService;
+	
+	@Autowired
+	private UserService  userService;
+	
+	@Autowired
+	private AuthoritiesService authoritiesService;
+	
 	
 	@Test
 	public void testCountWithInitialData() {
@@ -36,12 +49,20 @@ public class BibliotecarioServiceTest {
 	@Test
 	@Transactional
 	public void testAddBibliotecario() {
+		//int cuentaInicial = bibliotecarioService.bibliotecarioCount();
 		Bibliotecario bibliotecario = new Bibliotecario();
+		//bibliotecario.setId(cuentaInicial);
 		bibliotecario.setNombre("Alejandro");;
 		bibliotecario.setApellidos("Ruiz Costa");
 		bibliotecario.setDni("49387456P");
 		bibliotecario.setTelefono(650606444);
 		bibliotecario.setEmail("ruco@gmail.com");
+		User user = new User();
+		user.setUsername("aleruco");
+		user.setPassword("Pass1234");
+		user.setEnabled(true);
+		bibliotecario.setUser(user);
+		userService.saveUser(user);
 		bibliotecarioService.save(bibliotecario);
 		int count=bibliotecarioService.bibliotecarioCount();
 		assertTrue(count==3);
