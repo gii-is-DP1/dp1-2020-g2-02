@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		
 		@GetMapping
 		public String listPrestamos(ModelMap model) {
-			String vista = "miembros/listMiembros";
+			String vista = "prestamos/listPrestamo";
 			Collection<Prestamo> prestamos = prestamosService.findAll();
 			model.addAttribute("prestamos", prestamos);
 			return vista;
