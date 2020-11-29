@@ -36,6 +36,10 @@ public class UserService {
 
 	private UserRepository userRepository;
 
+	public int userCount() {
+		return (int) userRepository.count();
+	}
+	
 	@Autowired
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;

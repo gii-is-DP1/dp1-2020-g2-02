@@ -23,9 +23,9 @@ public class Autor extends BaseEntity {
 	@Column(name="apellidos")
 	@NotEmpty
 	private String apellidos;
-	
+
 	@Column(name = "fecha_nac")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_nac;
-	
+
 }

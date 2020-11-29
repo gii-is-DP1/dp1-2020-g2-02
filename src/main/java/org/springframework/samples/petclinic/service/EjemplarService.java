@@ -25,6 +25,11 @@ public class EjemplarService {
 	public Optional<Ejemplar> findById(int id) {
 		return EjemplarRepo.findById(id);
 	}
+	
+	@Transactional
+	public int ejemplarCount() {
+		return (int) EjemplarRepo.count();
+	}
 
 	@Transactional
 	public void delete(Ejemplar Ejemplar) {

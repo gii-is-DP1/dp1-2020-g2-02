@@ -19,11 +19,11 @@ import lombok.Data;
 public class Prestamo extends BaseEntity{
 	
 	@Column(name = "fecha_prestamo")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaPrestamo;
 	
 	@Column(name= "fecha_devolucion")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaDevolucion;
 	
 	@ManyToOne
