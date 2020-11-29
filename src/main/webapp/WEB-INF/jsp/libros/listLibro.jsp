@@ -12,44 +12,56 @@
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>
+            <th >Autor</th>
             <th >ISBN</th>
             <th >Título</th>
-            <th >Autor</th>
             <th >Idioma</th>   
-            <th>Género</th>
+            <th>Géneros</th>
             <th>Fecha de publicación</th>
             <th>Acciones</th>              
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${libros}" var="libro">
-            <tr>
+         <tr> 
+        <c:forEach items="${librosAutores}" var="libro">
+                
+                <td>
+                	<c:forEach items="${libro.value}" var="autorLibro">
+                    	<c:out value="${autorLibro.nombre} ${autorLibro.apellidos}"/> <br/>
+                </c:forEach>
+                </td>  
+            
+        </c:forEach>
+        <c:forEach items="${librosGeneros}" var="libro">
+           
+            
+         
                 <td>                    
-                    <c:out value="${libro.ISBN}"/>
+                    <c:out value="${libro.key.ISBN}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.titulo}"/>
+                    <c:out value="${libro.key.titulo}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.autor.nombre} ${libro.autor.apellidos}"/>
-                </td>                 
+                    <c:out value="${libro.key.idioma}"/>
+                </td>               
                 <td>
-                    <c:out value="${libro.idioma}"/>
+                	<c:forEach items="${libro.value}" var="generoLibro">
+                    	<c:out value="${generoLibro.genero}"/><br/>
+        			</c:forEach>
                 </td>  
                 <td>
-                    <c:out value="${libro.genero}"/>
-                </td>  
-                <td>
-                    <c:out value="${libro.fecha_publicacion}"/>
+                    <c:out value="${libro.key.fecha_publicacion}"/>
                 </td> 
                 <td>
                 	<spring:url value="/libros/delete/{libroId}" var="libroUrl">
-                        <spring:param name="libroId" value="${libro.id}"/>
+                        <spring:param name="libroId" value="${libro.key.id}"/>
                     </spring:url>
                     <a href ="${fn:escapeXml(libroUrl)}">Borrar libro</a>
                 </td>
             </tr>
         </c:forEach>
+        
         </tbody>
     </table>
 

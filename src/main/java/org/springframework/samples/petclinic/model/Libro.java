@@ -37,12 +37,5 @@ public class Libro extends BaseEntity {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_publicacion;
 	
-	@ManyToOne       
-	@JoinColumn(name = "autor_id")
-	private Autor autor;
-	
 
-	@ManyToOne
-	@JoinColumn(name = "genero_id")
-	private Genero genero;
 }

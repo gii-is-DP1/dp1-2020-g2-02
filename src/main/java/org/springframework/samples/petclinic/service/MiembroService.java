@@ -6,12 +6,13 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Miembro;
 
 import org.springframework.samples.petclinic.repository.MiembroRepository;
 import org.springframework.stereotype.Service;
 @Service
-public class MiembroService {
+public class MiembroService extends BaseEntity{
 	
 	@Autowired
 	MiembroRepository MiembroRepo;
