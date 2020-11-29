@@ -9,6 +9,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.LibroService;
@@ -31,14 +32,18 @@ public class LibroController {
 	@GetMapping
 	public String listLibros(ModelMap model) {
 		String vista = "libros/listLibro";
-		Map<Libro, Collection<Genero>> map = new HashMap<Libro, Collection<Genero>>();
+		Map<Libro, Collection<Genero>> mapGeneros = new HashMap<Libro, Collection<Genero>>();
+		Map<Libro, Collection<Autor>> mapAutores = new HashMap<Libro, Collection<Autor>>();
 		Iterator<Libro> it = librosService.findAll().iterator();
+		
 		while (it.hasNext()) {
 			Libro libro = it.next();
-			map.put(libro, librosService.getGenerosLibro(libro));
-			System.out.println("AquiController " + librosService.getGenerosLibro(libro).size());
+			mapGeneros.put(libro, librosService.getGenerosLibro(libro));
+			mapAutores.put(libro, librosService.getAutoresLibro(libro));
+			System.out.println("AquiController " + librosService.getAutoresLibro(libro).size());
 		}
-		model.addAttribute("libros", map);
+		model.addAttribute("librosGeneros", mapGeneros);
+		model.addAttribute("librosAutores", mapAutores);
 		return vista;
 	}
 	

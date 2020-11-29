@@ -20,12 +20,16 @@ INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1,
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
 
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,autor_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11',1);
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,autor_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11',2);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11');
 
 INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
 INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');
 INSERT INTO generos(libro_id,genero) VALUES (1, 'Policiaco');
+
+INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
 
 INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Bien','DISPONIBLE');
 INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Dañado','RESERVADO');

@@ -12,9 +12,9 @@
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>
+            <th >Autor</th>
             <th >ISBN</th>
             <th >Título</th>
-            <th >Autor</th>
             <th >Idioma</th>   
             <th>Géneros</th>
             <th>Fecha de publicación</th>
@@ -22,18 +22,26 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${libros}" var="libro">
-            <tr>
+         <tr> 
+        <c:forEach items="${librosAutores}" var="libro">
+                
+                <td>
+                	<c:forEach items="${libro.value}" var="autorLibro">
+                    	<c:out value="${autorLibro.nombre} ${autorLibro.apellidos}"/> <br/>
+                </c:forEach>
+                </td>  
+            
+        </c:forEach>
+        <c:forEach items="${librosGeneros}" var="libro">
+           
+            
+         
                 <td>                    
                     <c:out value="${libro.key.ISBN}"/>
                 </td>
                 <td>
                     <c:out value="${libro.key.titulo}"/>
                 </td>
-                <td>
-                    <c:out value="${libro.key.autor.nombre} ${libro.key.autor.apellidos}"/>
-                </td>     
-                
                 <td>
                     <c:out value="${libro.key.idioma}"/>
                 </td>               
@@ -53,6 +61,7 @@
                 </td>
             </tr>
         </c:forEach>
+        
         </tbody>
     </table>
 

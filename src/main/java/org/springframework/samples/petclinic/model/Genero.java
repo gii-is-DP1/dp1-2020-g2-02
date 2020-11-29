@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "generos")
 public class Genero extends BaseEntity {
