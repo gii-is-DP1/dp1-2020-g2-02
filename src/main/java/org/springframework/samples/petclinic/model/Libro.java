@@ -40,9 +40,5 @@ public class Libro extends BaseEntity {
 	@ManyToOne       
 	@JoinColumn(name = "autor_id")
 	private Autor autor;
-	
 
-	@ManyToOne
-	@JoinColumn(name = "genero_id")
-	private Genero genero;
 }
