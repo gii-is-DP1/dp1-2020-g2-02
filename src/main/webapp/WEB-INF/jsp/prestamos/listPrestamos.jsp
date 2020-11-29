@@ -6,7 +6,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
-<petclinic:layout pageName="Libros">
+<petclinic:layout pageName="prestamo">
 	
     <h2>Prestamos</h2>
         <table id="PrestamosTable" class="table table-striped">
@@ -27,22 +27,22 @@
                     <c:out value="${prestamo.ejemplar_id}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.miembro_id}"/>
+                    <c:out value="${prestamo.miembro_id}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.bibliotecario_id}"/>
+                    <c:out value="${prestamo.bibliotecario_id}"/>
                 </td> 
                 <td>
-                    <c:out value="${libro.fecha_prestamo}"/>
+                    <c:out value="${prestamo.fecha_prestamo}"/>
                 </td>  
                 <td>
-                    <c:out value="${libro.fecha_devolucion}"/>
+                    <c:out value="${prestamo.fecha_devolucion}"/>
                 </td>  
                 <td>
-                	<spring:url value="/libros/delete/{libroId}" var="libroUrl">
-                        <spring:param name="libroId" value="${libro.id}"/>
+                	<spring:url value="/prestamo/delete/{prestamoId}" var="prestamoUrl">
+                        <spring:param name="prestamoId" value="${prestamo.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(libroUrl)}">Borrar libro</a>
+                    <a href ="${fn:escapeXml(libroUrl)}">Borrar prestamo</a>
                 </td>
             </tr>
         </c:forEach>
@@ -51,7 +51,7 @@
     
     <br/> 
     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
+		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir prestamo</a>
 	</sec:authorize>
 
 </petclinic:layout>

@@ -38,13 +38,13 @@ public class PrestamoServiceTest {
 	@Test
 	public void testFindAll() {
 		Iterable<Prestamo> prestamos = prestamoService.findAll();
-		assertTrue(prestamos.iterator().next().getEjemplar().equals(1));
+		assertTrue(prestamos.iterator().next().getMiembro().getNombre().equals("Raúl"));
 	}
 
 	@Test
 	public void testFindById() {
 		Prestamo prestamo = prestamoService.findById(0).get();
-		assertTrue(prestamo.getEjemplar().equals(1));
+		assertTrue(prestamo.getEjemplar().getId().equals(1));
 	}
 
 	@Test
