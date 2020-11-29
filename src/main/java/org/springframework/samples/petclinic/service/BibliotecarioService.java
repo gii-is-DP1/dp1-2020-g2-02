@@ -10,6 +10,7 @@ import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.BibliotecarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BibliotecarioService {
 	
@@ -22,11 +23,17 @@ public class BibliotecarioService {
 	@Autowired
 	private AuthoritiesService authoritiesService;
 	
+	@Transactional(readOnly = true)
 	public Collection<Bibliotecario> findAll(){
 		return BibliotecarioRepo.findAll();
 	}
-
-
+	
+	@Transactional
+	public int bibliotecarioCount() {
+		return (int) BibliotecarioRepo.count();
+	}
+	
+	@Transactional(readOnly = true)
 	public Optional<Bibliotecario> findById(int id) {
 		return BibliotecarioRepo.findById(id);
 	}

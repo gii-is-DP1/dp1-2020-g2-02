@@ -1,11 +1,16 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Autor;
+import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.stereotype.Controller;
@@ -27,8 +32,18 @@ public class LibroController {
 	@GetMapping
 	public String listLibros(ModelMap model) {
 		String vista = "libros/listLibro";
-		Collection<Libro> Libros = librosService.findAll();
-		model.addAttribute("libros", Libros);
+		Map<Libro, Collection<Genero>> mapGeneros = new HashMap<Libro, Collection<Genero>>();
+		Map<Libro, Collection<Autor>> mapAutores = new HashMap<Libro, Collection<Autor>>();
+		Iterator<Libro> it = librosService.findAll().iterator();
+		
+		while (it.hasNext()) {
+			Libro libro = it.next();
+			mapGeneros.put(libro, librosService.getGenerosLibro(libro));
+			mapAutores.put(libro, librosService.getAutoresLibro(libro));
+			System.out.println("AquiController " + librosService.getAutoresLibro(libro).size());
+		}
+		model.addAttribute("librosGeneros", mapGeneros);
+		model.addAttribute("librosAutores", mapAutores);
 		return vista;
 	}
 	

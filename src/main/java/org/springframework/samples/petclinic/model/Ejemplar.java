@@ -7,6 +7,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.Data;
 
@@ -26,6 +27,7 @@ public class Ejemplar extends BaseEntity {
 	
 
 	@Column(name = "estado")
+	@NotEmpty
 	private String estado;
 	
 	

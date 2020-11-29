@@ -25,7 +25,7 @@ public class MiembroController {
 	
 	@GetMapping
 	public String listMiembros(ModelMap model) {
-		String vista = "miembros/listMiembros";
+		String vista = "miembros/listMiembro";
 		Collection<Miembro> miembros = miembrosService.findAll();
 		model.addAttribute("miembros", miembros);
 		return vista;

@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -16,25 +15,21 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.service.BibliotecarioService;
-import org.springframework.samples.petclinic.service.NovedadService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers=NovedadController.class,
+@WebMvcTest(controllers=BibliotecarioController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
-public class NovedadControllerTests {
-
+public class BibliotecarioControllerTests {
+	
 	@Autowired
-	NovedadController controller;
+	BibliotecarioController controller;
 	
 	@MockBean
 	BibliotecarioService bibliotecarioService;
-	
-	@MockBean
-	NovedadService novedadService;
 	
 	@MockBean
 	UserService userService;
@@ -43,31 +38,33 @@ public class NovedadControllerTests {
 	private MockMvc mockMvc;
 	
 	@WithMockUser(value = "Us3r")
-    	@Test
-    void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/novedades/new"))
+	@Test
+	void testInitCreationForm() throws Exception {
+		mockMvc.perform(get("/bibliotecarios/new"))
 		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("novedad"))
-		.andExpect(view().name("novedades/editNovedad"));
+		.andExpect(model().attributeExists("bibliotecario"))
+		.andExpect(view().name("bibliotecarios/editBibliotecario"));
 	}
 	
-	@WithMockUser(value = "Us3r")
+	/*@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/novedades/save").param("titulo", "A").param("contenido", "A")
-						.with(csrf()))
-			.andExpect(model().attribute("message", "Novedad guardada correctamente."));
-	}
+		mockMvc.perform(post("/biliotecarios/save").param("nombre", "Natalia").param("apellidos", "Cabeza Ramirez")
+						.param("dni", "49486598Q").param("telefono", "650606789").param("email", "nacara12@gmail.com")
+						.param("username", "nacara").with(csrf()))
+			.andExpect(model().attribute("message", "Bibliotecario guardada correctamente."));
+	}*/
 	
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/novedades/save")
+		mockMvc.perform(post("/bibliotecarios/save")
 						.with(csrf())
-						.param("titulo", "Prueba"))
+						.param("nombre", "P"))
 			.andExpect(status().isOk())
-			.andExpect(model().attributeHasErrors("novedad"))
-			.andExpect(model().attributeHasFieldErrors("novedad", "contenido"))
-			.andExpect(view().name("novedades/editNovedad"));
+			.andExpect(model().attributeHasErrors("bibliotecario"))
+			.andExpect(model().attributeHasFieldErrors("bibliotecario", "apellidos"))
+			.andExpect(view().name("bibliotecarios/editBibliotecario"));
 	}
+
 }
