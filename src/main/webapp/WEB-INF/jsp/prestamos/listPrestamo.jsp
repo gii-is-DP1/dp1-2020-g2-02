@@ -6,10 +6,10 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
-<petclinic:layout pageName="prestamo">
+<petclinic:layout pageName="prestamos">
 	
     <h2>Prestamos</h2>
-        <table id="PrestamosTable" class="table table-striped">
+        <table id="prestamosTable" class="table table-striped">
         <thead>
         <tr>
             <th >Ejemplar</th>
@@ -51,7 +51,7 @@
     
     <br/> 
     <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir prestamo</a>
+		<a class="btn btn-default" href='<spring:url value="/prestamos/new" htmlEscape="true"/>'>Añadir prestamo</a>
 	</sec:authorize>
 
 </petclinic:layout>

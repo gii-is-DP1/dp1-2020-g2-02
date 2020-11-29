@@ -56,7 +56,7 @@ public class EjemplarControllerTests {
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/ejemplares/save")
 						.with(csrf())
-						.param("titulo", "Prueba"))
+						.param("titulo", "P"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("ejemplar"))
 			.andExpect(model().attributeHasFieldErrors("ejemplar", "estado"))
