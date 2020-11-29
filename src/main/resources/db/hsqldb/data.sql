@@ -19,7 +19,7 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALU
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Lola', 'Atienza Ruiz', '49388441P', 650606604, 'lola@gmail.com', 'lolati1');
 
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
-INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388441P', 650606604, 'rauw@gmail.com', 'raulla1');
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388442P', 650606604, 'rauw@gmail.com', 'raulla1');
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
