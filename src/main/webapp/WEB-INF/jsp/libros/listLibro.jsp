@@ -16,7 +16,7 @@
             <th >Título</th>
             <th >Autor</th>
             <th >Idioma</th>   
-            <th>Género</th>
+            <th>Géneros</th>
             <th>Fecha de publicación</th>
             <th>Acciones</th>              
         </tr>
@@ -25,26 +25,29 @@
         <c:forEach items="${libros}" var="libro">
             <tr>
                 <td>                    
-                    <c:out value="${libro.ISBN}"/>
+                    <c:out value="${libro.key.ISBN}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.titulo}"/>
+                    <c:out value="${libro.key.titulo}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.autor.nombre} ${libro.autor.apellidos}"/>
-                </td>                 
+                    <c:out value="${libro.key.autor.nombre} ${libro.key.autor.apellidos}"/>
+                </td>     
+                
                 <td>
-                    <c:out value="${libro.idioma}"/>
+                    <c:out value="${libro.key.idioma}"/>
+                </td>               
+                <td>
+                	<c:forEach items="${libro.value}" var="generoLibro">
+                    	<c:out value="${generoLibro.genero}"/><br/>
+        			</c:forEach>
                 </td>  
                 <td>
-                    <c:out value="${libro.genero}"/>
-                </td>  
-                <td>
-                    <c:out value="${libro.fecha_publicacion}"/>
+                    <c:out value="${libro.key.fecha_publicacion}"/>
                 </td> 
                 <td>
                 	<spring:url value="/libros/delete/{libroId}" var="libroUrl">
-                        <spring:param name="libroId" value="${libro.id}"/>
+                        <spring:param name="libroId" value="${libro.key.id}"/>
                     </spring:url>
                     <a href ="${fn:escapeXml(libroUrl)}">Borrar libro</a>
                 </td>
