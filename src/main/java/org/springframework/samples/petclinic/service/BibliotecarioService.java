@@ -23,6 +23,7 @@ public class BibliotecarioService {
 	@Autowired
 	private AuthoritiesService authoritiesService;
 	
+	@Transactional(readOnly = true)
 	public Collection<Bibliotecario> findAll(){
 		return BibliotecarioRepo.findAll();
 	}
@@ -32,6 +33,7 @@ public class BibliotecarioService {
 		return (int) BibliotecarioRepo.count();
 	}
 	
+	@Transactional(readOnly = true)
 	public Optional<Bibliotecario> findById(int id) {
 		return BibliotecarioRepo.findById(id);
 	}
