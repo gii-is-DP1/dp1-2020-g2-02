@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.stereotype.Service;
@@ -19,9 +20,15 @@ public class LibroServiceTest {
 	private LibroService libroService;
 
 	@Test
-	private void testGetGenerosLibro() {
+	public void testGetGenerosLibro() {
 		Collection<Genero> generos = libroService.getGenerosLibro(libroService.findById(1).get());
 		assertTrue(generos.size()==2);
+	}
+	
+	@Test
+	public void testGetAutoresLibro() {
+		Collection<Autor> autores = libroService.getAutoresLibro(libroService.findById(2).get());
+		assertTrue(autores.size()==2);
 	}
 	
 	@Test
@@ -31,7 +38,7 @@ public class LibroServiceTest {
 	}
 	
 	@Test
-	private void testFindById() {
+	public void testFindById() {
 		Libro libro = libroService.findById(1).get();
 		assertTrue(libro.getTitulo().equals("El adversario")); 
 	}
