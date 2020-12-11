@@ -13,22 +13,26 @@
             <th >ISBN</th>
             <th >Titulo</th>
             <th >Idioma</th>  
-            <th ></th>         
+            <th >Géneros</th>         
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${libros}" var="libro">
             <tr>
                 <td>                    
-                    <c:out value="${libro.ISBN}"/>
+                    <c:out value="${libro.key.ISBN}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.titulo}"/>
+                    <c:out value="${libro.key.titulo}"/>
                 </td>
                     <td>
-                    <c:out value="${libro.idioma}"/>
-                </td>               
+                    <c:out value="${libro.key.idioma}"/>
+                </td>  
                 <td> 
+                <c:forEach items="${libro.value}" var="genero">
+                		<c:out value="${genero.genero}"/> <br/>
+                </c:forEach>  
+                </td>
             </tr>
         </c:forEach>
         </tbody>
