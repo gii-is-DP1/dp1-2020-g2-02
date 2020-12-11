@@ -40,7 +40,11 @@
                  		<c:choose>
                  			<c:when test="${libro.key.id == libroautores.key.id}">
                 				<c:forEach items="${libroautores.value}" var="autorLibro">
-                    				<c:out value="${autorLibro.nombre} ${autorLibro.apellidos}"/> <br/>
+                					<spring:url value="/autores/{autorId}" var="autorUrl">
+                        				<spring:param name="autorId" value="${autorLibro.id}"/>
+                    				</spring:url>
+                    				<a href ="${fn:escapeXml(autorUrl)}"><c:out value="${autorLibro.nombre} ${autorLibro.apellidos}"/></a>
+                    				 <br/>
                 				</c:forEach>
                 			</c:when>
                 		</c:choose>
