@@ -12,11 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping
+@RequestMapping("/autores")
 public class AutorController {
 
 	@Autowired
@@ -49,5 +51,13 @@ public class AutorController {
 		String vista = "autores/editAutor";
 		modelmap.addAttribute("autor", new Autor());
 		return vista;
+	}
+	
+	@GetMapping(path="/{autorId}")
+	public ModelAndView verLibrosAutor(@PathVariable("autorId") int autorId) {
+		ModelAndView mav = new ModelAndView("autores/librosAutor");
+		mav.addObject("autor", this.autorService.findById(autorId).get());
+		mav.addObject("libros", this.autorService.getLibrosAutor(autorService.findById(autorId).get()));
+		return mav;
 	}
 }
