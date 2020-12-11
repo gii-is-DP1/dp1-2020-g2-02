@@ -39,6 +39,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/bibliotecarios/**").hasAnyAuthority("admin")
 				.antMatchers("/miembros/**").hasAnyAuthority("bibliotecario", "admin")
 				.antMatchers("/libros/**").permitAll()
+				.antMatchers("/autores/**").permitAll()
+				.antMatchers("/autores/**").hasAnyAuthority("bibliotecario","admin")
 				.antMatchers("/ejemplares/**").permitAll()
 				.antMatchers("/prestamos/**").permitAll()
 				.antMatchers("/novedades").permitAll()
