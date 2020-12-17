@@ -41,8 +41,8 @@ public class AutorServiceTest {
 	
 	@Test
 	public void testFindAll() {
-		Iterable<Autor> autores = autorService.findAll();
-		assertTrue(autores.iterator().next().getNombre().equals("Emmanuel"));
+		Collection<Autor> autores = autorService.findAll();
+		assertTrue(autores.size()==2);
 	}
 	
 	@Test
