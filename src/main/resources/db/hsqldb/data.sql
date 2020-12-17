@@ -20,8 +20,9 @@ INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1,
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
 
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11');
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 'DISPONIBLE');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 'DISPONIBLE');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado) VALUES (0123456789, 'Libro descatalogado', 'Español', '2004-10-11', 'DESCATALOGADO');
 
 INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
 INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');

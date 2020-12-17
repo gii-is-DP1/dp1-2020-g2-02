@@ -55,7 +55,7 @@ public class LibroServiceTest {
 		libro.setFecha_publicacion(LocalDate.now());
 		libroService.save(libro);
 		Collection<Libro> libros = libroService.findAll();
-		assertTrue(libros.size()==3);
+		assertTrue(libros.size()==4);
 	}
 	
 	

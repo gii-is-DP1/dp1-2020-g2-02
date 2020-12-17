@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Autor;
+import org.springframework.samples.petclinic.model.EstadoLibro;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.LibroService;
@@ -67,15 +68,23 @@ public class LibroController {
 		modelmap.addAttribute("libro", new Libro());
 		return vista;
 	}
+
 	
-	@GetMapping(path="/delete/{libroId}")
-	public String borrarLibro(@PathVariable("libroId") int libroId, ModelMap modelmap) {
-		String vista = "libros/listLibro"; 
+	@GetMapping(path="/descatalogar/{libroId}")
+	public String descatalogarLibro(@PathVariable("libroId") int libroId, ModelMap modelmap) {
+		String vista = "libros/listLibro";
 		Optional<Libro> libro = librosService.findById(libroId);
-		if(libro.isPresent()) {
-			librosService.delete(libro.get());
-			modelmap.addAttribute("message", "Libro eliminado correctamente");
-		}else {
+		if (libro.isPresent()) {
+			if (libro.get().getEstado() == EstadoLibro.DISPONIBLE) {
+				libro.get().setEstado(EstadoLibro.DESCATALOGADO);
+				librosService.save(libro.get());
+			}
+			else {
+				modelmap.addAttribute("message", "Libro ya descatalogado");
+			}
+		}
+		else {
+
 			modelmap.addAttribute("message", "Libro no encontrado");
 		}
 		vista = listLibros(modelmap);

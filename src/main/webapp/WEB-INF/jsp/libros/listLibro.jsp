@@ -22,11 +22,11 @@
         </tr>
         </thead>
         <tbody>
-         <tr> 
        
         
         <c:forEach items="${librosGeneros}" var="libro">
-            
+            <c:if test="${libro.key.estado == 'DISPONIBLE' }">
+         	<tr> 
                 <td>                    
                     <c:out value="${libro.key.ISBN}"/>
                 </td>
@@ -63,12 +63,13 @@
                     <c:out value="${libro.key.fecha_publicacion}"/>
                 </td> 
                 <td>
-                	<spring:url value="/libros/delete/{libroId}" var="libroUrl">
+                	<spring:url value="/libros/descatalogar/{libroId}" var="libroUrl">
                         <spring:param name="libroId" value="${libro.key.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(libroUrl)}">Borrar libro</a>
+                    <a href ="${fn:escapeXml(libroUrl)}">Descatalogar</a>
                 </td>
-            </tr>
+        	</tr>
+           	</c:if>
         </c:forEach>
         
         </tbody>
