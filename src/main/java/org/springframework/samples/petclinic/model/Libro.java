@@ -42,5 +42,9 @@ public class Libro extends BaseEntity {
 	@Column(name = "estado")
 	@Enumerated(EnumType.STRING)
 	private EstadoLibro estado;
+	
+	@ManyToOne
+	@JoinColumn(name = "editorial_id")
+	private Editorial editorial;
 
 }

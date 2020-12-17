@@ -17,12 +17,15 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALU
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388442P', 650606604, 'rauw@gmail.com', 'raulla1');
 
+INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Norma', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
+INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Planeta', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
+
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
 
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 'DISPONIBLE');
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 'DISPONIBLE');
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado) VALUES (0123456789, 'Libro descatalogado', 'Español', '2004-10-11', 'DESCATALOGADO');
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 'DISPONIBLE', 1);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 'DISPONIBLE', 2);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado, editorial_id) VALUES (0123456789, 'Libro descatalogado', 'Español', '2004-10-11', 'DESCATALOGADO', 1);
 
 INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
 INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');

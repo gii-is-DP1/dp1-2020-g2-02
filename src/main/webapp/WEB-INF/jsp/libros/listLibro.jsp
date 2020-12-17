@@ -17,6 +17,7 @@
             <th >Autor</th>
             <th >Idioma</th>   
             <th>Géneros</th>
+            <th>Editorial</th>
             <th>Fecha de publicación</th>
             <th>Acciones</th>              
         </tr>
@@ -58,7 +59,13 @@
                 	<c:forEach items="${libro.value}" var="generoLibro">
                     	<c:out value="${generoLibro.genero}"/><br/>
         			</c:forEach>
-                </td>  
+                </td>   
+                <td>
+                    <spring:url value="/editoriales/{editorialId}" var="autorUrl">
+                        <spring:param name="editorialId" value="${libro.key.editorial.id}"/>
+                    </spring:url>
+                    <a href ="${fn:escapeXml(autorUrl)}"><c:out value="${libro.key.editorial.nombre}"/></a>
+                </td> 
                 <td>
                     <c:out value="${libro.key.fecha_publicacion}"/>
                 </td> 
