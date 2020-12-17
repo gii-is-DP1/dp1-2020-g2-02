@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -37,5 +39,8 @@ public class Libro extends BaseEntity {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_publicacion;
 	
+	@Column(name = "estado")
+	@Enumerated(EnumType.STRING)
+	private EstadoLibro estado;
 
 }

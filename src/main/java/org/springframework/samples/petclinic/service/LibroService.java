@@ -50,6 +50,7 @@ public class LibroService {
 
 	}
 	
+	
 	public Collection<Genero> getGenerosLibro(Libro libro){
 		Collection<Genero> generos = new ArrayList<Genero>();
 		Iterator<Genero> it = generoService.findAll().iterator();
@@ -60,7 +61,6 @@ public class LibroService {
 				generos.add(genero);
 			}
 		}
-		//System.out.println("AQUI " + generos.size());
 		return generos;
 	}
 	
@@ -76,7 +76,6 @@ public class LibroService {
 				autores.add(autorService.findById(idAutor).get());
 			}
 		}
-		//System.out.println("AQUI " + autores.size());
 		return autores;
 	}
 	

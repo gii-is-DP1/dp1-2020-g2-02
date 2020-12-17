@@ -7,6 +7,8 @@
 
 <petclinic:layout pageName="autores">
     <h2> <c:out value="${autor.nombre} ${autor.apellidos}"/></h2>
+    
+    
         <table id="autoresTable" class="table table-striped">
         <thead>
         <tr>
@@ -18,6 +20,7 @@
         </thead>
         <tbody>
         <c:forEach items="${libros}" var="libro">
+            <c:if test="${libro.key.estado == 'DISPONIBLE' }">
             <tr>
                 <td>                    
                     <c:out value="${libro.key.ISBN}"/>
@@ -34,6 +37,7 @@
                 </c:forEach>  
                 </td>
             </tr>
+            </c:if>
         </c:forEach>
         </tbody>
     </table>
