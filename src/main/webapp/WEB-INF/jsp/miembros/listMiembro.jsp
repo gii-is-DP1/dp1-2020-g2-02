@@ -10,12 +10,14 @@
         <table id="miembrosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 18%;">Nombre</th>
-            <th style="width: 18%;">Apellidos</th>
-            <th style="width: 18%;">DNI</th>
-            <th style="width: 18%;">Teléfono</th>
-            <th style="width: 18%;">Email</th>   
-            <th style="width: 5%;">Editar</th>                 
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Email</th>
+            <th>Usuario</th>  
+            <th>Estado</th>   
+            <th>Acciones</th>                 
         </tr>
         </thead>
         <tbody>
@@ -35,19 +37,30 @@
                 </td> 
                 <td>
                     <c:out value="${miembro.email}"/>
-                </td>              
+                </td> 
                 <td>
-                	<spring:url value="/miembros/delete/{miembroId}" var="miembroUrl">
+                    <c:out value="${miembro.user.username}"/>
+                </td>  
+                 <c:if test="${miembro.user.enabled}">
+                 	<td>Habilitado</td>
+                 	<td> <spring:url value="/miembros/deshabilitar/{miembroId}" var="ejemplarUrl">
                         <spring:param name="miembroId" value="${miembro.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(miembroUrl)}">Borrar</a>
-                </td>
+                    <a href ="${fn:escapeXml(ejemplarUrl)}">Deshabilitar</a>
+                    </td>
+                 </c:if>
+                 <c:if test="${!miembro.user.enabled}">
+                 	<td>Deshabilitado</td>
+                 	<td> <spring:url value="/miembros/habilitar/{miembroId}" var="ejemplarUrl">
+                        <spring:param name="miembroId" value="${miembro.id}"/>
+                    </spring:url>
+                    <a href ="${fn:escapeXml(ejemplarUrl)}">Habilitar</a>
+                    </td>
+                 </c:if>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <sec:authorize access="hasAuthority('admin')">
-        <a class="btn btn-default" href='<spring:url value="/miembros/new" htmlEscape="true"/>'>Añadir miembro</a>
-    </sec:authorize>
+    <a class="btn btn-default" href='<spring:url value="/miembros/new" htmlEscape="true"/>'>Añadir miembro</a>
 
 </petclinic:layout>

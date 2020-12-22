@@ -18,15 +18,13 @@
             <th >Idioma</th>   
             <th>Géneros</th>
             <th>Editorial</th>
-            <th>Fecha de publicación</th>
-            <th>Acciones</th>              
+            <th>Fecha de publicación</th>         
         </tr>
         </thead>
         <tbody>
        
         
         <c:forEach items="${librosGeneros}" var="libro">
-            <c:if test="${libro.key.estado == 'DISPONIBLE' }">
          	<tr> 
                 <td>                    
                     <c:out value="${libro.key.ISBN}"/>
@@ -68,15 +66,8 @@
                 </td> 
                 <td>
                     <c:out value="${libro.key.fecha_publicacion}"/>
-                </td> 
-                <td>
-                	<spring:url value="/libros/descatalogar/{libroId}" var="libroUrl">
-                        <spring:param name="libroId" value="${libro.key.id}"/>
-                    </spring:url>
-                    <a href ="${fn:escapeXml(libroUrl)}">Descatalogar</a>
                 </td>
         	</tr>
-           	</c:if>
         </c:forEach>
         
         </tbody>
@@ -84,7 +75,7 @@
 
 
     <br/> 
-    <sec:authorize access="hasAuthority('admin')">
+    <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
 		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
 	</sec:authorize>
 </petclinic:layout>

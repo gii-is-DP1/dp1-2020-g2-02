@@ -54,7 +54,6 @@ public class LibroServiceTest {
 		libro.setIdioma("Inglés");
 		libro.setTitulo("TítuloPrueba");
 		libro.setFecha_publicacion(LocalDate.now());
-		libro.setEstado(EstadoLibro.DISPONIBLE);
 		libroService.save(libro);
 		Collection<Libro> libros = libroService.findAll();
 		assertTrue(libros.size()==4);

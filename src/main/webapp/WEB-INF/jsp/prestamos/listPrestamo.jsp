@@ -12,7 +12,8 @@
         <table id="prestamosTable" class="table table-striped">
         <thead>
         <tr>
-            <th >Ejemplar</th>
+            <th >ID ejemplar</th>
+            <th >Libro</th>
             <th >Miembro</th>
             <th >Bibliotecario</th>
             <th >FechaPrestamo</th>   
@@ -21,28 +22,28 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach items="${prestamo}" var="prestamo">
+        <c:forEach items="${prestamos}" var="prestamo">
             <tr>
                 <td>                    
-                    <c:out value="${prestamo.ejemplar_id}"/>
+                    <c:out value="${prestamo.ejemplar.id}"/>
+                </td>
+                <td>                    
+                    <c:out value="${prestamo.ejemplar.libro.titulo}"/>
                 </td>
                 <td>
-                    <c:out value="${prestamo.miembro_id}"/>
+                    <c:out value="${prestamo.miembro.apellidos}"/>, <c:out value="${prestamo.miembro.nombre}"/>
                 </td>
                 <td>
-                    <c:out value="${prestamo.bibliotecario_id}"/>
+                    <c:out value="${prestamo.bibliotecario.apellidos}"/>, <c:out value="${prestamo.bibliotecario.nombre}"/>
                 </td> 
                 <td>
-                    <c:out value="${prestamo.fecha_prestamo}"/>
+                    <c:out value="${prestamo.fechaPrestamo}"/>
                 </td>  
                 <td>
-                    <c:out value="${prestamo.fecha_devolucion}"/>
+                    <c:out value="${prestamo.fechaDevolucion}"/>
                 </td>  
                 <td>
-                	<spring:url value="/prestamo/delete/{prestamoId}" var="prestamoUrl">
-                        <spring:param name="prestamoId" value="${prestamo.id}"/>
-                    </spring:url>
-                    <a href ="${fn:escapeXml(libroUrl)}">Borrar prestamo</a>
+                	TODO: conceder/rechazar/finalizar préstamos
                 </td>
             </tr>
         </c:forEach>

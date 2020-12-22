@@ -10,12 +10,14 @@
         <table id="bibliotecariosTable" class="table table-striped">
         <thead>
         <tr>
-            <th style="width: 18%;">Nombre</th>
-            <th style="width: 18%;">Apellidos</th>
-            <th style="width: 18%;">DNI</th>
-            <th style="width: 18%;">Teléfono</th>
-            <th style="width: 18%;">Email</th>   
-            <th style="width: 5%;">Editar</th>              
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>DNI</th>
+            <th>Teléfono</th>
+            <th>Email</th>   
+            <th>Usuario</th>
+            <th>Estado</th>
+            <th>Acciones</th>              
         </tr>
         </thead>
         <tbody>
@@ -37,11 +39,24 @@
                     <c:out value="${bibliotecario.email}"/>
                 </td>
                 <td>
-                	<spring:url value="/bibliotecarios/delete/{bibliotecarioId}" var="bibliotecarioUrl">
-                        <spring:param name="bibliotecarioId" value="${bibliotecario.id}"/>
-                    </spring:url>
-                    <a href ="${fn:escapeXml(bibliotecarioUrl)}">Borrar</a>
+                    <c:out value="${bibliotecario.user.username}"/>
                 </td>
+                <c:if test="${bibliotecario.user.enabled}">
+                 	<td>Habilitado</td>
+                 	<td> <spring:url value="/bibliotecarios/deshabilitar/{biblioId}" var="ejemplarUrl">
+                        <spring:param name="biblioId" value="${bibliotecario.id}"/>
+                    </spring:url>
+                    <a href ="${fn:escapeXml(ejemplarUrl)}">Deshabilitar</a>
+                    </td>
+                 </c:if>
+                 <c:if test="${!bibliotecario.user.enabled}">
+                 	<td>Deshabilitado</td>
+                 	<td> <spring:url value="/bibliotecarios/habilitar/{biblioId}" var="ejemplarUrl">
+                        <spring:param name="biblioId" value="${bibliotecario.id}"/>
+                    </spring:url>
+                    <a href ="${fn:escapeXml(ejemplarUrl)}">Habilitar</a>
+                    </td>
+                 </c:if>
             </tr>
         </c:forEach>
         </tbody>
