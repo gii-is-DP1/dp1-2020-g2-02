@@ -23,21 +23,21 @@
 			<ul class="nav navbar-nav">
 
 				<petclinic:menuItem active="${name eq 'home'}" url="/"
-					title="home page">
+					title="Página inicial">
 					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
-					<span>Home</span>
+					<span>Inicio</span>
 				</petclinic:menuItem>
-
-				<petclinic:menuItem active="${name eq 'owners'}" url="/owners/find"
-					title="find owners">
-					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-					<span>Find owners</span>
-				</petclinic:menuItem>
-
-				<petclinic:menuItem active="${name eq 'vets'}" url="/vets"
-					title="veterinarians">
+				
+				<petclinic:menuItem active="${name eq 'novedades'}" url="/novedades"
+					title="Novedades">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Veterinarians</span>
+					<span>Novedades</span>
+				</petclinic:menuItem>
+				
+				<petclinic:menuItem active="${name eq 'autores'}" url="/autores"
+					title="Autores">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					<span>Autores</span>
 				</petclinic:menuItem>
 
 				<petclinic:menuItem active="${name eq 'error'}" url="/oups"
@@ -75,9 +75,30 @@
 											<p class="text-left">
 												<strong><sec:authentication property="name" /></strong>
 											</p>
-											<p class="text-left">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-lg-12">
+											<p class="text-left" style="padding:6%">
+												<sec:authorize access="hasAuthority('admin')">
+													<a href="<c:url value="/bibliotecarios" />"
+													class="btn btn-primary btn-block btn-sm">Bibliotecarios</a>
+												</sec:authorize>
+												<sec:authorize access="hasAuthority('bibliotecario') || hasAuthority('admin')">
+													<a href="<c:url value="/libros" />"
+													class="btn btn-primary btn-block btn-sm">Consultar catálogo</a>
+													<a href="<c:url value="/ejemplares" />"
+													class="btn btn-primary btn-block btn-sm">Ejemplares</a>
+													<a href="<c:url value="miembros" />"
+													class="btn btn-primary btn-block btn-sm">Miembros</a>
+												</sec:authorize>
+												<sec:authorize access="hasAuthority('bibliotecario')">
+													<a href="<c:url value="/novedades/new" />"
+													class="btn btn-primary btn-block btn-sm">Publicar novedad</a>
+												</sec:authorize>
 												<a href="<c:url value="/logout" />"
-													class="btn btn-primary btn-block btn-sm">Logout</a>
+													class="btn btn-primary btn-block btn-sm">Cerrar sesión</a>
+											
 											</p>
 										</div>
 									</div>
