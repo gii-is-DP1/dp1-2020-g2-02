@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.EjemplarService;
@@ -54,7 +55,7 @@ public class EjemplarController {
 		return vista;
 	}
 	
-	@GetMapping(path="/delete/{ejemplarId}")
+	/*@GetMapping(path="/delete/{ejemplarId}")
 	public String borrarEjemplar(@PathVariable("ejemplarId") int ejemplarId, ModelMap modelmap) {
 		String vista = "libros/listLibro"; 
 		Optional<Ejemplar> ejemplar = ejemplaresService.findById(ejemplarId);
@@ -62,6 +63,21 @@ public class EjemplarController {
 			ejemplaresService.delete(ejemplar.get());
 			modelmap.addAttribute("message", "Ejemplar eliminado correctamente");
 		}else {
+			modelmap.addAttribute("message", "Ejemplar no encontrado");
+		}
+		vista = listEjemplares(modelmap);
+		return vista;
+	}*/
+	@GetMapping(path="/descatalogar/{ejemplarId}")
+	public String descatalogarLibro(@PathVariable("ejemplarId") int ejemplarId, ModelMap modelmap) {
+		String vista = "ejemplar/listEjemplar";
+		Optional<Ejemplar> ejemplar = ejemplaresService.findById(ejemplarId);
+		if (ejemplar.isPresent()) {
+			ejemplar.get().setDisponibilidad(Disponibilidad.DESCATALOGADO);
+			ejemplaresService.save(ejemplar.get());
+		}
+		else {
+
 			modelmap.addAttribute("message", "Ejemplar no encontrado");
 		}
 		vista = listEjemplares(modelmap);

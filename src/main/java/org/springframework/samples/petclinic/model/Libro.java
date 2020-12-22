@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -14,10 +12,12 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "libros")
 
 public class Libro extends BaseEntity {
@@ -38,10 +38,6 @@ public class Libro extends BaseEntity {
 	@Column(name = "fecha_publicacion")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_publicacion;
-	
-	@Column(name = "estado")
-	@Enumerated(EnumType.STRING)
-	private EstadoLibro estado;
 	
 	@ManyToOne
 	@JoinColumn(name = "editorial_id")

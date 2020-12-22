@@ -20,7 +20,6 @@
         </thead>
         <tbody>
         <c:forEach items="${libros}" var="libro">
-            <c:if test="${libro.key.estado == 'DISPONIBLE' }">
             <tr>
                 <td>                    
                     <c:out value="${libro.key.ISBN}"/>
@@ -37,7 +36,6 @@
                 </c:forEach>  
                 </td>
             </tr>
-            </c:if>
         </c:forEach>
         </tbody>
     </table>

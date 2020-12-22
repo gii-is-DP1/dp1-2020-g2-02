@@ -23,9 +23,8 @@ INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Planeta', 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
 
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 'DISPONIBLE', 1);
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 'DISPONIBLE', 2);
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion,estado, editorial_id) VALUES (0123456789, 'Libro descatalogado', 'Español', '2004-10-11', 'DESCATALOGADO', 1);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 1);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 2);
 
 INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
 INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');
@@ -35,9 +34,9 @@ INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
 
-INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Bien','DISPONIBLE');
-INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Dañado','RESERVADO');
-INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (2,'Bien','EN_PRESTAMO');
+INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Primera página arrancada.','DISPONIBLE');
+INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (1,'Cubierta doblada.','RESERVADO');
+INSERT INTO ejemplares(libro_id,estado,disponibilidad) VALUES (2,'En perfecto estado.','EN_PRESTAMO');
 
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id) VALUES (0,'2020-11-15', '2020-12-01', 1, 1,1);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id) VALUES (1,'2020-11-20', '2020-12-06', 1, 0,2);

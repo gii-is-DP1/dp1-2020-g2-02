@@ -68,27 +68,5 @@ public class LibroController {
 		modelmap.addAttribute("libro", new Libro());
 		return vista;
 	}
-
-	
-	@GetMapping(path="/descatalogar/{libroId}")
-	public String descatalogarLibro(@PathVariable("libroId") int libroId, ModelMap modelmap) {
-		String vista = "libros/listLibro";
-		Optional<Libro> libro = librosService.findById(libroId);
-		if (libro.isPresent()) {
-			if (libro.get().getEstado() == EstadoLibro.DISPONIBLE) {
-				libro.get().setEstado(EstadoLibro.DESCATALOGADO);
-				librosService.save(libro.get());
-			}
-			else {
-				modelmap.addAttribute("message", "Libro ya descatalogado");
-			}
-		}
-		else {
-
-			modelmap.addAttribute("message", "Libro no encontrado");
-		}
-		vista = listLibros(modelmap);
-		return vista;
-	}
 	
 }
