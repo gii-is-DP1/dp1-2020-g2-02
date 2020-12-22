@@ -20,7 +20,4 @@
             <p style="margin-top:1%;">${novedad.contenido}</p>
             </div>
         </c:forEach>
-        <sec:authorize access="hasAuthority('bibliotecario')">
-			<a class="btn btn-default" href='<spring:url value="/novedades/new" htmlEscape="true"/>'>Añadir novedad</a>
-		</sec:authorize>
 </petclinic:layout>
