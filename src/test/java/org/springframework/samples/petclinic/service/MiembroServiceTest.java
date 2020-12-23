@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -21,8 +20,6 @@ public class MiembroServiceTest {
 	@Autowired
 	private UserService  userService;
 	
-	@Autowired
-	private AuthoritiesService authoritiesService;
 	@Test
 	public void testCountWithInitialData() {
 		int count=miembroService.miembroCount();
@@ -41,18 +38,6 @@ public class MiembroServiceTest {
 		assertTrue(miembro.getNombre().equals("Raúl"));
 	}
 	
-//	@Test
-//	@Transactional
-//	public void testDeactivate() {
-//		int cuentaInicial = miembroService.miembroCount();
-//		
-//		Miembro miembro = miembroService.findById(0).get();
-//		miembroService.delete(miembro);
-//		
-//		int cuentaFinal = miembroService.miembroCount();
-//		assertTrue(cuentaInicial-cuentaFinal == 1);
-//	}
-	
 	@Test
 	@Transactional
 	public void testAddMiembro() {
@@ -66,7 +51,6 @@ public class MiembroServiceTest {
 		miembro.setNombre("Antonio");
 		miembro.setTelefono(661524384);
 
-		int cuentaInicialAuthorities = authoritiesService.authorityCount();
 		User user = new User();
 		user.setUsername("antlop1");
 		user.setPassword("Pass1234");
@@ -75,22 +59,6 @@ public class MiembroServiceTest {
 		userService.saveUser(user);
 		miembroService.save(miembro);
 		
-		
-//		Authorities autoridad = new Authorities();
-//		autoridad.setAuthority("miembro");
-//		autoridad.setId(cuentaInicialAuthorities);
-//		autoridad.setUser(user);
-//		Set<Authorities> autoridadesSet  = new HashSet<Authorities>();
-//		autoridadesSet.add(autoridad);
-//		authoritiesService.saveAuthorities(autoridad);
-////		authoritiesService.saveAuthorities(miembro.getUser().getUsername(), "miembro");
-//		user.setAuthorities(autoridadesSet);
-//		userService.saveUser(user);
-		
-	
-		
-//		Miembro miembroEncontrado = this.miembroService.findById(miembro.getId()).get();
-//		assertThat(miembro).isEqualTo(miembroEncontrado);
 		int cuentaFinal = miembroService.miembroCount();
 		assertTrue(cuentaFinal-cuentaInicial== 1);
 	}

@@ -21,6 +21,7 @@
         </thead>
         <tbody>
         <c:forEach items="${ejemplares}" var="ejemplar">
+        	<c:if test="${ejemplar.disponibilidad != 'DESCATALOGADO' }">
             <tr>
                 <td>                    
                     <c:out value="${ejemplar.libro.titulo}"/>
@@ -32,15 +33,24 @@
                     <c:out value="${ejemplar.estado}"/>
                 </td>
                 <td>
-                    <c:out value="${ejemplar.disponibilidad}"/>
+                	<c:if test="${ejemplar.disponibilidad == 'DISPONIBLE' }">
+                    	Disponible
+                    </c:if>
+                    <c:if test="${ejemplar.disponibilidad == 'EN_PRESTAMO' }">
+                    	En préstamo
+                    </c:if>
+                    <c:if test="${ejemplar.disponibilidad == 'RESERVADO' }">
+                    	Pendiente de recoger
+                    </c:if>
                 </td>  
                 <td>
-                	<spring:url value="/ejemplares/delete/{ejemplarId}" var="ejemplarUrl">
+                	<spring:url value="/ejemplares/descatalogar/{ejemplarId}" var="ejemplarUrl">
                         <spring:param name="ejemplarId" value="${ejemplar.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(ejemplarUrl)}">Borrar ejemplar</a>
+                    <a href ="${fn:escapeXml(ejemplarUrl)}">Descatalogar ejemplar</a>
                 </td>
             </tr>
+            </c:if>
         </c:forEach>
         </tbody>
     </table>
