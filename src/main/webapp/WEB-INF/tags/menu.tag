@@ -28,7 +28,7 @@
 					<span>Inicio</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'libros'}" url="/libros"
+				<petclinic:menuItem active="${name eq 'Libros'}" url="/libros"
 					title="Catálogo de libros">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Libros</span>

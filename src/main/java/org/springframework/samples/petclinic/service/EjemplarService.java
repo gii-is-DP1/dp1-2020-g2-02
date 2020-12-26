@@ -45,6 +45,7 @@ public class EjemplarService {
 
 	}
 
+	@Transactional(readOnly=true)
 	public Collection<Ejemplar> findDisponibles(Libro libro) {
 		// TODO Auto-generated method stub
 		return EjemplarRepo.findAllByLibroAndDisponibilidad(libro,Disponibilidad.DISPONIBLE);

@@ -41,11 +41,16 @@
                     <c:out value="${prestamo.fechaDevolucion}"/>
                 </td>  
                 <td>
-                    <c:out value="${prestamo.bibliotecario.apellidos}"/>, <c:out value="${prestamo.bibliotecario.nombre}"/>
+                	<c:if test="${empty prestamo.bibliotecario}">
+                		-
+                	</c:if>
+                	<c:if test="${not empty prestamo.bibliotecario}">
+                    	<c:out value="${prestamo.bibliotecario.apellidos}"/>, <c:out value="${prestamo.bibliotecario.nombre}"/>
+                    </c:if>
                 </td>
                 
                 <c:choose>
-                	<c:when test="${prestamo.ejemplar.disponibilidad=='DISPONIBLE'}">
+                	<c:when test="${prestamo.finalizado}">
                 		<td>Finalizado</td>
                 		<td> - </td>
                 	</c:when>
@@ -54,8 +59,8 @@
                 		<td>TODO: Rechazar o marcar como recogido</td>
                 	</c:when>
                 	<c:when test="${prestamo.ejemplar.disponibilidad=='EN_PRESTAMO'}">
+                		<td>En préstamo</td>
                 		<td>TODO: Finalizar el prestamo</td>
-                		<td> </td>
                 	</c:when>
                 </c:choose>
             </tr>
