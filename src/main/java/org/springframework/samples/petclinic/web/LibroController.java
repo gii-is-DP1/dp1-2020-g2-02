@@ -10,9 +10,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Autor;
-import org.springframework.samples.petclinic.model.EstadoLibro;
+import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
+import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -29,25 +30,48 @@ public class LibroController {
 	
 	@Autowired
 	LibroService librosService;
+	
+	@Autowired
+	EjemplarService ejemplarService;
 
 	@GetMapping
 	public String listLibros(ModelMap model) {
 		String vista = "libros/listLibro";
-		Map<Libro, Collection<Genero>> mapGeneros = new HashMap<Libro, Collection<Genero>>();
-		Map<Libro, Collection<Autor>> mapAutores = new HashMap<Libro, Collection<Autor>>();
-		Iterator<Libro> it = librosService.findAll().iterator();
+		Map<Integer, Collection<Genero>> mapGeneros = new HashMap<Integer, Collection<Genero>>();
+		Map<Integer, Collection<Autor>> mapAutores = new HashMap<Integer, Collection<Autor>>();
+		Map<Integer, Boolean> disponibilidad = new HashMap<Integer, Boolean>();
+		Collection<Libro> libros = librosService.findAll();
+		Iterator<Libro> it = libros.iterator();
 		
 		while (it.hasNext()) {
 			Libro libro = it.next();
-			mapGeneros.put(libro, librosService.getGenerosLibro(libro));
-			mapAutores.put(libro, librosService.getAutoresLibro(libro));
-			System.out.println("AquiController " + librosService.getAutoresLibro(libro).size());
+			Integer id = libro.getId();
+			mapGeneros.put(id, librosService.getGenerosLibro(libro));
+			mapAutores.put(id, librosService.getAutoresLibro(libro));
+			disponibilidad.put(id, !ejemplarService.findDisponibles(libro).isEmpty());
+			//System.out.println("AquiController " + librosService.getAutoresLibro(libro).size());
 		}
+		model.addAttribute("libros",libros);
 		model.addAttribute("librosGeneros", mapGeneros);
 		model.addAttribute("librosAutores", mapAutores);
+		model.addAttribute("disponibilidad", disponibilidad);
+		
 		return vista;
 	}
 	
+	@GetMapping(path="/reservar/{libroId}")
+	public String reservar(@PathVariable("libroId") int libroId, ModelMap model) {
+		Optional<Libro> libro = librosService.findById(libroId);
+		if(!libro.isPresent()) {
+			model.addAttribute("message","Libro no existente");
+			String vista = listLibros(model);
+			return vista;
+		}
+		Collection<Ejemplar> ejemplaresDisponibles = ejemplarService.findDisponibles(libro.get());
+		model.addAttribute("message","Libro existente");
+		String vista = listLibros(model);
+		return vista;
+	}
 	@PostMapping(path="/save")
 	public String guardarLibro(@Valid Libro libro, BindingResult result, ModelMap modelmap) {
 		String vista = "libros/listLibro";

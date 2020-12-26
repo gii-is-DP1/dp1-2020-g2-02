@@ -15,9 +15,10 @@
             <th >ID ejemplar</th>
             <th >Libro</th>
             <th >Miembro</th>
-            <th >Bibliotecario</th>
-            <th >FechaPrestamo</th>   
-            <th >FechaDevolución</th>
+            <th >Fecha del préstamo</th>   
+            <th >Fecha de devolución</th>
+            <th >Concedido por</th>
+            <th >Estado</th>
             <th>Acciones</th>              
         </tr>
         </thead>
@@ -34,17 +35,29 @@
                     <c:out value="${prestamo.miembro.apellidos}"/>, <c:out value="${prestamo.miembro.nombre}"/>
                 </td>
                 <td>
-                    <c:out value="${prestamo.bibliotecario.apellidos}"/>, <c:out value="${prestamo.bibliotecario.nombre}"/>
-                </td> 
-                <td>
                     <c:out value="${prestamo.fechaPrestamo}"/>
                 </td>  
                 <td>
                     <c:out value="${prestamo.fechaDevolucion}"/>
                 </td>  
                 <td>
-                	TODO: conceder/rechazar/finalizar préstamos
+                    <c:out value="${prestamo.bibliotecario.apellidos}"/>, <c:out value="${prestamo.bibliotecario.nombre}"/>
                 </td>
+                
+                <c:choose>
+                	<c:when test="${prestamo.ejemplar.disponibilidad=='DISPONIBLE'}">
+                		<td>Finalizado</td>
+                		<td> - </td>
+                	</c:when>
+                	<c:when test="${prestamo.ejemplar.disponibilidad=='RESERVADO'}">
+                		<td>Pendiente de recoger</td>
+                		<td>TODO: Rechazar o marcar como recogido</td>
+                	</c:when>
+                	<c:when test="${prestamo.ejemplar.disponibilidad=='EN_PRESTAMO'}">
+                		<td>TODO: Finalizar el prestamo</td>
+                		<td> </td>
+                	</c:when>
+                </c:choose>
             </tr>
         </c:forEach>
         </tbody>

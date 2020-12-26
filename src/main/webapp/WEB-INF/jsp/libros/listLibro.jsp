@@ -18,54 +18,64 @@
             <th >Idioma</th>   
             <th>Géneros</th>
             <th>Editorial</th>
-            <th>Fecha de publicación</th>         
+            <th>Fecha de publicación</th>   
+            <th>Disponibilidad</th>      
         </tr>
         </thead>
         <tbody>
        
         
-        <c:forEach items="${librosGeneros}" var="libro">
+        <c:forEach items="${libros}" var="libro">
          	<tr> 
                 <td>                    
-                    <c:out value="${libro.key.ISBN}"/>
+                    <c:out value="${libro.ISBN}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.key.titulo}"/>
+                    <c:out value="${libro.titulo}"/>
                 </td>
                 
                 
                 <td>
-                 	<c:forEach items="${librosAutores}" var="libroautores">
-                 		<c:choose>
-                 			<c:when test="${libro.key.id == libroautores.key.id}">
-                				<c:forEach items="${libroautores.value}" var="autorLibro">
-                					<spring:url value="/autores/{autorId}" var="autorUrl">
-                        				<spring:param name="autorId" value="${autorLibro.id}"/>
-                    				</spring:url>
-                    				<a href ="${fn:escapeXml(autorUrl)}"><c:out value="${autorLibro.nombre} ${autorLibro.apellidos}"/></a>
-                    				 <br/>
-                				</c:forEach>
-                			</c:when>
-                		</c:choose>
-               		</c:forEach>
+                	<c:forEach items="${librosAutores[libro.id]}" var="autorLibro">
+                		<spring:url value="/autores/{autorId}" var="autorUrl">
+                        	<spring:param name="autorId" value="${autorLibro.id}"/>
+                    	</spring:url>
+                    	<a href ="${fn:escapeXml(autorUrl)}"><c:out value="${autorLibro.nombre} ${autorLibro.apellidos}"/></a>
+                    	<br/>
+                	</c:forEach>
                 </td>  
-            
                 <td>
-                    <c:out value="${libro.key.idioma}"/>
+                    <c:out value="${libro.idioma}"/>
                 </td>               
                 <td>
-                	<c:forEach items="${libro.value}" var="generoLibro">
+                	<c:forEach items="${librosGeneros[libro.id]}" var="generoLibro">
                     	<c:out value="${generoLibro.genero}"/><br/>
         			</c:forEach>
                 </td>   
                 <td>
                     <spring:url value="/editoriales/{editorialId}" var="autorUrl">
-                        <spring:param name="editorialId" value="${libro.key.editorial.id}"/>
+                        <spring:param name="editorialId" value="${libro.editorial.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(autorUrl)}"><c:out value="${libro.key.editorial.nombre}"/></a>
+                    <a href ="${fn:escapeXml(autorUrl)}"><c:out value="${libro.editorial.nombre}"/></a>
                 </td> 
                 <td>
-                    <c:out value="${libro.key.fecha_publicacion}"/>
+                    <c:out value="${libro.fecha_publicacion}"/>
+                </td>
+                <td>
+               		<c:if test="${disponibilidad[libro.id]}">
+               			<sec:authorize access="!hasAuthority('miembro')">
+               				Disponible
+               			</sec:authorize>
+               			<sec:authorize access="hasAuthority('miembro')">
+               				<spring:url value="/libros/reservar/{libroId}" var="libroUrl">
+                        		<spring:param name="libroId" value="${libro.id}"/>
+                    		</spring:url>
+                    		<a href ="${fn:escapeXml(libroUrl)}">Reservar</a>
+               			</sec:authorize>
+               		</c:if>
+               		<c:if test="${!disponibilidad[libro.id]}">
+               			No disponible
+               		</c:if>
                 </td>
         	</tr>
         </c:forEach>
