@@ -16,7 +16,8 @@
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Email</th>   
-            <th>Página web</th>    
+            <th>Página web</th>   
+            <th>Acciones</th> 
         </tr>
         </thead>
         <tbody>
@@ -30,6 +31,9 @@
                 <td>
                     <c:out value="${editorial.direccion}"/>
                 </td>
+                <td>
+                    <c:out value="${editorial.telefono}"/>
+                </td>  
                 <td>
                     <c:out value="${editorial.email}"/>
                 </td>  

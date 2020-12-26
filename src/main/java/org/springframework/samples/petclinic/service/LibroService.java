@@ -78,5 +78,4 @@ public class LibroService {
 		}
 		return autores;
 	}
-	
 }

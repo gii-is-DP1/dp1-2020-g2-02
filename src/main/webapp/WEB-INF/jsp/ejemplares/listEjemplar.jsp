@@ -11,8 +11,8 @@
         <table id="EjemplaresTable" class="table table-striped">
         <thead>
         <tr>
+            <th style="width: 20%;">ID</th>
             <th style="width: 20%;">Título</th>
-            <th style="width: 20%;">Libro ID</th>
             <th style="width: 20%;">Estado</th>
             <th style="width: 20%;">Disponibilidad</th> 
             <th style="width: 20%;">Acciones</th> 
@@ -23,11 +23,11 @@
         <c:forEach items="${ejemplares}" var="ejemplar">
         	<c:if test="${ejemplar.disponibilidad != 'DESCATALOGADO' }">
             <tr>
-                <td>                    
-                    <c:out value="${ejemplar.libro.titulo}"/>
+            	<td>                    
+                    <c:out value="${ejemplar.id}"/>
                 </td>
                 <td>                    
-                    <c:out value="${ejemplar.libro.id}"/>
+                    <c:out value="${ejemplar.libro.titulo}"/>
                 </td>
                 <td>
                     <c:out value="${ejemplar.estado}"/>
