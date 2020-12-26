@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
+import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,11 +12,18 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Autor;
+import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
+import org.springframework.samples.petclinic.model.Miembro;
+import org.springframework.samples.petclinic.model.Prestamo;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.samples.petclinic.service.LibroService;
+import org.springframework.samples.petclinic.service.MiembroService;
+import org.springframework.samples.petclinic.service.PrestamoService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -33,7 +42,16 @@ public class LibroController {
 	
 	@Autowired
 	EjemplarService ejemplarService;
+	
+	@Autowired
+	PrestamoService prestamoService;
 
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	MiembroService miembroService;
+	
 	@GetMapping
 	public String listLibros(ModelMap model) {
 		String vista = "libros/listLibro";
@@ -60,15 +78,44 @@ public class LibroController {
 	}
 	
 	@GetMapping(path="/reservar/{libroId}")
-	public String reservar(@PathVariable("libroId") int libroId, ModelMap model) {
+	public String reservar(@PathVariable("libroId") int libroId, ModelMap model, Principal principal) {
+		//Comprueba si el libro existe
 		Optional<Libro> libro = librosService.findById(libroId);
 		if(!libro.isPresent()) {
 			model.addAttribute("message","Libro no existente");
 			String vista = listLibros(model);
 			return vista;
 		}
+		
+		//Comprueba si el usuario tiene ya en préstamo ese libro.
+		User user = userService.findByUsername(principal.getName());
+		Miembro miembro = miembroService.findByUser(user);
+		Optional<Prestamo> prestamoExistente = prestamoService.prestamosDeLibroEnProceso(miembro, libro.get());
+		if(prestamoExistente.isPresent()) {
+			model.addAttribute("message","Ya tienes ese libro en préstamo");
+			String vista = listLibros(model);
+			return vista;
+		}
+		
+		//Comprueba si el libro no tiene ejemplares disponibles
 		Collection<Ejemplar> ejemplaresDisponibles = ejemplarService.findDisponibles(libro.get());
-		model.addAttribute("message","Libro existente");
+		if(ejemplaresDisponibles.isEmpty()) {
+			model.addAttribute("message","Libro no disponible");
+			String vista = listLibros(model);
+			return vista;
+		}
+		
+		Ejemplar ejemplar = ejemplaresDisponibles.iterator().next();
+		ejemplar.setDisponibilidad(Disponibilidad.RESERVADO);
+		Prestamo prestamo = new Prestamo();
+		prestamo.setFechaPrestamo(LocalDate.now());
+		prestamo.setFechaDevolucion(LocalDate.now().plusDays(16));
+		prestamo.setFinalizado(false);
+		prestamo.setEjemplar(ejemplar);
+		prestamo.setMiembro(miembro);
+		ejemplarService.save(ejemplar);
+		prestamoService.save(prestamo);
+		model.addAttribute("message","Libro reservado, acuda a la biblioteca a recogerlo.");
 		String vista = listLibros(model);
 		return vista;
 	}

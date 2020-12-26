@@ -11,9 +11,11 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name= "prestamos")
 public class Prestamo extends BaseEntity{
@@ -37,4 +39,6 @@ public class Prestamo extends BaseEntity{
 	@ManyToOne
 	@JoinColumn( name = "ejemplar_id")
 	private Ejemplar ejemplar;
+	
+	boolean finalizado;
 }
