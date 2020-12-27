@@ -7,6 +7,8 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Libro;
+import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.repository.PrestamoRepository;
 import org.springframework.stereotype.Service;
@@ -40,6 +42,12 @@ public class PrestamoService {
 	@Transactional
 	public void save(@Valid Prestamo Prestamo) {
 		PrestamoRepo.save(Prestamo);
+	}
+	
+	@Transactional(readOnly = true)
+	public Optional<Prestamo> prestamosDeLibroEnProceso(Miembro miembro, Libro libro) {
+		//
+		return PrestamoRepo.prestamosDeLibroEnProceso(miembro,libro);
 	}
 
 }

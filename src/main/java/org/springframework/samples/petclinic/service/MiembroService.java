@@ -8,7 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Miembro;
-
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.repository.MiembroRepository;
 import org.springframework.stereotype.Service;
 @Service
@@ -49,6 +49,11 @@ public class MiembroService extends BaseEntity{
 		
 		authoritiesService.saveAuthorities(miembro.getUser().getUsername(), "miembro");
 
+	}
+
+	public Miembro findByUser(User user) {
+		// TODO Auto-generated method stub
+		return MiembroRepo.findByUser(user);
 	}
 	
 }

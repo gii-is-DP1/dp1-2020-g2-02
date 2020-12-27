@@ -7,7 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Miembro;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.MiembroService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,9 @@ public class MiembroController {
 	
 	@Autowired
 	MiembroService miembrosService;
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping
 	public String listMiembros(ModelMap model) {
@@ -52,7 +57,39 @@ public class MiembroController {
 		return vista;
 	}
 	
-	@GetMapping(path="/delete/{miembroId}")
+	@GetMapping(path="/habilitar/{miembroId}")
+	public String habilitarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
+		String vista = "miembros/listMiembros";
+		Optional<Miembro> miembro = miembrosService.findById(miembroId);
+		if(miembro.isPresent()) {
+			User user = miembro.get().getUser();
+			user.setEnabled(true);
+			userService.save(user);
+			modelmap.addAttribute("message", "Miembro habilitado correctamente");
+			vista = listMiembros(modelmap);
+		}else {
+			modelmap.addAttribute("message", "Miembro no encontrado");
+		}
+		vista = listMiembros(modelmap);
+		return vista;
+	}
+	@GetMapping(path="/deshabilitar/{miembroId}")
+	public String deshabilitarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
+		String vista = "miembros/listMiembros";
+		Optional<Miembro> miembro = miembrosService.findById(miembroId);
+		if(miembro.isPresent()) {
+			User user = miembro.get().getUser();
+			user.setEnabled(false);
+			userService.save(user);
+			modelmap.addAttribute("message", "Miembro deshabilitado correctamente");
+			vista = listMiembros(modelmap);
+		}else {
+			modelmap.addAttribute("message", "Miembro no encontrado");
+		}
+		vista = listMiembros(modelmap);
+		return vista;
+	}
+	/*@GetMapping(path="/delete/{miembroId}")
 	public String borrarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
 		String vista = "miembros/listMiembros";
 		Optional<Miembro> miembro = miembrosService.findById(miembroId);
@@ -65,5 +102,5 @@ public class MiembroController {
 		}
 		vista = listMiembros(modelmap);
 		return vista;
-	}	
+	}*/	
 }
