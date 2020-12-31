@@ -36,7 +36,7 @@
                 
                 
                 <td>
-                	<c:forEach items="${librosAutores[libro.id]}" var="autorLibro">
+                	<c:forEach items="${libro.autores}" var="autorLibro">
                 		<spring:url value="/autores/{autorId}" var="autorUrl">
                         	<spring:param name="autorId" value="${autorLibro.id}"/>
                     	</spring:url>

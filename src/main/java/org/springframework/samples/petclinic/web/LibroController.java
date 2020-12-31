@@ -65,13 +65,11 @@ public class LibroController {
 			Libro libro = it.next();
 			Integer id = libro.getId();
 			mapGeneros.put(id, librosService.getGenerosLibro(libro));
-			mapAutores.put(id, librosService.getAutoresLibro(libro));
 			disponibilidad.put(id, !ejemplarService.findDisponibles(libro).isEmpty());
 			//System.out.println("AquiController " + librosService.getAutoresLibro(libro).size());
 		}
 		model.addAttribute("libros",libros);
 		model.addAttribute("librosGeneros", mapGeneros);
-		model.addAttribute("librosAutores", mapAutores);
 		model.addAttribute("disponibilidad", disponibilidad);
 		
 		return vista;
