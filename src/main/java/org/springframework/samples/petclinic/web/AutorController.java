@@ -66,16 +66,9 @@ public class AutorController {
 		ModelAndView mav = new ModelAndView("autores/librosAutor");
 		Autor autor = this.autorService.findById(autorId).get();
 		mav.addObject("autor", autor);
-		
-		
 		Iterator<Libro> libros = autor.getLibros().iterator();
-		HashMap <Libro,Collection<Genero>> generosLibros = new HashMap<>();
-		while(libros.hasNext()) {
-			Libro libro = libros.next();
-			generosLibros.put(libro, libroService.getGenerosLibro(libro));
-		}
 		
-		mav.addObject("libros", generosLibros);
+		mav.addObject("libros", libros);
 		return mav;
 	}
 }

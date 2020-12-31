@@ -2,19 +2,19 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
-import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/libros")
@@ -53,23 +54,21 @@ public class LibroController {
 	MiembroService miembroService;
 	
 	@GetMapping
-	public String listLibros(ModelMap model) {
+	public String listLibros(ModelMap model, @RequestParam(required = false) String q) {
 		String vista = "libros/listLibro";
-		Map<Integer, Collection<Genero>> mapGeneros = new HashMap<Integer, Collection<Genero>>();
-		Map<Integer, Collection<Autor>> mapAutores = new HashMap<Integer, Collection<Autor>>();
 		Map<Integer, Boolean> disponibilidad = new HashMap<Integer, Boolean>();
-		Collection<Libro> libros = librosService.findAll();
-		Iterator<Libro> it = libros.iterator();
+		Collection<Libro> libros = new ArrayList<>();
+		Iterator<Libro> it = librosService.findAll().iterator();
 		
 		while (it.hasNext()) {
 			Libro libro = it.next();
 			Integer id = libro.getId();
-			mapGeneros.put(id, librosService.getGenerosLibro(libro));
+			libros.add(libro);
 			disponibilidad.put(id, !ejemplarService.findDisponibles(libro).isEmpty());
-			//System.out.println("AquiController " + librosService.getAutoresLibro(libro).size());
 		}
+		
+		if(q != null && !q.isEmpty()) libros=libros.stream().filter(x->x.getTitulo().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
 		model.addAttribute("libros",libros);
-		model.addAttribute("librosGeneros", mapGeneros);
 		model.addAttribute("disponibilidad", disponibilidad);
 		
 		return vista;
@@ -81,7 +80,7 @@ public class LibroController {
 		Optional<Libro> libro = librosService.findById(libroId);
 		if(!libro.isPresent()) {
 			model.addAttribute("message","Libro no existente");
-			String vista = listLibros(model);
+			String vista = listLibros(model,null);
 			return vista;
 		}
 		
@@ -91,7 +90,7 @@ public class LibroController {
 		Optional<Prestamo> prestamoExistente = prestamoService.prestamosDeLibroEnProceso(miembro, libro.get());
 		if(prestamoExistente.isPresent()) {
 			model.addAttribute("message","Ya tienes ese libro en préstamo");
-			String vista = listLibros(model);
+			String vista = listLibros(model,null);
 			return vista;
 		}
 		
@@ -99,7 +98,7 @@ public class LibroController {
 		Collection<Ejemplar> ejemplaresDisponibles = ejemplarService.findDisponibles(libro.get());
 		if(ejemplaresDisponibles.isEmpty()) {
 			model.addAttribute("message","Libro no disponible");
-			String vista = listLibros(model);
+			String vista = listLibros(model,null);
 			return vista;
 		}
 		
@@ -114,7 +113,7 @@ public class LibroController {
 		ejemplarService.save(ejemplar);
 		prestamoService.save(prestamo);
 		model.addAttribute("message","Libro reservado, acuda a la biblioteca a recogerlo.");
-		String vista = listLibros(model);
+		String vista = listLibros(model,null);
 		return vista;
 	}
 	@PostMapping(path="/save")
@@ -126,7 +125,7 @@ public class LibroController {
 		}else {
 			librosService.save(libro);
 			modelmap.addAttribute("message", "Libro guardado correctamente");
-			vista = listLibros(modelmap);
+			vista = listLibros(modelmap,null);
 		}
 		return vista;
 	}
