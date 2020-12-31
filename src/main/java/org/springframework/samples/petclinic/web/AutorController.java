@@ -64,10 +64,11 @@ public class AutorController {
 	@GetMapping(path="/{autorId}")
 	public ModelAndView verLibrosAutor(@PathVariable("autorId") int autorId) {
 		ModelAndView mav = new ModelAndView("autores/librosAutor");
-		mav.addObject("autor", this.autorService.findById(autorId).get());
+		Autor autor = this.autorService.findById(autorId).get();
+		mav.addObject("autor", autor);
 		
 		
-		Iterator<Libro> libros = this.autorService.getLibrosAutor(autorService.findById(autorId).get()).iterator();
+		Iterator<Libro> libros = autor.getLibros().iterator();
 		HashMap <Libro,Collection<Genero>> generosLibros = new HashMap<>();
 		while(libros.hasNext()) {
 			Libro libro = libros.next();
