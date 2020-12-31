@@ -42,17 +42,4 @@ public class LibroService {
 
 	}
 	
-	
-	public Collection<Genero> getGenerosLibro(Libro libro){
-		Collection<Genero> generos = new ArrayList<Genero>();
-		Iterator<Genero> it = generoService.findAll().iterator();
-		while (it.hasNext()) {
-			Genero genero = it.next();
-			
-			if (genero.getLibro().getId() == libro.getId()) {
-				generos.add(genero);
-			}
-		}
-		return generos;
-	}
 }

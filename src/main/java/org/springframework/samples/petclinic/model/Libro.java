@@ -2,13 +2,16 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
@@ -52,4 +55,7 @@ public class Libro extends BaseEntity {
 	  joinColumns = @JoinColumn(name = "libro_id"), 
 	  inverseJoinColumns = @JoinColumn(name = "autor_id"))
 	private List<Autor> autores;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
+	private Set<Genero> generos;
 }

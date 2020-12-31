@@ -22,16 +22,16 @@
         <c:forEach items="${libros}" var="libro">
             <tr>
                 <td>                    
-                    <c:out value="${libro.key.ISBN}"/>
+                    <c:out value="${libro.ISBN}"/>
                 </td>
                 <td>
-                    <c:out value="${libro.key.titulo}"/>
+                    <c:out value="${libro.titulo}"/>
                 </td>
                     <td>
-                    <c:out value="${libro.key.idioma}"/>
+                    <c:out value="${libro.idioma}"/>
                 </td>  
                 <td> 
-                <c:forEach items="${libro.value}" var="genero">
+                <c:forEach items="${libro.generos}" var="genero">
                 		<c:out value="${genero.genero}"/> <br/>
                 </c:forEach>  
                 </td>
