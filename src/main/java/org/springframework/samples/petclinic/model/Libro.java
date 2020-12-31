@@ -12,10 +12,12 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "libros")
 
 public class Libro extends BaseEntity {
@@ -37,5 +39,8 @@ public class Libro extends BaseEntity {
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_publicacion;
 	
+	@ManyToOne
+	@JoinColumn(name = "editorial_id")
+	private Editorial editorial;
 
 }

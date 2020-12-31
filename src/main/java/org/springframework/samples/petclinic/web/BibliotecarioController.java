@@ -7,7 +7,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Bibliotecario;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.BibliotecarioService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,6 +24,9 @@ public class BibliotecarioController {
 	
 	@Autowired
 	BibliotecarioService bibliotecariosService;
+	
+	@Autowired
+	UserService userService;
 	
 	@GetMapping
 	public String listBibliotecarios(ModelMap model) {
@@ -51,8 +56,37 @@ public class BibliotecarioController {
 		modelmap.addAttribute("bibliotecario", new Bibliotecario());
 		return vista;
 	}
-	
-	@GetMapping(path="/delete/{bibliotecarioId}")
+	@GetMapping(path="/habilitar/{biblioId}")
+	public String habilitarMiembro(@PathVariable("biblioId") int biblioId, ModelMap modelmap) {
+		String vista = "miembros/listMiembros";
+		Optional<Bibliotecario> biblio = bibliotecariosService.findById(biblioId);
+		if(biblio.isPresent()) {
+			User user = biblio.get().getUser();
+			user.setEnabled(true);
+			userService.save(user);
+			modelmap.addAttribute("message", "Bibliotecario habilitado correctamente");
+		}else {
+			modelmap.addAttribute("message", "Bibliotecario no encontrado");
+		}
+		vista = listBibliotecarios(modelmap);
+		return vista;
+	}
+	@GetMapping(path="/deshabilitar/{biblioId}")
+	public String deshabilitarMiembro(@PathVariable("biblioId") int biblioId, ModelMap modelmap) {
+		String vista = "miembros/listMiembros";
+		Optional<Bibliotecario> biblio = bibliotecariosService.findById(biblioId);
+		if(biblio.isPresent()) {
+			User user = biblio.get().getUser();
+			user.setEnabled(false);
+			userService.save(user);
+			modelmap.addAttribute("message", "Bibliotecario deshabilitado correctamente");
+		}else {
+			modelmap.addAttribute("message", "Bibliotecario no encontrado");
+		}
+		vista = listBibliotecarios(modelmap);
+		return vista;
+	}
+	/*@GetMapping(path="/delete/{bibliotecarioId}")
 	public String borrarBibliotecario(@PathVariable("bibliotecarioId") int bibliotecarioId, ModelMap modelmap) {
 		String vista = "bibliotecarios/listBibliotecario";
 		Optional<Bibliotecario> bibliotecario = bibliotecariosService.findById(bibliotecarioId);
@@ -65,5 +99,5 @@ public class BibliotecarioController {
 		}
 		vista = listBibliotecarios(modelmap);
 		return vista;
-	}	
+	}*/
 }
