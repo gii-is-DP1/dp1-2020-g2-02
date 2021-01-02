@@ -7,8 +7,10 @@
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 <petclinic:layout pageName="Libros">
-	
     <h2>Libros</h2>
+    
+    <petclinic:searchInput/>
+    
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>

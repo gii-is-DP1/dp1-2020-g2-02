@@ -24,6 +24,7 @@
         </thead>
         <tbody>
         <c:forEach items="${prestamos}" var="prestamo">
+        <c:if test="${!prestamo.finalizado}">
             <tr>
                 <td>                    
                     <c:out value="${prestamo.ejemplar.id}"/>
@@ -56,14 +57,20 @@
                 	</c:when>
                 	<c:when test="${prestamo.ejemplar.disponibilidad=='RESERVADO'}">
                 		<td>Pendiente de recoger</td>
-                		<td>TODO: Rechazar o marcar como recogido</td>
+                		<td>
+                			<a href="<c:url value="/prestamos/conceder/${prestamo.id}" />" class="btn btn-default btn-sm" style="min-width:100%; margin-bottom:1%">Conceder</a> 
+                			<a href="<c:url value="/prestamos/rechazar/${prestamo.id}" />" class="btn btn-default btn-sm" style="min-width:100%">Rechazar</a>
+						</td>
                 	</c:when>
                 	<c:when test="${prestamo.ejemplar.disponibilidad=='EN_PRESTAMO'}">
                 		<td>En préstamo</td>
-                		<td>TODO: Finalizar el prestamo</td>
+                		<td>
+                			<a href="<c:url value="/prestamos/finalizar/${prestamo.id}" />" class="btn btn-default" style="min-width:100%">Finalizar</a>
+                		</td>
                 	</c:when>
                 </c:choose>
             </tr>
+        </c:if>
         </c:forEach>
         </tbody>
     </table>
