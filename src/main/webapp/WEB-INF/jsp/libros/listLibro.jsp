@@ -7,8 +7,10 @@
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 <petclinic:layout pageName="Libros">
-	
     <h2>Libros</h2>
+    
+    <petclinic:searchInput/>
+    
         <table id="LibrosTable" class="table table-striped">
         <thead>
         <tr>
@@ -36,7 +38,7 @@
                 
                 
                 <td>
-                	<c:forEach items="${librosAutores[libro.id]}" var="autorLibro">
+                	<c:forEach items="${libro.autores}" var="autorLibro">
                 		<spring:url value="/autores/{autorId}" var="autorUrl">
                         	<spring:param name="autorId" value="${autorLibro.id}"/>
                     	</spring:url>
@@ -48,7 +50,7 @@
                     <c:out value="${libro.idioma}"/>
                 </td>               
                 <td>
-                	<c:forEach items="${librosGeneros[libro.id]}" var="generoLibro">
+                	<c:forEach items="${libro.generos}" var="generoLibro">
                     	<c:out value="${generoLibro.genero}"/><br/>
         			</c:forEach>
                 </td>   

@@ -1,14 +1,21 @@
 
 package org.springframework.samples.petclinic.web;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Bibliotecario;
+import org.springframework.samples.petclinic.model.Disponibilidad;
+import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Prestamo;
+import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.BibliotecarioService;
 import org.springframework.samples.petclinic.service.PrestamoService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,12 +29,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 	public class PrestamoController {
 		
 		@Autowired
-		PrestamoService prestamosService;
+		PrestamoService prestamoService;
+		
+		@Autowired
+		UserService userService;
+		
+		@Autowired
+		BibliotecarioService bibliotecarioService;
 		
 		@GetMapping
 		public String listPrestamos(ModelMap model) {
 			String vista = "prestamos/listPrestamo";
-			Collection<Prestamo> prestamos = prestamosService.findAll();
+			Collection<Prestamo> prestamos = prestamoService.findAll();
 			model.addAttribute("prestamos", prestamos);
 			return vista;
 		}
@@ -39,7 +52,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 				modelmap.addAttribute("prestamo", prestamos);
 				return "prestamos/editPrestamo";
 			}else {
-				prestamosService.save(prestamos);
+				prestamoService.save(prestamos);
 				modelmap.addAttribute("message", "Prestamo guardado correctamente");
 				vista = listPrestamos(modelmap);
 			}
@@ -53,6 +66,73 @@ import org.springframework.web.bind.annotation.RequestMapping;
 			return vista;
 		}
 		
+		@GetMapping(path="/conceder/{prestamoId}")
+		public String concederPrestamo(@PathVariable("prestamoId") int prestamoId, ModelMap modelmap, Principal principal) {
+			String vista = listPrestamos(modelmap);
+			Optional<Prestamo> p = prestamoService.findById(prestamoId);
+			if(!p.isPresent()) {
+				modelmap.addAttribute("message", "El préstamo no existe.");
+				return vista;
+			}
+			Prestamo prestamo = p.get();
+			Ejemplar ej = prestamo.getEjemplar();
+			Disponibilidad disp = ej.getDisponibilidad();
+			if(disp.equals(Disponibilidad.RESERVADO) && !prestamo.isFinalizado()) {
+				ej.setDisponibilidad(Disponibilidad.EN_PRESTAMO);
+				User user = userService.findByUsername(principal.getName());
+				Bibliotecario biblio = bibliotecarioService.findByUser(user);
+				prestamo.setBibliotecario(biblio);
+				prestamoService.save(prestamo);
+				modelmap.addAttribute("message", "Préstamo concedido correctamente.");
+			} else {
+				modelmap.addAttribute("message", "El préstamo no se puede conceder (Ya ha finalizado o el ejemplar no se encuentra reservado).");
+			}
+			return vista;
+		}
+		
+		@GetMapping(path="/finalizar/{prestamoId}")
+		public String finalizarPrestamo(@PathVariable("prestamoId") int prestamoId, ModelMap modelmap) {
+			String vista = listPrestamos(modelmap);
+			Optional<Prestamo> p = prestamoService.findById(prestamoId);
+			if(!p.isPresent()) {
+				modelmap.addAttribute("message", "El préstamo no existe.");
+				return vista;
+			}
+			Prestamo prestamo = p.get();
+			Ejemplar ej = prestamo.getEjemplar();
+			Disponibilidad disp = ej.getDisponibilidad();
+			if(disp.equals(Disponibilidad.EN_PRESTAMO) && !prestamo.isFinalizado()) {
+				ej.setDisponibilidad(Disponibilidad.DISPONIBLE);
+				prestamo.setFinalizado(true);
+				prestamoService.save(prestamo);
+				modelmap.addAttribute("message", "Préstamo finalizado correctamente.");
+			} else {
+				modelmap.addAttribute("message", "El préstamo no se puede finalizar (Ya ha finalizado o el ejemplar no se encuentra en préstamo).");
+			}
+			return vista;
+		}
+		
+		@GetMapping(path="/rechazar/{prestamoId}")
+		public String rechazarPrestamo(@PathVariable("prestamoId") int prestamoId, ModelMap modelmap) {
+			String vista = listPrestamos(modelmap);
+			Optional<Prestamo> p = prestamoService.findById(prestamoId);
+			if(!p.isPresent()) {
+				modelmap.addAttribute("message", "El préstamo no existe.");
+				return vista;
+			}
+			Prestamo prestamo = p.get();
+			Ejemplar ej = prestamo.getEjemplar();
+			Disponibilidad disp = ej.getDisponibilidad();
+			if(disp.equals(Disponibilidad.RESERVADO) && !prestamo.isFinalizado()) {
+				ej.setDisponibilidad(Disponibilidad.DISPONIBLE);
+				prestamo.setFinalizado(true);
+				prestamoService.save(prestamo);
+				modelmap.addAttribute("message", "Préstamo rechazado correctamente.");
+			} else {
+				modelmap.addAttribute("message", "El préstamo no se puede rechazar (Ya ha finalizado o el ejemplar no se encuentra reservado).");
+			}
+			return vista;
+		}
 		
 	}
 	

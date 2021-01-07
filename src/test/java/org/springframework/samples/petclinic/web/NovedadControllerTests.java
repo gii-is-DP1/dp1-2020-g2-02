@@ -43,19 +43,28 @@ public class NovedadControllerTests {
 	private MockMvc mockMvc;
 	
 	@WithMockUser(value = "Us3r")
-    	@Test
+	@Test
+	void testNovedadesList() throws Exception {
+		mockMvc.perform(get("/novedades"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("novedades"))
+			.andExpect(view().name("novedades/listNovedad"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
     void testInitCreationForm() throws Exception {
 		mockMvc.perform(get("/novedades/new"))
-		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("novedad"))
-		.andExpect(view().name("novedades/editNovedad"));
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("novedad"))
+			.andExpect(view().name("novedades/editNovedad"));
 	}
 	
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/novedades/save").param("titulo", "A").param("contenido", "A")
-						.with(csrf()))
+			.with(csrf()))
 			.andExpect(model().attribute("message", "Novedad guardada correctamente."));
 	}
 	
