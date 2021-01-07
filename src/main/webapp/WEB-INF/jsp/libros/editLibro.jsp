@@ -7,21 +7,25 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="ejemplares">
+<petclinic:layout pageName="libros">
 <jsp:body>
     <h2>
-        Añadir ejemplar
+        Añadir libro
     </h2>
-    <form:form modelAttribute="ejemplar" class="form-horizontal" id="add-ejemplar-form" action="/ejemplares/save">
+    <form:form modelAttribute="libro" class="form-horizontal" id="add-libro-form" action="/libros/save">
         <div class="form-group has-feedback">
-        <petclinic:inputField label="Título del libro" name="libro.titulo"/>
-            <petclinic:inputField label="Disponibilidad" name="disponibilidad"/>
-            <petclinic:inputField label="Estado" name="estado"/>
+        	<petclinic:inputField label="ISBN" name="ISBN"/>
+            <petclinic:inputField label="Título" name="titulo"/>
+            <petclinic:inputField label="Autor" name="autores"/>
+            <petclinic:inputField label="Idioma" name="titulo"/>
+            <petclinic:inputField label="Géneros" name="generos"/>
+            <petclinic:inputField label="Editorial" name="editorial.nombre"/>
+            <petclinic:inputField label="Fecha publicación" name="fecha_publicacion"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             
-           		<input type="hidden" name="id" value="${ejemplar.id}"/>
+           		<input type="hidden" name="id" value="${libro.id}"/>
                	<button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
