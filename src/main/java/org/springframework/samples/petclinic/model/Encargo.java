@@ -6,8 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -28,9 +27,13 @@ public class Encargo extends BaseEntity{
 //	@JoinColumn(name = 'proveedor_id')
 //	private Proveedor Proveedor;
 	
-	@ManyToMany
-	@JoinTable(name = "es_encargo",
-			joinColumns = @JoinColumn(name = "encargo_id"), 
-			  inverseJoinColumns = @JoinColumn(name = "libro_id"))
-	private List<Libro> libros;
+//	@ManyToMany
+//	@JoinTable(name = "es_encargo",
+//			joinColumns = @JoinColumn(name = "encargo_id"), 
+//			  inverseJoinColumns = @JoinColumn(name = "libro_id"))
+//	private List<Libro> libros;
+	
+	@OneToMany
+	@JoinColumn(name = "cantidad_id")
+	private List<Cantidad> cantidad;
 }

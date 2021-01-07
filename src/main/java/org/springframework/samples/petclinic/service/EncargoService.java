@@ -22,6 +22,9 @@ public class EncargoService {
 	
 //	@Autowired
 //	ProveedorService proveedorService;
+	
+	@Autowired
+	CantidadService cantidadService;
 	@Transactional
 	public int encargoCount() {
 		return (int) encargoRepo.count();
@@ -42,6 +45,6 @@ public class EncargoService {
 	@Transactional
 	public void save(@Valid Encargo encargo) {
 		encargoRepo.save(encargo);
-
+		cantidadService.save(encargo.getCantidad().get(0));
 	}
 }
