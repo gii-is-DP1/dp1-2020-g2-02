@@ -46,7 +46,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		}
 		
 		@PostMapping(path="/save")
-		public String guardarMiembro(@Valid Prestamo prestamos, BindingResult result, ModelMap modelmap) {
+		public String guardarPrestamo(@Valid Prestamo prestamos, BindingResult result, ModelMap modelmap) {
 			String vista = "prestamos/listPrestamo";
 			if(result.hasErrors()) {
 				modelmap.addAttribute("prestamo", prestamos);
@@ -133,6 +133,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 			}
 			return vista;
 		}
+		
+		
 		
 	}
 	
