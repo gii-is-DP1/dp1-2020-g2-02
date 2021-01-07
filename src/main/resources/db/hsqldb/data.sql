@@ -45,8 +45,11 @@ INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembr
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
-INSERT INTO encargos(id, fechaRealizacion, fechaEntrega, proveedor_id, libro_id) VALUES (0, '2020-11-15', '2020-11-16', 1, 1);
-INSERT INTO encargos(id, fechaRealizacion, fechaEntrega, proveedor_id, libro_id) VALUES (0, '2020-11-20', '2020-12-06', 0, 2);
+INSERT INTO encargos(id, fechaRealizacion, fechaEntrega, proveedor_id) VALUES (0, '2020-11-15', '2020-11-16', 1);
+INSERT INTO encargos(id, fechaRealizacion, fechaEntrega, proveedor_id) VALUES (0, '2020-11-20', '2020-12-06', 0);
+
+INSERT INTO cantidad(id, unidades, precioUnitario, encargo_id, libro_id) VALUES (0, 5, 7, 0, 0);
+INSERT INTO cantidad(id, unidades, precioUnitario, encargo_id, libro_id) VALUES (1, 3, 4, 1, 1);
 -- Petclinic --
 
 -- One admin user, named admin1 with passwor 4dm1n and authority admin
