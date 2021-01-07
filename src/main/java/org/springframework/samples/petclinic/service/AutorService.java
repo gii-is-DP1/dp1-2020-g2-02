@@ -16,6 +16,9 @@ public class AutorService {
 	@Autowired
 	AutorRepository AutorRepo;
 	
+	@Autowired
+	LibroService libroService;
+	
 	public Collection<Autor> findAll(){
 		return AutorRepo.findAll();
 	}
@@ -36,4 +39,5 @@ public class AutorService {
 
 	}
 	
+
 }

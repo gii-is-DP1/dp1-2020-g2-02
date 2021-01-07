@@ -11,8 +11,8 @@
         <table id="EjemplaresTable" class="table table-striped">
         <thead>
         <tr>
+            <th style="width: 20%;">ID</th>
             <th style="width: 20%;">Título</th>
-            <th style="width: 20%;">Libro ID</th>
             <th style="width: 20%;">Estado</th>
             <th style="width: 20%;">Disponibilidad</th> 
             <th style="width: 20%;">Acciones</th> 
@@ -21,26 +21,36 @@
         </thead>
         <tbody>
         <c:forEach items="${ejemplares}" var="ejemplar">
+        	<c:if test="${ejemplar.disponibilidad != 'DESCATALOGADO' }">
             <tr>
-                <td>                    
-                    <c:out value="${ejemplar.libro.titulo}"/>
+            	<td>                    
+                    <c:out value="${ejemplar.id}"/>
                 </td>
                 <td>                    
-                    <c:out value="${ejemplar.libro.id}"/>
+                    <c:out value="${ejemplar.libro.titulo}"/>
                 </td>
                 <td>
                     <c:out value="${ejemplar.estado}"/>
                 </td>
                 <td>
-                    <c:out value="${ejemplar.disponibilidad}"/>
+                	<c:if test="${ejemplar.disponibilidad == 'DISPONIBLE' }">
+                    	Disponible
+                    </c:if>
+                    <c:if test="${ejemplar.disponibilidad == 'EN_PRESTAMO' }">
+                    	En préstamo
+                    </c:if>
+                    <c:if test="${ejemplar.disponibilidad == 'RESERVADO' }">
+                    	Pendiente de recoger
+                    </c:if>
                 </td>  
                 <td>
-                	<spring:url value="/ejemplares/delete/{ejemplarId}" var="ejemplarUrl">
+                	<spring:url value="/ejemplares/descatalogar/{ejemplarId}" var="ejemplarUrl">
                         <spring:param name="ejemplarId" value="${ejemplar.id}"/>
                     </spring:url>
-                    <a href ="${fn:escapeXml(ejemplarUrl)}">Borrar ejemplar</a>
+                    <a href ="${fn:escapeXml(ejemplarUrl)}">Descatalogar ejemplar</a>
                 </td>
             </tr>
+            </c:if>
         </c:forEach>
         </tbody>
     </table>

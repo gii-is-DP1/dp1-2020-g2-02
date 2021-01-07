@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Autor;
-import org.springframework.samples.petclinic.model.Novedad;
+import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +41,13 @@ public class AutorServiceTest {
 	
 	@Test
 	public void testFindAll() {
-		Iterable<Autor> autores = autorService.findAll();
-		assertTrue(autores.iterator().next().getNombre().equals("Emmanuel"));
+		Collection<Autor> autores = autorService.findAll();
+		assertTrue(autores.size()==2);
+	}
+	
+	@Test
+	public void testGetLibrosAutor() {
+		Collection<Libro> libros = autorService.findById(1).get().getLibros();
+		assertTrue(libros.size()==2);
 	}
 }
