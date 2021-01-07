@@ -47,7 +47,7 @@ public class AutorServiceTest {
 	
 	@Test
 	public void testGetLibrosAutor() {
-		Collection<Libro> libros = autorService.getLibrosAutor(autorService.findById(1).get());
+		Collection<Libro> libros = autorService.findById(1).get().getLibros();
 		assertTrue(libros.size()==2);
 	}
 }
