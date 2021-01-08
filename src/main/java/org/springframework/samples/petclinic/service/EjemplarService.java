@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Disponibilidad;
+import org.springframework.samples.petclinic.model.Editorial;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.repository.EjemplarRepository;
@@ -50,5 +51,5 @@ public class EjemplarService {
 		// TODO Auto-generated method stub
 		return EjemplarRepo.findAllByLibroAndDisponibilidad(libro,Disponibilidad.DISPONIBLE);
 	}
-
+	
 }
