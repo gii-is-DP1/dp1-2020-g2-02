@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/resources/**","/webjars/**","/h2-console/**").permitAll()
 				.antMatchers(HttpMethod.GET, "/","/oups").permitAll()
 				/*BIBLIONET*/
+			
 				.antMatchers("/bibliotecarios/**").hasAnyAuthority("admin")
 				.antMatchers("/miembros/**").hasAnyAuthority("bibliotecario", "admin")
 				.antMatchers("/libros").permitAll()
@@ -49,6 +50,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/libros/reservar/**").hasAnyAuthority("miembro")
 				.antMatchers("/ejemplares/**").hasAnyAuthority("bibliotecario","admin")
 				.antMatchers("/proveedores/**").hasAnyAuthority("bibliotecario","admin")
+				.antMatchers("/encargos/**").hasAnyAuthority("admin", "bibliotecario")
 				/*PETCLINIC*/
 				.antMatchers("/users/new").permitAll()
 				.antMatchers("/owners/**").hasAnyAuthority("owner", "admin")			

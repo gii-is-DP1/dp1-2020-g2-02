@@ -47,6 +47,14 @@ INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VA
 
 INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', '69060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
 INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', '36614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
+
+INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(0, '2020-11-12', '2020-11-21', 0);
+INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, '2020-12-12', '2020-12-21', 1);
+
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 0, 2);
+
+
 -- Petclinic --
 
 -- One admin user, named admin1 with passwor 4dm1n and authority admin

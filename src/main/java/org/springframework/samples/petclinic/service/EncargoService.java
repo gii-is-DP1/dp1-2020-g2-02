@@ -16,35 +16,38 @@ public class EncargoService {
 
 	@Autowired
 	EncargoRepository encargoRepo;
-	
+
 //	@Autowired
 //	LibroService libroService;
-	
+
 //	@Autowired
 //	ProveedorService proveedorService;
-	
-	@Autowired
-	CantidadService cantidadService;
+
+//	@Autowired
+//	CantidadService cantidadService;
 	@Transactional
 	public int encargoCount() {
 		return (int) encargoRepo.count();
-	} 
+	}
+
 	@Transactional
 	public Collection<Encargo> findAll() {
 		return encargoRepo.findAll();
 	}
+
 	@Transactional
 	public Optional<Encargo> findById(int id) {
 		return encargoRepo.findById(id);
 	}
+
 	@Transactional
 	public void delete(Encargo encargo) {
 		encargoRepo.deleteById(encargo.getId());
 
 	}
+
 	@Transactional
 	public void save(@Valid Encargo encargo) {
 		encargoRepo.save(encargo);
-		cantidadService.save(encargo.getCantidad().get(0));
 	}
 }

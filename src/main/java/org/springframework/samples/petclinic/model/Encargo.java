@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,22 +18,17 @@ import lombok.Setter;
 @Setter
 @Table(name = "encargos")
 public class Encargo extends BaseEntity{
-	@Column(name = "fechaRealizacion")
+	
+	@Column(name = "fecha_realizacion")
 	private LocalDate fechaRealizacion;
 	
-	@Column(name = "fechaEntrega")
+	@Column(name = "fecha_entrega")
 	private LocalDate fechaEntrega;
 	
-//	@ManyToOne
-//	@JoinColumn(name = 'proveedor_id')
-//	private Proveedor Proveedor;
-	
-//	@ManyToMany
-//	@JoinTable(name = "es_encargo",
-//			joinColumns = @JoinColumn(name = "encargo_id"), 
-//			  inverseJoinColumns = @JoinColumn(name = "libro_id"))
-//	private List<Libro> libros;
-	
+	@ManyToOne
+	@JoinColumn(name = "proveedor_id")
+	private Proveedor proveedor;
+		
 	@OneToMany
 	@JoinColumn(name = "cantidad_id")
 	private List<Cantidad> cantidad;

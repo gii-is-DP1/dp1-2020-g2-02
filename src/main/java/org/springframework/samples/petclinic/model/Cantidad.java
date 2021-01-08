@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -16,6 +18,15 @@ public class Cantidad extends BaseEntity{
 	@Column(name = "unidades")
 	private Integer unidades;
 	
-	@Column(name = "precioUnitario")
+	@Column(name = "precio_unitario")
 	private Long precioUnitario;
+	
+	@ManyToOne
+	@JoinColumn(name = "encargo_id")
+	private Encargo encargo;
+	
+	@ManyToOne
+	@JoinColumn(name = "libro_id")
+	private Libro libro;
+	
 }
