@@ -2,6 +2,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 	@Controller
 	@RequestMapping("/prestamos")
@@ -38,9 +40,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		BibliotecarioService bibliotecarioService;
 		
 		@GetMapping
-		public String listPrestamos(ModelMap model) {
+		public String listPrestamos(ModelMap model, @RequestParam(required = false) Boolean b) {
 			String vista = "prestamos/listPrestamo";
-			Collection<Prestamo> prestamos = prestamoService.findAll();
+			LocalDate fecha = LocalDate.now();
+			Collection<Prestamo> prestamos;
+			if(b != null && b ) {
+				prestamos = prestamoService.prestamosConFechaDevolucionTardia(fecha);
+			}
+			else {
+				prestamos = prestamoService.findAll();
+			}
 			model.addAttribute("prestamos", prestamos);
 			return vista;
 		}
@@ -54,7 +63,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 			}else {
 				prestamoService.save(prestamos);
 				modelmap.addAttribute("message", "Prestamo guardado correctamente");
-				vista = listPrestamos(modelmap);
+				vista = listPrestamos(modelmap, false);
 			}
 			return vista;
 		}
@@ -68,7 +77,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		
 		@GetMapping(path="/conceder/{prestamoId}")
 		public String concederPrestamo(@PathVariable("prestamoId") int prestamoId, ModelMap modelmap, Principal principal) {
-			String vista = listPrestamos(modelmap);
+			String vista = listPrestamos(modelmap, false);
 			Optional<Prestamo> p = prestamoService.findById(prestamoId);
 			if(!p.isPresent()) {
 				modelmap.addAttribute("message", "El préstamo no existe.");
@@ -92,7 +101,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		
 		@GetMapping(path="/finalizar/{prestamoId}")
 		public String finalizarPrestamo(@PathVariable("prestamoId") int prestamoId, ModelMap modelmap) {
-			String vista = listPrestamos(modelmap);
+			String vista = listPrestamos(modelmap, false);
 			Optional<Prestamo> p = prestamoService.findById(prestamoId);
 			if(!p.isPresent()) {
 				modelmap.addAttribute("message", "El préstamo no existe.");
@@ -114,7 +123,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 		
 		@GetMapping(path="/rechazar/{prestamoId}")
 		public String rechazarPrestamo(@PathVariable("prestamoId") int prestamoId, ModelMap modelmap) {
-			String vista = listPrestamos(modelmap);
+			String vista = listPrestamos(modelmap, false);
 			Optional<Prestamo> p = prestamoService.findById(prestamoId);
 			if(!p.isPresent()) {
 				modelmap.addAttribute("message", "El préstamo no existe.");
