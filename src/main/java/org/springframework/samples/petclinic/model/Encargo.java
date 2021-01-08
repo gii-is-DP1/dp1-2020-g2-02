@@ -32,4 +32,5 @@ public class Encargo extends BaseEntity{
 	@OneToMany
 	@JoinColumn(name = "cantidad_id")
 	private List<Cantidad> cantidad;
+	
 }
