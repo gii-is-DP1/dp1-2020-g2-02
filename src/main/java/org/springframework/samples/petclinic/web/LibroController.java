@@ -126,6 +126,6 @@ public class LibroController {
 		String vista = "libros/editLibro";
 		modelmap.addAttribute("libro", new Libro());
 		return vista;
-	}
+	}	
 	
 }
