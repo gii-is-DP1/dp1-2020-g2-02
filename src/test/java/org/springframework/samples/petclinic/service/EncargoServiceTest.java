@@ -30,13 +30,13 @@ public class EncargoServiceTest {
 	@Test
 	public void testFindAll() {
 		Iterable<Encargo> encargos = encargoService.findAll();
-		assertTrue(encargos.iterator().next().getFechaEntrega().equals(LocalDate.of(2020, 10, 12)));
+		assertTrue(encargos.iterator().next().getFechaRealizacion().equals(LocalDate.of(2020, 11, 12)));
 	}
 	
 	@Test
 	public void testFindById() {
 		Encargo encargo = encargoService.findById(0).get();
-		assertTrue(encargo.getFechaEntrega().equals(LocalDate.of(2020, 10, 12)));
+		assertTrue(encargo.getFechaRealizacion().equals(LocalDate.of(2020, 11, 12)));
 	}
 	
 	@Test
