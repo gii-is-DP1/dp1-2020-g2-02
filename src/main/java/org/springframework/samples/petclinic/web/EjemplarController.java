@@ -1,14 +1,16 @@
 package org.springframework.samples.petclinic.web;
 
+import java.security.Principal;
 import java.util.Collection;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
-import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -83,4 +85,24 @@ public class EjemplarController {
 		vista = listEjemplares(modelmap);
 		return vista;
 	}
+	
+	public String modificarEstado(Ejemplar ejemplar, ModelMap modelmap,BindingResult result, String estado, Principal principal) {
+		String vista = "ejemplares/listEjemplar";
+		System.out.println(ejemplar);
+		if(result.hasErrors()){
+			modelmap.addAttribute("message", result.toString());
+			modelmap.addAttribute("ejemplar", ejemplar);
+			modelmap.addAttribute("message", "Hay fallos en el formulario.");
+			return "ejemplares/editEjemplar";
+			}else {
+				ejemplar.setEstado(estado);
+				
+			}
+		return vista;
+	}
+	
+	
+	
+	
+	
 }
