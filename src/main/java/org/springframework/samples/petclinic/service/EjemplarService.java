@@ -6,7 +6,10 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Disponibilidad;
+import org.springframework.samples.petclinic.model.Editorial;
 import org.springframework.samples.petclinic.model.Ejemplar;
+import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.repository.EjemplarRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,4 +45,11 @@ public class EjemplarService {
 		EjemplarRepo.save(Ejemplar);
 
 	}
+
+	@Transactional(readOnly=true)
+	public Collection<Ejemplar> findDisponibles(Libro libro) {
+		// TODO Auto-generated method stub
+		return EjemplarRepo.findAllByLibroAndDisponibilidad(libro,Disponibilidad.DISPONIBLE);
+	}
+	
 }

@@ -2,14 +2,11 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Editorial;
-import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.EditorialService;
 import org.springframework.samples.petclinic.service.LibroService;
@@ -65,14 +62,8 @@ public class EditorialController {
 		String vista = "editoriales/librosEditorial";
 		Collection<Libro> libros = this.editorialService.getLibrosEditorial(editorialService.findById(editorialId).get());
 		
-		Iterator<Libro> it = libros.iterator();
-		HashMap <Libro,Collection<Genero>> generosLibros = new HashMap<>();
-		while(it.hasNext()) {
-			Libro libro = it.next();
-			generosLibros.put(libro, libroService.getGenerosLibro(libro));
-		}
 		modelmap.addAttribute("editorial", editorialService.findById(editorialId).get());
-		modelmap.addAttribute("libros", generosLibros);
+		modelmap.addAttribute("libros", libros);
 				
 		return vista;
 	}

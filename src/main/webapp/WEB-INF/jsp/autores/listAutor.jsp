@@ -13,7 +13,7 @@
             <th >Nombre</th>
             <th >Apellidos</th>
             <th >Fecha de nacimiento</th>  
-            <th ></th>         
+            <th >Acciones</th>         
         </tr>
         </thead>
         <tbody>

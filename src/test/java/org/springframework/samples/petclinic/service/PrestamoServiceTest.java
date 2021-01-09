@@ -32,7 +32,7 @@ public class PrestamoServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = prestamoService.prestamoCount();
-		assertTrue(count == 2);
+		assertTrue(count == 3);
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class PrestamoServiceTest {
 		prestamo.setBibliotecario(bibliotecario);
 		prestamoService.save(prestamo);
 		int count = prestamoService.prestamoCount();
-		assertTrue(count == 3);
+		assertTrue(count == 4);
 	}
 
 }

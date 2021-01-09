@@ -28,7 +28,7 @@
 					<span>Inicio</span>
 				</petclinic:menuItem>
 				
-				<petclinic:menuItem active="${name eq 'libros'}" url="/libros"
+				<petclinic:menuItem active="${name eq 'Libros'}" url="/libros"
 					title="Catálogo de libros">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Libros</span>
@@ -95,10 +95,10 @@
 													class="btn btn-primary btn-block btn-sm">Ejemplares</a>
 													<a href="<c:url value="/miembros" />"
 													class="btn btn-primary btn-block btn-sm">Miembros</a>
-													<a href="<c:url value="/prestamos" />"
-													class="btn btn-primary btn-block btn-sm">Préstamos</a>
 												</sec:authorize>
 												<sec:authorize access="hasAuthority('bibliotecario')">
+													<a href="<c:url value="/prestamos" />"
+													class="btn btn-primary btn-block btn-sm">Préstamos</a>
 													<a href="<c:url value="/novedades/new" />"
 													class="btn btn-primary btn-block btn-sm">Publicar novedad</a>
 												</sec:authorize>

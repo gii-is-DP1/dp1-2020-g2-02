@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Autor;
-import org.springframework.samples.petclinic.model.EstadoLibro;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.stereotype.Service;
@@ -24,20 +23,20 @@ public class LibroServiceTest {
 
 	@Test
 	public void testGetGenerosLibro() {
-		Collection<Genero> generos = libroService.getGenerosLibro(libroService.findById(1).get());
+		Collection<Genero> generos = libroService.findById(1).get().getGeneros();
 		assertTrue(generos.size()==2);
 	}
 	
 	@Test
 	public void testGetAutoresLibro() {
-		Collection<Autor> autores = libroService.getAutoresLibro(libroService.findById(2).get());
+		Collection<Autor> autores = libroService.findById(2).get().getAutores();
 		assertTrue(autores.size()==2);
 	}
 	
 	@Test
 	public void testFindAll() {
 		Collection<Libro> libros = libroService.findAll();
-		assertTrue(libros.size()==3);
+		assertTrue(libros.size()==2);
 	}
 	
 	@Test
@@ -56,7 +55,7 @@ public class LibroServiceTest {
 		libro.setFecha_publicacion(LocalDate.now());
 		libroService.save(libro);
 		Collection<Libro> libros = libroService.findAll();
-		assertTrue(libros.size()==4);
+		assertTrue(libros.size()==3);
 	}
 	
 	
