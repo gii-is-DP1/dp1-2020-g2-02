@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -47,7 +48,7 @@ public class Proveedor extends BaseEntity{
 	@Email
 	private String email;
 	
-	/*@OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
-	private Set<Encargo> encargos;*/
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
+	private List<Encargo> encargos;
 
 }
