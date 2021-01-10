@@ -24,12 +24,10 @@ public class Encargo extends BaseEntity{
 	
 	@Column(name = "fecha_realizacion")
 	@NotNull
-	@NotEmpty
 	private LocalDate fechaRealizacion;
 	
 	@Column(name = "fecha_entrega")
 	@NotNull
-	@NotEmpty
 	private LocalDate fechaEntrega;
 	
 	@ManyToOne
