@@ -14,8 +14,7 @@
     </h2>
     <form:form modelAttribute="ejemplar" class="form-horizontal" id="add-ejemplar-form" action="/ejemplares/save">
         <div class="form-group has-feedback">
-        <petclinic:inputField label="Título del libro" name="libro.titulo"/>
-            <petclinic:inputField label="Disponibilidad" name="disponibilidad"/>
+        	<h2>TODO: seleccionar libro</h2>
             <petclinic:inputField label="Estado" name="estado"/>
         </div>
         <div class="form-group">
