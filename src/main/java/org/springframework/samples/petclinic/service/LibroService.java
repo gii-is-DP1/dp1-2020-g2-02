@@ -1,14 +1,11 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.repository.LibroRepository;
 import org.springframework.stereotype.Service;
@@ -18,9 +15,6 @@ public class LibroService {
 
 	@Autowired
 	LibroRepository LibroRepo;
-
-	@Autowired
-	private GeneroService generoService;
 	
 	public Collection<Libro> findAll(){
 		return LibroRepo.findAll();
