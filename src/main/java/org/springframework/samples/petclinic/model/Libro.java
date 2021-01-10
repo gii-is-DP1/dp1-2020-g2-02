@@ -59,7 +59,6 @@ public class Libro extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
 	private Set<Genero> generos;
 	
-	@OneToMany
-	@JoinColumn(name = "cantidad_id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
 	private List<Cantidad> cantidad;
 }

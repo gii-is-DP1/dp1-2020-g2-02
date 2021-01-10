@@ -17,8 +17,8 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALU
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388442P', 650606604, 'rauw@gmail.com', 'raulla1');
 
-INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Norma', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
-INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Planeta', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
+INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Norma', 'A1231123B', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
+INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planeta', 'B1234567C', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
@@ -45,8 +45,17 @@ INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembr
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', '69060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', '36614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', 'C6614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
+
+INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(0, '2020-11-12', '2020-11-21', 0);
+INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, '2020-12-12', '2020-12-21', 1);
+
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 7, 3, 0, 2);
+
+
 -- Petclinic --
 
 -- One admin user, named admin1 with passwor 4dm1n and authority admin

@@ -31,7 +31,7 @@ public class Proveedor extends BaseEntity{
 	
 	@Column(name = "nif")
 	@NotEmpty
-	@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")
+	@Pattern(regexp = "^[a-zA-Z]{1}\\d{7}[a-zA-Z0-9]{1}$")
 	private String nif;
 	
 	@Column(name = "direccion")
