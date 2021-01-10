@@ -13,6 +13,7 @@
         <thead>
         <tr>
             <th>Nombre</th>
+            <th>NIF</th>
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Email</th>   
@@ -27,6 +28,9 @@
             <tr>
                 <td>                    
                     <c:out value="${editorial.nombre}"/>
+                </td>
+                <td>
+                	<c:out value="${editorial.nif}"/>
                 </td>
                 <td>
                     <c:out value="${editorial.direccion}"/>
