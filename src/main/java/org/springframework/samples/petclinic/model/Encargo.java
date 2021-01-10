@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -23,10 +24,12 @@ public class Encargo extends BaseEntity{
 	
 	@Column(name = "fecha_realizacion")
 	@NotNull
+	@NotEmpty
 	private LocalDate fechaRealizacion;
 	
 	@Column(name = "fecha_entrega")
 	@NotNull
+	@NotEmpty
 	private LocalDate fechaEntrega;
 	
 	@ManyToOne
