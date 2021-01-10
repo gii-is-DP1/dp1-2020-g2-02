@@ -5,11 +5,8 @@ import java.util.Collection;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Cantidad;
 import org.springframework.samples.petclinic.model.Encargo;
-import org.springframework.samples.petclinic.service.CantidadService;
 import org.springframework.samples.petclinic.service.EncargoService;
-import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,19 +21,11 @@ public class EncargoController {
 	@Autowired
 	EncargoService encargosService;
 
-	@Autowired
-	UserService userService;
-	
-	@Autowired
-	CantidadService cantidadService;
-
 	@GetMapping
 	public String listEncargos(ModelMap model) {
 		String vista = "encargos/listEncargo";
 		Collection<Encargo> encargos = encargosService.findAll();
-//		Collection<Cantidad> cantidades = cantidadService.findAll();
 		model.addAttribute("encargos", encargos);
-//		model.addAttribute("cantidad", cantidades);
 		return vista;
 	}
 
@@ -44,7 +33,7 @@ public class EncargoController {
 	public String guardarEncargo(@Valid Encargo encargo, BindingResult result, ModelMap modelmap) {
 		String vista = "encargos/listEncargo";
 		if (result.hasErrors()) {
-			modelmap.addAttribute("miembro", encargo);
+			modelmap.addAttribute("encargo", encargo);
 			return "encargos/editEncargo";
 		} else {
 			encargosService.save(encargo);

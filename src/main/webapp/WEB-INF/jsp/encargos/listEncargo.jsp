@@ -6,7 +6,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="encargos">
-    <h2>Proveedores</h2>
+    <h2>Encargos</h2>
         <table id="encargosTable" class="table table-striped">
         <thead>
         <tr>
@@ -23,22 +23,22 @@
         <c:forEach items="${encargos}" var="encargos">
             <tr>
                 <td>                    
-                    <c:out value="${encargos.proveedor.nombre}"/>
+                    <c:out value="${encargos.proveedor.nombre} "/>
                 </td>
                 <td>
-               <%--<c:forEach items="${cantidad.libro}" var="cantidad">
-                   <c:out value="${cantidad.titulo}"/>
-                   </c:forEach> --%> 
+                <c:forEach items="${encargos.cantidad}" var="cantidad">
+               		<c:out value="${cantidad.libro.titulo}"/><br/>
+               		</c:forEach>
                 </td>
                 
                 <td>
                 <c:forEach items="${encargos.cantidad}" var="cantidad">
-                   <c:out value="${cantidad.unidades}"/>
+                   <c:out value="${cantidad.unidades}"/><br/>
                    </c:forEach>
                 </td>  
                 <td>
                 <c:forEach items="${encargos.cantidad}" var="cantidad">
-                   <c:out value="${cantidad.precioUnitario}"/>
+                   <c:out value="${cantidad.precioUnitario}"/><br/>
                    </c:forEach>
                 </td>
                 <td>

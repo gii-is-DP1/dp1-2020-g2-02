@@ -52,7 +52,8 @@ INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(
 INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, '2020-12-12', '2020-12-21', 1);
 
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
-INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 0, 2);
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 12, 3, 0, 2);
 
 
 -- Petclinic --
