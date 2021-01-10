@@ -51,13 +51,15 @@ public class LibroController {
 	MiembroService miembroService;
 	
 	@GetMapping
-	public String listLibros(ModelMap model, @RequestParam(required = false) String q) {
+	public String listLibros(ModelMap model, @RequestParam(required = false) String q, @RequestParam(required = false) String qAutor, @RequestParam(required = false) String qEditorial) {
 		String vista = "libros/listLibro";
 		Collection<Libro> libros = librosService.findAll();
 		//Halla si hay algún ejemplar disponible para cada libro.
 		Map<Integer, Boolean> disponibilidad = libros.stream().collect(Collectors.toMap(x->x.getId(), y->!ejemplarService.findDisponibles(y).isEmpty()));
 		//Filtra por nombre en caso de que haya una búsqueda.
 		if(q != null && !q.isEmpty()) libros=libros.stream().filter(x->x.getTitulo().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
+		if(qAutor != null && !qAutor.isEmpty()) libros=libros.stream().filter(x->x.getAutores().stream().anyMatch(y->y.getNombre().toLowerCase().contains(qAutor.toLowerCase()))).collect(Collectors.toList());
+		if(qEditorial != null && !qEditorial.isEmpty()) libros=libros.stream().filter(x->x.getEditorial().getNombre().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
 		model.addAttribute("libros",libros);
 		model.addAttribute("disponibilidad", disponibilidad);
 		
@@ -66,7 +68,7 @@ public class LibroController {
 	
 	@GetMapping(path="/reservar/{libroId}")
 	public String reservar(@PathVariable("libroId") int libroId, ModelMap model, Principal principal) {
-		String vista = listLibros(model,null);
+		String vista = listLibros(model,null,null,null);
 		
 		//Comprueba si el libro existe
 		Optional<Libro> libro = librosService.findById(libroId);
@@ -114,7 +116,7 @@ public class LibroController {
 		}else {
 			librosService.save(libro);
 			modelmap.addAttribute("message", "Libro guardado correctamente");
-			vista = listLibros(modelmap,null);
+			vista = listLibros(modelmap,null,null,null);
 		}
 		return vista;
 	}
@@ -124,6 +126,6 @@ public class LibroController {
 		String vista = "libros/editLibro";
 		modelmap.addAttribute("libro", new Libro());
 		return vista;
-	}
+	}	
 	
 }
