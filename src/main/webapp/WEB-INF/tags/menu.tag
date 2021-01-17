@@ -49,7 +49,7 @@
 				<petclinic:menuItem active="${name eq 'Editoriales'}" url="/editoriales"
 					title="editoriales">
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>editoriales</span>
+					<span>Editoriales</span>
 				</petclinic:menuItem>
 
 			</ul>
@@ -95,6 +95,8 @@
 													class="btn btn-primary btn-block btn-sm">Ejemplares</a>
 													<a href="<c:url value="/miembros" />"
 													class="btn btn-primary btn-block btn-sm">Miembros</a>
+													<a href="<c:url value="/proveedores" />"
+													class="btn btn-primary btn-block btn-sm">Proveedores</a>
 												</sec:authorize>
 												<sec:authorize access="hasAuthority('bibliotecario')">
 													<a href="<c:url value="/prestamos" />"

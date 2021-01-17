@@ -55,7 +55,7 @@
         </tbody>
     </table>
     <br/> 
-     <sec:authorize access="hasAuthority('admin')">
+     <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
 		<a class="btn btn-default" href='<spring:url value="/ejemplares/new" htmlEscape="true"/>'>Añadir ejemplar</a>
 	</sec:authorize>
 
