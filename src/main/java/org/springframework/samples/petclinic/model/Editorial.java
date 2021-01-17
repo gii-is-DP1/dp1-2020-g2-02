@@ -6,6 +6,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,11 @@ public class Editorial extends BaseEntity {
 	@Column(name = "nombre")
 	@NotEmpty
 	private String nombre;
+	
+	@Column(name = "nif")
+	@NotEmpty
+	@Pattern(regexp = "^[a-zA-Z]{1}\\d{7}[a-zA-Z0-9]{1}$")
+	private String nif;
 	
 	@Column(name = "direccion")
 	@NotEmpty

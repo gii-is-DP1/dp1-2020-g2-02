@@ -42,7 +42,7 @@ public class ProveedorServiceTest {
 		Proveedor proveedor = new Proveedor();
 		proveedor.setId(cuentaInicial);
 		proveedor.setNombre("Alejandro");;
-		proveedor.setNif("49387456P");
+		proveedor.setNif("A9387456P");
 		proveedor.setDireccion("C/Betis Nº12, Sevilla");
 		proveedor.setTelefono(650606444);
 		proveedor.setEmail("ruco@gmail.com");

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
@@ -27,7 +28,7 @@ public class Encargo extends BaseEntity{
 	
 	@Column(name = "fecha_entrega")
 	@NotNull
-	private LocalDate fechaEntrega;
+	private LocalDate fechaEntrega; 
 	
 	@ManyToOne
 	@JoinColumn(name = "proveedor_id")
