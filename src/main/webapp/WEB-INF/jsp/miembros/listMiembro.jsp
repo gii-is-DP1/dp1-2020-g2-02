@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+
 
 <petclinic:layout pageName="miembros">
     <h2>Miembros</h2>
@@ -41,6 +43,7 @@
                 <td>
                     <c:out value="${miembro.user.username}"/>
                 </td>  
+                
                  <c:if test="${miembro.user.enabled}">
                  	<td>Habilitado</td>
                  	<td> <spring:url value="/miembros/deshabilitar/{miembroId}" var="ejemplarUrl">
@@ -57,10 +60,13 @@
                     <a href ="${fn:escapeXml(ejemplarUrl)}">Habilitar</a>
                     </td>
                  </c:if>
+                 
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <a class="btn btn-default" href='<spring:url value="/miembros/new" htmlEscape="true"/>'>Añadir miembro</a>
-
+    <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
+    	<a class="btn btn-default" href='<spring:url value="/miembros/new" htmlEscape="true"/>'>Añadir miembro</a>
+	</sec:authorize>
+    
 </petclinic:layout>
