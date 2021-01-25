@@ -16,14 +16,13 @@
             <th>NIF</th>
             <th>Dirección</th> 
             <th>Teléfono</th>
-            <th>Email</th>  
-            <th>Estado</th>   
-            <th>Acciones</th>                
+            <th>Email</th>                
         </tr>
         </thead>
         <tbody>
         <c:forEach items="${proveedor}" var="proveedor">
             <tr>
+            
                 <td>                    
                     <c:out value="${proveedor.nombre}"/>
                 </td>
@@ -40,22 +39,6 @@
                     <c:out value="${proveedor.email}"/>
                 </td>
                 
-                 <c:if test="${proveedor.user.enabled}">
-                 	<td>En uso</td>
-                 	<td> <spring:url value="/proveedores/deshabilitar/{proveedorId}" var="ejemplarUrl">
-                        <spring:param name="proveedorId" value="${proveedor.id}"/>
-                    </spring:url>
-                    <a href ="${fn:escapeXml(ejemplarUrl)}">Dejar de usar</a>
-                    </td>
-                 </c:if>
-                 <c:if test="${!proveedor.user.enabled}">
-                 	<td>No se usa</td>
-                 	<td> <spring:url value="/proveedores/habilitar/{proveedorId}" var="ejemplarUrl">
-                        <spring:param name="proveedorId" value="${proveedor.id}"/>
-                    </spring:url>
-                    <a href ="${fn:escapeXml(ejemplarUrl)}">Volver a usar</a>
-                    </td>
-                 </c:if>
                 
             </tr>
         </c:forEach>
