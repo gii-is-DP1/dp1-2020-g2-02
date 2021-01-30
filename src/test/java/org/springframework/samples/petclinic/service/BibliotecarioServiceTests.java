@@ -2,16 +2,11 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Bibliotecario;
-import org.springframework.samples.petclinic.model.Novedad;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +18,6 @@ public class BibliotecarioServiceTests {
 	
 	@Autowired
 	private UserService  userService;
-	
-	@Autowired
-	private AuthoritiesService authoritiesService;
 	
 	
 	@Test
