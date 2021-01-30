@@ -2,6 +2,7 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <br>
+
 <div class="row" style="margin-bottom:1%">
 	<form action="/libros" method="get">
 		<div class="col-sm-10">
@@ -12,4 +13,5 @@
 		</div>
 	</form>
 </div>
+
 <br>
