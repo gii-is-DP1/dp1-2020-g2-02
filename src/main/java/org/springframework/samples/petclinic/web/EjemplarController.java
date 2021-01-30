@@ -6,9 +6,7 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.service.EjemplarService;

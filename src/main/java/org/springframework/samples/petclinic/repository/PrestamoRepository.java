@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
