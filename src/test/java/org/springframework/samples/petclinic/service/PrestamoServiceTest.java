@@ -37,7 +37,7 @@ public class PrestamoServiceTest {
 	@Test
 	public void testFindAll() {
 		Iterable<Prestamo> prestamos = prestamoService.findAll();
-		assertTrue(prestamos.iterator().next().getMiembro().getNombre().equals("Raúl"));
+		assertTrue(prestamos.iterator().next().getMiembro().getApellidos().equals("Llamas Costa"));
 	}
 
 	@Test
