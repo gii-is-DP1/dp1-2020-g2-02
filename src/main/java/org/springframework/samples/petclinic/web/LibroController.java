@@ -19,6 +19,7 @@ import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoDisponibleException;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoExistenteException;
 import org.springframework.samples.petclinic.service.exceptions.LibroYaEnPrestamoException;
+import org.springframework.samples.petclinic.service.exceptions.LimitePrestamosException;
 import org.springframework.samples.petclinic.service.exceptions.PrestamoConRetrasoException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -82,6 +83,9 @@ public class LibroController {
 		}
 		catch(LibroNoExistenteException e) {
 			model.addAttribute("message","Libro no existente");
+		}
+		catch(LimitePrestamosException e) {
+			model.addAttribute("message","Ha superado el limite de préstamos, por favor entregue uno de sus préstamos antes de realizar uno nuevo");
 		}
 		catch(LibroYaEnPrestamoException e) {
 			model.addAttribute("message","Ya tienes ese libro en préstamo");
