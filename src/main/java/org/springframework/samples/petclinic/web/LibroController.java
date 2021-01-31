@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.AutorService;
+import org.springframework.samples.petclinic.service.EditorialService;
 import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
@@ -25,6 +27,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,6 +53,22 @@ public class LibroController {
 	@Autowired
 	MiembroService miembroService;
 	
+	@Autowired
+	AutorService autorService;
+	
+	@Autowired
+	EditorialService editorialService;
+	
+	@ModelAttribute("autores")
+	public Map<Integer, String> listaAutores() {
+		return autorService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getNombre() + " " + y.getApellidos()));
+	}
+	
+	@ModelAttribute("editoriales")
+	public Map<Integer, String> listaEditoriales() {
+		return editorialService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getNombre()));
+	}
+
 	@GetMapping
 	public String listLibros(ModelMap model, @RequestParam(required = false) String q, @RequestParam(required = false) String qAutor, @RequestParam(required = false) String qEditorial) {
 		String vista = "libros/listLibro";
