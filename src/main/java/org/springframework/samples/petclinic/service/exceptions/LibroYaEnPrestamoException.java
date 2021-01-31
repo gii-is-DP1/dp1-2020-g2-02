@@ -5,10 +5,6 @@
  */
 package org.springframework.samples.petclinic.service.exceptions;
 
-/**
- *
- * @author japarejo
- */
 public class LibroYaEnPrestamoException extends Exception{
     
 }

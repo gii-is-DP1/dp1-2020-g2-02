@@ -18,6 +18,7 @@ import org.springframework.samples.petclinic.repository.PrestamoRepository;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoDisponibleException;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoExistenteException;
 import org.springframework.samples.petclinic.service.exceptions.LibroYaEnPrestamoException;
+import org.springframework.samples.petclinic.service.exceptions.LimitePrestamosException;
 import org.springframework.samples.petclinic.service.exceptions.PrestamoConRetrasoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,15 +65,18 @@ public class PrestamoService {
 		return PrestamoRepo.prestamosConFechaDevolucionTardia(fecha);
 	}
 	
-	public Prestamo realizarReserva(int libroId, Miembro miembro)  throws LibroNoExistenteException, LibroYaEnPrestamoException, LibroNoDisponibleException, PrestamoConRetrasoException{
+	public Prestamo realizarReserva(int libroId, Miembro miembro)  throws LibroNoExistenteException, LimitePrestamosException, LibroYaEnPrestamoException, LibroNoDisponibleException, PrestamoConRetrasoException{
 		Optional<Libro> libro = LibroRepo.findById(libroId);
 		if(!libro.isPresent()) {
 			throw new LibroNoExistenteException();
 		}
-		
+		//Comprueba si el usuario tiene ya 3 o más préstamos en proceso
+		Collection<Prestamo> prestamos = PrestamoRepo.prestamosEnProceso(miembro);
+		if(prestamos.size()>3) {
+			throw new LimitePrestamosException();
+		}
 		//Comprueba si el usuario tiene ya en préstamo ese libro.
-		Optional<Prestamo> prestamoExistente = PrestamoRepo.prestamosDeLibroEnProceso(miembro, libro.get());
-		if(prestamoExistente.isPresent()) {
+		if(prestamos.stream().anyMatch(x->x.getEjemplar().getLibro().equals(libro.get()))) {
 			throw new LibroYaEnPrestamoException();
 		}
 		
@@ -83,9 +87,7 @@ public class PrestamoService {
 		}
 		
 		//Comprueba si el usuario tiene algún préstamo con fecha de devolución tardía
-		Collection<Prestamo> prestamosRetraso = PrestamoRepo.prestamosMiembroConFechaDevolucionTardia(miembro, LocalDate.now());
-		prestamosRetraso.stream().forEach(x->System.out.println("Aca esta el prestamo que habla" + x.getId()));
-		if(!prestamosRetraso.isEmpty()) {
+		if(prestamos.stream().anyMatch(x->x.getFechaDevolucion().isBefore(LocalDate.now()))) {
 			throw new PrestamoConRetrasoException();
 		}
 		

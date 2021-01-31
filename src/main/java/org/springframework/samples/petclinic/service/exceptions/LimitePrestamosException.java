@@ -5,6 +5,6 @@
  */
 package org.springframework.samples.petclinic.service.exceptions;
 
-public class LibroNoDisponibleException extends Exception{
+public class LimitePrestamosException extends Exception{
     
 }
