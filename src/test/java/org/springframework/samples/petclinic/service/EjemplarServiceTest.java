@@ -24,7 +24,7 @@ public class EjemplarServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==3);
+		assertTrue(count==4);
 	}
 	
 	@Test
@@ -37,7 +37,7 @@ public class EjemplarServiceTest {
 		ejemplar.setEstado("Bien");
 		ejemplarService.save(ejemplar);
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==4);
+		assertTrue(count==5);
 	}
 	
 
