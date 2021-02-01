@@ -33,9 +33,8 @@ INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
 INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');
 INSERT INTO generos(libro_id,genero) VALUES (1, 'Policiaco');
 
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
+INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(5,2,1);
+INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(2,1,1);
 
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (1,1,'Primera página arrancada.','DISPONIBLE');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (2,1,'Cubierta doblada.','RESERVADO');

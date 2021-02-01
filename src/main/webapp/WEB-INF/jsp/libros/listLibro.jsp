@@ -21,6 +21,7 @@
             <th>Géneros</th>
             <th>Editorial</th>
             <th>Fecha de publicación</th>   
+            <th>Puntuación</th> 
             <th>Disponibilidad</th>      
         </tr>
         </thead>
@@ -64,6 +65,13 @@
                     <c:out value="${libro.fecha_publicacion}"/>
                 </td>
                 <td>
+                    <c:forEach items="${puntuaciones}" var="entry">
+                    	<c:if test="${entry.key.id == libro.id }">
+                    		<fmt:formatNumber type="number" maxFractionDigits="2" value="${entry.value}" />
+                    	</c:if>
+        			</c:forEach>
+                </td>
+                <td>
                		<c:if test="${disponibilidad[libro.id]}">
                			<sec:authorize access="!hasAuthority('miembro')">
                				Disponible
@@ -77,7 +85,14 @@
                		</c:if>
                		<c:if test="${!disponibilidad[libro.id]}">
                			No disponible
-               		</c:if>
+               		</c:if></br>
+               		
+               		<sec:authorize access="hasAuthority('miembro')">
+               			<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
+                        	<spring:param name="libroId" value="${libro.id}"/>
+                    	</spring:url>
+                    	<a href ="${fn:escapeXml(libroUrl)}">Valorar</a>
+               		</sec:authorize>
                 </td>
         	</tr>
         </c:forEach>
