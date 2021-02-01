@@ -30,7 +30,7 @@ public class AutorServiceTest {
 		autor.setFecha_nac(LocalDate.now());
 		autorService.save(autor);
 		Collection<Autor> autores = autorService.findAll();
-		assertTrue(autores.size()==3);
+		assertTrue(autores.size()==5);
 	}
 	
 	@Test
@@ -42,7 +42,7 @@ public class AutorServiceTest {
 	@Test
 	public void testFindAll() {
 		Collection<Autor> autores = autorService.findAll();
-		assertTrue(autores.size()==2);
+		assertTrue(autores.size()==4);
 	}
 	
 	@Test

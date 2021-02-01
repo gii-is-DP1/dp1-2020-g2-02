@@ -33,7 +33,7 @@ public class EditorialServiceTest {
 	@Test
 	public void getLibrosEditorial() {
 		Collection<Libro> libros = editorialService.getLibrosEditorial(editorialService.findById(1).get());
-		assertTrue(libros.size()==1);
+		assertTrue(libros.size()==2);
 	}
 	
 }

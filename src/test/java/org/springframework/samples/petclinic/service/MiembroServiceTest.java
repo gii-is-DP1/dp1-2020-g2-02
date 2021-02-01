@@ -23,7 +23,7 @@ public class MiembroServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=miembroService.miembroCount();
-		assertTrue(count==3);
+		assertTrue(count==4);
 	}
 	
 	@Test

@@ -15,8 +15,7 @@
     <form:form modelAttribute="ejemplar" class="form-horizontal" id="add-ejemplar-form" action="/ejemplares/save">
         <div class="form-group has-feedback">
         	<h5>Seleccionar libro</h5>
-			
-        	<petclinic:selectFieldMap name="libro" label="Libro" names="${libros}" size="5"/>
+			<petclinic:selectFieldMap name="libro" label="Libro" names="${listaLibros}" size="5"/>
 			
             <petclinic:inputField label="Estado" name="estado"/>
             

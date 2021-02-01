@@ -11,6 +11,8 @@ INSERT INTO users(username,password,enabled) VALUES ('raulla1','Pass1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (7,'raulla1','miembro');
 INSERT INTO users(username,password,enabled) VALUES ('ivasan1','Pass1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (8,'ivasan1','miembro');
+INSERT INTO users(username,password,enabled) VALUES ('alecai1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (9,'alecai1','miembro');
 
 
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Fernando', 'Romero Ruiz', '49387441P', 650606544, 'ferr@gmail.com', 'ferror1');
@@ -19,33 +21,61 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALU
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388442P', 650606604, 'rauw@gmail.com', 'raulla1');
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Iván', 'Sanabria García', '49388442P', 650177654, 'ivansg@gmail.com', 'ivasan1');
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Alejandro', 'Sanabria Romero', '49388432P', 650177654, 'alexg@gmail.com', 'alecai1');
+
 
 INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Norma', 'A1231123B', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
 INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planeta', 'B1234567C', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
+INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Sthepen', 'King', '1947-09-21');
+INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Fernando', 'Aramburu', '1959-04-17');
 
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 1);
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 2);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456433, 'El resplandor', 'Español', '1977-01-28', 2);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234543216, 'Patria', 'Español', '2016-09-06', 1);
 
-INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
-INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');
-INSERT INTO generos(libro_id,genero) VALUES (1, 'Policiaco');
+INSERT INTO generos(id, genero) VALUES (1, 'Biografía');
+INSERT INTO generos(id, genero) VALUES (2, 'Fantasía');
+INSERT INTO generos(id, genero) VALUES (3, 'Policíaco');
+INSERT INTO generos(id, genero) VALUES (4, 'Aventura');
+INSERT INTO generos(id, genero) VALUES (5, 'Romántico');
+INSERT INTO generos(id, genero) VALUES (6, 'Histórico');
+INSERT INTO generos(id, genero) VALUES (7, 'Terror');
+
+
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (1, 1);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (3, 1);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (2, 2);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (4, 2);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (6, 4);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (7, 3);
 
 INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
 
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (1,1,'Primera página arrancada.','DISPONIBLE');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (2,1,'Cubierta doblada.','RESERVADO');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (3,2,'En perfecto estado.','EN_PRESTAMO');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (4,2,'Algunas páginas arrugadas.','EN_PRESTAMO');
+INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (5,1,'Cubierta doblada.','EN_PRESTAMO');
+INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (6,2,'En perfecto estado.','EN_PRESTAMO');
+INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (7,3,'Algunas páginas arrugadas.','EN_PRESTAMO');
+INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (8,4,'Algunas páginas arrugadas.','DISPONIBLE');
 
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (0,DATEADD(DAY, -30, CURRENT_TIMESTAMP()), DATEADD(DAY, -14, CURRENT_TIMESTAMP()), 1, 1,1,TRUE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (1,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), null, 0,2,FALSE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (2,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 0, 1,3,FALSE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (3,DATEADD(DAY, -20, CURRENT_TIMESTAMP()), DATEADD(DAY, -4, CURRENT_TIMESTAMP()), 0, 2,4,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (4,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 1, 3,5,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (5,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 0, 3,6,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (6,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 1, 3,7,FALSE);
+
 
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
