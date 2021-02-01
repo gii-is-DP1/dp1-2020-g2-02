@@ -36,7 +36,7 @@ public class LibroServiceTest {
 	@Test
 	public void testFindAll() {
 		Collection<Libro> libros = libroService.findAll();
-		assertTrue(libros.size()==2);
+		assertTrue(libros.size()==4);
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ public class LibroServiceTest {
 		libro.setFecha_publicacion(LocalDate.now());
 		libroService.save(libro);
 		Collection<Libro> libros = libroService.findAll();
-		assertTrue(libros.size()==3);
+		assertTrue(libros.size()==5);
 	}
 	
 }

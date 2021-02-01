@@ -24,12 +24,13 @@ public class EjemplarServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==4);
+		assertTrue(count==8);
 	}
 	
 	@Test
 	@Transactional
 	public void testAddEjemplar() {
+		int countinicial=ejemplarService.ejemplarCount();
 		Ejemplar ejemplar = new Ejemplar();
 		Libro libro = libroService.findById(1).get();
 		ejemplar.setLibro(libro);
@@ -37,7 +38,7 @@ public class EjemplarServiceTest {
 		ejemplar.setEstado("Bien");
 		ejemplarService.save(ejemplar);
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==5);
+		assertTrue(count==countinicial+1);
 	}
 	
 
