@@ -43,9 +43,7 @@ public class NovedadController {
 	@PostMapping(path="/save")
 	public String guardarNovedad(@Valid Novedad novedad, BindingResult result, ModelMap modelmap, Principal principal) {
 		String vista = "novedades/listNovedad";
-		System.out.println(novedad);
 		if(result.hasErrors()) {
-			modelmap.addAttribute("message", result.toString());
 			modelmap.addAttribute("novedad", novedad);
 			modelmap.addAttribute("message", "Hay fallos en el formulario.");
 			return "novedades/editNovedad";
