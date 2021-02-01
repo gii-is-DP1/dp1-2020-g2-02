@@ -14,53 +14,67 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.service.EncargoService;
+import org.springframework.samples.petclinic.service.MiembroService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-@WebMvcTest(controllers=EncargoController.class,
+@WebMvcTest(controllers=MiembroController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
+public class MiembroControllerTests {
 
-public class EncargoControllerTests {
-	
-	/*@Autowired
-	EncargoController controller;
+	@Autowired
+	MiembroController controller;
 	
 	@MockBean
-	EncargoService encargoService;
+	MiembroService miembroService;
 	
+	@MockBean
+	UserService userService;
+
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@WithMockUser(value = "Us3r")
+	@Test
+	void testMiembrosList() throws Exception {
+		mockMvc.perform(get("/miembros"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("miembros"))
+			.andExpect(view().name("miembros/listMiembro"));
+	}
+	
+	@WithMockUser(value = "Us3r")
     @Test
     void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/encargos/new"))
-		.andExpect(status().isOk())
-		.andExpect(model().attributeExists("encargo"))
-		.andExpect(view().name("encargos/editEncargo"));
+		mockMvc.perform(get("/miembros/new"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("miembro"))
+			.andExpect(view().name("miembros/editMiembro"));
 	}
 	
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/encargos/save").param("fecha_realizacion", "2020-11-11").param("fecha_entrega", "2020-12-12")
-						.with(csrf()))
-			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
+		mockMvc.perform(post("/miembros/save").param("nombre", "A").param("apellidos", "A")
+				.param("dni", "00000000A").param("telefono", "000000000").param("email", "A@A.A")
+			.with(csrf()))
+			.andExpect(model().attribute("message", "Miembro guardado correctamente"));
 	}
 	
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/encargos/save")
+		mockMvc.perform(post("/miembros/save")
 						.with(csrf())
-						.param("fecha_realizacion", "2020-11-11"))
+						.param("nombre", "Prueba").param("apellidos", "A")
+						.param("dni", "00000000A").param("telefono", "000000000"))
 			.andExpect(status().isOk())
-			.andExpect(model().attributeHasErrors("encargo"))
-			.andExpect(model().attributeHasFieldErrors("encargo", "fecha_entrega"))
-			.andExpect(view().name("encargos/editEncargo"));
-	}*/
-
+			.andExpect(model().attributeHasErrors("miembro"))
+			.andExpect(model().attributeHasFieldErrors("miembro", "email"))
+			.andExpect(view().name("miembros/editMiembro"));
+	}
+	
 }

@@ -13,6 +13,7 @@
         <thead>
         <tr>
             <th>Nombre</th>
+            <th>NIF</th>
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Email</th>   
@@ -27,6 +28,9 @@
             <tr>
                 <td>                    
                     <c:out value="${editorial.nombre}"/>
+                </td>
+                <td>
+                	<c:out value="${editorial.nif}"/>
                 </td>
                 <td>
                     <c:out value="${editorial.direccion}"/>
@@ -53,7 +57,7 @@
 
 
     <br/> 
-    <sec:authorize access="hasAuthority('admin')">
+    <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
 		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
 	</sec:authorize>
 </petclinic:layout>

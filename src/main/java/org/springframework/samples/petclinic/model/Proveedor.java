@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,13 +24,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "proveedores")
 public class Proveedor extends BaseEntity{
+	
 	@Column(name = "nombre")
 	@NotEmpty
 	private String nombre;
 	
 	@Column(name = "nif")
 	@NotEmpty
-	@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")
+	@Pattern(regexp = "^[a-zA-Z]{1}\\d{7}[a-zA-Z0-9]{1}$")
 	private String nif;
 	
 	@Column(name = "direccion")
@@ -50,5 +50,6 @@ public class Proveedor extends BaseEntity{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
 	private List<Encargo> encargos;
-
+	
+	
 }

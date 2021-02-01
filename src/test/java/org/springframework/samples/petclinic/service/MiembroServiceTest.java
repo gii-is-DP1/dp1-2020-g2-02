@@ -23,7 +23,7 @@ public class MiembroServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=miembroService.miembroCount();
-		assertTrue(count==2);
+		assertTrue(count==3);
 	}
 	
 	@Test
@@ -34,8 +34,8 @@ public class MiembroServiceTest {
 	
 	@Test
 	public void testFindById() {
-		Miembro miembro = miembroService.findById(1).get();
-		assertTrue(miembro.getNombre().equals("Raúl"));
+		Miembro miembro = miembroService.findById(0).get();
+		assertTrue(miembro.getNombre().equals("Jorge"));
 	}
 	
 	@Test

@@ -2,8 +2,6 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
 
-import java.time.LocalDate;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -26,7 +24,7 @@ public class EjemplarServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==3);
+		assertTrue(count==4);
 	}
 	
 	@Test
@@ -39,7 +37,7 @@ public class EjemplarServiceTest {
 		ejemplar.setEstado("Bien");
 		ejemplarService.save(ejemplar);
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==4);
+		assertTrue(count==5);
 	}
 	
 

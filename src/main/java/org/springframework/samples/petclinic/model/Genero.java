@@ -26,20 +26,4 @@ public class Genero extends BaseEntity {
 	@NotEmpty    
 	private String genero;
 
-	public Libro getLibro() {
-		return libro;
-	}
-
-	public void setLibro(Libro libro) {
-		this.libro = libro;
-	}
-
-	public String getGenero() {
-		return genero;
-	}
-
-	public void setGenero(String genero) {
-		this.genero = genero;
-	}
-	
 }

@@ -14,14 +14,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+
 @Controller
 @RequestMapping("/proveedores")
 public class ProveedorController {
 	@Autowired
 	ProveedorService proveedorService;
 	
+	
+	
 	@GetMapping
-	public String listProveedors(ModelMap model) {
+	public String listProveedores(ModelMap model) {
 		String vista = "proveedores/listProveedor";
 		Collection<Proveedor> proveedor = proveedorService.findAll();
 		model.addAttribute("proveedor", proveedor);
@@ -37,7 +40,7 @@ public class ProveedorController {
 		}else {
 			proveedorService.save(proveedor);
 			modelmap.addAttribute("message", "Proveedor guardado correctamente");
-			vista = listProveedors(modelmap);
+			vista = listProveedores(modelmap);
 		}
 		return vista;
 	}
@@ -48,6 +51,8 @@ public class ProveedorController {
 		modelmap.addAttribute("proveedor", new Proveedor());
 		return vista;
 	}
+	
+	
 	
 	
 

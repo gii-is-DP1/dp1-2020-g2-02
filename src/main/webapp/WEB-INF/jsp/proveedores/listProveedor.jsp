@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+
 
 <petclinic:layout pageName="proveedores">
     <h2>Proveedores</h2>
@@ -20,6 +22,7 @@
         <tbody>
         <c:forEach items="${proveedor}" var="proveedor">
             <tr>
+            
                 <td>                    
                     <c:out value="${proveedor.nombre}"/>
                 </td>
@@ -35,11 +38,13 @@
                 <td>
                     <c:out value="${proveedor.email}"/>
                 </td>
+                
+                
             </tr>
         </c:forEach>
         </tbody>
     </table>
-        <sec:authorize access="hasAuthority('admin')">
-		<a class="btn btn-default" href='<spring:url value="/proveedores/new" htmlEscape="true"/>'>Añadir proveedor</a>
+    <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
+    	<a class="btn btn-default" href='<spring:url value="/proveedores/new" htmlEscape="true"/>'>Añadir proveedor</a>
 	</sec:authorize>
 </petclinic:layout>

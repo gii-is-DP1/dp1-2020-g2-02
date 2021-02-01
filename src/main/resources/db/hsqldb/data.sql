@@ -9,6 +9,8 @@ INSERT INTO users(username,password,enabled) VALUES ('jorgon1','Pass1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (6,'jorgon1','miembro');
 INSERT INTO users(username,password,enabled) VALUES ('raulla1','Pass1234',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (7,'raulla1','miembro');
+INSERT INTO users(username,password,enabled) VALUES ('ivasan1','Pass1234',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (8,'ivasan1','miembro');
 
 
 INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Fernando', 'Romero Ruiz', '49387441P', 650606544, 'ferr@gmail.com', 'ferror1');
@@ -16,9 +18,10 @@ INSERT INTO bibliotecarios(id,nombre,apellidos,dni,telefono,email,username) VALU
 
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (0, 'Jorge', 'González Pardo', '49387441P', 650606544, 'jorr@gmail.com', 'jorgon1');
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1, 'Raúl', 'Llamas Costa', '49388442P', 650606604, 'rauw@gmail.com', 'raulla1');
+INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Iván', 'Sanabria García', '49388442P', 650177654, 'ivansg@gmail.com', 'ivasan1');
 
-INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Norma', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
-INSERT INTO editoriales(nombre,direccion,telefono,email,web) VALUES ('Planeta', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
+INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Norma', 'A1231123B', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
+INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planeta', 'B1234567C', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
@@ -37,23 +40,25 @@ INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (1,1,'Primera página arrancada.','DISPONIBLE');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (2,1,'Cubierta doblada.','RESERVADO');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (3,2,'En perfecto estado.','EN_PRESTAMO');
+INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (4,2,'Algunas páginas arrugadas.','EN_PRESTAMO');
 
-INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (0,'2020-11-15', '2020-12-01', 1, 1,1,TRUE);
-INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (1,'2020-11-20', '2020-12-06', null, 0,2,FALSE);
-INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (2,'2020-11-20', '2021-12-06', 0, 1,3,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (0,DATEADD(DAY, -30, CURRENT_TIMESTAMP()), DATEADD(DAY, -14, CURRENT_TIMESTAMP()), 1, 1,1,TRUE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (1,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), null, 0,2,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (2,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 0, 1,3,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (3,DATEADD(DAY, -20, CURRENT_TIMESTAMP()), DATEADD(DAY, -4, CURRENT_TIMESTAMP()), 0, 2,4,FALSE);
 
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', '69060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', '36614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', 'C6614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
 
 INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(0, '2020-11-12', '2020-11-21', 0);
 INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, '2020-12-12', '2020-12-21', 1);
 
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);
-INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 12, 3, 0, 2);
+INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 7, 3, 0, 2);
 
 
 -- Petclinic --
