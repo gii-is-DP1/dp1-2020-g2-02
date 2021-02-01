@@ -14,7 +14,6 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.AutorService;
 import org.springframework.samples.petclinic.service.EditorialService;
 import org.springframework.samples.petclinic.service.EjemplarService;
-import org.springframework.samples.petclinic.service.GeneroService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
@@ -59,13 +58,6 @@ public class LibroController {
 	
 	@Autowired
 	EditorialService editorialService;
-	
-	@Autowired
-	GeneroService generoService;
-	@ModelAttribute("generos")
-    public Map<Integer, String> listaGeneros() {
-        return generoService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getGenero()));
-    }
 	
 	@ModelAttribute("autores")
 	public Map<Integer, String> listaAutores() {
