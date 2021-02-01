@@ -7,20 +7,19 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="libros">
+<petclinic:layout pageName="editoriales">
 <jsp:body>
     <h2>
-        Añadir libro
+        Añadir editorial
     </h2>
-    <form:form modelAttribute="libro" class="form-horizontal" id="add-libro-form" action="/libros/save">
+    <form:form modelAttribute="editorial" class="form-horizontal" id="add-editorial-form" action="/editoriales/save">
         <div class="form-group has-feedback">
-        	<petclinic:inputField label="ISBN" name="ISBN" />
-            <petclinic:inputField label="Título" name="titulo"/>
-            <petclinic:selectFieldMap name="autores" label="Autor" names="${autores}" size="5"/>
-            <petclinic:inputField label="Idioma" name="idioma"/>
-            <petclinic:selectFieldMap name="genero" label="Género" names="${generos}" size="5"/>
-            <petclinic:selectFieldMap name="editorial" label="Editorial" names="${editoriales}" size="5"/>
-            <petclinic:inputField label="Fecha publicación" name="fecha_publicacion"/>
+        	<petclinic:inputField label="Nombre" name="nombre" />
+            <petclinic:inputField label="NIF" name="nif"/>
+            <petclinic:inputField label="Dirección" name="direccion"/>
+            <petclinic:inputField label="Teléfono" name="telefono"/>
+            <petclinic:inputField label="Email" name="email" />
+            <petclinic:inputField label="Web" name="web" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
