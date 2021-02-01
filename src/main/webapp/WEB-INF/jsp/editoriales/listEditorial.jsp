@@ -58,6 +58,6 @@
 
     <br/> 
     <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
-		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
+		<a class="btn btn-default" href='<spring:url value="/editoriales/new" htmlEscape="true"/>'>Añadir editorial</a>
 	</sec:authorize>
 </petclinic:layout>

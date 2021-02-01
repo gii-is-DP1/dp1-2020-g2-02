@@ -2,7 +2,6 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -48,6 +47,10 @@ public class Libro extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "editorial_id")
 	private Editorial editorial;
+	
+	@ManyToOne
+	@JoinColumn(name = "genero_id")
+	private Genero genero;
 
 	@ManyToMany
 	@JoinTable(
