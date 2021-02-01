@@ -60,6 +60,11 @@ public class PrestamoService {
 	}
 	
 	@Transactional(readOnly = true)
+    public Collection<Prestamo> prestamosMiembrosUrgentes(Miembro miembro){
+        return PrestamoRepo.prestamosEnProcesoFecha(miembro, LocalDate.now().plusDays(3));
+    }
+	
+	@Transactional(readOnly = true)
 	public Collection<Prestamo> prestamosConFechaDevolucionTardia(LocalDate fecha){
 		//
 		return PrestamoRepo.prestamosConFechaDevolucionTardia(fecha);
