@@ -13,6 +13,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import org.springframework.format.annotation.NumberFormat;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,7 +41,7 @@ public class Proveedor extends BaseEntity{
 	
 	@Column(name = "telefono")
 	@NotNull
-	@Digits(fraction = 0, integer = 10)
+	@NumberFormat(style=NumberFormat.Style.CURRENCY)
 	private Integer telefono;
 	
 	@Column(name = "email")

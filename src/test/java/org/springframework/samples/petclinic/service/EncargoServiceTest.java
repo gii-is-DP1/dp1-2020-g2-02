@@ -41,7 +41,7 @@ public class EncargoServiceTest {
 	
 	@Test
 	@Transactional
-	public void testAddEncargo() {
+	public void testAddEncargo() throws Exception {
 		int cuentaInicial = encargoService.encargoCount();
 		Encargo encargo = new Encargo();
 		encargo.setId(cuentaInicial);

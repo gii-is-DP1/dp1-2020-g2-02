@@ -18,8 +18,11 @@ public class LibroService {
 	@Autowired
 	LibroRepository LibroRepo;
 	
+
+	
 	@Autowired
-	PuntuacionService puntuacionService;
+ 	PuntuacionService puntuacionService;
+
 	
 	public Collection<Libro> findAll(){
 		return LibroRepo.findAll();
@@ -41,20 +44,19 @@ public class LibroService {
 
 	}
 	
+	
 	public Double getNotaMedia(Libro libro) {
-		Collection<Puntuacion> puntuaciones = puntuacionService.findAll();
-		Iterator<Puntuacion> it = puntuaciones.iterator();
-		Double media = 0.0;
-		int n = 0;
-		
-		while (it.hasNext()) {
-			Puntuacion puntuacion = it.next();
-			if (puntuacion.getLibro()==libro) {
-				media += puntuacion.getPuntuacion();
-				n ++;
-			}
-		}
-		return media/n;
-	}
+ 		Collection<Puntuacion> puntuaciones = puntuacionService.findAll();
+ 		Iterator<Puntuacion> it = puntuaciones.iterator();
+ 		Double media = 0.0;
+
+ 		while (it.hasNext()) {
+ 			Puntuacion puntuacion = it.next();
+ 			if (puntuacion.getLibro()==libro) {
+ 				media += puntuacion.getPuntuacion();
+ 			}
+ 		}
+ 		return media/puntuaciones.size();
+ 	}
 	
 }

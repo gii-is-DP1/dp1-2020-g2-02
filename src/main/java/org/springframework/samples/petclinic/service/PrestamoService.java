@@ -60,6 +60,11 @@ public class PrestamoService {
 	}
 	
 	@Transactional(readOnly = true)
+    public Collection<Prestamo> prestamosMiembrosUrgentes(Miembro miembro){
+        return PrestamoRepo.prestamosEnProcesoFecha(miembro, LocalDate.now().plusDays(3));
+    }
+	
+	@Transactional(readOnly = true)
 	public Collection<Prestamo> prestamosConFechaDevolucionTardia(LocalDate fecha){
 		//
 		return PrestamoRepo.prestamosConFechaDevolucionTardia(fecha);
@@ -72,7 +77,7 @@ public class PrestamoService {
 		}
 		//Comprueba si el usuario tiene ya 3 o más préstamos en proceso
 		Collection<Prestamo> prestamos = PrestamoRepo.prestamosEnProceso(miembro);
-		if(prestamos.size()>3) {
+		if(prestamos.size()>=3) {
 			throw new LimitePrestamosException();
 		}
 		//Comprueba si el usuario tiene ya en préstamo ese libro.

@@ -17,6 +17,7 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.AutorService;
 import org.springframework.samples.petclinic.service.EditorialService;
 import org.springframework.samples.petclinic.service.EjemplarService;
+import org.springframework.samples.petclinic.service.GeneroService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
@@ -62,6 +63,14 @@ public class LibroController {
 	@Autowired
 	EditorialService editorialService;
 	
+	@Autowired
+	GeneroService generoService;
+	
+	@ModelAttribute("generos")
+    public Map<Integer, String> listaGeneros() {
+        return generoService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getGenero()));
+    }
+	
 	@ModelAttribute("autores")
 	public Map<Integer, String> listaAutores() {
 		return autorService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getNombre() + " " + y.getApellidos()));
@@ -80,13 +89,14 @@ public class LibroController {
 		//Halla si hay algún ejemplar disponible para cada libro.
 		Map<Integer, Boolean> disponibilidad = libros.stream().collect(Collectors.toMap(x->x.getId(), y->!ejemplarService.findDisponibles(y).isEmpty()));
 		
+		
 		//Halla las puntuaciones de los libros
-		Map<Libro, Double> puntuaciones = new HashMap<>();
-		Iterator<Libro> it = libros.iterator();
-		while(it.hasNext()) {
-			Libro l = it.next();
-			puntuaciones.put(l, librosService.getNotaMedia(l));
-		}
+ 		Map<Libro, Double> puntuaciones = new HashMap<>();
+ 		Iterator<Libro> it = libros.iterator();
+ 		while(it.hasNext()) {
+ 			Libro l = it.next();
+ 			puntuaciones.put(l, librosService.getNotaMedia(l));
+ 		}
 		
 		//Filtra y ordena el resultado.
 		if(q != null && !q.isEmpty()) 

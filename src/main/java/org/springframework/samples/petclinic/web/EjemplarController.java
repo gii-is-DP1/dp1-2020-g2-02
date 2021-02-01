@@ -33,7 +33,7 @@ public class EjemplarController {
 	@Autowired
 	LibroService libroService;
 	
-	@ModelAttribute("libros")
+	@ModelAttribute("listaLibros")
 	public Map<Integer, String> titulosLibros() {
 		return libroService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getTitulo()));
 	}

@@ -1,16 +1,55 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
+import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Authorities;
+import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Person;
+import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.MiembroService;
+import org.springframework.samples.petclinic.service.PrestamoService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class WelcomeController {
+	
+	@Autowired
+    UserService userService;
+    
+    @Autowired
+    MiembroService miembroService;
+    
+    @Autowired
+    PrestamoService prestamoService;
+    
+    @GetMapping(path="/inicio")
+    public String welcomeLogin(ModelMap model, Principal principal) {
+        String vista = welcome(model);
+        User user = userService.findByUsername(principal.getName());
+
+        Set<Authorities> permisos = user.getAuthorities();
+        if(permisos.stream().map(x->x.getAuthority()).anyMatch(x->x.equals("miembro"))) {
+            Miembro miembro = miembroService.findByUser(user);
+            
+            if(!prestamoService.prestamosMiembrosUrgentes(miembro).isEmpty()) {
+                model.addAttribute("prestamoUrgente", true);
+            }
+        } 
+        else if(permisos.stream().map(x->x.getAuthority()).anyMatch(x->x.equals("bibliotecario") || x.equals("admin"))) {
+            //TODO: Comprobar si hay un pedido en los proximos días.
+        }
+        model.addAttribute("message", "Bienvenido, " + user.getUsername());
+        return vista;
+    }
 	
 	
 	  @GetMapping({"/","/welcome"})

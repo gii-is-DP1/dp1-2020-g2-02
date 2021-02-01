@@ -4,6 +4,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
+
 
 <petclinic:layout pageName="autores">
     <h2>Autores</h2>
@@ -38,5 +40,11 @@
         </c:forEach>
         </tbody>
     </table>
+    
+    <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
+
+		<a class="btn btn-default" href='<spring:url value="/autores/new" htmlEscape="true"/>'>Añadir autor</a>
+		
+	</sec:authorize>
 
 </petclinic:layout>

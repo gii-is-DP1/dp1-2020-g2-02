@@ -7,23 +7,25 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="proveedores">
+<petclinic:layout pageName="editoriales">
 <jsp:body>
     <h2>
-        Proveedor
+        Añadir editorial
     </h2>
-    <form:form modelAttribute="proveedor" class="form-horizontal" id="add-proveedor-form" action="/proveedores/save">
+    <form:form modelAttribute="editorial" class="form-horizontal" id="add-editorial-form" action="/editoriales/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Nombre" name="nombre"/>
+        	<petclinic:inputField label="Nombre" name="nombre" />
             <petclinic:inputField label="NIF" name="nif"/>
-            <petclinic:inputField label="Direccion" name="direccion"/>
-            <petclinic:inputField label="Telefono" name="telefono"/>
-            <petclinic:inputField label="Email" name="email"/>
+            <petclinic:inputField label="Dirección" name="direccion"/>
+            <petclinic:inputField label="Teléfono" name="telefono"/>
+            <petclinic:inputField label="Email" name="email" />
+            <petclinic:inputField label="Web" name="web" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-               <input type="hidden" name="id" value="${proveedor.id}"/>
-               <button class="btn btn-default" type="submit">Guardar</button>
+            
+           		<input type="hidden" name="id" value="${editorial.id}"/>
+               	<button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
     </form:form>

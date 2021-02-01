@@ -7,23 +7,23 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="proveedores">
+<petclinic:layout pageName="autores">
 <jsp:body>
     <h2>
-        Proveedor
+        Añadir autor
     </h2>
-    <form:form modelAttribute="proveedor" class="form-horizontal" id="add-proveedor-form" action="/proveedores/save">
+    <form:form modelAttribute="autor" class="form-horizontal" id="add-autor-form" action="/autores/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Nombre" name="nombre"/>
-            <petclinic:inputField label="NIF" name="nif"/>
-            <petclinic:inputField label="Direccion" name="direccion"/>
-            <petclinic:inputField label="Telefono" name="telefono"/>
-            <petclinic:inputField label="Email" name="email"/>
+        	<petclinic:inputField label="Nombre" name="nombre" />
+            <petclinic:inputField label="Apellidos" name="apellidos"/>
+            <petclinic:inputField label="Fecha de nacimiento" name="fecha_nac"/>
+           
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-               <input type="hidden" name="id" value="${proveedor.id}"/>
-               <button class="btn btn-default" type="submit">Guardar</button>
+            
+           		<input type="hidden" name="id" value="${autor.id}"/>
+               	<button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
     </form:form>

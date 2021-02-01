@@ -15,13 +15,13 @@
         <thead>
         <tr>
             <th >ISBN</th>
-            <th >Título</th>
+            <th >TÃ­tulo</th>
             <th >Autor</th>
             <th >Idioma</th>   
-            <th>Géneros</th>
+            <th>GÃ©neros</th>
             <th>Editorial</th>
-            <th>Fecha de publicación</th>   
-            <th>Puntuación</th> 
+            <th>Fecha de publicaciÃ³n</th>
+            <th>PuntuaciÃ³n</th>
             <th>Disponibilidad</th>      
         </tr>
         </thead>
@@ -64,6 +64,15 @@
                 <td>
                     <c:out value="${libro.fecha_publicacion}"/>
                 </td>
+                
+                <td>
+                     <c:forEach items="${puntuaciones}" var="entry">
+                     	<c:if test="${entry.key.id == libro.id }">
+                     		<fmt:formatNumber type="number" maxFractionDigits="2" value="${entry.value}" />
+                     	</c:if>
+         			</c:forEach>
+                 </td>
+                 
                 <td>
                     <c:forEach items="${puntuaciones}" var="entry">
                     	<c:if test="${entry.key.id == libro.id }">
@@ -85,14 +94,15 @@
                		</c:if>
                		<c:if test="${!disponibilidad[libro.id]}">
                			No disponible
-               		</c:if></br>
-               		
-               		<sec:authorize access="hasAuthority('miembro')">
-               			<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
-                        	<spring:param name="libroId" value="${libro.id}"/>
-                    	</spring:url>
-                    	<a href ="${fn:escapeXml(libroUrl)}">Valorar</a>
-               		</sec:authorize>
+
+               		</c:if><br>
+
+                		<sec:authorize access="hasAuthority('miembro')">
+                			<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
+                         	<spring:param name="libroId" value="${libro.id}"/>
+                     	</spring:url>
+                     	<a href ="${fn:escapeXml(libroUrl)}">Valorar</a>
+                		</sec:authorize>
                 </td>
         	</tr>
         </c:forEach>
@@ -106,7 +116,7 @@
 		<a class="btn btn-default" href='<spring:url value="/ejemplares" htmlEscape="true"/>'>Consultar ejemplares</a>
 		<br/> 
 		<br/> 
-		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>
+		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>AÃ±adir libro</a>
 		
 	</sec:authorize>
 </petclinic:layout>
