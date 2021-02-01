@@ -1,4 +1,5 @@
 <%@ page session="false" trimDirectiveWhitespaces="true" %>
+
  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,7 +15,7 @@
      </h2>
      <form:form modelAttribute="puntuacion" class="form-horizontal" id="valorar-libro-form" action="/puntuacion/save">
          <div class="form-group">
-         	<petclinic:inputField label="Puntuación" name="puntuacion" />
+         	<petclinic:inputField label="PuntuaciÃ³n" name="puntuacion" />
          </div>
          <div class="form-group">
              <div class="col-sm-offset-2 col-sm-10">

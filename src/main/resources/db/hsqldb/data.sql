@@ -53,11 +53,6 @@ INSERT INTO pertenece_a(genero_id,libro_id) VALUES (4, 2);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (6, 4);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (7, 3);
 
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
 
 INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(5,2,1);
 INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(2,1,1);
