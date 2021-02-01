@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,10 +25,12 @@ public class Encargo extends BaseEntity{
 	
 	@Column(name = "fecha_realizacion")
 	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaRealizacion;
 	
 	@Column(name = "fecha_entrega")
 	@NotNull
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fechaEntrega; 
 	
 	@ManyToOne

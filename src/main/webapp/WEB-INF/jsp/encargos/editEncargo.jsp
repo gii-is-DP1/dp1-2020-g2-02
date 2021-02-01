@@ -14,15 +14,14 @@
     </h2>
     <form:form modelAttribute="encargo" class="form-horizontal" id="add-encargo-form" action="/encargos/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="Nombre Proveedor" name="proveedor"/>
-            <%--<petclinic:inputField label="Libro" name="Libro"/>--%>
-            <petclinic:inputField label="Fecha Realización" name="fechaRealizacion"/>
+            <petclinic:selectFieldMap name="proveedor" label="Proveedor" names="${listaProveedores}" size="5"/>
             <petclinic:inputField label="Fecha Entrega" name="fechaEntrega"/>
-            <petclinic:inputField label="Cantidad" name="cantidad"/>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
+            <c:set var = "now" value = "<%= new java.util.Date()%>" />
                <input type="hidden" name="id" value="${encargo.id}"/>
+               <input type="hidden" name="fechaRealizacion" value="<fmt:formatDate pattern = "dd/MM/yyyy" value = "${now}" />"/>
                <button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>

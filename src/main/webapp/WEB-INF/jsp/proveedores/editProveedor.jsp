@@ -14,10 +14,10 @@
     </h2>
     <form:form modelAttribute="proveedor" class="form-horizontal" id="add-proveedor-form" action="/proveedores/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="First Name" name="nombre"/>
+            <petclinic:inputField label="Nombre" name="nombre"/>
             <petclinic:inputField label="NIF" name="nif"/>
             <petclinic:inputField label="Direccion" name="direccion"/>
-            <petclinic:inputField label="Telephone" name="telefono"/>
+            <petclinic:inputField label="Telefono" name="telefono"/>
             <petclinic:inputField label="Email" name="email"/>
         </div>
         <div class="form-group">
