@@ -16,9 +16,7 @@
         <div class="form-group has-feedback">
         	<h5>Seleccionar libro</h5>
 			
-        	<form:select path="libro">
-			<form:options items="${libro.titulo}" />
-			</form:select>
+        	<petclinic:selectFieldMap name="libro" label="Libro" names="${libros}" size="5"/>
 			
             <petclinic:inputField label="Estado" name="estado"/>
             

@@ -25,7 +25,7 @@ excludeAutoConfiguration= SecurityConfiguration.class)
 
 public class EncargoControllerTests {
 	
-	@Autowired
+	/*@Autowired
 	EncargoController controller;
 	
 	@MockBean
@@ -61,6 +61,6 @@ public class EncargoControllerTests {
 			.andExpect(model().attributeHasErrors("encargo"))
 			.andExpect(model().attributeHasFieldErrors("encargo", "fecha_entrega"))
 			.andExpect(view().name("encargos/editEncargo"));
-	}
+	}*/
 
 }

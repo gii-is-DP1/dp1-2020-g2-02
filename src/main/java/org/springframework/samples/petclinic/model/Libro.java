@@ -57,7 +57,7 @@ public class Libro extends BaseEntity {
 	private List<Autor> autores;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
-	private Set<Genero> generos;
+	private List<Genero> generos;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
 	private List<Cantidad> cantidad;
