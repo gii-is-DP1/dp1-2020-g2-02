@@ -7,23 +7,22 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="ejemplares">
+<petclinic:layout pageName="autores">
 <jsp:body>
     <h2>
-        Añadir ejemplar
+        Añadir autor
     </h2>
-    <form:form modelAttribute="ejemplar" class="form-horizontal" id="add-ejemplar-form" action="/ejemplares/save">
+    <form:form modelAttribute="autor" class="form-horizontal" id="add-autor-form" action="/autores/save">
         <div class="form-group has-feedback">
-        	<h5>Seleccionar libro</h5>
-			<petclinic:selectFieldMap name="libro" label="Libro" names="${listaLibros}" size="5"/>
-			
-            <petclinic:inputField label="Estado" name="estado"/>
-            
+        	<petclinic:inputField label="Nombre" name="nombre" />
+            <petclinic:inputField label="Apellidos" name="apellidos"/>
+            <petclinic:inputField label="Fecha de nacimiento" name="fecha_nac"/>
+           
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             
-           		<input type="hidden" name="id" value="${ejemplar.id}"/>
+           		<input type="hidden" name="id" value="${autor.id}"/>
                	<button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
