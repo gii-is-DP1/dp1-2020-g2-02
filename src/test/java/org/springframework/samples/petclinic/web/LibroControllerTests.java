@@ -18,7 +18,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.service.AutorService;
+import org.springframework.samples.petclinic.service.EditorialService;
 import org.springframework.samples.petclinic.service.EjemplarService;
+import org.springframework.samples.petclinic.service.GeneroService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
@@ -49,6 +52,15 @@ public class LibroControllerTests {
 	
 	@MockBean
 	PrestamoService prestamoService;
+	
+	@MockBean
+	AutorService autorService;
+	
+	@MockBean
+	EditorialService editorialService;
+	
+	@MockBean
+	GeneroService generoService;
 	
 	@Autowired
 	private MockMvc mockMvc;

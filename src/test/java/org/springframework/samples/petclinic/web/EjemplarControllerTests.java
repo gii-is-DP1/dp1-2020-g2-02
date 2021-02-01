@@ -15,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
 import org.springframework.samples.petclinic.service.EjemplarService;
+import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,6 +31,9 @@ public class EjemplarControllerTests {
 	
 	@MockBean
 	EjemplarService ejemplarService;
+	
+	@MockBean
+	LibroService libroService;
 	
 	@Autowired
 	private MockMvc mockMvc;

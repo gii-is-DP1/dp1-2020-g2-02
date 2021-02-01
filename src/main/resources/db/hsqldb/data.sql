@@ -29,9 +29,13 @@ INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin',
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 1);
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 2);
 
-INSERT INTO generos(libro_id,genero) VALUES (1, 'Biografía');
-INSERT INTO generos(libro_id,genero) VALUES (2, 'Fantasía');
-INSERT INTO generos(libro_id,genero) VALUES (1, 'Policiaco');
+INSERT INTO generos(id, genero) VALUES (1, 'Biografía');
+INSERT INTO generos(id, genero) VALUES (2, 'Fantasía');
+INSERT INTO generos(id, genero) VALUES (3, 'Policiaco');
+
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (1, 1);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (3, 1);
+INSERT INTO pertenece_a(genero_id,libro_id) VALUES (2, 2);
 
 INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);

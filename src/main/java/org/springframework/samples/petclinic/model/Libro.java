@@ -59,8 +59,12 @@ public class Libro extends BaseEntity {
 	  inverseJoinColumns = @JoinColumn(name = "autor_id"))
 	private List<Autor> autores;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
-	private List<Genero> generos;
+	@ManyToMany
+    @JoinTable(
+      name = "pertenece_a", 
+      joinColumns = @JoinColumn(name = "libro_id"), 
+      inverseJoinColumns = @JoinColumn(name = "genero_id"))
+    private List<Genero> generos;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
 	private List<Cantidad> cantidad;

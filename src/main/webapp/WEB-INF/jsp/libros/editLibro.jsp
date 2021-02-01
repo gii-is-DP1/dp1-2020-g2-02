@@ -16,9 +16,9 @@
         <div class="form-group has-feedback">
         	<petclinic:inputField label="ISBN" name="ISBN" />
             <petclinic:inputField label="Título" name="titulo"/>
-            <petclinic:selectFieldMap name="autores" label="Autor" names="${autores}" size="5"/>
             <petclinic:inputField label="Idioma" name="idioma"/>
-            <petclinic:selectFieldMap name="genero" label="Género" names="${generos}" size="5"/>
+            <petclinic:selectFieldMap name="autores" label="Autores" names="${autores}" size="5"/>
+            <petclinic:selectFieldMap name="generos" label="Generos" names="${generos}" size="5"/>
             <petclinic:selectFieldMap name="editorial" label="Editorial" names="${editoriales}" size="5"/>
             <petclinic:inputField label="Fecha publicación" name="fecha_publicacion"/>
         </div>
