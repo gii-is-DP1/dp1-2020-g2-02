@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -86,6 +88,15 @@ public class LibroController {
 		//Halla si hay algún ejemplar disponible para cada libro.
 		Map<Integer, Boolean> disponibilidad = libros.stream().collect(Collectors.toMap(x->x.getId(), y->!ejemplarService.findDisponibles(y).isEmpty()));
 		
+		
+		//Halla las puntuaciones de los libros
+ 		Map<Libro, Double> puntuaciones = new HashMap<>();
+ 		Iterator<Libro> it = libros.iterator();
+ 		while(it.hasNext()) {
+ 			Libro l = it.next();
+ 			puntuaciones.put(l, librosService.getNotaMedia(l));
+ 		}
+		
 		//Filtra y ordena el resultado.
 		if(q != null && !q.isEmpty()) 
 			libros=libros.stream().filter(x->x.getTitulo().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
@@ -95,6 +106,7 @@ public class LibroController {
 			libros=libros.stream().filter(x->x.getEditorial().getNombre().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
 		
 		model.addAttribute("libros",libros);
+		model.addAttribute("puntuaciones",puntuaciones);
 		model.addAttribute("disponibilidad", disponibilidad);
 		
 		return vista;

@@ -59,6 +59,9 @@ INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
 INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
 
+INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(5,2,1);
+INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(2,1,1);
+
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (1,1,'Primera página arrancada.','DISPONIBLE');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (2,1,'Cubierta doblada.','RESERVADO');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (3,2,'En perfecto estado.','EN_PRESTAMO');
