@@ -45,14 +45,16 @@ public class LibroService {
 		Collection<Puntuacion> puntuaciones = puntuacionService.findAll();
 		Iterator<Puntuacion> it = puntuaciones.iterator();
 		Double media = 0.0;
+		int n = 0;
 		
 		while (it.hasNext()) {
 			Puntuacion puntuacion = it.next();
 			if (puntuacion.getLibro()==libro) {
 				media += puntuacion.getPuntuacion();
+				n ++;
 			}
 		}
-		return media/puntuaciones.size();
+		return media/n;
 	}
 	
 }
