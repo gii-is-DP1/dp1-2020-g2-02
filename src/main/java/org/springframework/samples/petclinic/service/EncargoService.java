@@ -1,13 +1,17 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cantidad;
+import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Encargo;
 import org.springframework.samples.petclinic.repository.EncargoRepository;
+import org.springframework.samples.petclinic.service.exceptions.LimiteEjemplaresException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,7 +51,17 @@ public class EncargoService {
 	}
 
 	@Transactional
-	public void save(@Valid Encargo encargo) {
+	public void save(@Valid Encargo encargo) throws LimiteEjemplaresException {
+		List<Cantidad> cantidades = encargo.getCantidad();
+		for (int i = 0; i < cantidades.size(); i++) {
+			Cantidad cantidad = cantidades.get(i);
+			Integer unidadesEncargo = cantidad.getUnidades();
+			List<Ejemplar> ejemplares = cantidad.getLibro().getEjemplar();
+			int unidadesEjemplares = ejemplares.size();
+			if (unidadesEncargo + unidadesEjemplares > 10) {
+				throw new LimiteEjemplaresException();
+			}
+		}
 		encargoRepo.save(encargo);
 	}
 }

@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Encargo;
 import org.springframework.samples.petclinic.service.EncargoService;
+import org.springframework.samples.petclinic.service.exceptions.LimiteEjemplaresException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -30,14 +31,19 @@ public class EncargoController {
 	}
 
 	@PostMapping(path = "/save")
-	public String guardarEncargo(@Valid Encargo encargo, BindingResult result, ModelMap modelmap) {
+	public String guardarEncargo(@Valid Encargo encargo, BindingResult result, ModelMap modelmap)
+			throws LimiteEjemplaresException {
 		String vista = "encargos/listEncargo";
 		if (result.hasErrors()) {
 			modelmap.addAttribute("encargo", encargo);
 			return "encargos/editEncargo";
 		} else {
-			encargosService.save(encargo);
-			modelmap.addAttribute("message", "Encargo guardado correctamente");
+			try {
+				encargosService.save(encargo);
+				modelmap.addAttribute("message", "Encargo guardado correctamente");
+			} catch (LimiteEjemplaresException e) {
+				modelmap.addAttribute("message", "Demasiados ejemplares del libro");
+			}
 			vista = listEncargos(modelmap);
 		}
 		return vista;
