@@ -17,6 +17,8 @@ public class ProveedorService {
 	@Autowired
 	ProveedorRepository ProveedorRepo;
 	
+	
+	
 	@Transactional(readOnly = true)
 	public Collection<Proveedor> findAll(){
 		return ProveedorRepo.findAll();
@@ -38,7 +40,10 @@ public class ProveedorService {
 	
 	public void save(@Valid Proveedor proveedor) {
 		ProveedorRepo.save(proveedor);
+		
 	}
+	
+	
 	
 
 }

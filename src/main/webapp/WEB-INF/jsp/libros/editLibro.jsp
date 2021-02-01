@@ -14,12 +14,11 @@
     </h2>
     <form:form modelAttribute="libro" class="form-horizontal" id="add-libro-form" action="/libros/save">
         <div class="form-group has-feedback">
-        	<petclinic:inputField label="ISBN" name="ISBN"/>
+        	<petclinic:inputField label="ISBN" name="ISBN" />
             <petclinic:inputField label="Título" name="titulo"/>
-            <petclinic:inputField label="Autor" name="autores"/>
-            <petclinic:inputField label="Idioma" name="titulo"/>
-            <petclinic:inputField label="Géneros" name="generos"/>
-            <petclinic:inputField label="Editorial" name="editorial.nombre"/>
+            <petclinic:selectFieldMap name="autores" label="Autor" names="${autores}" size="5"/>
+            <petclinic:inputField label="Idioma" name="idioma"/>
+            <petclinic:selectFieldMap name="editorial" label="Editorial" names="${editoriales}" size="5"/>
             <petclinic:inputField label="Fecha publicación" name="fecha_publicacion"/>
         </div>
         <div class="form-group">

@@ -1,7 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,6 +24,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "proveedores")
 public class Proveedor extends BaseEntity{
+	
 	@Column(name = "nombre")
 	@NotEmpty
 	private String nombre;
@@ -50,5 +50,6 @@ public class Proveedor extends BaseEntity{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
 	private List<Encargo> encargos;
-
+	
+	
 }

@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.samples.petclinic.model.Disponibilidad;
-import org.springframework.samples.petclinic.model.Editorial;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Libro;
 

@@ -2,20 +2,22 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.util.Collection;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.service.EjemplarService;
+import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,14 @@ public class EjemplarController {
 	
 	@Autowired
 	EjemplarService ejemplaresService;
+	
+	@Autowired
+	LibroService libroService;
+	
+	@ModelAttribute("libros")
+	public Map<Integer, String> titulosLibros() {
+		return libroService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getTitulo()));
+	}
 	
 	@GetMapping
 	public String listEjemplares(ModelMap model) {
@@ -43,6 +53,7 @@ public class EjemplarController {
 			modelmap.addAttribute("ejemplar", ejemplar);
 			return "ejemplares/editEjemplar";
 		}else {
+			ejemplar.setDisponibilidad(Disponibilidad.DISPONIBLE);
 			ejemplaresService.save(ejemplar);
 			modelmap.addAttribute("message", "Ejemplar guardado correctamente");
 			vista = listEjemplares(modelmap);
