@@ -7,24 +7,22 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 
-<petclinic:layout pageName="editoriales">
+<petclinic:layout pageName="autores">
 <jsp:body>
     <h2>
-        Añadir editorial
+        Añadir autor
     </h2>
-    <form:form modelAttribute="editorial" class="form-horizontal" id="add-editorial-form" action="/editoriales/save">
+    <form:form modelAttribute="autor" class="form-horizontal" id="add-autor-form" action="/autores/save">
         <div class="form-group has-feedback">
         	<petclinic:inputField label="Nombre" name="nombre" />
-            <petclinic:inputField label="NIF" name="nif"/>
-            <petclinic:inputField label="Dirección" name="direccion"/>
-            <petclinic:inputField label="Teléfono" name="telefono"/>
-            <petclinic:inputField label="Email" name="email" />
-            <petclinic:inputField label="Web" name="web" />
+            <petclinic:inputField label="Apellidos" name="apellidos"/>
+            <petclinic:inputField label="Fecha de nacimiento" name="fecha_nac"/>
+           
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
             
-           		<input type="hidden" name="id" value="${editorial.id}"/>
+           		<input type="hidden" name="id" value="${autor.id}"/>
                	<button class="btn btn-default" type="submit">Guardar</button>
             </div>
         </div>
