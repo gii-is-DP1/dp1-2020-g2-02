@@ -24,6 +24,6 @@
         </c:forEach>
         <br>
     <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
-		<a class="btn btn-default" href='<spring:url value="/novedades/new" htmlEscape="true"/>'>Añadir género</a>
+		<a class="btn btn-default" href='<spring:url value="/generos/new" htmlEscape="true"/>'>Añadir género</a>
 	</sec:authorize>
 </petclinic:layout>
