@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoDisponibleException;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoExistenteException;
 import org.springframework.samples.petclinic.service.exceptions.LibroYaEnPrestamoException;
+import org.springframework.samples.petclinic.service.exceptions.LimitePrestamosException;
 import org.springframework.samples.petclinic.service.exceptions.PrestamoConRetrasoException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,7 +32,7 @@ public class PrestamoServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count = prestamoService.prestamoCount();
-		assertTrue(count == 4);
+		assertTrue(count == 7);
 	}
 
 	@Test
@@ -94,5 +95,14 @@ public class PrestamoServiceTest {
 		Miembro miembro = miembroService.findByUser(user);
 		
 		Assertions.assertThrows(PrestamoConRetrasoException.class,() ->{prestamoService.realizarReserva(1, miembro);});
+	}
+	
+	@Test
+	@Transactional
+	public void testPrestamoLimite() throws Exception {
+		User user = userService.findUser("alecai1").get();
+		Miembro miembro = miembroService.findByUser(user);
+		
+		Assertions.assertThrows(LimitePrestamosException.class,() ->{prestamoService.realizarReserva(4, miembro);});
 	}
 }

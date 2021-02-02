@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
 
+import java.util.Collection;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -21,15 +23,30 @@ public class EjemplarServiceTest {
 	@Autowired
 	private LibroService libroService;
 	
+	
+	@Test
+	public void testFindAll() {
+		Collection<Ejemplar> ejemplares = ejemplarService.findAll();
+		assertTrue(ejemplares.size()==8);
+	}
+	
+	
+	@Test
+	public void testFindById() {
+		Ejemplar ejemplar = ejemplarService.findById(1).get();
+		assertTrue(ejemplar.getEstado().equals("Primera página arrancada."));
+	}
+	
 	@Test
 	public void testCountWithInitialData() {
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==4);
+		assertTrue(count==8);
 	}
 	
 	@Test
 	@Transactional
 	public void testAddEjemplar() {
+		int countinicial=ejemplarService.ejemplarCount();
 		Ejemplar ejemplar = new Ejemplar();
 		Libro libro = libroService.findById(1).get();
 		ejemplar.setLibro(libro);
@@ -37,7 +54,7 @@ public class EjemplarServiceTest {
 		ejemplar.setEstado("Bien");
 		ejemplarService.save(ejemplar);
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==5);
+		assertTrue(count==countinicial+1);
 	}
 	
 

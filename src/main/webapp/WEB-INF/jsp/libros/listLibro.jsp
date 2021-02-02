@@ -20,7 +20,8 @@
             <th >Idioma</th>   
             <th>Géneros</th>
             <th>Editorial</th>
-            <th>Fecha de publicación</th>   
+            <th>Fecha de publicación</th>
+            <th>Puntuación</th>
             <th>Disponibilidad</th>      
         </tr>
         </thead>
@@ -63,6 +64,15 @@
                 <td>
                     <c:out value="${libro.fecha_publicacion}"/>
                 </td>
+                
+                <td>
+                     <c:forEach items="${puntuaciones}" var="entry">
+                     	<c:if test="${entry.key.id == libro.id }">
+                     		<fmt:formatNumber type="number" maxFractionDigits="2" value="${entry.value}" />
+                     	</c:if>
+         			</c:forEach>
+                 </td>
+                 
                 <td>
                		<c:if test="${disponibilidad[libro.id]}">
                			<sec:authorize access="!hasAuthority('miembro')">
@@ -77,7 +87,15 @@
                		</c:if>
                		<c:if test="${!disponibilidad[libro.id]}">
                			No disponible
-               		</c:if>
+
+               		</c:if><br>
+
+                		<sec:authorize access="hasAuthority('miembro')">
+                			<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
+                         	<spring:param name="libroId" value="${libro.id}"/>
+                     	</spring:url>
+                     	<a href ="${fn:escapeXml(libroUrl)}">Valorar</a>
+                		</sec:authorize>
                 </td>
         	</tr>
         </c:forEach>
@@ -88,6 +106,9 @@
 
     <br/> 
     <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
+    	<a class="btn btn-default" href='<spring:url value="/generos" htmlEscape="true"/>'>Consultar géneros disponibles</a>
+		<br/> 
+		<br/> 
 		<a class="btn btn-default" href='<spring:url value="/ejemplares" htmlEscape="true"/>'>Consultar ejemplares</a>
 		<br/> 
 		<br/> 
