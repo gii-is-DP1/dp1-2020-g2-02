@@ -18,6 +18,7 @@ public class LibroService {
 	@Autowired
 	LibroRepository LibroRepo;
 	
+
 	
 	@Autowired
  	PuntuacionService puntuacionService;
@@ -57,6 +58,5 @@ public class LibroService {
  		}
  		return media/puntuaciones.size();
  	}
-
 	
 }

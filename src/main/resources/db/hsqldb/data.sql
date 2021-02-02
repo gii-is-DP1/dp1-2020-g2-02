@@ -53,11 +53,6 @@ INSERT INTO pertenece_a(genero_id,libro_id) VALUES (4, 2);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (6, 4);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (7, 3);
 
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
 
 INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(5,2,1);
 INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(2,1,1);
@@ -83,8 +78,8 @@ INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembr
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', 'C6614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Libros Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Cuentos Eugenio', 'C6614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
 
 INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(0, '2020-11-12', '2020-11-21', 0);
 INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, '2020-12-12', '2020-12-21', 1);

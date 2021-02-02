@@ -6,15 +6,18 @@
 <!-- %@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %-->  
 
 <petclinic:layout pageName="home">
-    <h2><fmt:message key="welcome"/></h2>
     <div class="row">
+
+    <h2>Bienvenido</h2>
+    <br/>
+    
     <h2>Project ${title} </h2>
-    <p><h2>Group ${group}</h2></p>
-    <p><ul>
+    <h2>Group ${group}</h2>
+    <ul>
     <c:forEach items="${persons}" var="person">
-    	<li>${person.firstName} ${person.lastName}</li>
+        <li>${person.firstName} ${person.lastName}</li>
     </c:forEach>
-    </ul></p>
+    </ul>
     </div>
     
     
@@ -22,5 +25,16 @@
             <spring:url value="/resources/images/logoDP.png" htmlEscape="true" var="biblioImage"/>
             <img class="img-responsive" src="${biblioImage}" width="500" height="250"/>
         </div>
-    </div>
 </petclinic:layout>
+
+<script>
+function myFunction() {
+    if("${prestamoUrgente}"){
+        alert("Tiene un préstamo pendiente de devolver en los proximos días, por favor acuda a la biblioteca.");
+    }
+    if("${pedidoUrgente}"){
+        alert("Envío pendiente en los próximos días, permanezca atento para su recogida.");
+    }
+}
+window.onload = myFunction;
+</script>
