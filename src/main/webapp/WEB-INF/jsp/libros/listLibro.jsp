@@ -15,13 +15,13 @@
         <thead>
         <tr>
             <th >ISBN</th>
-            <th >TÃ­tulo</th>
+            <th >Título</th>
             <th >Autor</th>
             <th >Idioma</th>   
-            <th>GÃ©neros</th>
+            <th>Géneros</th>
             <th>Editorial</th>
-            <th>Fecha de publicaciÃ³n</th>
-            <th>PuntuaciÃ³n</th>
+            <th>Fecha de publicación</th>
+            <th>Puntuación</th>
             <th>Disponibilidad</th>      
         </tr>
         </thead>
@@ -73,13 +73,6 @@
          			</c:forEach>
                  </td>
                  
-                <td>
-                    <c:forEach items="${puntuaciones}" var="entry">
-                    	<c:if test="${entry.key.id == libro.id }">
-                    		<fmt:formatNumber type="number" maxFractionDigits="2" value="${entry.value}" />
-                    	</c:if>
-        			</c:forEach>
-                </td>
                 <td>
                		<c:if test="${disponibilidad[libro.id]}">
                			<sec:authorize access="!hasAuthority('miembro')">
