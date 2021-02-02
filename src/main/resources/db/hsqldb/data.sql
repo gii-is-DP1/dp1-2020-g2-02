@@ -29,7 +29,7 @@ INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planet
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
-INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Sthepen', 'King', '1947-09-21');
+INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Stephen', 'King', '1947-09-21');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Fernando', 'Aramburu', '1959-04-17');
 
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 1);
@@ -45,6 +45,11 @@ INSERT INTO generos(id, genero) VALUES (5, 'Romántico');
 INSERT INTO generos(id, genero) VALUES (6, 'Histórico');
 INSERT INTO generos(id, genero) VALUES (7, 'Terror');
 
+
+INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
 
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (1, 1);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (3, 1);

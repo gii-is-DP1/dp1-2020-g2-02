@@ -30,7 +30,7 @@ public class LibroServiceTest {
 	@Test
 	public void testGetAutoresLibro() {
 		Collection<Autor> autores = libroService.findById(2).get().getAutores();
-		assertTrue(autores.size()==4);
+		assertTrue(autores.size()==1);
 	}
 	
 	@Test
