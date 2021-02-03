@@ -13,4 +13,6 @@ public interface EncargoRepository extends CrudRepository<Encargo, Integer>{
 
     @Query("SELECT e FROM Encargo e WHERE e.fechaEntrega >= ?1 AND e.fechaEntrega <= ?2")
 	List<Encargo> pedidosEntreFechas(LocalDate fechaInicial, LocalDate fechaFinal);
+
+	Collection<Encargo> findByFechaRealizacion(LocalDate fecha);
 }
