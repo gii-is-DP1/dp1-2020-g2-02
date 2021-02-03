@@ -107,7 +107,7 @@
 													class="btn btn-primary btn-block btn-sm">Publicar novedad</a>
 												</sec:authorize>
 												<sec:authorize access="hasAuthority('miembro')">
-													<a href="<c:url value="/" />"
+													<a href="<c:url value="/prestamos/misprestamos" />"
 													class="btn btn-primary btn-block btn-sm">Mis préstamos</a>
 												</sec:authorize>
 												<a href="<c:url value="/logout" />"
