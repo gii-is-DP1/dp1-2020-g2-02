@@ -18,10 +18,10 @@ package org.springframework.samples.petclinic.model;
  @Table(name = "puntuaciones")
  public class Puntuacion extends BaseEntity{
 
- 	@Column(name = "puntuacion")
+ 	@Column(name = "puntaje")
  	@Min(0)
  	@Max(5)
- 	private Integer puntuacion;
+ 	private Integer puntaje;
 
  	@ManyToOne
  	@JoinColumn(name = "miembro_id")
