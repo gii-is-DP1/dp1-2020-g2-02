@@ -8,8 +8,9 @@ package org.springframework.samples.petclinic.model;
  import javax.persistence.Table;
  import javax.validation.constraints.Max;
  import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
- import lombok.Getter;
+import lombok.Getter;
  import lombok.Setter;
 
  @Entity
@@ -19,8 +20,9 @@ package org.springframework.samples.petclinic.model;
  public class Puntuacion extends BaseEntity{
 
  	@Column(name = "puntaje")
- 	@Min(0)
+ 	@Min(1)
  	@Max(5)
+ 	@NotNull
  	private Integer puntaje;
 
  	@ManyToOne
