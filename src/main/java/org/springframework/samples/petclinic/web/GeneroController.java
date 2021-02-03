@@ -38,7 +38,7 @@ public class GeneroController {
 		if(result.hasErrors()) {
 			modelmap.addAttribute("genero", genero);
 			modelmap.addAttribute("message", "Hay fallos en el formulario.");
-			return "generos/editLibro";
+			return "generos/editGenero";
 		}else {
 			generoService.save(genero);
 			modelmap.addAttribute("message", "Género guardado correctamente");
