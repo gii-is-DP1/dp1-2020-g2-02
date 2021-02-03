@@ -23,5 +23,8 @@ public interface PrestamoRepository extends CrudRepository<Prestamo,Integer>{
         Collection<Prestamo> prestamosEnProcesoFecha(Miembro miembro, LocalDate fecha);
 
 		Collection<Prestamo> findByFechaPrestamo(LocalDate fecha);
+		
+		@Query("SELECT p FROM Prestamo p WHERE p.miembro=:miembro")
+		Collection<Prestamo> prestamosMiembro(Miembro miembro);
 	
 }
