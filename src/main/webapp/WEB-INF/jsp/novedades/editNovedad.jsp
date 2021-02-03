@@ -21,7 +21,6 @@
             <div class="col-sm-offset-2 col-sm-10">
             
             <c:set var = "now" value = "<%= new java.util.Date()%>" />
-               ${novedad.bibliotecario.nombre}
                <input type="hidden" name="fechaPublicacion" value="<fmt:formatDate pattern = "yyyy/MM/dd" value = "${now}" />"/>
                <button class="btn btn-default" type="submit">Guardar</button>
             </div>

@@ -32,7 +32,7 @@ INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planet
 
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
-INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Sthepen', 'King', '1947-09-21');
+INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Stephen', 'King', '1947-09-21');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Fernando', 'Aramburu', '1959-04-17');
 
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 1);
@@ -49,6 +49,11 @@ INSERT INTO generos(id, genero) VALUES (6, 'Histórico');
 INSERT INTO generos(id, genero) VALUES (7, 'Terror');
 
 
+INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
+INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
+
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (1, 1);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (3, 1);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (2, 2);
@@ -56,14 +61,11 @@ INSERT INTO pertenece_a(genero_id,libro_id) VALUES (4, 2);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (6, 4);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (7, 3);
 
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (2, 2);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (3, 3);
-INSERT INTO es_autor(autor_id,libro_id) VALUES (4, 4);
 
-INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(5,2,1);
-INSERT INTO puntuaciones(puntuacion,miembro_id,libro_id) VALUES(2,1,1);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(5,2,1);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(2,1,1);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(5,2,2);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(3,1,2);
 
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (1,1,'Primera página arrancada.','DISPONIBLE');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (2,1,'Cubierta doblada.','RESERVADO');
@@ -86,11 +88,11 @@ INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembr
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
-INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Eugenio', 'C6614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Libros Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
+INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (1, 'Cuentos Eugenio', 'C6614739G', 'C\Giralda Nº12, Morón de la Frontera', 650606333, 'eu1@gmail.com');
 
-INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(0, '2020-11-12', '2020-11-21', 0);
-INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, '2020-12-12', '2020-12-21', 1);
+INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(0, DATEADD(DAY, -2, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 0);
+INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(1, DATEADD(DAY, -1, CURRENT_TIMESTAMP()), DATEADD(DAY, 5, CURRENT_TIMESTAMP()), 1);
 
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);

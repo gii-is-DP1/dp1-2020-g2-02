@@ -20,7 +20,7 @@
             <th >Idioma</th>   
             <th>Géneros</th>
             <th>Editorial</th>
-            <th>Fecha de publicación</th>   
+            <th>Fecha de publicación</th>
             <th>Puntuación</th>
             <th>Disponibilidad</th>      
         </tr>
@@ -87,6 +87,7 @@
                		</c:if>
                		<c:if test="${!disponibilidad[libro.id]}">
                			No disponible
+
                		</c:if><br>
 
                 		<sec:authorize access="hasAuthority('miembro')">
@@ -105,6 +106,9 @@
 
     <br/> 
     <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
+    	<a class="btn btn-default" href='<spring:url value="/generos" htmlEscape="true"/>'>Consultar géneros disponibles</a>
+		<br/> 
+		<br/> 
 		<a class="btn btn-default" href='<spring:url value="/ejemplares" htmlEscape="true"/>'>Consultar ejemplares</a>
 		<br/> 
 		<br/> 

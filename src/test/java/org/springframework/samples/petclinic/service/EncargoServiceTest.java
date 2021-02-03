@@ -3,6 +3,7 @@ package org.springframework.samples.petclinic.service;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,8 @@ public class EncargoServiceTest {
 	
 	@Test
 	public void testFindAll() {
-		Iterable<Encargo> encargos = encargoService.findAll();
-		assertTrue(encargos.iterator().next().getFechaRealizacion().equals(LocalDate.of(2020, 11, 12)));
+		Collection<Encargo> encargos = encargoService.findAll();
+		assertTrue(encargos.size()==2);
 	}
 	
 	@Test
@@ -39,9 +40,10 @@ public class EncargoServiceTest {
 		assertTrue(encargo.getFechaRealizacion().equals(LocalDate.of(2020, 11, 12)));
 	}
 	
+	
 	@Test
 	@Transactional
-	public void testAddEncargo() {
+	public void testAddEncargo() throws Exception {
 		int cuentaInicial = encargoService.encargoCount();
 		Encargo encargo = new Encargo();
 		encargo.setId(cuentaInicial);

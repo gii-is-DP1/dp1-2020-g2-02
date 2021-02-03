@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,7 +43,7 @@ public class CantidadServiceTest {
 		Cantidad cantidad = new Cantidad();
 		cantidad.setId(3);
 		cantidad.setUnidades(5);
-		cantidad.setPrecioUnitario((long) 10);
+		cantidad.setPrecioUnitario(10.0);
 		cantidad.setEncargo(encargoService.findById(0).get());
 		cantidad.setLibro(libroService.findById(1).get());
 		cantidadService.save(cantidad);

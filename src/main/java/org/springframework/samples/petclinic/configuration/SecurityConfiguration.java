@@ -44,6 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/editoriales/**").permitAll()
 				.antMatchers("/prestamos/**").hasAnyAuthority("bibliotecario")
 				.antMatchers("/novedades").permitAll()
+				.antMatchers("/inicio").authenticated()
 				.antMatchers("/novedades/**").hasAnyAuthority("bibliotecario")
 				.antMatchers("/libros/new").hasAnyAuthority("bibliotecario","admin")
 				.antMatchers("/libros/save").hasAnyAuthority("bibliotecario","admin")
@@ -51,6 +52,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/ejemplares/**").hasAnyAuthority("bibliotecario","admin")
 				.antMatchers("/proveedores/**").hasAnyAuthority("bibliotecario","admin")
 				.antMatchers("/encargos/**").hasAnyAuthority("admin", "bibliotecario")
+				.antMatchers("/generos/**").hasAnyAuthority("admin", "bibliotecario")
 				.antMatchers("/puntuacion/**").hasAnyAuthority("miembro")
 				.antMatchers("/sugerencias/**").hasAnyAuthority("admin")
 				/*PETCLINIC*/
@@ -72,6 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // se sirve desde esta misma página.
                 http.csrf().ignoringAntMatchers("/h2-console/**");
                 http.headers().frameOptions().sameOrigin();
+                http.formLogin().defaultSuccessUrl("/inicio", true);
 	}
 
 	@Override

@@ -20,5 +20,8 @@ public interface PrestamoRepository extends CrudRepository<Prestamo,Integer>{
 
 		@Query("SELECT p FROM Prestamo p WHERE p.miembro=:miembro AND p.finalizado=false")
 		Collection<Prestamo> prestamosEnProceso(Miembro miembro);
+		
+		@Query("SELECT p FROM Prestamo p WHERE p.fechaDevolucion<:fecha AND p.miembro=:miembro AND p.finalizado=false")
+        Collection<Prestamo> prestamosEnProcesoFecha(Miembro miembro, LocalDate fecha);
 	
 }

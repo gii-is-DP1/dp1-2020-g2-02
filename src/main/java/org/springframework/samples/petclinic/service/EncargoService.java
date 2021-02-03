@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -53,6 +55,7 @@ public class EncargoService {
 	@Transactional
 	public void save(@Valid Encargo encargo) throws LimiteEjemplaresException {
 		List<Cantidad> cantidades = encargo.getCantidad();
+		if(cantidades!=null && !cantidades.isEmpty()) {
 		for (int i = 0; i < cantidades.size(); i++) {
 			Cantidad cantidad = cantidades.get(i);
 			Integer unidadesEncargo = cantidad.getUnidades();
@@ -61,7 +64,11 @@ public class EncargoService {
 			if (unidadesEncargo + unidadesEjemplares > 10) {
 				throw new LimiteEjemplaresException();
 			}
-		}
+		}}
 		encargoRepo.save(encargo);
+	}
+
+	public List<Encargo> pedidosUrgentes() {
+		return encargoRepo.pedidosEntreFechas(LocalDate.now(),LocalDate.now().plusDays(2));
 	}
 }

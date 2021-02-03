@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.model;
 
+
  import javax.persistence.Column;
  import javax.persistence.Entity;
  import javax.persistence.JoinColumn;
@@ -7,8 +8,9 @@ package org.springframework.samples.petclinic.model;
  import javax.persistence.Table;
  import javax.validation.constraints.Max;
  import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
- import lombok.Getter;
+import lombok.Getter;
  import lombok.Setter;
 
  @Entity
@@ -17,10 +19,11 @@ package org.springframework.samples.petclinic.model;
  @Table(name = "puntuaciones")
  public class Puntuacion extends BaseEntity{
 
- 	@Column(name = "puntuacion")
- 	@Min(0)
+ 	@Column(name = "puntaje")
+ 	@Min(1)
  	@Max(5)
- 	private Integer puntuacion;
+ 	@NotNull
+ 	private Integer puntaje;
 
  	@ManyToOne
  	@JoinColumn(name = "miembro_id")
