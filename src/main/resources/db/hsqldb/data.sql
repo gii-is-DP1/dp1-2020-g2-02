@@ -23,6 +23,9 @@ INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (1,
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (2, 'Iván', 'Sanabria García', '49388442P', 650177654, 'ivansg@gmail.com', 'ivasan1');
 INSERT INTO miembros(id,nombre,apellidos,dni,telefono,email,username) VALUES (3, 'Alejandro', 'Sanabria Romero', '49388432P', 650177654, 'alexg@gmail.com', 'alecai1');
 
+INSERT INTO sugerencias(id, titulo_libro, nombre_autor, miembro_id) VALUES(0, 'Abdel', 'Enrique Páez', 0);
+INSERT INTO sugerencias(id, titulo_libro, nombre_autor, miembro_id) VALUES(1, 'El Camino de los Reyes', 'Brandon Sanderson', 0);
+INSERT INTO sugerencias(id, titulo_libro, nombre_autor, miembro_id) VALUES(2, 'El Guardian Invisible', 'Dolores Redondo', 1);
 
 INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Norma', 'A1231123B', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
 INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planeta', 'B1234567C', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
@@ -92,6 +95,8 @@ INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 7, 3, 0, 2);
+
+
 
 
 -- Petclinic --
