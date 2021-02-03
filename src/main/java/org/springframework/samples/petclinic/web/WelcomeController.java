@@ -8,6 +8,7 @@ import org.springframework.samples.petclinic.model.Authorities;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Person;
 import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.EncargoService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -31,6 +32,9 @@ public class WelcomeController {
     @Autowired
     PrestamoService prestamoService;
     
+    @Autowired
+    EncargoService encargoService;
+    
     @GetMapping(path="/inicio")
     public String welcomeLogin(ModelMap model, Principal principal) {
         String vista = welcome(model);
@@ -38,6 +42,7 @@ public class WelcomeController {
 
         Set<Authorities> permisos = user.getAuthorities();
         if(permisos.stream().map(x->x.getAuthority()).anyMatch(x->x.equals("miembro"))) {
+        	//Comprueba si existe un préstamo pendiente de devolución en los próximos 3 días, y lo notifica si es el caso.
             Miembro miembro = miembroService.findByUser(user);
             
             if(!prestamoService.prestamosMiembrosUrgentes(miembro).isEmpty()) {
@@ -45,7 +50,11 @@ public class WelcomeController {
             }
         } 
         else if(permisos.stream().map(x->x.getAuthority()).anyMatch(x->x.equals("bibliotecario") || x.equals("admin"))) {
-            //TODO: Comprobar si hay un pedido en los proximos días.
+            //Comprueba si hay un pedido que llega en los próximos 2 días, y lo notifica si es el caso.
+        	if(!encargoService.pedidosUrgentes().isEmpty()) {
+        		model.addAttribute("pedidoUrgente", true);
+        	}
+        	
         }
         model.addAttribute("message", "Bienvenido, " + user.getUsername());
         return vista;
