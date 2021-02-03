@@ -72,4 +72,5 @@ public class Libro extends BaseEntity {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro", fetch = FetchType.EAGER)
 	private List<Ejemplar> ejemplar;	
+	
 }
