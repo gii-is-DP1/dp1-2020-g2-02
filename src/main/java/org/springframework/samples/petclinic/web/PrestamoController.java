@@ -12,11 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
+import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.BibliotecarioService;
+import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,10 +30,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 	@Controller
 	@RequestMapping("/prestamos")
 	public class PrestamoController {
+		
+		@Autowired
+		MiembroService miembroService;
 		
 		@Autowired
 		PrestamoService prestamoService;
@@ -96,6 +105,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 			} else {
 				modelmap.addAttribute("message", "El préstamo no se puede conceder (Ya ha finalizado o el ejemplar no se encuentra reservado).");
 			}
+			return vista;
+		}
+		
+		@GetMapping(path="/misprestamos")
+		public String listPrestamosMiembro(ModelMap model, Principal principal) {
+			String vista = "prestamos/listPrestamoMiembro";
+			Collection<Prestamo> prestamos;
+			User user = userService.findByUsername(principal.getName());
+			Miembro miembro = miembroService.findByUser(user);
+			prestamos = prestamoService.historialPrestamos(miembro);
+			model.addAttribute("prestamos", prestamos);
 			return vista;
 		}
 		

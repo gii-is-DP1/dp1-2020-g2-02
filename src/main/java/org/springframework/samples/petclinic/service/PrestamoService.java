@@ -65,6 +65,11 @@ public class PrestamoService {
     }
 	
 	@Transactional(readOnly = true)
+    public Collection<Prestamo> historialPrestamos(Miembro miembro){
+        return PrestamoRepo.prestamosMiembro(miembro);
+    }
+	
+	@Transactional(readOnly = true)
 	public Collection<Prestamo> prestamosConFechaDevolucionTardia(LocalDate fecha){
 		//
 		return PrestamoRepo.prestamosConFechaDevolucionTardia(fecha);
