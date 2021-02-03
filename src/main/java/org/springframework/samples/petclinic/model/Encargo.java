@@ -34,6 +34,7 @@ public class Encargo extends BaseEntity{
 	private LocalDate fechaEntrega; 
 	
 	@ManyToOne
+	@NotNull
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedor;
 		

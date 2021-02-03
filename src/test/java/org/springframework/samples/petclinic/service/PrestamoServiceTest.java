@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.jupiter.api.Assertions;
@@ -58,7 +59,7 @@ public class PrestamoServiceTest {
 		prestamoService.realizarReserva(1, miembro);
 		
 		int count = prestamoService.prestamoCount();
-		assertTrue(count == initialCount + 1);
+		assertThat(count).isEqualTo(initialCount+1);
 	}
 	
 	@Test
