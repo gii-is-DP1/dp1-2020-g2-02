@@ -13,7 +13,6 @@
         <thead>
         <tr>
             <th >Libro</th>
-            <th >Miembro</th>
             <th >Fecha del préstamo</th>   
             <th >Fecha de devolución</th>
             <th >Concedido por</th>
@@ -26,9 +25,6 @@
             <tr>
                 <td>                    
                     <c:out value="${prestamo.ejemplar.libro.titulo}"/>
-                </td>
-                <td>
-                    <c:out value="${prestamo.miembro.apellidos}"/>, <c:out value="${prestamo.miembro.nombre}"/>
                 </td>
                 <td>
                     <c:out value="${prestamo.fechaPrestamo}"/>
