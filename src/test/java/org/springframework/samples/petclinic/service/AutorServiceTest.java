@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -48,6 +49,6 @@ public class AutorServiceTest {
 	@Test
 	public void testGetLibrosAutor() {
 		Collection<Libro> libros = autorService.findById(1).get().getLibros();
-		assertTrue(libros.size()==2);
+		assertThat(libros.size()).isEqualTo(1);
 	}
 }

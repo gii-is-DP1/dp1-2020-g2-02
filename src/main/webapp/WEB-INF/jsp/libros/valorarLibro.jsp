@@ -20,7 +20,8 @@
          <div class="form-group">
              <div class="col-sm-offset-2 col-sm-10">
 
-            		<input type="hidden" name="libroId" value="${libro.id}"/>
+            		<input type="hidden" name="libro" value="${libro.id}"/>
+            		<input type="hidden" name="id" value="${puntuacion.id}"/>
                 	<button class="btn btn-default" type="submit">Valorar</button>
              </div>
          </div>

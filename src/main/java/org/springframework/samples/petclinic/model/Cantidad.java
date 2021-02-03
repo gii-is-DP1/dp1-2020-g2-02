@@ -21,7 +21,7 @@ public class Cantidad extends BaseEntity{
 	private Integer unidades;
 	
 	@Column(name = "precio_unitario")
-	private Long precioUnitario;
+	private Double precioUnitario;
 	
 	@ManyToOne
 	@JoinColumn(name = "encargo_id")
