@@ -7,53 +7,24 @@
 <%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
 
-<petclinic:layout pageName="encargos">
-    <h2>Encargos</h2>
-        <table id="encargosTable" class="table table-striped">
-        <thead>
-        <tr>
-            <th>Proveedor</th>
-            <th>Libro</th>
-            <th>Cantidad</th>
-            <th>Precio Unitario</th>
-            <th>Fecha Realización</th> 
-            <th>Fecha Entrega</th>             
-        </tr>
-        </thead>
-        <tbody>
-         
+<petclinic:layout pageName="encargos">    
+        <h1>Encargos</h1>
         <c:forEach items="${encargos}" var="encargos">
-            <tr>
-                <td>                    
-                    <c:out value="${encargos.proveedor.nombre} "/>
-                </td>
-                <td>
-                <c:forEach items="${encargos.cantidad}" var="cantidad">
-               		<c:out value="${cantidad.libro.titulo}"/><br/>
-               		</c:forEach>
-                </td>
-                
-                <td>
-                <c:forEach items="${encargos.cantidad}" var="cantidad">
-                   <c:out value="${cantidad.unidades}"/><br/>
-                   </c:forEach>
-                </td>  
-                <td>
-                <c:forEach items="${encargos.cantidad}" var="cantidad">
-                   <c:out value="${cantidad.precioUnitario}"/><br/>
-                   </c:forEach>
-                </td>
-                <td>
-                    <c:out value="${encargos.fechaRealizacion}"/>
-                </td>
-                <td>
-                    <c:out value="${encargos.fechaEntrega}"/>
-                </td>                
-            </tr>
+        	<div style="border-radius: 10px;
+    			border-color: black;
+  				border-style: solid;
+    			background-color: white;
+    			padding: 1.5%;
+    			margin: 1.5%;
+    		">
+            <h2>${encargos.proveedor.nombre}</h2>
+            <em>Realizado el ${encargos.fechaRealizacion} y entregado el ${encargos.fechaEntrega}</em>
+            <c:forEach items="${encargos.cantidad}" var="cantidad">
+            <p style="margin-top:1%;">Se han pedido ${cantidad.unidades} unidades del libro ${cantidad.libro.titulo}, con un coste por unidad de ${cantidad.precioUnitario} euros</p>
             </c:forEach>
-        
-        </tbody>
-    </table>
+            </div>
+        </c:forEach>
+    
    <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
     	<a class="btn btn-default" href='<spring:url value="/encargos/new" htmlEscape="true"/>'>Añadir encargo</a>
 	</sec:authorize> 
