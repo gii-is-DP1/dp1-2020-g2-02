@@ -8,7 +8,8 @@
 <petclinic:layout pageName="home">
     <div class="row">
 
-    <h2>Bienvenido</h2>
+    <h1>Bienvenido a BiblioNET</h1>
+    <br/>
     <br/>
     
     <h2>Project ${title} </h2>
@@ -21,10 +22,6 @@
     </div>
     
     
-        <div class="col-md-12">
-            <spring:url value="/resources/images/logoDP.png" htmlEscape="true" var="biblioImage"/>
-            <img class="img-responsive" src="${biblioImage}" width="500" height="250"/>
-        </div>
 </petclinic:layout>
 
 <script>
