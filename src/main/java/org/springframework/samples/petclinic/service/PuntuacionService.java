@@ -16,10 +16,10 @@ import org.springframework.stereotype.Service;
  public class PuntuacionService {
 
  	@Autowired
- 	private PuntuacionRepository PuntuacionRepo;
+ 	PuntuacionRepository PuntuacionRepo;
  	
  	@Autowired
- 	private PrestamoService prestamoService;
+ 	PrestamoService prestamoService;
  	
  	
 
