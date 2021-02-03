@@ -30,11 +30,10 @@ public class EjemplarServiceTest {
 		assertTrue(ejemplares.size()==8);
 	}
 	
-	
 	@Test
 	public void testFindById() {
-		Ejemplar ejemplar = ejemplarService.findById(1).get();
-		assertTrue(ejemplar.getEstado().equals("Primera página arrancada."));
+		Ejemplar ejemplar = ejemplarService.findById(2).get();
+		assertTrue(ejemplar.getEstado().equals("Cubierta doblada."));
 	}
 	
 	@Test

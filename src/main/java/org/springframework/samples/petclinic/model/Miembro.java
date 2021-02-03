@@ -31,7 +31,7 @@ public class Miembro extends BaseEntity {
 		
 		@Column(name = "dni")
 		@NotEmpty
-		@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")
+		@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$", message="DNI no valido (Debe contener 8 dígitos y una letra de control)")
 		private String dni;
 		
 		@Column(name = "telefono")

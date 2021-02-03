@@ -54,7 +54,7 @@ public class LibroService {
  		while (it.hasNext()) {
  			Puntuacion puntuacion = it.next();
  			if (puntuacion.getLibro()==libro) {
- 				media += puntuacion.getPuntuacion();
+ 				media += puntuacion.getPuntaje();
  				n++;
  			}
  		}

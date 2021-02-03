@@ -1,6 +1,8 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,5 +66,9 @@ public class EncargoService {
 			}
 		}}
 		encargoRepo.save(encargo);
+	}
+
+	public List<Encargo> pedidosUrgentes() {
+		return encargoRepo.pedidosEntreFechas(LocalDate.now(),LocalDate.now().plusDays(2));
 	}
 }

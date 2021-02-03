@@ -15,7 +15,7 @@
      </h2>
      <form:form modelAttribute="puntuacion" class="form-horizontal" id="valorar-libro-form" action="/puntuacion/save">
          <div class="form-group">
-         	<petclinic:inputField label="Puntuación" name="puntuacion" />
+         	<petclinic:inputField label="Puntuación" name="puntaje" />
          </div>
          <div class="form-group">
              <div class="col-sm-offset-2 col-sm-10">
