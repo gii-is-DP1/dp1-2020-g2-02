@@ -6,11 +6,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Collection;
 
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
@@ -20,27 +22,26 @@ public class GeneroServiceTest {
 	@Autowired
 	private GeneroService generoservice;
 	
+	@Test
 	public void testFindAll() {
-		Iterable<Genero> generos = generoservice.findAll();
-		assertTrue(generos.iterator().next().getGenero().equals("Fantasía"));
+		Collection<Genero> generos = generoservice.findAll();
+		assertTrue(generos.size()==7);
 	}
-	
+
+	@Test
 	public void testFindById() {
 		Genero genero = generoservice.findById(2).get();
 		assertTrue(genero.getGenero().equals("Fantasía"));
 	}
-	
+
+	@Test
+	@Transactional
 	public void testAddGenero() {
+		Collection<Genero> generos = generoservice.findAll();
 		Genero genero = new Genero();
-		genero.setId(3);
 		genero.setGenero("Aventuras");
 		generoservice.save(genero);
-		Collection<Genero> generos = generoservice.findAll();
-		assertTrue(generos.size()==4);
+		assertTrue(generos.size()+1==generoservice.findAll().size());
 	}
-
-
-	
-	
 	
 }
