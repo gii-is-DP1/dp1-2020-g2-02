@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 
  import java.security.Principal;
+import java.util.Iterator;
 
 import javax.validation.Valid;
 
@@ -61,9 +62,24 @@ import org.springframework.stereotype.Controller;
  	 		Miembro miembro = miembroService.findByUser(user);
 	 		puntuacion.setMiembro(miembro);
 	 		
+	 		Iterator<Puntuacion> it = puntuacionService.findAll().iterator();
+	 		boolean b = true;
+	 		
  			try {
- 	 			puntuacionService.savePuntuacion(puntuacion);
- 	 			modelmap.addAttribute("message", "Libro valorado correctamente");
+ 				while (it.hasNext()) {
+ 		 			Puntuacion p = it.next();
+ 		 			if (p.getMiembro().getId()==miembro.getId() && p.getLibro().getId()==puntuacion.getLibro().getId()) {
+ 		 				p.setPuntaje(puntuacion.getPuntaje());
+ 		 				puntuacionService.savePuntuacion(p);
+ 		 	 			modelmap.addAttribute("message", "Valoración actualizada correctamente");
+ 		 	 			b = false;
+ 		 	 			break;
+ 		 			}
+ 		 		}
+ 				if (b) {
+ 					puntuacionService.savePuntuacion(puntuacion);
+ 	 	 			modelmap.addAttribute("message", "Libro valorado correctamente");
+ 				}
  			}
  			catch (LibroNoPrestadoAnteriormenteException e) {
  				modelmap.addAttribute("message", "Este libro no ha sido prestado por usted anteriormente");
