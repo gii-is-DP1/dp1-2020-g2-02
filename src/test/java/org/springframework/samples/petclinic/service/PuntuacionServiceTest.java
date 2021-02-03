@@ -17,11 +17,11 @@ public class PuntuacionServiceTest {
 	
 	public void testFindAll() {
 		Iterable<Puntuacion> puntuaciones = puntuacionservice.findAll();
-		assertTrue(puntuaciones.iterator().next().getPuntuacion()>3);
+		assertTrue(puntuaciones.iterator().next().getPuntaje()>3);
 	}
 	
 	public void testFindById() {
 		Puntuacion puntuacion = puntuacionservice.findById(2).get();
-		assertTrue(puntuacion.getPuntuacion().equals(2));
+		assertTrue(puntuacion.getPuntaje().equals(2));
 	}
 }

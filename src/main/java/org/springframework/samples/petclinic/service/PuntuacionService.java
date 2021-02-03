@@ -2,13 +2,11 @@ package org.springframework.samples.petclinic.service;
 
 
  import java.util.Collection;
-import java.util.Iterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.Puntuacion;
 import org.springframework.samples.petclinic.repository.PuntuacionRepository;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoPrestadoAnteriormenteException;
@@ -46,20 +44,9 @@ import org.springframework.stereotype.Service;
  	}
  	
  	
- 	public void savePuntuacion(@Valid Puntuacion Puntuacion) throws LibroNoPrestadoAnteriormenteException {
-
- 		Iterator<Prestamo> it = prestamoService.findAll().iterator();
- 		boolean b = false;
- 		while (it.hasNext()) {
- 			Prestamo prestamo = it.next();
- 			if (prestamo.getMiembro() == Puntuacion.getMiembro() && prestamo.getEjemplar().getLibro() == Puntuacion.getLibro()) {
- 				b = true;
- 			}
- 		}
- 		if (!b) {
+ 	public void savePuntuacion(Puntuacion puntuacion) throws LibroNoPrestadoAnteriormenteException {
+ 		if(prestamoService.findAll().stream().noneMatch(x->x.getMiembro().getId().equals(puntuacion.getMiembro().getId()) && x.getEjemplar().getLibro().getId().equals(puntuacion.getLibro().getId())))
  			throw new LibroNoPrestadoAnteriormenteException();
- 		}
-
- 		PuntuacionRepo.save(Puntuacion);
+ 		PuntuacionRepo.save(puntuacion);
  	}
  }
