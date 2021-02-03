@@ -1,15 +1,21 @@
 package org.springframework.samples.petclinic.web;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Cantidad;
 import org.springframework.samples.petclinic.model.Encargo;
+import org.springframework.samples.petclinic.model.Libro;
+import org.springframework.samples.petclinic.service.CantidadService;
 import org.springframework.samples.petclinic.service.EncargoService;
+import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.ProveedorService;
 import org.springframework.samples.petclinic.service.exceptions.LimiteEjemplaresException;
 import org.springframework.stereotype.Controller;
@@ -19,9 +25,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@RequestMapping("/encargos")
+@RequestMapping("/encargos") 
+@SessionAttributes("lineasPedido")
 public class EncargoController {
 
 	@Autowired
@@ -29,10 +37,26 @@ public class EncargoController {
 	
 	@Autowired
     ProveedorService proveedorService;
+	
+	@Autowired
+    LibroService libroService;
+	
+	@Autowired
+    CantidadService cantidadService;
 
     @ModelAttribute("listaProveedores")
-    public Map<Integer, String> listaAutores() {
+    public Map<Integer, String> listaProveedores() {
         return proveedorService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getNombre()));
+    }
+    
+    @ModelAttribute("listaLibros")
+    public Collection<Libro> listaLibros() {
+        return libroService.findAll();
+    }
+    
+    @ModelAttribute("lineasPedido")
+    public List<Cantidad> lineasPedido() {
+        return new ArrayList<Cantidad>();
     }
 
 	@GetMapping
@@ -44,29 +68,64 @@ public class EncargoController {
 	}
 
 	@PostMapping(path = "/save")
-	public String guardarEncargo(@Valid Encargo encargo, BindingResult result, ModelMap modelmap)
+	public String guardarEncargo(@Valid Encargo encargo, BindingResult result, ModelMap modelmap, HttpServletRequest request, @ModelAttribute("lineasPedido") ArrayList<Cantidad> lineasPedido)
 			throws LimiteEjemplaresException {
-		String vista = "encargos/listEncargo";
-		if (result.hasErrors()) {
-			modelmap.addAttribute("message", result.getAllErrors().toString());
-			modelmap.addAttribute("encargo", encargo);
-			return "encargos/editEncargo";
-		} else {
-			try {
-				encargosService.save(encargo);
-				modelmap.addAttribute("message", "Encargo guardado correctamente");
-			} catch (LimiteEjemplaresException e) {
-				modelmap.addAttribute("message", "Demasiados ejemplares del libro");
+		
+		String vista = "encargos/editEncargo";
+
+		//Guarda el encargo.
+		if(request.getParameter("guardar")!=null) {
+			if(lineasPedido==null || lineasPedido.isEmpty()) {
+				modelmap.addAttribute("message", "Introduce al menos un libro en el pedido");
 			}
-			vista = listEncargos(modelmap);
+			else if (result.hasErrors()) {
+				modelmap.addAttribute("encargo", encargo);
+			} else {
+				try {
+					encargo.setCantidad(lineasPedido);
+					encargosService.save(encargo);
+					for(Cantidad c: lineasPedido) {
+						c.setEncargo(encargo);
+						cantidadService.save(c);
+					}
+					modelmap.addAttribute("message", "Encargo guardado correctamente");
+					vista = listEncargos(modelmap);
+				} catch (LimiteEjemplaresException e) {
+					modelmap.addAttribute("message", "Demasiados ejemplares del libro");
+				}
+			}
+		} 
+		//Añade el libro y su cantidad al pedido
+		else if(request.getParameter("addLibro")!=null){
+			String idLibro = request.getParameter("libroEncargo");
+			String numEjemplares = request.getParameter("numEjemplares");
+			String precioUnitario = request.getParameter("precioUnitario");
+			try{
+				Cantidad cantidad = new Cantidad();
+				cantidad.setPrecioUnitario(Double.valueOf(precioUnitario));
+				Libro libro = libroService.findById(Integer.valueOf(idLibro)).get();
+				cantidad.setLibro(libro);
+				cantidad.setUnidades(Integer.valueOf(numEjemplares));
+				
+				lineasPedido.add(cantidad);
+				
+				modelmap.addAttribute("lineasPedido", lineasPedido);
+				modelmap.addAttribute("message", "Añadido libro al pedido.");
+				
+			}
+			catch(Exception e) {
+				modelmap.addAttribute("message", "Error al añadir libros al pedido.");
+			}
 		}
+			
 		return vista;
 	}
-
 	@GetMapping(path = "/new")
 	public String crearEncargo(ModelMap modelmap) {
 		String vista = "encargos/editEncargo";
-		modelmap.addAttribute("encargo", new Encargo());
+		Encargo encargo = new Encargo();
+		modelmap.addAttribute("encargo", encargo);
+		modelmap.addAttribute("lineasPedido", new ArrayList<Cantidad>());
 		return vista;
 	}
 }

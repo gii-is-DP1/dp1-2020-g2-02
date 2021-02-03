@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,13 @@ public class ProveedorServiceTest {
 	@Test
 	public void testFindAll() {
 		Iterable<Proveedor> proveedors = proveedorService.findAll();
-		assertTrue(proveedors.iterator().next().getNombre().equals("Francisco"));
+		assertThat(proveedors.iterator().next().getNombre()).isEqualTo("Libros Francisco");
 	}
 	
 	@Test
 	public void testFindById() {
 		Proveedor proveedor = proveedorService.findById(0).get();
-		assertTrue(proveedor.getNombre().equals("Francisco"));
+		assertThat(proveedor.getNombre()).isEqualTo("Libros Francisco");
 	}
 	
 	@Test

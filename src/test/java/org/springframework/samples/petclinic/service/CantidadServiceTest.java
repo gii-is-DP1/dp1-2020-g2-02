@@ -43,7 +43,7 @@ public class CantidadServiceTest {
 		Cantidad cantidad = new Cantidad();
 		cantidad.setId(3);
 		cantidad.setUnidades(5);
-		cantidad.setPrecioUnitario((long) 10);
+		cantidad.setPrecioUnitario(10.0);
 		cantidad.setEncargo(encargoService.findById(0).get());
 		cantidad.setLibro(libroService.findById(1).get());
 		cantidadService.save(cantidad);
