@@ -71,4 +71,5 @@ public class PuntuacionControllerTest {
 			.andExpect(model().attribute("message", "Hay fallos en el formulario"));
 	}
 	
+	
 }
