@@ -37,7 +37,7 @@ public class BibliotecarioController {
 	}
 	
 	@PostMapping(path="/save")
-	public String guardarBibliotecario(@Valid Bibliotecario bibliotecario, BindingResult result, ModelMap modelmap) {
+	public String guardarBibliotecario(@Valid Bibliotecario bibliotecario, @Valid User usuario, BindingResult result, ModelMap modelmap) {
 		String vista = "bibliotecarios/listBibliotecario";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("bibliotecario", bibliotecario);
