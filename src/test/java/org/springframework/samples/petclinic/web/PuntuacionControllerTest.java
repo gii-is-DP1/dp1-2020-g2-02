@@ -1,11 +1,14 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PuntuacionService;
@@ -27,6 +31,8 @@ excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classe
 excludeAutoConfiguration= SecurityConfiguration.class)
 public class PuntuacionControllerTest {
 
+	private static final int TEST_LIBRO_ID=1;
+	
 	@Autowired
 	PuntuacionController controller;
 	
@@ -37,7 +43,7 @@ public class PuntuacionControllerTest {
  	MiembroService miembroService;
 	
 	@MockBean
- 	LibroService librosService;
+ 	LibroService libroService;
 	
 	@MockBean
  	UserService userService;
@@ -48,7 +54,13 @@ public class PuntuacionControllerTest {
 	@WithMockUser(value="Us3r")
 	@Test
 	void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/puntuacion/valorar/{libroId}", 3))
+		Libro libro = new Libro();
+		libro.setId(1);
+		libro.setISBN("1234567890");
+		libro.setTitulo("Prueba");
+		libro.setIdioma("Prueba");
+		given(this.libroService.findById(TEST_LIBRO_ID)).willReturn(Optional.of(libro));
+		mockMvc.perform(get("/puntuacion/valorar/{libroId}", TEST_LIBRO_ID))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("libro"))
 			.andExpect(model().attributeExists("puntuacion"))

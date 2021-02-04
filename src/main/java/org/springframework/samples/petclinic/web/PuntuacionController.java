@@ -51,7 +51,7 @@ import org.springframework.stereotype.Controller;
 
  	@PostMapping(path="/save")
  	public String guardarPuntuacion(@Valid Puntuacion puntuacion, BindingResult result, ModelMap modelmap, Principal principal) {
- 		String vista = "welcome";
+ 		String vista = "prestamos/listPrestamoMiembro";
  		if(result.hasErrors()) {
  			modelmap.addAttribute("puntuacion", puntuacion);
  			modelmap.addAttribute("message", "Hay fallos en el formulario");
