@@ -44,14 +44,9 @@ public class PrestamoService {
 		return PrestamoRepo.findById(id);
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public int prestamoCount() {
 		return (int) PrestamoRepo.count();
-	}
-
-	@Transactional
-	public void delete(Prestamo Prestamo) {
-		PrestamoRepo.deleteById(Prestamo.getId());
 	}
 
 	@Transactional
@@ -65,11 +60,16 @@ public class PrestamoService {
     }
 	
 	@Transactional(readOnly = true)
+    public Collection<Prestamo> historialPrestamos(Miembro miembro){
+        return PrestamoRepo.prestamosMiembro(miembro);
+    }
+	
+	@Transactional(readOnly = true)
 	public Collection<Prestamo> prestamosConFechaDevolucionTardia(LocalDate fecha){
-		//
 		return PrestamoRepo.prestamosConFechaDevolucionTardia(fecha);
 	}
 	
+	@Transactional
 	public Prestamo realizarReserva(int libroId, Miembro miembro)  throws LibroNoExistenteException, LimitePrestamosException, LibroYaEnPrestamoException, LibroNoDisponibleException, PrestamoConRetrasoException{
 		Optional<Libro> libro = LibroRepo.findById(libroId);
 		if(!libro.isPresent()) {
@@ -108,6 +108,11 @@ public class PrestamoService {
 
 		PrestamoRepo.save(prestamo);
 		return prestamo;
+	}
+
+	@Transactional(readOnly = true)
+	public Collection<Prestamo> findPrestamosHoy() {
+		return PrestamoRepo.findByFechaPrestamo(LocalDate.now());
 	}
 
 }

@@ -66,7 +66,7 @@ public class AutorController {
 		ModelAndView mav = new ModelAndView("autores/librosAutor");
 		Autor autor = this.autorService.findById(autorId).get();
 		mav.addObject("autor", autor);
-		Iterator<Libro> libros = autor.getLibros().iterator();
+		Collection<Libro> libros = autor.getLibros();
 		
 		mav.addObject("libros", libros);
 		return mav;

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,6 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 @Configuration
 @EnableWebSecurity
+@EnableScheduling
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -42,7 +44,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/libros").permitAll()
 				.antMatchers("/autores/**").permitAll()
 				.antMatchers("/editoriales/**").permitAll()
-				.antMatchers("/prestamos/**").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos/save").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos/new").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos/conceder/{prestamoId}").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos/finalizar/{prestamoId}").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos/rechazar/{prestamoId}").hasAnyAuthority("bibliotecario")
+				.antMatchers("/prestamos/misprestamos").hasAnyAuthority("miembro")
 				.antMatchers("/novedades").permitAll()
 				.antMatchers("/inicio").authenticated()
 				.antMatchers("/novedades/**").hasAnyAuthority("bibliotecario")
@@ -54,6 +62,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers("/encargos/**").hasAnyAuthority("admin", "bibliotecario")
 				.antMatchers("/generos/**").hasAnyAuthority("admin", "bibliotecario")
 				.antMatchers("/puntuacion/**").hasAnyAuthority("miembro")
+				.antMatchers("/sugerencias/**").hasAnyAuthority("admin")
 				/*PETCLINIC*/
 				.antMatchers("/users/new").permitAll()
 				.antMatchers("/owners/**").hasAnyAuthority("owner", "admin")			

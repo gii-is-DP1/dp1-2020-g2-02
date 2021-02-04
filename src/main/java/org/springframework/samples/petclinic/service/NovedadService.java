@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +15,31 @@ public class NovedadService {
 	@Autowired
 	private NovedadRepository novedadRepo;
 	
-	@Transactional
+	@Transactional(readOnly = true)
 	public int novedadCount() {
 		return (int) novedadRepo.count();
 	}
 	
-	@Transactional
+	@Transactional(readOnly = true)
 	public Iterable<Novedad> findAll() {
 		return novedadRepo.findAllByOrderByFechaPublicacionDesc();
 	}
 
+	@Transactional
 	public void save(Novedad novedad) {
 		novedadRepo.save(novedad);
 	}
 
+	@Transactional(readOnly = true)
 	public Optional<Novedad> findById(int id) {
 		// TODO Auto-generated method stub
 		return novedadRepo.findById(id);
+	}
+	
+	@Transactional(readOnly = true)
+	public Collection<Novedad> findNovedadesHoy() {
+		// TODO Auto-generated method stub
+		return novedadRepo.findByFechaPublicacion(LocalDate.now());
 	}
 
 }
