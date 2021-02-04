@@ -40,8 +40,8 @@ public class Proveedor extends BaseEntity{
 	
 	@Column(name = "telefono")
 	@NotNull
-	@NumberFormat(style=NumberFormat.Style.CURRENCY)
-	private Integer telefono;
+	@Pattern(regexp = "^[0-9]{9}$", message="El número de teléfono debe contener 9 dígitos")
+	private String telefono;
 	
 	@Column(name = "email")
 	@NotEmpty

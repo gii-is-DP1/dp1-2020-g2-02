@@ -42,7 +42,11 @@ public class BibliotecarioController {
 		if(result.hasErrors()) {
 			modelmap.addAttribute("bibliotecario", bibliotecario);
 			return "bibliotecarios/editBibliotecario";
-		}else {
+		} else if(userService.findUser(bibliotecario.getUser().getUsername()).isPresent()) {
+			modelmap.addAttribute("message", "Usuario ya existente");
+			modelmap.addAttribute("bibliotecario", bibliotecario);
+			return "bibliotecarios/editBibliotecario";
+		} else {
 			bibliotecariosService.save(bibliotecario);
 			modelmap.addAttribute("message", "Bibliotecario guardado correctamente");
 			vista = listBibliotecarios(modelmap);

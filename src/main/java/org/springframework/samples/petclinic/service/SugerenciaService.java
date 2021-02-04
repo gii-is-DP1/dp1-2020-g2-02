@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -23,8 +23,8 @@ public class SugerenciaService {
 	}
 	
 	@Transactional
-	public Collection<Sugerencia> findAllOrderByTituloLibro() {
-		return sugerenciaRepository.findAllOrderByTituloLibro();
+	public List<Sugerencia> findAllOrderByTituloLibro() {
+		return sugerenciaRepository.findAllByOrderByTituloLibroAsc();
 	}
 	
 	@Transactional

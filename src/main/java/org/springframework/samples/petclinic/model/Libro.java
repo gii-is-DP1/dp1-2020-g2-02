@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -43,6 +44,7 @@ public class Libro extends BaseEntity {
 	
 	@Column(name = "fecha_publicacion")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Past
 	private LocalDate fecha_publicacion;
 	
 	@ManyToOne
