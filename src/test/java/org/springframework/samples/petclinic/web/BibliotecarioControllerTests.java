@@ -95,7 +95,8 @@ public class BibliotecarioControllerTests {
 				.param("dni", "49387445P")
 				.param("telefono", "650666999")
 				.param("email", "marulo@gmail.com")
-				.param("username", "marulo"))
+				.param("user.username", "marulo")
+				.param("user.password", "Pass1234"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("bibliotecarios/listBibliotecario"));
 				
@@ -112,7 +113,8 @@ public class BibliotecarioControllerTests {
 				.param("dni", "49387445P")
 				.param("telefono", "650666947847474747474474747474799")
 				.param("email", "marulo@gmail.com")
-				.param("username", "marulo"))
+				.param("user.username", "marulo")
+				.param("user.password", "Pass1234"))
 		.andExpect(model().attributeHasErrors("bibliotecario"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("bibliotecarios/editBibliotecario"));
