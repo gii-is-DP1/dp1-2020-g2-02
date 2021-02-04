@@ -43,7 +43,7 @@ public class ProveedorServiceTest {
 		proveedor.setNombre("Alejandro");;
 		proveedor.setNif("A9387456P");
 		proveedor.setDireccion("C/Betis Nº12, Sevilla");
-		proveedor.setTelefono(650606444);
+		proveedor.setTelefono("650606444");
 		proveedor.setEmail("ruco@gmail.com");
 		proveedorService.save(proveedor);
 

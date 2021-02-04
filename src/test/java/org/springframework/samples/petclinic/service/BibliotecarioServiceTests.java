@@ -47,7 +47,7 @@ public class BibliotecarioServiceTests {
 		bibliotecario.setNombre("Alejandro");;
 		bibliotecario.setApellidos("Ruiz Costa");
 		bibliotecario.setDni("49387456P");
-		bibliotecario.setTelefono(650606444);
+		bibliotecario.setTelefono("650606444");
 		bibliotecario.setEmail("ruco@gmail.com");
 		
 		User user = new User();
