@@ -51,7 +51,6 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Editoriales</span>
 				</petclinic:menuItem>
-
 			</ul>
 
 
@@ -60,7 +59,6 @@
 			<ul class="nav navbar-nav navbar-right">
 				<sec:authorize access="!isAuthenticated()">
 					<li><a href="<c:url value="/login" />">Login</a></li>
-					<li><a href="<c:url value="/users/new" />">Register</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -86,6 +84,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<p class="text-left" style="padding:6%">
+											
 												<sec:authorize access="hasAuthority('admin')">
 													<a href="<c:url value="/bibliotecarios" />"
 													class="btn btn-primary btn-block btn-sm">Bibliotecarios</a>
@@ -112,10 +111,13 @@
 													<a href="<c:url value="/prestamos/misprestamos" />"
 													class="btn btn-primary btn-block btn-sm">Mis préstamos</a>
 												</sec:authorize>
+												<a href="<c:url value="/sugerencias" />"
+													class="btn btn-primary btn-block btn-sm">Sugerencias</a>
 												<a href="<c:url value="/logout" />"
 													class="btn btn-primary btn-block btn-sm">Cerrar sesión</a>
 											
 											</p>
+													
 										</div>
 									</div>
 								</div>
