@@ -88,14 +88,8 @@
                		<c:if test="${!disponibilidad[libro.id]}">
                			No disponible
 
-               		</c:if><br>
+               		</c:if>
 
-                		<sec:authorize access="hasAuthority('miembro')">
-                			<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
-                         	<spring:param name="libroId" value="${libro.id}"/>
-                     	</spring:url>
-                     	<a href ="${fn:escapeXml(libroUrl)}">Valorar</a>
-                		</sec:authorize>
                 </td>
         	</tr>
         </c:forEach>

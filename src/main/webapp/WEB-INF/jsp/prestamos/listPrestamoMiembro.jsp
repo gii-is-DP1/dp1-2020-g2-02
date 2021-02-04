@@ -51,7 +51,14 @@
                 		<td>En préstamo</td>
                 	</c:when>
                 </c:choose>
-                
+                <td>
+                	<sec:authorize access="hasAuthority('miembro')">
+                		<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
+                         	<spring:param name="libroId" value="${prestamo.ejemplar.libro.id}"/>
+                     	</spring:url>
+                     	<a href ="${fn:escapeXml(libroUrl)}">Valorar</a>
+                	</sec:authorize>
+                </td>
                   
             </tr>
         </c:forEach>
