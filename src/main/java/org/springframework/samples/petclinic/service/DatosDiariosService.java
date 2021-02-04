@@ -1,5 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.DatosDiarios;
 import org.springframework.samples.petclinic.repository.DatosDiariosRepository;
@@ -12,13 +14,13 @@ public class DatosDiariosService {
 	@Autowired
 	private DatosDiariosRepository datosRepo;
 	
-	@Transactional(readOnly = true)
-	public Iterable<DatosDiarios> findAll() {
-		return datosRepo.findAll();
-	}
-
 	@Transactional
 	public void save(DatosDiarios datos) {
 		datosRepo.save(datos);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<DatosDiarios> findAllOrderByFecha() {
+		return datosRepo.findAllByOrderByFechaDesc();
 	}
 }
