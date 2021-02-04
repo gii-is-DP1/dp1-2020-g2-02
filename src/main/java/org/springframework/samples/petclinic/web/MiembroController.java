@@ -37,7 +37,7 @@ public class MiembroController {
 	}
 
 	@PostMapping(path = "/save")
-	public String guardarMiembro(@Valid Miembro miembro, @Valid User user, BindingResult result, ModelMap modelmap) {
+	public String guardarMiembro(@Valid Miembro miembro, BindingResult result, ModelMap modelmap) {
 		String vista = "miembros/listMiembro";
 		if (result.hasErrors()) {
 			modelmap.addAttribute("miembro", miembro);
