@@ -1,6 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -25,19 +25,19 @@ public class EncargoServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=encargoService.encargoCount();
-		assertTrue(count==2);
+		assertThat(count).isEqualTo(2);
 	}
 	
 	@Test
 	public void testFindAll() {
 		Collection<Encargo> encargos = encargoService.findAll();
-		assertTrue(encargos.size()==2);
+		assertThat(encargos.size()).isEqualTo(2);
 	}
 	
 	@Test
 	public void testFindById() {
 		Encargo encargo = encargoService.findById(0).get();
-		assertTrue(encargo.getFechaRealizacion().equals(LocalDate.of(2020, 11, 12)));
+		assertThat(encargo.getFechaRealizacion()).isEqualTo(LocalDate.now().minusDays(2));
 	}
 	
 	
@@ -52,6 +52,6 @@ public class EncargoServiceTest {
 		encargo.setProveedor(proveedorService.findById(0).get());
 		encargoService.save(encargo);
 		int cuentaFinal = encargoService.encargoCount();
-		assertTrue(cuentaFinal == cuentaInicial + 1);
+		assertThat(cuentaFinal).isEqualTo(cuentaInicial + 1);
 	}
 }
