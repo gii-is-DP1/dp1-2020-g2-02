@@ -5,9 +5,11 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Authorities;
+import org.springframework.samples.petclinic.model.DatosDiarios;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Person;
 import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.DatosDiariosService;
 import org.springframework.samples.petclinic.service.EncargoService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
@@ -34,6 +36,9 @@ public class WelcomeController {
     
     @Autowired
     EncargoService encargoService;
+
+    @Autowired
+    DatosDiariosService datosService;
     
     @GetMapping(path="/inicio")
     public String welcomeLogin(ModelMap model, Principal principal) {
@@ -62,7 +67,10 @@ public class WelcomeController {
 	
 	
 	  @GetMapping({"/","/welcome"})
-	  public String welcome(Map<String, Object> model) {	    
+	  public String welcome(ModelMap model) {	   
+		  
+		  DatosDiarios datos = datosService.findAllOrderByFecha().get(0);
+		  model.addAttribute("datos", datos);
 		  
 		  List<Person> persons=new ArrayList<Person>();
 		  Person person = new Person();
@@ -90,9 +98,9 @@ public class WelcomeController {
 		  person6.setLastName("Sanabria");
 		  persons.add(person6);
 		  
-		  model.put("persons", persons);
-		  model.put("title", "Biblionet");
-		  model.put("group", "G2-02");
+		  model.addAttribute("persons", persons);
+		  model.addAttribute("title", "Biblionet");
+		  model.addAttribute("group", "G2-02");
 		  
 	    return "welcome";
 	  }

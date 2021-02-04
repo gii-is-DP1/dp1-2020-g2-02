@@ -29,8 +29,8 @@ public class Genero extends BaseEntity {
     @JoinColumn(name = "libro_id")
     private List<Libro> libros;
 	
-	@Column(name = "genero")
+	@Column(name = "nombre_genero")
 	@NotEmpty    
-	private String genero;
+	private String nombreGenero;
 
 }

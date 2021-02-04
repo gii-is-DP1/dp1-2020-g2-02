@@ -21,7 +21,20 @@
     </ul>
     </div>
     
-    
+    <div style="border-radius: 10px;
+    			border-color: black;
+  				border-style: solid;
+    			background-color: white;
+    			padding: 1.5%;
+    			margin: 1.5%;
+    		">
+    	<h2>Estadísticas del día anterior en la biblioteca:</h2>
+    	<ul>
+    		<li>Se realizaron ${datos.prestamos} préstamos.</li>
+    		<li>Se publicaron ${datos.novedades} novedades.</li>
+    		<li>Se realizaron ${datos.encargos} encargos.</li>
+    	</ul>
+    </div>
 </petclinic:layout>
 
 <script>

@@ -59,7 +59,7 @@ public class GeneroControllerTest {
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/generos/save").param("genero", "A")
+		mockMvc.perform(post("/generos/save").param("nombreGenero", "GeneroPrueba")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Género guardado correctamente"));
 	}

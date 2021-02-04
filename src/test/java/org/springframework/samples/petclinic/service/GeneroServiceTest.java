@@ -31,7 +31,7 @@ public class GeneroServiceTest {
 	@Test
 	public void testFindById() {
 		Genero genero = generoservice.findById(2).get();
-		assertTrue(genero.getGenero().equals("Fantasía"));
+		assertTrue(genero.getNombreGenero().equals("Fantasía"));
 	}
 
 	@Test
@@ -39,7 +39,7 @@ public class GeneroServiceTest {
 	public void testAddGenero() {
 		Collection<Genero> generos = generoservice.findAll();
 		Genero genero = new Genero();
-		genero.setGenero("Aventuras");
+		genero.setNombreGenero("Aventuras");
 		generoservice.save(genero);
 		assertTrue(generos.size()+1==generoservice.findAll().size());
 	}

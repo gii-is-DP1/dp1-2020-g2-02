@@ -2,6 +2,8 @@ package org.springframework.samples.petclinic.util;
 
 import java.time.LocalDate;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.DatosDiarios;
 import org.springframework.samples.petclinic.service.DatosDiariosService;
@@ -37,4 +39,9 @@ public class CalculoDiario {
 		datosService.save(datos);
 	}
 	
+	 @PostConstruct
+	 private void init() {
+		 //Inicializa la tabla al arrancar la aplicación
+		 calcularDatosDiarios();
+	 }
 }
