@@ -77,15 +77,15 @@ INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (7,3,'Algunas p
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (8,4,'Algunas páginas arrugadas.','DISPONIBLE');
 
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (0,DATEADD(DAY, -30, CURRENT_TIMESTAMP()), DATEADD(DAY, -14, CURRENT_TIMESTAMP()), 1, 1,1,TRUE);
-INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (1,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), null, 0,2,FALSE);
-INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (2,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 0, 1,3,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (1,CURRENT_TIMESTAMP(), DATEADD(DAY, 16, CURRENT_TIMESTAMP()), null, 0,2,FALSE);
+INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (2,CURRENT_TIMESTAMP(), DATEADD(DAY, 16, CURRENT_TIMESTAMP()), 0, 1,3,FALSE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (3,DATEADD(DAY, -20, CURRENT_TIMESTAMP()), DATEADD(DAY, -4, CURRENT_TIMESTAMP()), 0, 2,4,FALSE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (4,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 1, 3,5,FALSE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (5,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 0, 3,6,FALSE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (6,DATEADD(DAY, -8, CURRENT_TIMESTAMP()), DATEADD(DAY, 8, CURRENT_TIMESTAMP()), 1, 3,7,FALSE);
 
 
-INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.','2020-11-17',0);
+INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (0,'Nuevos ejemplares', 'Hoy han llegado a la biblioteca 10 nuevos ejemplares de "La Celestina", ya están disponibles para su reserva.',CURRENT_TIMESTAMP(),0);
 INSERT INTO novedades(id,titulo,contenido,fecha_publicacion,bibliotecario_id) VALUES (1,'Biblioteca cerrada', 'Mañana día 19 la biblioteca permanecerá cerrada. Disculpen las molestias que esto pueda causar.','2020-11-18',1);
 
 INSERT INTO proveedores(id,nombre,nif,direccion,telefono,email) VALUES (0, 'Libros Francisco', 'B9060971K', 'C\Jerez Alta Nº6, Morón de la Frontera', 650606599, 'fran@gmail.com');
@@ -97,8 +97,6 @@ INSERT INTO encargos(id, fecha_realizacion, fecha_entrega, proveedor_id) VALUES(
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(0, 5, 7, 0, 1);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 7, 3, 0, 2);
-
-
 
 
 -- Petclinic --

@@ -99,6 +99,8 @@
 													class="btn btn-primary btn-block btn-sm">Proveedores</a>
 													<a href="<c:url value="/encargos" />"
 													class="btn btn-primary btn-block btn-sm">Encargos</a>
+													<a href="<c:url value="estadisticas" />"
+													class="btn btn-primary btn-block btn-sm">Estadísticas</a>
 												</sec:authorize>
 												<sec:authorize access="hasAuthority('bibliotecario')">
 													<a href="<c:url value="/prestamos" />"
