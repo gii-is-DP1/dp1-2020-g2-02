@@ -66,7 +66,7 @@ public class BibliotecarioControllerTests {
 		bibliotecario.setNombre("Alejandro");
 		bibliotecario.setApellidos("Castro Garcia");
 		bibliotecario.setDni("49586958D");
-		bibliotecario.setTelefono(123456789);
+		bibliotecario.setTelefono("123456789");
 		bibliotecario.setEmail("alecagar@gmail.com");
 		bibliotecario.setUser(usuario);
 		bibliotecario.setNovedades(new HashSet<Novedad>());

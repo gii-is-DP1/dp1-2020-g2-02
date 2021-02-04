@@ -36,12 +36,28 @@ public class SugerenciaServiceTest {
 	
 	@Test
 	@Transactional
-	public void testAddGenero() {
+	public void testAddSugerencia() {
 		Collection<Sugerencia> sugerencias = sugerenciaService.findAllOrderByTituloLibro();
 		Sugerencia sugerencia = new Sugerencia();
 		sugerencia.setNombreAutor("Brandon Sanderson");
+		sugerencia.setTituloLibro("titulo");
 		sugerenciaService.save(sugerencia);
 		assertTrue(sugerencias.size()+1==sugerenciaService.findAllOrderByTituloLibro().size());
 	}
+	
+	/*@Test
+	@Transactional
+	public void testAddSugerenciaHasErrors() {
+		Collection<Sugerencia> sugerencias = sugerenciaService.findAllOrderByTituloLibro();
+		Sugerencia sugerencia = new Sugerencia();
+		sugerencia.setNombreAutor("Brandon Sanderson");
+		try {
+			sugerenciaService.save(sugerencia);
+			assertTrue(false);
+		}
+		catch(Exception e) {
+			assertTrue(true);
+		}
+	}*/
 
 }
