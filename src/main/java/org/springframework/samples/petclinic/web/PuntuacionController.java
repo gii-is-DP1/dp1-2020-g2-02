@@ -38,6 +38,10 @@ import org.springframework.stereotype.Controller;
 
  	@Autowired
  	LibroService librosService;
+ 	
+
+ 	@Autowired
+ 	PrestamoController prestamoController;
 
 
  	@GetMapping(path="/valorar/{libroId}")
@@ -51,7 +55,7 @@ import org.springframework.stereotype.Controller;
 
  	@PostMapping(path="/save")
  	public String guardarPuntuacion(@Valid Puntuacion puntuacion, BindingResult result, ModelMap modelmap, Principal principal) {
- 		String vista = "prestamos/listPrestamoMiembro";
+ 		
  		if(result.hasErrors()) {
  			modelmap.addAttribute("puntuacion", puntuacion);
  			modelmap.addAttribute("message", "Hay fallos en el formulario");
@@ -84,7 +88,8 @@ import org.springframework.stereotype.Controller;
  			catch (LibroNoPrestadoAnteriormenteException e) {
  				modelmap.addAttribute("message", "Este libro no ha sido prestado por usted anteriormente");
  			}
+ 			
  		}
- 		return vista; 
+ 		return prestamoController.listPrestamosMiembro(modelmap, principal);
  	}
  }
