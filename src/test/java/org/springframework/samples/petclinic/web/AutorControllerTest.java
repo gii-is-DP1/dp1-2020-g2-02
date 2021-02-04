@@ -32,7 +32,7 @@ excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classe
 excludeAutoConfiguration= SecurityConfiguration.class)
 public class AutorControllerTest {
 
-	private static final int TEST_AUTOR_ID = 1;
+	
 	
 	@Autowired
 	AutorController controller;
@@ -106,8 +106,8 @@ public class AutorControllerTest {
 		autor.setFecha_nac(LocalDate.now().minusDays(1));
 		autor.setNombre("Pepe");
 		autor.setLibros(new ArrayList<Libro>());
-		given(this.autorService.findById(TEST_AUTOR_ID)).willReturn(Optional.of(autor));
-		mockMvc.perform(get("/autores/{autorId}",TEST_AUTOR_ID))
+		given(this.autorService.findById(1)).willReturn(Optional.of(autor));
+		mockMvc.perform(get("/autores/{autorId}",1))
 			.andExpect(status().isOk())
 			.andExpect(view().name("autores/librosAutor"))
 			.andExpect(model().attributeExists("autor"))

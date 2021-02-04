@@ -1,11 +1,15 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
+
+import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
@@ -28,14 +32,16 @@ public class BibliotecarioServiceTests {
 	
 	@Test
 	public void testFindAll() {
-		Iterable<Bibliotecario> bibliotecarios = bibliotecarioService.findAll();
-		assertTrue(bibliotecarios.iterator().next().getNombre().equals("Fernando"));	
+		int cuentaInicial = bibliotecarioService.bibliotecarioCount();
+		Collection<Bibliotecario> bibliotecarios = bibliotecarioService.findAll();
+		assertThat(bibliotecarios.size()).isEqualTo(cuentaInicial);	
 	}
 	
 	@Test
 	public void testFindById() {
 		Bibliotecario bibliotecario = bibliotecarioService.findById(0).get();
-		assertTrue(bibliotecario.getNombre().equals("Fernando"));
+		String nombre = bibliotecario.getNombre();
+		assertThat(nombre).isEqualTo("Fernando");
 	}
 	
 	@Test
@@ -57,9 +63,10 @@ public class BibliotecarioServiceTests {
 		bibliotecario.setUser(user);
 		userService.saveUser(user);
 		bibliotecarioService.save(bibliotecario);
-		int count=bibliotecarioService.bibliotecarioCount();
-		assertTrue(count==3);
+		Collection<Bibliotecario> bibliotecarios = bibliotecarioService.findAll();
+		assertThat(bibliotecarios.size()).isEqualTo(cuentaInicial+1);
 	}
+	
 	
 	
 	
