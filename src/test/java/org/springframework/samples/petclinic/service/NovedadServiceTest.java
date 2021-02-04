@@ -1,7 +1,7 @@
 
 package org.springframework.samples.petclinic.service;
 
-import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 
@@ -24,18 +24,18 @@ public class NovedadServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=novedadService.novedadCount();
-		assertTrue(count==2);
+		assertThat(count).isEqualTo(2);
 	}
 	@Test
 	public void testFindAll() {
 		Iterable<Novedad> novedades = novedadService.findAll();
-		assertTrue(novedades.iterator().next().getTitulo().equals("Biblioteca cerrada"));
+		assertThat(novedades.iterator().next().getTitulo()).isEqualTo("Nuevos ejemplares");
 	}
 	
 	@Test
 	public void testFindById() {
 		Novedad novedad = novedadService.findById(0).get();
-		assertTrue(novedad.getTitulo().equals("Nuevos ejemplares"));
+		assertThat(novedad.getTitulo()).isEqualTo("Nuevos ejemplares");
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class NovedadServiceTest {
 		novedad.setBibliotecario(bibliotecario);
 		novedadService.save(novedad);
 		int count=novedadService.novedadCount();
-		assertTrue(count==3);
+		assertThat(count).isEqualTo(3);
 	}
 	
 	

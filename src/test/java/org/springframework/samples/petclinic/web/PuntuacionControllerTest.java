@@ -40,13 +40,16 @@ public class PuntuacionControllerTest {
 	PuntuacionService puntuacionService;
 	
 	@MockBean
+ 	UserService userService;
+	
+	@MockBean
  	MiembroService miembroService;
 	
 	@MockBean
  	LibroService libroService;
 	
 	@MockBean
- 	UserService userService;
+ 	PrestamoController prestamoController;
 	
 	@Autowired
 	private MockMvc mockMvc;
