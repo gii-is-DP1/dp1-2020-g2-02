@@ -40,13 +40,13 @@ INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456433, 'El resplandor', 'Español', '1977-01-28', 2);
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234543216, 'Patria', 'Español', '2016-09-06', 1);
 
-INSERT INTO generos(id, genero) VALUES (1, 'Biografía');
-INSERT INTO generos(id, genero) VALUES (2, 'Fantasía');
-INSERT INTO generos(id, genero) VALUES (3, 'Policíaco');
-INSERT INTO generos(id, genero) VALUES (4, 'Aventura');
-INSERT INTO generos(id, genero) VALUES (5, 'Romántico');
-INSERT INTO generos(id, genero) VALUES (6, 'Histórico');
-INSERT INTO generos(id, genero) VALUES (7, 'Terror');
+INSERT INTO generos(id, nombre_genero) VALUES (1, 'Biografía');
+INSERT INTO generos(id, nombre_genero) VALUES (2, 'Fantasía');
+INSERT INTO generos(id, nombre_genero) VALUES (3, 'Policíaco');
+INSERT INTO generos(id, nombre_genero) VALUES (4, 'Aventura');
+INSERT INTO generos(id, nombre_genero) VALUES (5, 'Romántico');
+INSERT INTO generos(id, nombre_genero) VALUES (6, 'Histórico');
+INSERT INTO generos(id, nombre_genero) VALUES (7, 'Terror');
 
 
 INSERT INTO es_autor(autor_id,libro_id) VALUES (1, 1);
