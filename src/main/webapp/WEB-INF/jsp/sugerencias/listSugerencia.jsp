@@ -23,10 +23,9 @@
             <p>Sugerencia por: ${sugerencias.miembro.nombre}&nbsp;${sugerencias.miembro.apellidos}</p>
             </div>
         </c:forEach>
-	
-	<sec:authorize access="hasAuthority('bibliotecario')">
+	<br>
+	<sec:authorize access="hasAuthority('miembro')">
 		<a class="btn btn-default"
-			href='<spring:url value="/sugerencias/new" htmlEscape="true"/>'>Añadir
-			sugerencia</a>
+			href='<spring:url value="/sugerencias/new" htmlEscape="true"/>'>Añadir sugerencia</a>
 	</sec:authorize>
 </petclinic:layout>
