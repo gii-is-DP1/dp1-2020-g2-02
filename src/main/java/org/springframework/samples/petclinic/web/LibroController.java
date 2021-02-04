@@ -68,7 +68,7 @@ public class LibroController {
 	
 	@ModelAttribute("generos")
     public Map<Integer, String> listaGeneros() {
-        return generoService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getGenero()));
+        return generoService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getNombreGenero()));
     }
 	
 	@ModelAttribute("autores")

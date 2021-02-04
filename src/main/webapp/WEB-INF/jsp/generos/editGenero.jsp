@@ -15,7 +15,7 @@
     <br>
     <form:form modelAttribute="genero" class="form-horizontal" id="add-genero-form" action="/generos/save">
         <div class="form-group has-feedback">
-        	<petclinic:inputField label="Nuevo género" name="genero" />
+        	<petclinic:inputField label="Nuevo género" name="nombreGenero" />
         </div>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">

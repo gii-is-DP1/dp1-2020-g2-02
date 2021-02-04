@@ -32,7 +32,7 @@
                 </td>  
                 <td> 
                 <c:forEach items="${libro.generos}" var="genero">
-                		<c:out value="${genero.genero}"/> <br/>
+                		<c:out value="${genero.nombreGenero}"/> <br/>
                 </c:forEach>  
                 </td>
             </tr>
