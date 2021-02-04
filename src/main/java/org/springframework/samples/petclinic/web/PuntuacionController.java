@@ -2,8 +2,9 @@ package org.springframework.samples.petclinic.web;
 
 
  import java.security.Principal;
+import java.util.Iterator;
 
- import javax.validation.Valid;
+import javax.validation.Valid;
 
  import org.springframework.beans.factory.annotation.Autowired;
  import org.springframework.samples.petclinic.model.Miembro;
@@ -13,7 +14,8 @@ package org.springframework.samples.petclinic.web;
  import org.springframework.samples.petclinic.service.MiembroService;
  import org.springframework.samples.petclinic.service.PuntuacionService;
  import org.springframework.samples.petclinic.service.UserService;
- import org.springframework.stereotype.Controller;
+import org.springframework.samples.petclinic.service.exceptions.LibroNoPrestadoAnteriormenteException;
+import org.springframework.stereotype.Controller;
  import org.springframework.ui.ModelMap;
  import org.springframework.validation.BindingResult;
  import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +38,10 @@ package org.springframework.samples.petclinic.web;
 
  	@Autowired
  	LibroService librosService;
+ 	
+
+ 	@Autowired
+ 	PrestamoController prestamoController;
 
 
  	@GetMapping(path="/valorar/{libroId}")
@@ -45,22 +51,45 @@ package org.springframework.samples.petclinic.web;
  		model.addAttribute("libro", librosService.findById(libroId).get());
  		model.addAttribute("puntuacion", new Puntuacion());
  		return vista;
- 	}
+ 	} 
 
  	@PostMapping(path="/save")
  	public String guardarPuntuacion(@Valid Puntuacion puntuacion, BindingResult result, ModelMap modelmap, Principal principal) {
- 		String vista = "welcome";
+ 		
  		if(result.hasErrors()) {
  			modelmap.addAttribute("puntuacion", puntuacion);
- 			modelmap.addAttribute("Message", "Hay fallos en el formulario");
+ 			modelmap.addAttribute("message", "Hay fallos en el formulario");
  			return "libros/valorarLibro";
- 		}else {
- 			User user = userService.findByUsername(principal.getName());
- 			Miembro miembro = miembroService.findByUser(user);
- 			puntuacion.setMiembro(miembro);
- 			puntuacionService.save(puntuacion);
- 			modelmap.addAttribute("message", "Libro valorado correctamente");
  		}
- 		return vista;
+ 		else {
+ 			User user = userService.findByUsername(principal.getName());
+ 	 		Miembro miembro = miembroService.findByUser(user);
+	 		puntuacion.setMiembro(miembro);
+	 		
+	 		Iterator<Puntuacion> it = puntuacionService.findAll().iterator();
+	 		boolean b = true;
+	 		
+ 			try {
+ 				while (it.hasNext()) {
+ 		 			Puntuacion p = it.next();
+ 		 			if (p.getMiembro().getId()==miembro.getId() && p.getLibro().getId()==puntuacion.getLibro().getId()) {
+ 		 				p.setPuntaje(puntuacion.getPuntaje());
+ 		 				puntuacionService.savePuntuacion(p);
+ 		 	 			modelmap.addAttribute("message", "Valoración actualizada correctamente");
+ 		 	 			b = false;
+ 		 	 			break;
+ 		 			}
+ 		 		}
+ 				if (b) {
+ 					puntuacionService.savePuntuacion(puntuacion);
+ 	 	 			modelmap.addAttribute("message", "Libro valorado correctamente");
+ 				}
+ 			}
+ 			catch (LibroNoPrestadoAnteriormenteException e) {
+ 				modelmap.addAttribute("message", "Este libro no ha sido prestado por usted anteriormente");
+ 			}
+ 			
+ 		}
+ 		return prestamoController.listPrestamosMiembro(modelmap, principal);
  	}
  }

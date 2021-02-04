@@ -27,7 +27,7 @@
 <script>
 function myFunction() {
     if("${prestamoUrgente}"){
-        alert("Tiene un préstamo pendiente de devolver en los proximos días, por favor acuda a la biblioteca.");
+        alert("Tiene un préstamo pendiente de devolver en los próximos días, por favor acuda a la biblioteca.");
     }
     if("${pedidoUrgente}"){
         alert("Envío pendiente en los próximos días, permanezca atento para su recogida.");

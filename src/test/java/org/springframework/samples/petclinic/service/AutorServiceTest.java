@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -24,30 +25,32 @@ public class AutorServiceTest {
 	@Test
 	@Transactional
 	public void testAddAutor() {
+		int cuentaInicial = autorService.autorCount();
 		Autor autor = new Autor();
 		autor.setNombre("nombreTest");
 		autor.setApellidos("apellidosTest");
 		autor.setFecha_nac(LocalDate.now());
 		autorService.save(autor);
 		Collection<Autor> autores = autorService.findAll();
-		assertTrue(autores.size()==5);
+		assertThat(autores.size()).isEqualTo(cuentaInicial+1);
 	}
 	
 	@Test
 	public void testFindById() {
 		String nombre = autorService.findById(1).get().getNombre();
-		assertTrue(nombre.equals("Emmanuel"));
+		assertThat(nombre).isEqualTo("Emmanuel");
 	}
 	
 	@Test
 	public void testFindAll() {
+		int cuentaInicial = autorService.autorCount();
 		Collection<Autor> autores = autorService.findAll();
-		assertTrue(autores.size()==4);
+		assertThat(autores.size()).isEqualTo(cuentaInicial);
 	}
 	
 	@Test
 	public void testGetLibrosAutor() {
 		Collection<Libro> libros = autorService.findById(1).get().getLibros();
-		assertTrue(libros.size()==2);
+		assertThat(libros.size()).isEqualTo(1);
 	}
 }

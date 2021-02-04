@@ -6,14 +6,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -29,7 +30,7 @@ public class Libro extends BaseEntity {
 
 	@Column(name = "ISBN")
 	@NotEmpty
-	@Digits(fraction=0, integer=12)
+	@Pattern(regexp = "^[0-9]{10}|^(97)[89]{1}[0-9]{10}$",message="El ISBN debe contener 10 o 13 dígitos. Si contiene 13 dígitos debe empezar por 978 o 979.")
 	private String ISBN;
 	
 	@Column(name = "titulo")
@@ -69,6 +70,7 @@ public class Libro extends BaseEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
 	private List<Cantidad> cantidad;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro", fetch = FetchType.EAGER)
 	private List<Ejemplar> ejemplar;	
+	
 }

@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
@@ -21,33 +22,19 @@ public class EncargoService {
 	@Autowired
 	EncargoRepository encargoRepo;
 
-//	@Autowired
-//	LibroService libroService;
-
-//	@Autowired
-//	ProveedorService proveedorService;
-
-//	@Autowired
-//	CantidadService cantidadService;
-	@Transactional
+	@Transactional(readOnly = true)
 	public int encargoCount() {
 		return (int) encargoRepo.count();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Collection<Encargo> findAll() {
 		return encargoRepo.findAll();
 	}
 
-	@Transactional
+	@Transactional(readOnly = true)
 	public Optional<Encargo> findById(int id) {
 		return encargoRepo.findById(id);
-	}
-
-	@Transactional
-	public void delete(Encargo encargo) {
-		encargoRepo.deleteById(encargo.getId());
-
 	}
 
 	@Transactional
@@ -64,5 +51,15 @@ public class EncargoService {
 			}
 		}}
 		encargoRepo.save(encargo);
+	}
+
+	@Transactional(readOnly = true)
+	public List<Encargo> pedidosUrgentes() {
+		return encargoRepo.pedidosEntreFechas(LocalDate.now(),LocalDate.now().plusDays(2));
+	}
+
+	@Transactional(readOnly = true)
+	public Collection<Encargo> findEncargosHoy() {
+		return encargoRepo.findByFechaRealizacion(LocalDate.now());
 	}
 }

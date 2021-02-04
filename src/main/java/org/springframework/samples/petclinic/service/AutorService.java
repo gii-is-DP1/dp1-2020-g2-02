@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.repository.AutorRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class AutorService {
@@ -37,6 +38,11 @@ public class AutorService {
 	public void save(@Valid Autor Autor) {
 		AutorRepo.save(Autor);
 
+	}
+	
+	@Transactional
+	public int autorCount() {
+		return (int) AutorRepo.count();
 	}
 	
 
