@@ -7,6 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.Optional;
 
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,6 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Proveedor;
 import org.springframework.samples.petclinic.service.CantidadService;
 import org.springframework.samples.petclinic.service.EncargoService;
 import org.springframework.samples.petclinic.service.LibroService;
@@ -50,6 +52,8 @@ public class EncargoControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	
+	
 	@WithMockUser(value = "Us3r")
 	@Test
 	void testBibliotecariosList() throws Exception {
@@ -67,34 +71,42 @@ public class EncargoControllerTests {
 			.andExpect(model().attributeExists("encargo"))
 			.andExpect(view().name("encargos/editEncargo"));
 	}
+
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormSuccess() throws Exception {
+		
+		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2020")
+				.param("fechaEntrega", "12/12/2020").param("proveedor", "1")
+				.with(csrf()))
+			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
+	}
 	
-//	@WithMockUser(value = "Us3r")
-//    @Test
-//    void testInitCreationForm() throws Exception {
-//		mockMvc.perform(get("/encargos/new"))
-//		.andExpect(status().isOk())
-//		.andExpect(model().attributeExists("encargo"))
-//		.andExpect(view().name("encargos/editEncargo"));
-//	}
-//	
-//	@WithMockUser(value = "Us3r")
-//    @Test
-//    void testProcessCreationFormSuccess() throws Exception {
-//		mockMvc.perform(post("/encargos/save").param("fecha_realizacion", "2020-11-11").param("fecha_entrega", "2020-12-12")
-//						.with(csrf()))
-//			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
-//	}
-//	
-//	@WithMockUser(value = "Us3r")
-//    @Test
-//    void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/encargos/save")
-//						.with(csrf())
-//						.param("fecha_realizacion", "2020-11-11"))
-//			.andExpect(status().isOk())
-//			.andExpect(model().attributeHasErrors("encargo"))
-//			.andExpect(model().attributeHasFieldErrors("encargo", "fecha_entrega"))
-//			.andExpect(view().name("encargos/editEncargo"));
-//	}
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		
+		mockMvc.perform(post("/encargos/save")
+						.with(csrf())
+						.param("fechaRealizacion", "11/11/2020"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("encargo"))
+			.andExpect(model().attributeHasFieldErrors("encargo", "fechaEntrega"))
+			.andExpect(view().name("encargos/editEncargo"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormFechaDeEntregaErronea() throws Exception {
+		
+		mockMvc.perform(post("/encargos/save")
+						.with(csrf())
+						.param("fechaRealizacion", "11-11-2020")
+						.param("fechaEntrega", "7/12/2010"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("encargo"))
+			.andExpect(model().attributeHasFieldErrors("encargo", "fechaEntrega"))
+			.andExpect(view().name("encargos/editEncargo"));
+	}
 
 }
