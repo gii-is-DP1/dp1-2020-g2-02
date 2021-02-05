@@ -146,37 +146,7 @@ public class LibroControllerTests {
 			.andExpect(view().name("libros/listLibro"));
 	}
 	
-	@WithMockUser(value = "Us3r")
-	@Test
-	void testGuardarAutorSuccess() throws Exception {
-		mockMvc.perform(post("/libros/save")
-				.with(csrf())
-				.param("ISBN", "1234567890")
-				.param("titulo", "El adversario")
-				.param("idioma", "castellano")
-				.param("fecha_publicacion", "12/11/2000"))
-		.andExpect(model().attribute("message", "Libro guardado correctamente"))
-		.andExpect(status().isOk())
-		.andExpect(view().name("libros/listLibro"));
-				
-		
-	}
-	
-	@WithMockUser(value = "Us3r")
-	@Test
-	void testGuardarAutorHasErrors() throws Exception {
-		mockMvc.perform(post("/libros/save")
-				.with(csrf())
-				.param("ISBN", "")
-				.param("titulo", "El adversario")
-				.param("idioma", "castellano")
-				.param("fecha_publicacion", "12/11/2000"))
-		.andExpect(model().attributeHasErrors("libro"))
-		.andExpect(status().isOk())
-		.andExpect(view().name("libros/editLibro"));
-				
-		
-	}
+
 	
 	@WithMockUser(value = "alecasgar")
 	@Test
