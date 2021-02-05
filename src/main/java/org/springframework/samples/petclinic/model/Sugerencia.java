@@ -7,6 +7,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,6 +27,7 @@ public class Sugerencia extends BaseEntity{
 	@NotEmpty
 	private String nombreAutor;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "miembro_id")
 	private Miembro miembro;
