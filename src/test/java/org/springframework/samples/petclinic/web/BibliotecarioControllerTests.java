@@ -71,7 +71,7 @@ public class BibliotecarioControllerTests {
 		
 		
 		given(this.bibliotecarioService.findById(1)).willReturn(Optional.of(bibliotecario));
-		bibliotecarioService.save(bibliotecario);
+		//bibliotecarioService.save(bibliotecario);
 		//given(this.bibliotecarioService.save(bibliotecario));
 		
 	}
