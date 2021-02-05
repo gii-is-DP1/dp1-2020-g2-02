@@ -38,8 +38,6 @@ excludeAutoConfiguration= SecurityConfiguration.class)
 public class BibliotecarioControllerTests {
 	
 	
-	
-	
 	@Autowired
 	BibliotecarioController controller;
 	
@@ -73,6 +71,8 @@ public class BibliotecarioControllerTests {
 		
 		
 		given(this.bibliotecarioService.findById(1)).willReturn(Optional.of(bibliotecario));
+		//bibliotecarioService.save(bibliotecario);
+		//given(this.bibliotecarioService.save(bibliotecario));
 		
 	}
 	
@@ -97,6 +97,7 @@ public class BibliotecarioControllerTests {
 				.param("email", "marulo@gmail.com")
 				.param("user.username", "marulo")
 				.param("user.password", "Pass1234"))
+		.andExpect(model().attribute("message", "Bibliotecario guardado correctamente"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("bibliotecarios/listBibliotecario"));
 				
@@ -118,7 +119,7 @@ public class BibliotecarioControllerTests {
 		.andExpect(model().attributeHasErrors("bibliotecario"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("bibliotecarios/editBibliotecario"));
-				
+		
 		
 	}
 	
@@ -133,9 +134,10 @@ public class BibliotecarioControllerTests {
 	
 	@WithMockUser(value = "Us3r")
 	@Test
-	void testHabiblitarBibliotecarioSuccess() throws Exception {
+	void testHabilitarBibliotecarioSuccess() throws Exception {
 		mockMvc.perform(get("/bibliotecarios/habilitar/{biblioId}",1))
 		.andExpect(status().isOk())
+		.andExpect(model().attribute("message", "Bibliotecario habilitado correctamente"))
 		.andExpect(view().name("bibliotecarios/listBibliotecario"))
 		.andExpect(model().attributeExists("bibliotecarios"));
 		
@@ -143,9 +145,10 @@ public class BibliotecarioControllerTests {
 	
 	@WithMockUser(value = "Us3r")
 	@Test
-	void testHabiblitarBibliotecarioHasErrors() throws Exception {
+	void testHabilitarBibliotecarioHasErrors() throws Exception {
 		mockMvc.perform(get("/bibliotecarios/habilitar/{biblioId}",5))
 		.andExpect(status().isOk())
+		.andExpect(model().attribute("message", "Bibliotecario no encontrado"))
 		.andExpect(view().name("bibliotecarios/listBibliotecario"))
 		.andExpect(model().attributeExists("bibliotecarios"));
 		
@@ -156,6 +159,7 @@ public class BibliotecarioControllerTests {
 	void testDeshabilitarBibliotecarioSuccess() throws Exception {
 		mockMvc.perform(get("/bibliotecarios/deshabilitar/{biblioId}",1))
 		.andExpect(status().isOk())
+		.andExpect(model().attribute("message", "Bibliotecario deshabilitado correctamente"))
 		.andExpect(view().name("bibliotecarios/listBibliotecario"))
 		.andExpect(model().attributeExists("bibliotecarios"));
 		
@@ -166,6 +170,7 @@ public class BibliotecarioControllerTests {
 	void testDeshabilitarBibliotecarioHasErrors() throws Exception {
 		mockMvc.perform(get("/bibliotecarios/deshabilitar/{biblioId}",5))
 		.andExpect(status().isOk())
+		.andExpect(model().attribute("message", "Bibliotecario no encontrado"))
 		.andExpect(view().name("bibliotecarios/listBibliotecario"))
 		.andExpect(model().attributeExists("bibliotecarios"));
 		
@@ -175,21 +180,22 @@ public class BibliotecarioControllerTests {
 	
 //	@WithMockUser(value = "Us3r")
 //	@Test
-//	void testInitCreationForm() throws Exception {
-//		mockMvc.perform(get("/bibliotecarios/new"))
+//	void testProcessCreationFormBibliotecarioDuplicatedBibliotecario() throws Exception {
+//		mockMvc.perform(post("/bibliotecarios/save")
+//				.with(csrf())
+//				.param("nombre", "Alejandro")
+//				.param("apellidos", "Castro García")
+//				.param("dni", "49586958D")
+//				.param("telefono", "123456789")
+//				.param("email", "alecagar@gmail.com")
+//				.param("user.username", "alecagar")
+//				.param("user.password", "Pass1234"))
+//		.andExpect(model().attributeExists("bibliotecarios"))
+//		.andExpect(model().attribute("message", "Usuario ya existente"))
 //		.andExpect(status().isOk())
-//		.andExpect(model().attributeExists("bibliotecario"))
-//		.andExpect(view().name("bibliotecarios/editBibliotecario"));
+//		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
+//		
 //	}
-	
-	/*@WithMockUser(value = "Us3r")
-    @Test
-    void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/biliotecarios/save").param("nombre", "Natalia").param("apellidos", "Cabeza Ramirez")
-						.param("dni", "49486598Q").param("telefono", "650606789").param("email", "nacara12@gmail.com")
-						.param("username", "nacara").with(csrf()))
-			.andExpect(model().attribute("message", "Bibliotecario guardada correctamente."));
-	}*/
 	
 //	@WithMockUser(value = "Us3r")
 //    @Test

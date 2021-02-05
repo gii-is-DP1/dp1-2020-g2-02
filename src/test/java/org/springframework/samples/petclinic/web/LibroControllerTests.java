@@ -32,6 +32,7 @@ import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
 import org.springframework.samples.petclinic.service.UserService;
+
 import org.springframework.samples.petclinic.service.exceptions.LibroNoDisponibleException;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoExistenteException;
 import org.springframework.samples.petclinic.service.exceptions.LibroYaEnPrestamoException;
@@ -45,6 +46,31 @@ import org.springframework.test.web.servlet.MockMvc;
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
 public class LibroControllerTests {
+	
+	@BeforeEach
+    void setup() throws Exception {
+        
+        User usuario = new User();
+        usuario.setUsername("alecasgar");
+        usuario.setPassword("Ale123456");
+        usuario.setEnabled(true);
+    
+        
+        Miembro miembro = new Miembro();
+        miembro.setId(1);
+        miembro.setNombre("Alejandro");
+        miembro.setApellidos("Castro Garcia");
+        miembro.setDni("49586958D");
+        miembro.setTelefono("123456789");
+        miembro.setEmail("alecagar@gmail.com");
+        miembro.setUser(usuario);
+        
+        given(this.userService.findByUsername("alecasgar")).willReturn(usuario);
+        given(this.miembroService.findByUser(usuario)).willReturn(miembro);
+        given(prestamoService.realizarReserva(1,miembro)).willReturn(new Prestamo());
+        given(prestamoService.realizarReserva(2,miembro)).willThrow(new LibroNoExistenteException());
+        
+    }
 
 	@Autowired
 	LibroController controller;
@@ -125,4 +151,20 @@ public class LibroControllerTests {
 			.andExpect(model().attribute("message", "Libro no existente"))
 			.andExpect(view().name("libros/listLibro"));
 	}
+//	@WithMockUser(value = "Us3r")
+//	@Test
+//	void testLibrosList() throws Exception {
+//		mockMvc.perform(get("/libros"))
+//			.andExpect(status().isOk())
+//			.andExpect(model().attributeExists("libros"))
+//			.andExpect(view().name("libros/listLibro"));
+//	}
+//	@WithMockUser(value = "Us3r")
+//	@Test
+//	void testReservarLibro() throws Exception {
+//		mockMvc.perform(get("/libros/reservar/1"))
+//			.andExpect(status().isOk())
+//			.andExpect(model().attribute("message", "Libro reservado, acuda a la biblioteca a recogerlo."))
+//			.andExpect(view().name("libros/listLibro"));
+//	}
 }
