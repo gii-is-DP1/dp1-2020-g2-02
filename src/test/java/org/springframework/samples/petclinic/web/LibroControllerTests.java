@@ -145,6 +145,9 @@ public class LibroControllerTests {
 			.andExpect(model().attributeExists("libros"))
 			.andExpect(view().name("libros/listLibro"));
 	}
+	
+
+	
 	@WithMockUser(value = "alecasgar")
 	@Test
 	void testReservarLibro() throws Exception {
@@ -153,6 +156,8 @@ public class LibroControllerTests {
 			.andExpect(model().attribute("message", "Libro reservado, acuda a la biblioteca a recogerlo."))
 			.andExpect(view().name("libros/listLibro"));
 	}
+	
+	
 	@WithMockUser(value = "alecasgar")
 	@Test
 	void testReservarLibroNoExistente() throws Exception {

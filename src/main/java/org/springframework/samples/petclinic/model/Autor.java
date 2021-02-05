@@ -13,6 +13,9 @@ import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "autores")
+
 public class Autor extends BaseEntity {
 
 	@Column(name="nombre")
@@ -33,6 +37,7 @@ public class Autor extends BaseEntity {
 	@Column(name = "fecha_nac")        
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private LocalDate fecha_nac;
+
 
 	@ManyToMany
 	@JoinTable(
