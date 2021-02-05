@@ -49,7 +49,7 @@ public class MiembroServiceTest {
 		miembro.setEmail("antlop@gmail.com");
 		miembro.setId(cuentaInicial);
 		miembro.setNombre("Antonio");
-		miembro.setTelefono(661524384);
+		miembro.setTelefono("661524384");
 
 		User user = new User();
 		user.setUsername("antlop1");

@@ -34,13 +34,13 @@ public class Bibliotecario extends BaseEntity {
 		
 		@Column(name = "dni")
 		@NotEmpty
-		@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$")
+		@Pattern(regexp = "^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$", message="DNI no válido (Debe contener 8 dígitos y una letra de control)")
 		private String dni;
 		
 		@Column(name = "telefono")
 		@NotNull
-		@Digits(fraction = 0, integer = 10)
-		private Integer telefono;
+		@Pattern(regexp = "^[0-9]{9}$", message="El número de teléfono debe contener 9 dígitos")
+		private String telefono;
 		
 		@Column(name = "email")
 		@NotEmpty
