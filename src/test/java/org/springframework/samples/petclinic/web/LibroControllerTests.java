@@ -1,7 +1,9 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -99,6 +101,39 @@ public class LibroControllerTests {
 			.andExpect(model().attributeExists("libros"))
 			.andExpect(view().name("libros/listLibro"));
 	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testGuardarAutorSuccess() throws Exception {
+		mockMvc.perform(post("/libros/save")
+				.with(csrf())
+				.param("ISBN", "1234567890")
+				.param("titulo", "El adversario")
+				.param("idioma", "castellano")
+				.param("fecha_publicacion", "12/11/2000"))
+		.andExpect(model().attribute("message", "Libro guardado correctamente"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("libros/listLibro"));
+				
+		
+	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testGuardarAutorHasErrors() throws Exception {
+		mockMvc.perform(post("/libros/save")
+				.with(csrf())
+				.param("ISBN", "")
+				.param("titulo", "El adversario")
+				.param("idioma", "castellano")
+				.param("fecha_publicacion", "12/11/2000"))
+		.andExpect(model().attributeHasErrors("libro"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("libros/editLibro"));
+				
+		
+	}
+	
 	@WithMockUser(value = "alecasgar")
 	@Test
 	void testReservarLibro() throws Exception {
@@ -107,6 +142,8 @@ public class LibroControllerTests {
 			.andExpect(model().attribute("message", "Libro reservado, acuda a la biblioteca a recogerlo."))
 			.andExpect(view().name("libros/listLibro"));
 	}
+	
+	
 	@WithMockUser(value = "alecasgar")
 	@Test
 	void testReservarLibroError() throws Exception {
