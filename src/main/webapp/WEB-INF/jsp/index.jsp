@@ -6,12 +6,14 @@
         <script>
         $(document).ready(function() {
             $.ajax({
-                url: "http://localhost:8080/api/autor/1"
+                url: "http://localhost:8080/api/autor/verTodos",
+                type: "GET",
+                dataType: "json"
             }).then(function(data) {
-            	var autornombre = data.nombre;
-            	var autorid = data.id;
-            	document.write(autornombre);
-            	document.write(" "+ autorid);
+            	document.write(data[0].nombre);
+            	document.write(data[1].nombre);
+            	document.write(data[2].nombre);
+            	document.write(data[3].nombre);
  			});
             
         });
@@ -19,9 +21,6 @@
     </head>
 
     <body>
-        <div>
-        Autor:
-            <c:out value="${autornombre }" />
-        </div>
+        <div clas="autornombre"></div>
     </body>
 </html>

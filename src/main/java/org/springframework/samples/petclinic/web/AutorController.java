@@ -72,8 +72,5 @@ public class AutorController {
 		return mav;
 	}
 	
-	@GetMapping(path="/ver")
-	public String verAutor() {
-		return "index";
-	}
+	
 }
