@@ -30,8 +30,8 @@ public class GeneroServiceTest {
 
 	@Test
 	public void testFindById() {
-		Genero genero = generoservice.findById(2).get();
-		assertTrue(genero.getNombreGenero().equals("Fantasía"));
+		Genero genero = generoservice.findById(4).get();
+		assertTrue(genero.getNombreGenero().equals("Aventura"));
 	}
 
 	@Test
