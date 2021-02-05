@@ -39,7 +39,6 @@ public class Autor extends BaseEntity {
 	private LocalDate fecha_nac;
 
 
-	@JsonIgnore
 	@ManyToMany
 	@JoinTable(
 			  name = "es_autor", 

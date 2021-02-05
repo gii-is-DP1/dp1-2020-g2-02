@@ -15,6 +15,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 @Data
@@ -48,7 +50,8 @@ public class Bibliotecario extends BaseEntity {
 		@OneToOne(cascade = CascadeType.ALL)
 	    @JoinColumn(name = "username", referencedColumnName = "username")
 		private User user;
-		
+
+		@JsonIgnore
 		@OneToMany(cascade = CascadeType.ALL, mappedBy = "bibliotecario")
 		private Set<Novedad> novedades;
 
