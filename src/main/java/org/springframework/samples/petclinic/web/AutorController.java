@@ -71,4 +71,9 @@ public class AutorController {
 		mav.addObject("libros", libros);
 		return mav;
 	}
+	
+	@GetMapping(path="/ver")
+	public String verAutor() {
+		return "index";
+	}
 }
