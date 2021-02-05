@@ -1,7 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
-import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -35,7 +35,7 @@ public class SugerenciaController {
 	@GetMapping
 	public String listSugerencias(ModelMap model) {
 		String vista = "sugerencias/listSugerencia";
-		Collection<Sugerencia> sugerencias = sugerenciaService.findAllOrderByTituloLibro();
+		List<Sugerencia> sugerencias = sugerenciaService.findAllOrderByTituloLibro();
 		model.addAttribute("sugerencias", sugerencias);
 		return vista;
 	}

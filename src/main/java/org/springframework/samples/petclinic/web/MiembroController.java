@@ -21,13 +21,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/miembros")
 public class MiembroController {
-	
+
 	@Autowired
 	MiembroService miembrosService;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@GetMapping
 	public String listMiembros(ModelMap model) {
 		String vista = "miembros/listMiembro";
@@ -35,72 +35,73 @@ public class MiembroController {
 		model.addAttribute("miembros", miembros);
 		return vista;
 	}
-	
-	@PostMapping(path="/save")
+
+	@PostMapping(path = "/save")
 	public String guardarMiembro(@Valid Miembro miembro, BindingResult result, ModelMap modelmap) {
 		String vista = "miembros/listMiembro";
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			modelmap.addAttribute("miembro", miembro);
 			return "miembros/editMiembro";
-		}else {
+		} else if (userService.findUser(miembro.getUser().getUsername()).isPresent()) {
+			modelmap.addAttribute("message", "Usuario ya existente");
+			modelmap.addAttribute("miembro", miembro);
+			return "miembros/editMiembro";
+		} else {
 			miembrosService.save(miembro);
 			modelmap.addAttribute("message", "Miembro guardado correctamente");
 			vista = listMiembros(modelmap);
 		}
 		return vista;
 	}
-	
-	@GetMapping(path="/new")
+
+	@GetMapping(path = "/new")
 	public String crearMiembro(ModelMap modelmap) {
 		String vista = "miembros/editMiembro";
 		modelmap.addAttribute("miembro", new Miembro());
 		return vista;
 	}
-	
-	@GetMapping(path="/habilitar/{miembroId}")
+
+	@GetMapping(path = "/habilitar/{miembroId}")
 	public String habilitarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
 		String vista = "miembros/listMiembros";
 		Optional<Miembro> miembro = miembrosService.findById(miembroId);
-		if(miembro.isPresent()) {
+		if (miembro.isPresent()) {
 			User user = miembro.get().getUser();
 			user.setEnabled(true);
 			userService.save(user);
 			modelmap.addAttribute("message", "Miembro habilitado correctamente");
 			vista = listMiembros(modelmap);
-		}else {
+		} else {
 			modelmap.addAttribute("message", "Miembro no encontrado");
 		}
 		vista = listMiembros(modelmap);
 		return vista;
 	}
-	@GetMapping(path="/deshabilitar/{miembroId}")
+
+	@GetMapping(path = "/deshabilitar/{miembroId}")
 	public String deshabilitarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
 		String vista = "miembros/listMiembros";
 		Optional<Miembro> miembro = miembrosService.findById(miembroId);
-		if(miembro.isPresent()) {
+		if (miembro.isPresent()) {
 			User user = miembro.get().getUser();
 			user.setEnabled(false);
 			userService.save(user);
 			modelmap.addAttribute("message", "Miembro deshabilitado correctamente");
 			vista = listMiembros(modelmap);
-		}else {
+		} else {
 			modelmap.addAttribute("message", "Miembro no encontrado");
 		}
 		vista = listMiembros(modelmap);
 		return vista;
 	}
-	/*@GetMapping(path="/delete/{miembroId}")
-	public String borrarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
-		String vista = "miembros/listMiembros";
-		Optional<Miembro> miembro = miembrosService.findById(miembroId);
-		if(miembro.isPresent()) {
-			miembrosService.delete(miembro.get());
-			modelmap.addAttribute("message", "Miembro eliminado correctamente");
-			vista = listMiembros(modelmap);
-		}else {
-			modelmap.addAttribute("message", "Miembro no encontrado");
-		}
-		vista = listMiembros(modelmap);
-		return vista;
-	}*/	
+	/*
+	 * @GetMapping(path="/delete/{miembroId}") public String
+	 * borrarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
+	 * String vista = "miembros/listMiembros"; Optional<Miembro> miembro =
+	 * miembrosService.findById(miembroId); if(miembro.isPresent()) {
+	 * miembrosService.delete(miembro.get()); modelmap.addAttribute("message",
+	 * "Miembro eliminado correctamente"); vista = listMiembros(modelmap); }else {
+	 * modelmap.addAttribute("message", "Miembro no encontrado"); } vista =
+	 * listMiembros(modelmap); return vista; }
+	 */
 }

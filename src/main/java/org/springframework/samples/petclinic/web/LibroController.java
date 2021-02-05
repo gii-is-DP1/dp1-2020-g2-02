@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
-import org.springframework.samples.petclinic.model.Puntuacion;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.AutorService;
 import org.springframework.samples.petclinic.service.EditorialService;
@@ -68,7 +67,7 @@ public class LibroController {
 	
 	@ModelAttribute("generos")
     public Map<Integer, String> listaGeneros() {
-        return generoService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getGenero()));
+        return generoService.findAll().stream().collect(Collectors.toMap(x->x.getId(), y->y.getNombreGenero()));
     }
 	
 	@ModelAttribute("autores")

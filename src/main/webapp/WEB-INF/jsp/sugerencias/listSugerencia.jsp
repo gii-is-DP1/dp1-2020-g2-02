@@ -10,6 +10,12 @@
 <petclinic:layout pageName="sugerencias">
 	
 	<h1>Sugerencias</h1>
+	
+	<sec:authorize access="hasAuthority('miembro')">
+		<a class="btn btn-default"
+			href='<spring:url value="/sugerencias/new" htmlEscape="true"/>'>Añadir sugerencia</a>
+	</sec:authorize>
+	
         <c:forEach items="${sugerencias}" var="sugerencias">
         	<div style="border-radius: 10px;
     			border-color: black;
@@ -24,8 +30,4 @@
             </div>
         </c:forEach>
 	<br>
-	<sec:authorize access="hasAuthority('miembro')">
-		<a class="btn btn-default"
-			href='<spring:url value="/sugerencias/new" htmlEscape="true"/>'>Añadir sugerencia</a>
-	</sec:authorize>
 </petclinic:layout>

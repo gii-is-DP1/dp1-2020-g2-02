@@ -52,7 +52,7 @@ public class LibroServiceTest {
 		libro.setISBN("1234567890");
 		libro.setIdioma("Inglés");
 		libro.setTitulo("TítuloPrueba");
-		libro.setFecha_publicacion(LocalDate.now());
+		libro.setFecha_publicacion(LocalDate.now().minusDays(1));
 		libroService.save(libro);
 		Collection<Libro> libros = libroService.findAll();
 		assertTrue(libros.size()==5);

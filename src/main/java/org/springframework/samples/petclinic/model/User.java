@@ -20,7 +20,7 @@ public class User{
 	String username;
 	
 	@NotEmpty
-	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$") //Contraseña con minúsculas, mayúsculas, números y entre 8 y 32 caracteres
+	@Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$", message="La contraseña debe contener minúsculas, mayúsculas, números y debe estar entre 8 y 32 caracteres") //Contraseña con minúsculas, mayúsculas, números y entre 8 y 32 caracteres
 	String password;
 	
 	boolean enabled;

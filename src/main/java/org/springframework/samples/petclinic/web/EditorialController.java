@@ -44,7 +44,7 @@ public class EditorialController {
 			return "editoriales/editEditorial";
 		}else {
 			editorialService.save(editorial);
-			modelmap.addAttribute("message", "Editorial guardado correctamente");
+			modelmap.addAttribute("message", "Editorial guardada correctamente");
 			vista = listEditoriales(modelmap);
 		}
 		return vista;

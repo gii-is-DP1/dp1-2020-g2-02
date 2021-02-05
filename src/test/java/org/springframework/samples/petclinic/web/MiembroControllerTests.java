@@ -59,7 +59,7 @@ public class MiembroControllerTests {
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/miembros/save").param("nombre", "A").param("apellidos", "A")
-				.param("dni", "00000000A").param("telefono", "000000000").param("email", "A@A.A")
+				.param("dni", "00000000A").param("telefono", "000000000").param("email", "a@a.a").param("user.username", "usuarioejemplo").param("user.pass","Pass1234")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Miembro guardado correctamente"));
 	}

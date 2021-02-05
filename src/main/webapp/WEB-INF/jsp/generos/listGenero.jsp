@@ -18,7 +18,7 @@
     			padding: 1%;
     			margin: 1.5%;
     		">
-            <h4>${genero.genero}</h4>
+            <h4>${genero.nombreGenero}</h4>
            
             </div>
         </c:forEach>

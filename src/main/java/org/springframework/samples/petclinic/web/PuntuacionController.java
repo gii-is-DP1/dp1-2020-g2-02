@@ -39,7 +39,6 @@ import org.springframework.stereotype.Controller;
  	@Autowired
  	LibroService librosService;
  	
-
  	@Autowired
  	PrestamoController prestamoController;
 

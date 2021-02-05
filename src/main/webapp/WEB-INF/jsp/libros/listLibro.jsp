@@ -52,7 +52,7 @@
                 </td>               
                 <td>
                 	<c:forEach items="${libro.generos}" var="generoLibro">
-                    	<c:out value="${generoLibro.genero}"/><br/>
+                    	<c:out value="${generoLibro.nombreGenero}"/><br/>
         			</c:forEach>
                 </td>   
                 <td>
@@ -99,18 +99,9 @@
 
 
     <br/> 
-    <sec:authorize access="hasAuthority('miembro')">
-		<a class="btn btn-default" href='<spring:url value="/sugerencias" htmlEscape="true"/>'>Sugerencias de nuevos libros</a>
-	</sec:authorize>
 	
     <sec:authorize access="hasAuthority('admin') || hasAuthority('bibliotecario')">
-    	<a class="btn btn-default" href='<spring:url value="/sugerencias" htmlEscape="true"/>'>Sugerencias de nuevos libros</a>
-    	<br/> 
-		<br/>
     	<a class="btn btn-default" href='<spring:url value="/generos" htmlEscape="true"/>'>Consultar géneros disponibles</a>
-		<br/> 
-		<br/> 
-		<a class="btn btn-default" href='<spring:url value="/ejemplares" htmlEscape="true"/>'>Consultar ejemplares</a>
 		<br/> 
 		<br/> 
 		<a class="btn btn-default" href='<spring:url value="/libros/new" htmlEscape="true"/>'>Añadir libro</a>

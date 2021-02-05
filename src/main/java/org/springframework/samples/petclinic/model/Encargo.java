@@ -31,6 +31,7 @@ public class Encargo extends BaseEntity{
 	@Column(name = "fecha_entrega")
 	@NotNull
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	
 	private LocalDate fechaEntrega; 
 	
 	@ManyToOne
