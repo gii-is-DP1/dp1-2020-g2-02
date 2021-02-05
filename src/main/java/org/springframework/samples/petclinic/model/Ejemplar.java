@@ -33,7 +33,4 @@ public class Ejemplar extends BaseEntity {
 	@NotEmpty
 	private String estado;
 	
-	
-	
-
 }

@@ -102,6 +102,19 @@ public class EjemplarControllerTests {
 	}
 	
 	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormDispErronea() throws Exception {
+		mockMvc.perform(post("/ejemplares/save")
+						.with(csrf())
+						.param("titulo", "A")
+						.param("estado", "A").param("disponibilidad", "aaaa"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("ejemplar"))
+			.andExpect(model().attributeHasFieldErrors("ejemplar", "disponibilidad"))
+			.andExpect(view().name("ejemplares/editEjemplar"));
+	}
+	
+	@WithMockUser(value = "Us3r")
 	@Test
 	void testDescatalogarEjemplarSuccess() throws Exception {
 		mockMvc.perform(get("/ejemplares/descatalogar/{ejemplarId}",1))

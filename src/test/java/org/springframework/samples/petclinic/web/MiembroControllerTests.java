@@ -59,7 +59,8 @@ public class MiembroControllerTests {
     @Test
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/miembros/save").param("nombre", "A").param("apellidos", "A")
-				.param("dni", "00000000A").param("telefono", "000000000").param("email", "a@a.a").param("user.username", "usuarioejemplo").param("user.pass","Pass1234")
+				.param("dni", "00000000A").param("telefono", "000000000").param("email", "a@a.a")
+				.param("user.username", "usuarioejemplo").param("user.pass","Pass1234")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Miembro guardado correctamente"));
 	}
@@ -74,6 +75,45 @@ public class MiembroControllerTests {
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("miembro"))
 			.andExpect(model().attributeHasFieldErrors("miembro", "email"))
+			.andExpect(view().name("miembros/editMiembro"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrorsInPhoneFormat() throws Exception {
+		mockMvc.perform(post("/miembros/save")
+						.with(csrf())
+						.param("nombre", "Prueba").param("apellidos", "A")
+						.param("dni", "00000000A").param("telefono", "00").param("email", "a@a.a").param("user.username", "usuarioejemplo").param("user.pass","Pass1234"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("miembro"))
+			.andExpect(model().attributeHasFieldErrors("miembro", "telefono"))
+			.andExpect(view().name("miembros/editMiembro"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrorsInEmailFormat() throws Exception {
+		mockMvc.perform(post("/miembros/save")
+						.with(csrf())
+						.param("nombre", "Prueba").param("apellidos", "A")
+						.param("dni", "00000000A").param("telefono", "000000000").param("email", "a").param("user.username", "usuarioejemplo").param("user.pass","Pass1234"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("miembro"))
+			.andExpect(model().attributeHasFieldErrors("miembro", "email"))
+			.andExpect(view().name("miembros/editMiembro"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrorsInDNIFormat() throws Exception {
+		mockMvc.perform(post("/miembros/save")
+						.with(csrf())
+						.param("nombre", "Prueba").param("apellidos", "A")
+						.param("dni", "000A").param("telefono", "000000000").param("email", "a@a.a").param("user.username", "usuarioejemplo").param("user.pass","Pass1234"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("miembro"))
+			.andExpect(model().attributeHasFieldErrors("miembro", "dni"))
 			.andExpect(view().name("miembros/editMiembro"));
 	}
 	
