@@ -38,12 +38,6 @@ public class BibliotecarioService {
 		return BibliotecarioRepo.findById(id);
 	}
 
-
-	public void delete(Bibliotecario Bibliotecario) {
-		BibliotecarioRepo.deleteById(Bibliotecario.getId());
-
-	}
-
 	public void save(@Valid Bibliotecario bibliotecario) {
 		BibliotecarioRepo.save(bibliotecario);
 		
