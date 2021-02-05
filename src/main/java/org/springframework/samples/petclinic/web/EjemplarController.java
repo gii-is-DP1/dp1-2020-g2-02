@@ -13,6 +13,7 @@ import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.samples.petclinic.service.LibroService;
+import org.springframework.samples.petclinic.service.PrestamoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,9 @@ public class EjemplarController {
 	
 	@Autowired
 	LibroService libroService;
+	
+	@Autowired
+	PrestamoService prestamosService;
 	
 	@ModelAttribute("listaLibros")
 	public Map<Integer, String> titulosLibros() {
@@ -68,29 +72,21 @@ public class EjemplarController {
 		return vista;
 	}
 	
-	/*@GetMapping(path="/delete/{ejemplarId}")
-	public String borrarEjemplar(@PathVariable("ejemplarId") int ejemplarId, ModelMap modelmap) {
-		String vista = "libros/listLibro"; 
-		Optional<Ejemplar> ejemplar = ejemplaresService.findById(ejemplarId);
-		if(ejemplar.isPresent()) {
-			ejemplaresService.delete(ejemplar.get());
-			modelmap.addAttribute("message", "Ejemplar eliminado correctamente");
-		}else {
-			modelmap.addAttribute("message", "Ejemplar no encontrado");
-		}
-		vista = listEjemplares(modelmap);
-		return vista;
-	}*/
 	@GetMapping(path="/descatalogar/{ejemplarId}")
 	public String descatalogarLibro(@PathVariable("ejemplarId") int ejemplarId, ModelMap modelmap) {
 		String vista = "ejemplar/listEjemplar";
 		Optional<Ejemplar> ejemplar = ejemplaresService.findById(ejemplarId);
 		if (ejemplar.isPresent()) {
-			ejemplar.get().setDisponibilidad(Disponibilidad.DESCATALOGADO);
-			ejemplaresService.save(ejemplar.get());
+			if(prestamosService.findAll().stream().anyMatch(x->x.getEjemplar().equals(ejemplar.get()) && !x.isFinalizado())) {
+				modelmap.addAttribute("message", "No se puede descatalogar el ejemplar: Se encuentra en un préstamo actualmente.");
+			}
+			else {
+				ejemplar.get().setDisponibilidad(Disponibilidad.DESCATALOGADO);
+				ejemplaresService.save(ejemplar.get());
+				modelmap.addAttribute("message", "Ejemplar descatalogado con éxito");
+			}
 		}
 		else {
-
 			modelmap.addAttribute("message", "Ejemplar no encontrado");
 		}
 		vista = listEjemplares(modelmap);

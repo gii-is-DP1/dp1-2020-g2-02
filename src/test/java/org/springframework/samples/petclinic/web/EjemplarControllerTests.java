@@ -28,6 +28,7 @@ import org.springframework.samples.petclinic.model.Novedad;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.samples.petclinic.service.LibroService;
+import org.springframework.samples.petclinic.service.PrestamoService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -46,6 +47,9 @@ public class EjemplarControllerTests {
 	
 	@MockBean
 	LibroService libroService;
+	
+	@MockBean
+	PrestamoService prestamoService;
 	
 	@Autowired
 	private MockMvc mockMvc;
