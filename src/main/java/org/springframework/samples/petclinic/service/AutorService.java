@@ -29,12 +29,6 @@ public class AutorService {
 		return AutorRepo.findById(id);
 	}
 
-
-	public void delete(Autor Autor) {
-		AutorRepo.deleteById(Autor.getId());
-
-	}
-
 	public void save(@Valid Autor Autor) {
 		AutorRepo.save(Autor);
 

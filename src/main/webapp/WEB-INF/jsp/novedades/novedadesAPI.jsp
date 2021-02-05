@@ -1,10 +1,16 @@
+<%@ page session="false" trimDirectiveWhitespaces="true" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>API Novedades</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script>
+<petclinic:layout pageName="novedades">
+    <h1>Novedades</h1>
+        	<div id="caja"></div>
+</petclinic:layout>
+
+<script>
         
         $(document).ready(function() {
             $.ajax({
@@ -13,15 +19,11 @@
                 dataType: "json",
             	success: function(data) {
             		var len = data.length;
+            		
                 	for(var i=0; i<len; i++){
-            			document.write("<h1>"+data[i].titulo+":</h1>" +"<p>"+ data[i].fechaPublicacion + " _ Contenido: " + data[i].contenido+"</p>");
+                		document.getElementById('caja').innerHTML += '<div style="border-radius: 10px;border-color: black;border-style: solid;background-color: white;padding: 1.5%;margin: 1.5%;"> <h2>' + data[i].titulo + '</h2>\n<em> Publicada el '+ data[i].fechaPublicacion +'</em>\n<p style="margin-top:1%;">'+ data[i].contenido + '</p></div>';
                 	}
             	}
  			});
         });
         </script>
-    </head>
-
-
-</html>
-

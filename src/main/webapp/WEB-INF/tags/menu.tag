@@ -51,12 +51,6 @@
 					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
 					<span>Editoriales</span>
 				</petclinic:menuItem>
-				
-				<petclinic:menuItem active="${name eq 'Sugerencias'}" url="/sugerencias"
-					title="sugerencias">
-					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-					<span>Sugerencias</span>
-				</petclinic:menuItem>
 			</ul>
 
 
