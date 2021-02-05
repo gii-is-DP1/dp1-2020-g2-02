@@ -159,6 +159,7 @@
 			<version>${webjars-bootstrap.version}</version>
 		</dependency>
 
+
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -266,6 +267,7 @@
 					<failOnNoGitDirectory>false</failOnNoGitDirectory>
 				</configuration>
 			</plugin>
+
 
 			<plugin>
 				<groupId>ro.isdc.wro4j</groupId>
