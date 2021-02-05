@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Optional;
@@ -24,7 +25,9 @@ import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Libro;
+import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Novedad;
+import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.EjemplarService;
 import org.springframework.samples.petclinic.service.LibroService;
@@ -57,14 +60,48 @@ public class EjemplarControllerTests {
 	@BeforeEach
 	void setup() {
 	
+		User usuario = new User();
+		usuario.setUsername("alecasgar");
+		usuario.setPassword("Ale123456");
+		usuario.setEnabled(true);
+	
+		
+		Miembro miembro = new Miembro();
+		miembro.setId(1);
+		miembro.setNombre("Alejandro");
+		miembro.setApellidos("Castro Garcia");
+		miembro.setDni("49586958D");
+		miembro.setTelefono("123456789");
+		miembro.setEmail("alecagar@gmail.com");
+		miembro.setUser(usuario);
+		
 		Ejemplar ejemplar = new Ejemplar();
 		ejemplar.setId(1);
 		ejemplar.setDisponibilidad(Disponibilidad.DISPONIBLE);
 		ejemplar.setEstado("Primera página arrancada.");
 		ejemplar.setLibro(new Libro());
 		
+		Ejemplar ejemplar2 = new Ejemplar();
+		ejemplar2.setId(2);
+		ejemplar2.setDisponibilidad(Disponibilidad.EN_PRESTAMO);
+		ejemplar2.setEstado("Primera página arrancada.");
+		ejemplar2.setLibro(new Libro());
 		
+		Prestamo prestamo1 = new Prestamo();
+		prestamo1.setBibliotecario(new Bibliotecario());
+		prestamo1.setEjemplar(ejemplar2);
+		prestamo1.setFinalizado(false);
+		prestamo1.setId(1);
+		prestamo1.setFechaPrestamo(LocalDate.now());
+		prestamo1.setFechaDevolucion(LocalDate.of(2020, 02, 21));
+		
+		
+		
+		
+		//given(this.prestamoService.realizarReserva(1, miembro)).willReturn(prestamo1);
 		given(this.ejemplarService.findById(1)).willReturn(Optional.of(ejemplar));
+		given(this.ejemplarService.findById(2)).willReturn(Optional.of(ejemplar2));
+		given(this.prestamoService.findById(1)).willReturn(Optional.of(prestamo1));
 		//given(this.bibliotecarioService.save(bibliotecario));
 		
 	}
@@ -133,6 +170,18 @@ public class EjemplarControllerTests {
 		.andExpect(model().attribute("message","Ejemplar no encontrado"));
 		
 	}
+	
+//	@WithMockUser(value = "Us3r")
+//	@Test
+//	void testDescatalogarEjemplarEnPrestamo() throws Exception {
+//		mockMvc.perform(get("/ejemplares/descatalogar/{ejemplarId}",2))
+//		.andExpect(status().isOk())
+//		.andExpect(view().name("ejemplares/listEjemplar"))
+//		.andExpect(model().attribute("message","No se puede descatalogar el ejemplar: Se encuentra en un préstamo actualmente."));
+//		
+//	}
+	
+	
 	
 	
 
