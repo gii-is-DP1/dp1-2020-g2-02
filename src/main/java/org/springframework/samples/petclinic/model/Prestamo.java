@@ -40,5 +40,6 @@ public class Prestamo extends BaseEntity{
 	@JoinColumn( name = "ejemplar_id")
 	private Ejemplar ejemplar;
 	
+	@Column(name = "finalizado")
 	boolean finalizado;
 }
