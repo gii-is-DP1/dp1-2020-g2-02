@@ -15,6 +15,11 @@ public class DatosDiariosService {
 	private DatosDiariosRepository datosRepo;
 	
 	@Transactional
+	public int DatosDiariosCount() {
+		return (int) datosRepo.count();
+	}
+	
+	@Transactional
 	public void save(DatosDiarios datos) {
 		datosRepo.save(datos);
 	}
