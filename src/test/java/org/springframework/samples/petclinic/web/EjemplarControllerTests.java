@@ -171,15 +171,15 @@ public class EjemplarControllerTests {
 		
 	}
 	
-//	@WithMockUser(value = "Us3r")
-//	@Test
-//	void testDescatalogarEjemplarEnPrestamo() throws Exception {
-//		mockMvc.perform(get("/ejemplares/descatalogar/{ejemplarId}",2))
-//		.andExpect(status().isOk())
-//		.andExpect(view().name("ejemplares/listEjemplar"))
-//		.andExpect(model().attribute("message","No se puede descatalogar el ejemplar: Se encuentra en un préstamo actualmente."));
-//		
-//	}
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testDescatalogarEjemplarEnPrestamo() throws Exception {
+		mockMvc.perform(get("/ejemplares/descatalogar/{ejemplarId}",2))
+		.andExpect(status().isOk())
+		.andExpect(view().name("ejemplares/listEjemplar"))
+		.andExpect(model().attribute("message","No se puede descatalogar el ejemplar: Se encuentra en un préstamo actualmente."));
+		
+	}
 	
 	
 	
