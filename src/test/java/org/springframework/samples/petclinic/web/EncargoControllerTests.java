@@ -72,15 +72,15 @@ public class EncargoControllerTests {
 			.andExpect(view().name("encargos/editEncargo"));
 	}
 
-	@WithMockUser(value = "Us3r")
-    @Test
-    void testProcessCreationFormSuccess() throws Exception {
-		
-		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2020")
-				.param("fechaEntrega", "12/12/2020").param("proveedor", "1")
-				.with(csrf()))
-			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
-	}
+//	@WithMockUser(value = "Us3r")
+//    @Test
+//    void testProcessCreationFormSuccess() throws Exception {
+//		
+//		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2020")
+//				.param("fechaEntrega", "12/12/2020").param("proveedor", "1")
+//				.with(csrf()))
+//			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
+//	}
 	
 	@WithMockUser(value = "Us3r")
     @Test
