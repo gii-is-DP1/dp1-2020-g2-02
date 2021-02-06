@@ -51,17 +51,14 @@ public class Libro extends BaseEntity {
 	private LocalDate fecha_publicacion;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "editorial_id")
 	private Editorial editorial;
 	
 	@ManyToOne
-	@JsonIgnore
 	@JoinColumn(name = "genero_id")
 	private Genero genero;
 
 	@ManyToMany
-	@JsonIgnore
 	@JoinTable(
 	  name = "es_autor", 
 	  joinColumns = @JoinColumn(name = "libro_id"), 

@@ -40,6 +40,7 @@ public class Autor extends BaseEntity {
 
 
 	@ManyToMany
+	@JsonIgnore
 	@JoinTable(
 			  name = "es_autor", 
 			  joinColumns = @JoinColumn(name = "autor_id"), 
