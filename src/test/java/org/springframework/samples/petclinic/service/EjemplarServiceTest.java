@@ -27,7 +27,13 @@ public class EjemplarServiceTest {
 	@Test
 	public void testFindAll() {
 		Collection<Ejemplar> ejemplares = ejemplarService.findAll();
-		assertTrue(ejemplares.size()==8);
+		assertTrue(ejemplares.size()==9);
+	}
+	
+	@Test
+	public void testFindDisponibles() {
+		Collection<Ejemplar> ejemplaresDisponibles = ejemplarService.findDisponibles(libroService.findById(1).get());
+		assertTrue(ejemplaresDisponibles.size() == 2);
 	}
 	
 	@Test
@@ -40,7 +46,7 @@ public class EjemplarServiceTest {
 	@Test
 	public void testCountWithInitialData() {
 		int count=ejemplarService.ejemplarCount();
-		assertTrue(count==8);
+		assertTrue(count==9);
 	}
 	
 	@Test

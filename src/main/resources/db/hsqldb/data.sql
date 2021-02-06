@@ -75,6 +75,7 @@ INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (5,1,'Cubierta 
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (6,2,'En perfecto estado.','EN_PRESTAMO');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (7,3,'Algunas páginas arrugadas.','EN_PRESTAMO');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (8,4,'Algunas páginas arrugadas.','DISPONIBLE');
+INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (9,1,'Segunda página arrugada.','DISPONIBLE');
 
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (0,DATEADD(DAY, -30, CURRENT_TIMESTAMP()), DATEADD(DAY, -14, CURRENT_TIMESTAMP()), 1, 1,1,TRUE);
 INSERT INTO prestamos(id,fecha_prestamo,fecha_devolucion,bibliotecario_id,miembro_id,ejemplar_id,finalizado) VALUES (1,CURRENT_TIMESTAMP(), DATEADD(DAY, 16, CURRENT_TIMESTAMP()), null, 0,2,FALSE);
