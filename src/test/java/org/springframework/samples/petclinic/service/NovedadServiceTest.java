@@ -42,10 +42,7 @@ public class NovedadServiceTest {
 	@Test
 	public void testFindNovedadesHoy() {
 		Collection<Novedad> novedades = novedadService.findNovedadesHoy();
-		for(Novedad novedad:novedades) {
-			assertThat(novedad.getFechaPublicacion().isEqual(LocalDate.now()));
-
-		}
+		assertThat(novedades.size()).isEqualTo(1);
 	}
 	
 	@Test
