@@ -8,9 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -21,13 +19,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Autor;
-import org.springframework.samples.petclinic.model.DatosDiarios;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Puntuacion;
 import org.springframework.samples.petclinic.model.User;
-import org.springframework.samples.petclinic.service.AutorService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PuntuacionService;
@@ -115,6 +110,19 @@ public class PuntuacionControllerTest {
 		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "3")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Libro valorado correctamente"));
+	}
+	
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/puntuacion/save")
+						.with(csrf())
+						.param("libro", "2"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("puntuacion"))
+			.andExpect(model().attributeHasFieldErrors("puntuacion", "puntaje"))
+			.andExpect(view().name("libros/valorarLibro"));
 	}
 	
 	@WithMockUser(value = "Us3r")

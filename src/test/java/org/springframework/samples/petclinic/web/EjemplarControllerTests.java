@@ -123,7 +123,7 @@ public class EjemplarControllerTests {
 				.param("titulo", "A")
 				.param("estado", "A"))
 			.andExpect(model().attribute("message", "Ejemplar guardado correctamente"))
-			.andExpect(view().name("ejemplares/listEjemplar"));;
+			.andExpect(view().name("ejemplares/listEjemplar"));
 	}
 	
 	@WithMockUser(value = "Us3r")
