@@ -123,7 +123,7 @@ public class PuntuacionControllerTest {
 		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4")
 				.param("libro", "1").param("autor", "1")
 			.with(csrf()))
-			.andExpect(model().attribute("message", "Valoración actualizada correctamente"));
+			.andExpect(model().attribute("message", "Libro valorado correctamente"));
 	}
 	
 	

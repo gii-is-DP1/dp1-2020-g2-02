@@ -98,6 +98,8 @@ INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(1, 3, 4, 1, 2);
 INSERT INTO cantidad(id, unidades, precio_unitario, encargo_id, libro_id) VALUES(2, 7, 3, 0, 2);
 
+INSERT INTO datos(id, encargos, fecha, novedades, prestamos) VALUES(1, 2, '2020-02-06', 3, 4);
+
 
 -- Petclinic --
 
