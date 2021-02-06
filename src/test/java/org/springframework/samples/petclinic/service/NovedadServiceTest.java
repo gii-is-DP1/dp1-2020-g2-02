@@ -4,6 +4,7 @@ package org.springframework.samples.petclinic.service;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,15 @@ public class NovedadServiceTest {
 	public void testFindById() {
 		Novedad novedad = novedadService.findById(0).get();
 		assertThat(novedad.getTitulo()).isEqualTo("Nuevos ejemplares");
+	}
+	
+	@Test
+	public void testFindNovedadesHoy() {
+		Collection<Novedad> novedades = novedadService.findNovedadesHoy();
+		for(Novedad novedad:novedades) {
+			assertThat(novedad.getFechaPublicacion().isEqual(LocalDate.now()));
+
+		}
 	}
 	
 	@Test

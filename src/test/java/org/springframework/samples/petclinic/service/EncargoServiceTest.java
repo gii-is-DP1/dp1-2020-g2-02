@@ -40,6 +40,13 @@ public class EncargoServiceTest {
 		assertThat(encargo.getFechaRealizacion()).isEqualTo(LocalDate.now().minusDays(2));
 	}
 	
+	@Test
+	public void testFindEncargosHoy() {
+		Collection<Encargo> encargos = encargoService.findEncargosHoy();
+		for(Encargo encargo:encargos) {
+			assertThat(encargo.getFechaRealizacion().isEqual(LocalDate.now()));
+		}
+	}
 	
 	@Test
 	@Transactional
@@ -54,4 +61,16 @@ public class EncargoServiceTest {
 		int cuentaFinal = encargoService.encargoCount();
 		assertThat(cuentaFinal).isEqualTo(cuentaInicial + 1);
 	}
+	
+	@Test
+	public void testPedidosUrgentes() {
+		Collection<Encargo> encargos = encargoService.pedidosUrgentes();
+		for(Encargo encargo:encargos) {
+			int rango = encargo.getFechaEntrega().getDayOfYear()
+					-encargo.getFechaRealizacion().getDayOfYear();
+			assertThat(rango<=2);
+		}
+	}
+	
+	
 }
