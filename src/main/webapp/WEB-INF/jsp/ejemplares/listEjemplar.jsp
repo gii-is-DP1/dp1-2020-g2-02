@@ -49,7 +49,7 @@
                     </spring:url>
                     <a href ="${fn:escapeXml(ejemplarUrl)}">Descatalogar ejemplar</a>
                     <br>
-                    <spring:url value="/ejemplares/new" var="ejemplarUrl">
+                   <spring:url value="/ejemplares/edit/{ejemplarId}" var="ejemplarUrl">
                         <spring:param name="ejemplarId" value="${ejemplar.id}"/>
                     </spring:url>
                     <a href ="${fn:escapeXml(ejemplarUrl)}">Editar estado</a>

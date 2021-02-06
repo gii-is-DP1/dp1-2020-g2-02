@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
+import static org.mockito.ArgumentMatchers.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -8,30 +9,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Autor;
-import org.springframework.samples.petclinic.model.DatosDiarios;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Puntuacion;
 import org.springframework.samples.petclinic.model.User;
-import org.springframework.samples.petclinic.service.AutorService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PuntuacionService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.LibroNoPrestadoAnteriormenteException;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -72,6 +69,12 @@ public class PuntuacionControllerTest {
 		libro.setISBN("1234567890");
 		libro.setTitulo("Prueba");
 		libro.setIdioma("Prueba");
+		
+		Libro libro2 = new Libro();
+		libro2.setId(2);
+		libro2.setISBN("1234567890");
+		libro2.setTitulo("Prueba");
+		libro2.setIdioma("Prueba");
 
 		User usuario = new User();
 		usuario.setUsername("alecasgar");
@@ -92,9 +95,13 @@ public class PuntuacionControllerTest {
 		puntuacion.setMiembro(miembro);
 		puntuacion.setLibro(libro);
 		
-		given(this.libroService.findById(TEST_LIBRO_ID)).willReturn(Optional.of(libro));
+		given(this.libroService.findById(1)).willReturn(Optional.of(libro));
+		given(this.libroService.findById(2)).willReturn(Optional.of(libro2));
 		given(this.miembroService.findById(1)).willReturn(Optional.of(miembro));
 		given(this.puntuacionService.findById(1)).willReturn(Optional.of(puntuacion));
+		given(this.userService.findByUsername("alecasgar")).willReturn(usuario);
+		given(this.miembroService.findByUser(usuario)).willReturn(miembro);
+		
 		
 	}
 	
@@ -135,11 +142,11 @@ public class PuntuacionControllerTest {
 			.andExpect(model().attribute("message", "Hay fallos en el formulario"));
 	}
 	
-	@WithMockUser(value = "Us3r")
+	@WithMockUser(value = "alecasgar")
     @Test
     void testProcessCreationFormLibroNoPrestado() throws Exception {
-		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "3")
-				.param("miembro", "1")
+		Mockito.doThrow(new LibroNoPrestadoAnteriormenteException()).when(puntuacionService).savePuntuacion(any(Puntuacion.class));
+		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "2")				
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Este libro no ha sido prestado por usted anteriormente"));
 	}

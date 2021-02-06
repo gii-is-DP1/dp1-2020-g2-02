@@ -33,7 +33,7 @@ public class Editorial extends BaseEntity {
 	
 	@Column(name = "telefono")
 	@NotEmpty
-	@Digits(fraction = 0, integer = 10)
+	@Pattern(regexp = "^[0-9]{9}$", message="El número de teléfono debe contener 9 dígitos")
 	private String telefono;
 
 	@Column(name = "email")
@@ -43,6 +43,6 @@ public class Editorial extends BaseEntity {
 
 	@Column(name = "web")
 	@NotEmpty
-	@Pattern(regexp="https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_\\+.~#?&//=]*)")
+	@Pattern(regexp="(www\\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\\.)+[\\w]{2,}(\\/\\S*)?$")
 	private String web;
 }

@@ -60,8 +60,8 @@ public class EncargoServiceTest {
 		int cuentaInicial = encargoService.encargoCount();
 		Encargo encargo = new Encargo();
 		encargo.setId(cuentaInicial);
-		encargo.setFechaEntrega(LocalDate.of(2020, 12, 31));
-		encargo.setFechaRealizacion(LocalDate.of(2021, 1, 6));
+		encargo.setFechaEntrega(LocalDate.now().plusDays(1));
+		encargo.setFechaRealizacion(LocalDate.now());
 		encargo.setProveedor(proveedorService.findById(0).get());
 		encargoService.save(encargo);
 		int cuentaFinal = encargoService.encargoCount();
