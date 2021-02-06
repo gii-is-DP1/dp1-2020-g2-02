@@ -36,6 +36,7 @@ public class EjemplarServiceTest {
 		assertTrue(ejemplar.getEstado().equals("Cubierta doblada."));
 	}
 	
+	
 	@Test
 	public void testCountWithInitialData() {
 		int count=ejemplarService.ejemplarCount();

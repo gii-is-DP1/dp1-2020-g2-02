@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.service;
 
 import static org.junit.Assert.assertTrue;
 
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -36,6 +37,14 @@ public class MiembroServiceTest {
 	public void testFindById() {
 		Miembro miembro = miembroService.findById(0).get();
 		assertTrue(miembro.getNombre().equals("Jorge"));
+	}
+	
+	
+	@Test
+	public void testFindByUser() {
+		User user = userService.findUser("jorgon1").get();
+		Miembro miembro = miembroService.findByUser(user);
+		assertTrue(miembro.getUser().equals(user));
 	}
 	
 	@Test
