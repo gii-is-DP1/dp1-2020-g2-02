@@ -9,7 +9,7 @@ addons:
   sonarcloud:
     organization: "gii-is-dp1"
     token:
-      secure: fc230c5c4fd37badc3916cfdbbe8780226210be0 # encrypted value of your token
+      secure: 3ffa109593a9fd216a5c8cf1a210c65451b49a63 # encrypted value of your token
 
 script:
   - mvn test -Dspring-boot.run.profiles=mysql-travis
