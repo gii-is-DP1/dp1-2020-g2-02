@@ -1,13 +1,17 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.hibernate.mapping.Collection;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,44 +20,56 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Bibliotecario;
+import org.springframework.samples.petclinic.model.DatosDiarios;
+import org.springframework.samples.petclinic.model.Disponibilidad;
+import org.springframework.samples.petclinic.model.Ejemplar;
+import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.DatosDiariosService;
+import org.springframework.samples.petclinic.service.EncargoService;
 import org.springframework.samples.petclinic.service.MiembroService;
-import org.springframework.samples.petclinic.service.SugerenciaService;
+import org.springframework.samples.petclinic.service.PrestamoService;
 import org.springframework.samples.petclinic.service.UserService;
-import org.springframework.samples.petclinic.service.exceptions.LibroNoExistenteException;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-@WebMvcTest(controllers=SugerenciaController.class,
+@WebMvcTest(controllers=WelcomeController.class,
 excludeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = WebSecurityConfigurer.class),
 excludeAutoConfiguration= SecurityConfiguration.class)
 
-public class SugerenciaControllerTests {
-	
+public class WelcomeControllerTest {
+
 	@Autowired
-	SugerenciaController controller;
+	WelcomeController controller;
 	
 	@MockBean
-	SugerenciaService sugerenciaService;
-	
+    UserService userService;
+    
 	@MockBean
-	MiembroService miembroService;
-		
+    MiembroService miembroService;
+    
 	@MockBean
- 	UserService userService;
-	
+    PrestamoService prestamoService;
+    
+	@MockBean
+    EncargoService encargoService;
+
+	@MockBean
+    DatosDiariosService datosService;
+
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@BeforeEach
 	void setup() {
+	
 		User usuario = new User();
 		usuario.setUsername("alecasgar");
-		usuario.setPassword("Alex123456");
+		usuario.setPassword("Ale123456");
 		usuario.setEnabled(true);
 	
 		
@@ -66,52 +82,28 @@ public class SugerenciaControllerTests {
 		miembro.setEmail("alecagar@gmail.com");
 		miembro.setUser(usuario);
 		
-		given(this.userService.findByUsername("alecasgar")).willReturn(usuario);
-		given(this.miembroService.findByUser(usuario)).willReturn(miembro);
+		DatosDiarios datosDiarios = new DatosDiarios();
+		datosDiarios.setFecha(LocalDate.now());
+		datosDiarios.setId(1);
+		DatosDiarios datosDiarios2 = new DatosDiarios();
+		datosDiarios2.setFecha(LocalDate.of(2020, 01, 01));
+		datosDiarios2.setId(2);
+		List<DatosDiarios> dd = new ArrayList<>();
+		dd.add(datosDiarios);dd.add(datosDiarios2);
+		
+		given(this.datosService.findAllOrderByFecha()).willReturn(dd);
+		
 	}
-	
-	@WithMockUser(value = "alecasgar")
-	@Test
-	void testSugerenciaList() throws Exception {
-		mockMvc.perform(get("/sugerencias"))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("sugerencias"))
-			.andExpect(view().name("sugerencias/listSugerencia"));
-	}
-	
-	
-	@WithMockUser(value = "alecasgar")
-    @Test
-    void testInitCreationForm() throws Exception {
-		mockMvc.perform(get("/sugerencias/new"))
-			.andExpect(status().isOk())
-			.andExpect(model().attributeExists("sugerencia"))
-			.andExpect(view().name("sugerencias/editSugerencia"));
-	}
-	
-	
-	@WithMockUser(value = "alecasgar")
-    @Test
-    void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/sugerencias/save")
-				.param("tituloLibro", "A")
-				.param("nombreAutor", "A")
-			.with(csrf()))
-			.andExpect(view().name("sugerencias/listSugerencia"))
-			.andExpect(model().attribute("message", "Sugerencia guardada correctamente"));
-	}
-	
 	
 	@WithMockUser(value = "Us3r")
-    @Test
-    void testProcessCreationFormHasErrors() throws Exception {
-		mockMvc.perform(post("/sugerencias/save")
-						.param("titulo_libro", "Prueba")
-			.with(csrf()))
+	@Test
+	void testWelcome() throws Exception {
+		mockMvc.perform(get("/welcome"))
 			.andExpect(status().isOk())
-			.andExpect(model().attributeHasErrors("sugerencia"))
-			.andExpect(model().attributeHasFieldErrors("sugerencia","nombreAutor"))
-			.andExpect(view().name("sugerencias/editSugerencia"));
+			.andExpect(model().attributeExists("datos"))
+			.andExpect(model().attributeExists("persons"))
+			.andExpect(model().attributeExists("title"))
+			.andExpect(model().attributeExists("group"))
+			.andExpect(view().name("welcome"));
 	}
-
 }

@@ -20,12 +20,12 @@ public class SugerenciaControllerAlternativo {
 	@Autowired
 	private SugerenciaService sugerenciaService;
 	
-	@RequestMapping(value="/getAll", method = RequestMethod.GET)
+	@RequestMapping(value="/get", method = RequestMethod.GET)
 	public @ResponseBody Iterable<Sugerencia> getSugerencias(){
 		return sugerenciaService.findAllOrderByTituloLibro();
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/get/{id}", method = RequestMethod.GET)
 	public @ResponseBody Sugerencia getSugerencia(@PathVariable int id){
 		return sugerenciaService.findById(id).get();
 	}
@@ -36,12 +36,12 @@ public class SugerenciaControllerAlternativo {
 		sugerenciaService.save(newSugerencia);
 	 }
 	
-	@GetMapping(path="/verTodas")
+	@GetMapping(path="")
 	public String listSugerencias() {
 		return "sugerencias/sugerenciasAPI";
 	}
 	
-	@GetMapping(path="/ver/{id}")
+	@GetMapping(path="/{id}")
 	public String listSugerencia(@PathVariable int id) {
 		return "sugerencias/sugerenciasAPI";
 	}

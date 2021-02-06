@@ -96,7 +96,7 @@ public class EditorialControllerTest {
 	
 	@WithMockUser(value = "Us3r")
 	@Test
-	void testProcessCreationFormEditorialHasErrors() throws Exception {
+	void testProcessCreationFormEditorialWrongDNIF() throws Exception {
 		mockMvc.perform(post("/editoriales/save")
 				.with(csrf())
 				.param("nombre", "Norma")
@@ -108,8 +108,38 @@ public class EditorialControllerTest {
 		.andExpect(model().attributeHasErrors("editorial"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("editoriales/editEditorial"));
-				
-		
+	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testProcessCreationFormEditorialWrongEmail() throws Exception {
+		mockMvc.perform(post("/editoriales/save")
+				.with(csrf())
+				.param("nombre", "Norma")
+				.param("nif", "A1231123B")
+				.param("direccion", "calle Ejemplo, 13, Barcelona")
+				.param("telefono", "650666999")
+				.param("email", "om")
+				.param("web", "www.norma.com"))
+		.andExpect(model().attributeHasErrors("editorial"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("editoriales/editEditorial"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testProcessCreationFormEditorialWrongWeb() throws Exception {
+		mockMvc.perform(post("/editoriales/save")
+				.with(csrf())
+				.param("nombre", "Norma")
+				.param("nif", "A1231123B")
+				.param("direccion", "calle Ejemplo, 13, Barcelona")
+				.param("telefono", "650666999")
+				.param("email", "norma@mail.com")
+				.param("web", "om"))
+		.andExpect(model().attributeHasErrors("editorial"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("editoriales/editEditorial"));
 	}
 	
 	@WithMockUser(value = "Us3r")
