@@ -15,5 +15,5 @@ before_install:
       - master
 script:
   # other script steps might be done before running the actual analysis
+  - mvn test -Dspring-boot.run.profiles=mysql-travis
   - sonar-scanner
-script: mvn test -Dspring-boot.run.profiles=mysql-travis
