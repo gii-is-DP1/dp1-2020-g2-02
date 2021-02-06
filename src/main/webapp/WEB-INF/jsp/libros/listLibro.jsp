@@ -9,7 +9,32 @@
 <petclinic:layout pageName="Libros">
     <h2>Libros</h2>
     
-    <petclinic:searchInput/>
+ <form action="/libros" method="get">
+    <div class="row" style="margin-bottom:1%">
+        <label class="col-sm-2 control-label">Título</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="q" placeholder= "Buscar por título" value="${param.q}"/>
+        </div>
+        
+    </div>
+    <div class="row" style="margin-bottom:1%">
+        <label class="col-sm-2 control-label">Autor</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="qAutor" placeholder= "Buscar por autor" value="${param.qAutor}"/>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:1%">
+        <label class="col-sm-2 control-label">Editorial</label>
+        <div class="col-sm-10">
+            <input class="form-control" type="text" name="qEditorial" placeholder= "Buscar por editorial" value="${param.qEditorial}"/>
+        </div>
+    </div> 
+    <div class="row" style="margin-bottom:1%">
+        <div class="col-sm-2">
+            <input class="btn btn-default" type="submit"  value="BUSCAR">
+        </div>
+    </div>
+    </form>
     
         <table id="LibrosTable" class="table table-striped">
         <thead>

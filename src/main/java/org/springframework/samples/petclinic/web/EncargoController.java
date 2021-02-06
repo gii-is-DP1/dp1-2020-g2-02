@@ -75,10 +75,7 @@ public class EncargoController {
 
 		//Guarda el encargo.
 		if(request.getParameter("guardar")!=null) {
-			if(lineasPedido==null || lineasPedido.isEmpty()) {
-				modelmap.addAttribute("message", "Introduce al menos un libro en el pedido");
-			}
-			else if (result.hasErrors()) {
+			if (result.hasErrors()) {
 				modelmap.addAttribute("encargo", encargo);
 			} else {
 				try {

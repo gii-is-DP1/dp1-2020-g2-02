@@ -1,4 +1,4 @@
-package AssertTest;
+package AssertJTest;
 
 import org.assertj.core.api.AbstractAssert;
 import org.springframework.samples.petclinic.model.Libro;

@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -30,12 +31,12 @@ public class Encargo extends BaseEntity{
 	
 	@Column(name = "fecha_entrega")
 	@NotNull
+	@Future
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	
 	private LocalDate fechaEntrega; 
 	
 	@ManyToOne
-	@NotNull
 	@JoinColumn(name = "proveedor_id")
 	private Proveedor proveedor;
 		

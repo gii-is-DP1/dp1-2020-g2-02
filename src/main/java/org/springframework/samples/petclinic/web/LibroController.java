@@ -101,9 +101,9 @@ public class LibroController {
 		if(q != null && !q.isEmpty()) 
 			libros=libros.stream().filter(x->x.getTitulo().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
 		if(qAutor != null && !qAutor.isEmpty()) 
-			libros=libros.stream().filter(x->x.getAutores().stream().anyMatch(y->y.getNombre().toLowerCase().contains(qAutor.toLowerCase()))).collect(Collectors.toList());
+			libros=libros.stream().filter(x->x.getAutores().stream().anyMatch(y->(y.getNombre()+" "+y.getApellidos()).toLowerCase().contains(qAutor.toLowerCase()))).collect(Collectors.toList());
 		if(qEditorial != null && !qEditorial.isEmpty()) 
-			libros=libros.stream().filter(x->x.getEditorial().getNombre().toLowerCase().contains(q.toLowerCase())).collect(Collectors.toList());
+			libros=libros.stream().filter(x->x.getEditorial().getNombre().toLowerCase().contains(qEditorial.toLowerCase())).collect(Collectors.toList());
 		
 		model.addAttribute("libros",libros);
 		model.addAttribute("puntuaciones",puntuaciones);

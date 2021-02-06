@@ -77,7 +77,7 @@ public class EjemplarController {
 		String vista = "ejemplar/listEjemplar";
 		Optional<Ejemplar> ejemplar = ejemplaresService.findById(ejemplarId);
 		if (ejemplar.isPresent()) {
-			if(prestamosService.findAll().stream().anyMatch(x->x.getEjemplar().equals(ejemplar.get()) && !x.isFinalizado())) {
+			if(ejemplar.get().getDisponibilidad()!=Disponibilidad.DISPONIBLE) {
 				modelmap.addAttribute("message", "No se puede descatalogar el ejemplar: Se encuentra en un préstamo actualmente.");
 			}
 			else {
@@ -93,23 +93,34 @@ public class EjemplarController {
 		return vista;
 	}
 	
-	public String modificarEstado(Ejemplar ejemplar, ModelMap modelmap,BindingResult result, String estado, Principal principal) {
-		String vista = "ejemplares/listEjemplar";
-		System.out.println(ejemplar);
-		if(result.hasErrors()){
-			modelmap.addAttribute("message", result.toString());
-			modelmap.addAttribute("ejemplar", ejemplar);
-			modelmap.addAttribute("message", "Hay fallos en el formulario.");
-			return "ejemplares/editEjemplar";
-			}else {
-				ejemplar.setEstado(estado);
-				
-			}
-		return vista;
-	}
-	
-	
-	
-	
-	
+    @GetMapping(path="/edit/{ejemplarId}")
+    public String modificarEstado(@PathVariable("ejemplarId") int ejemplarId, ModelMap modelmap) {
+        String vista = "ejemplares/editEstado";
+
+        Optional<Ejemplar> ejemplar = ejemplaresService.findById(ejemplarId);
+        
+        if(ejemplar.isPresent()) {
+            modelmap.addAttribute("ejemplar", ejemplar.get());
+        }
+        else {
+            modelmap.addAttribute("message", "Ejemplar no encontrado");
+            vista = listEjemplares(modelmap);
+        }
+        
+        return vista;
+    }
+    
+    @PostMapping(path="/saveEstado")
+    public String guardarEstadoEjemplar(@Valid Ejemplar ejemplar, BindingResult result, ModelMap modelmap) {
+        String vista = "ejemplares/listEjemplar";
+        if(result.hasErrors()) {
+            modelmap.addAttribute("ejemplar", ejemplar);
+            return "ejemplares/editEstado";
+        }else {
+            ejemplaresService.save(ejemplar);
+            modelmap.addAttribute("message", "Estado del ejemplar modificado correctamente");
+            vista = listEjemplares(modelmap);
+        }
+        return vista;
+    }
 }
