@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.stereotype.Service;
@@ -42,6 +41,13 @@ public class BibliotecarioServiceTests {
 		Bibliotecario bibliotecario = bibliotecarioService.findById(0).get();
 		String nombre = bibliotecario.getNombre();
 		assertThat(nombre).isEqualTo("Fernando");
+	}
+	
+	@Test
+	public void testFindByUser() {
+		User user = userService.findUser("ferror1").get();
+		Bibliotecario bibliotecario = bibliotecarioService.findByUser(user);
+		assertTrue(bibliotecario.getUser().equals(user));
 	}
 	
 	@Test
