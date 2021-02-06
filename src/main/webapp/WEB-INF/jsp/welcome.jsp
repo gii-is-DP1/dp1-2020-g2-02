@@ -35,11 +35,16 @@
     		<li>Se realizaron ${datos.encargos} encargos.</li>
     	</ul>
     </div>
+    
+    <br>
     <br>
     <h2>APIs</h2>
+    <a href='/api/libros/verTodas'>Libros</a>
+    <br>
     <a href='/api/novedades/verTodas'>Novedades</a>
     <br>
     <a href='/api/sugerencias/verTodas'>Sugerencias</a>
+    
 </petclinic:layout>
 
 <script>
