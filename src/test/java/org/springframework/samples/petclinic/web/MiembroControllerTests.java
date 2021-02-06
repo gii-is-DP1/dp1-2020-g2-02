@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.web;
 
+import static org.mockito.BDDMockito.given;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -7,6 +8,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -14,6 +19,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
+import org.springframework.samples.petclinic.model.Bibliotecario;
+import org.springframework.samples.petclinic.model.Disponibilidad;
+import org.springframework.samples.petclinic.model.Ejemplar;
+import org.springframework.samples.petclinic.model.Libro;
+import org.springframework.samples.petclinic.model.Miembro;
+import org.springframework.samples.petclinic.model.Prestamo;
+import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
@@ -36,6 +48,32 @@ public class MiembroControllerTests {
 
 	@Autowired
 	private MockMvc mockMvc;
+	
+	
+	@BeforeEach
+	void setup() {
+	
+		User usuario = new User();
+		usuario.setUsername("alecasgar");
+		usuario.setPassword("Ale123456");
+		usuario.setEnabled(true);
+	
+		
+		Miembro miembro = new Miembro();
+		miembro.setId(1);
+		miembro.setNombre("Alejandro");
+		miembro.setApellidos("Castro Garcia");
+		miembro.setDni("49586958D");
+		miembro.setTelefono("123456789");
+		miembro.setEmail("alecagar@gmail.com");
+		miembro.setUser(usuario);
+
+
+		given(this.miembroService.findById(1)).willReturn(Optional.of(miembro));
+		given(this.userService.findUser("alecasgar")).willReturn(Optional.of(usuario));
+		
+	}
+	
 	
 	@WithMockUser(value = "Us3r")
 	@Test
@@ -117,4 +155,31 @@ public class MiembroControllerTests {
 			.andExpect(view().name("miembros/editMiembro"));
 	}
 	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testGuardarMiembroExistente() throws Exception {
+		mockMvc.perform(post("/miembros/save").param("nombre", "A").param("apellidos", "A")
+				.param("dni", "49586958D").param("telefono", "000000000").param("email", "a@a.a")
+				.param("user.username", "alecasgar").param("user.pass","Pass1234")
+			.with(csrf()))
+			.andExpect(model().attribute("message", "Usuario ya existente"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testDeshabilitarMiembroSuccess() throws Exception {
+		mockMvc.perform(get("/miembros/deshabilitar/{miembroId}", 1))
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("message", "Miembro deshabilitado correctamente"))
+			.andExpect(view().name("miembros/listMiembro"));
+	}
+
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testDeshabilitarMiembroNoExistente() throws Exception {
+		mockMvc.perform(get("/miembros/deshabilitar/{miembroId}", 2))
+			.andExpect(status().isOk())
+			.andExpect(model().attribute("message", "Miembro no encontrado"))
+			.andExpect(view().name("miembros/listMiembro"));
+	}
 }

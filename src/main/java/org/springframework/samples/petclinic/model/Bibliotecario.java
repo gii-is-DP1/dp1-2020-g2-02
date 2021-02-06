@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -19,10 +20,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "bibliotecarios")
+@Table(name = "bibliotecarios", uniqueConstraints={@UniqueConstraint(columnNames={"dni"})})
 public class Bibliotecario extends BaseEntity {
 		@Column(name = "nombre")
 		@NotEmpty

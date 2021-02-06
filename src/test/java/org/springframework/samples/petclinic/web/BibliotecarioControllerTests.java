@@ -71,7 +71,7 @@ public class BibliotecarioControllerTests {
 		
 		
 		given(this.bibliotecarioService.findById(1)).willReturn(Optional.of(bibliotecario));
-		//bibliotecarioService.save(bibliotecario);
+		bibliotecarioService.save(bibliotecario);
 		//given(this.bibliotecarioService.save(bibliotecario));
 		
 	}
@@ -178,24 +178,24 @@ public class BibliotecarioControllerTests {
 	
 	
 	
-//	@WithMockUser(value = "Us3r")
-//	@Test
-//	void testProcessCreationFormBibliotecarioDuplicatedBibliotecario() throws Exception {
-//		mockMvc.perform(post("/bibliotecarios/save")
-//				.with(csrf())
-//				.param("nombre", "Alejandro")
-//				.param("apellidos", "Castro García")
-//				.param("dni", "49586958D")
-//				.param("telefono", "123456789")
-//				.param("email", "alecagar@gmail.com")
-//				.param("user.username", "alecagar")
-//				.param("user.password", "Pass1234"))
-//		.andExpect(model().attributeExists("bibliotecarios"))
-//		.andExpect(model().attribute("message", "Usuario ya existente"))
-//		.andExpect(status().isOk())
-//		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
-//		
-//	}
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testProcessCreationFormBibliotecarioDuplicatedBibliotecario() throws Exception {
+		mockMvc.perform(post("/bibliotecarios/save")
+				.with(csrf())
+				.param("nombre", "Alejandro")
+				.param("apellidos", "Castro García")
+				.param("dni", "49586958D")
+				.param("telefono", "123456789")
+				.param("email", "alecagar@gmail.com")
+				.param("user.username", "alecagar")
+				.param("user.password", "Pass1234"))
+		.andExpect(model().attributeExists("bibliotecarios"))
+		.andExpect(model().attribute("message", "Usuario ya existente"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
+		
+	}
 	
 //	@WithMockUser(value = "Us3r")
 //    @Test
