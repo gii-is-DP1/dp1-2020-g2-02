@@ -31,12 +31,6 @@ public class EjemplarServiceTest {
 	}
 	
 	@Test
-	public void testFindDisponibles() {
-		Collection<Ejemplar> ejemplaresDisponibles = ejemplarService.findDisponibles(libroService.findById(1).get());
-		assertTrue(ejemplaresDisponibles.size() == 2);
-	}
-	
-	@Test
 	public void testFindById() {
 		Ejemplar ejemplar = ejemplarService.findById(2).get();
 		assertTrue(ejemplar.getEstado().equals("Cubierta doblada."));
@@ -51,7 +45,7 @@ public class EjemplarServiceTest {
 			int count = ejemplares.size();
 			disponibles = disponibles+count;
 		}
-		assertTrue(disponibles==2);
+		assertTrue(disponibles==3);
 		
 	}
 	
