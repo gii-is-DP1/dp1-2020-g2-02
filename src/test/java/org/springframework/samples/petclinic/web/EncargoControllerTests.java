@@ -75,17 +75,16 @@ public class EncargoControllerTests {
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
-		
 		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2022")
 				.param("fechaEntrega", "12/12/2200").param("guardar", "true")
 				.with(csrf()))
 			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
+
 	}
 	
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormHasErrors() throws Exception {
-		
 		mockMvc.perform(post("/encargos/save")
 						.with(csrf())
 						.param("guardar", "true")

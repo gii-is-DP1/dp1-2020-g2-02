@@ -124,6 +124,19 @@ public class PuntuacionControllerTest {
 			.andExpect(model().attribute("message", "Libro valorado correctamente"));
 	}
 	
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/puntuacion/save")
+						.with(csrf())
+						.param("libro", "2"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("puntuacion"))
+			.andExpect(model().attributeHasFieldErrors("puntuacion", "puntaje"))
+			.andExpect(view().name("libros/valorarLibro"));
+	}
+	
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessUpdateFormSuccess() throws Exception {
