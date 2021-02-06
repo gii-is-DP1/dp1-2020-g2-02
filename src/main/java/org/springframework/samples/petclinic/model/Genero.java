@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +27,8 @@ public class Genero extends BaseEntity {
     @JoinTable(
               name = "pertenece_a", 
               joinColumns = @JoinColumn(name = "genero_id"), 
-              inverseJoinColumns = @JoinColumn(name = "libro_id"))     
+              inverseJoinColumns = @JoinColumn(name = "libro_id"))   
+	
     @JoinColumn(name = "libro_id")
     private List<Libro> libros;
 	

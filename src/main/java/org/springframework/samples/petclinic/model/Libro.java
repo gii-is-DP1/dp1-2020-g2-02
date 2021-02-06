@@ -59,7 +59,6 @@ public class Libro extends BaseEntity {
 	private Genero genero;
 
 	@ManyToMany
-	@JsonIgnore
 	@JoinTable(
 	  name = "es_autor", 
 	  joinColumns = @JoinColumn(name = "libro_id"), 
@@ -67,15 +66,18 @@ public class Libro extends BaseEntity {
 	private List<Autor> autores;
 	
 	@ManyToMany
+	@JsonIgnore
     @JoinTable(
       name = "pertenece_a", 
       joinColumns = @JoinColumn(name = "libro_id"), 
       inverseJoinColumns = @JoinColumn(name = "genero_id"))
     private List<Genero> generos;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro")
 	private List<Cantidad> cantidad;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "libro", fetch = FetchType.EAGER)
 	private List<Ejemplar> ejemplar;	
 	

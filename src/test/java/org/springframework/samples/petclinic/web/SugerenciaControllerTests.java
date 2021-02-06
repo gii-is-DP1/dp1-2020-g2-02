@@ -102,16 +102,16 @@ public class SugerenciaControllerTests {
 	}
 	
 	
-//	@WithMockUser(value = "Us3r")
-//    @Test
-//    void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/sugerencias/save")
-//						.param("titulo_libro", "Prueba")
-//			.with(csrf()))
-//			.andExpect(status().isOk())
-//			.andExpect(model().attributeHasErrors("sugerencia"))
-//			.andExpect(model().attributeHasFieldErrors("sugerencia","nombre_autor"))
-//			.andExpect(view().name("sugerencias/editSugerencia"));
-//	}
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/sugerencias/save")
+						.param("titulo_libro", "Prueba")
+			.with(csrf()))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("sugerencia"))
+			.andExpect(model().attributeHasFieldErrors("sugerencia","nombreAutor"))
+			.andExpect(view().name("sugerencias/editSugerencia"));
+	}
 
 }

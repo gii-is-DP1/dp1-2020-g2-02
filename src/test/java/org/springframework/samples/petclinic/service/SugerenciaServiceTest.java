@@ -45,6 +45,8 @@ public class SugerenciaServiceTest {
 		assertTrue(sugerencias.size()+1==sugerenciaService.findAllOrderByTituloLibro().size());
 	}
 	
+	//Esto es una prueba para travis
+	
 	/*@Test
 	@Transactional
 	public void testAddSugerenciaHasErrors() {
