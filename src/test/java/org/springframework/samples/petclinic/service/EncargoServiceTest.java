@@ -55,11 +55,6 @@ public class EncargoServiceTest {
 		assertThat(encargos.size()).isEqualTo(0);
 	}
 	
-	@Test
-	public void testFindEncargosHoy() {
-		Collection<Encargo> encargos = encargoService.findEncargosHoy();
-		assertThat(encargos.size()).isEqualTo(0);		
-	}
 	
 	@Test
 	@Transactional
@@ -75,15 +70,6 @@ public class EncargoServiceTest {
 		assertThat(cuentaFinal).isEqualTo(cuentaInicial + 1);
 	}
 	
-	@Test
-	public void testPedidosUrgentes() {
-		Collection<Encargo> encargos = encargoService.pedidosUrgentes();
-		for(Encargo encargo:encargos) {
-			int rango = encargo.getFechaEntrega().getDayOfYear()
-					-encargo.getFechaRealizacion().getDayOfYear();
-			assertThat(rango<=2);
-		}
-	}
 	
 	
 }
