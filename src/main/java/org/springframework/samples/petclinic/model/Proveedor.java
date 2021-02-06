@@ -14,6 +14,8 @@ import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.NumberFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -48,6 +50,7 @@ public class Proveedor extends BaseEntity{
 	@Email
 	private String email;
 	
+	@JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "proveedor")
 	private List<Encargo> encargos;
 	
