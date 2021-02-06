@@ -36,6 +36,18 @@ public class EjemplarServiceTest {
 		assertTrue(ejemplar.getEstado().equals("Cubierta doblada."));
 	}
 	
+	@Test
+	public void testFindDisponibles() {		
+		int disponibles = 0;
+		Collection<Libro> libros = libroService.findAll();
+		for(Libro libro:libros) {
+			Collection<Ejemplar> ejemplares = ejemplarService.findDisponibles(libro);
+			int count = ejemplares.size();
+			disponibles = disponibles+count;
+		}
+		assertTrue(disponibles==2);
+		
+	}
 	
 	@Test
 	public void testCountWithInitialData() {
