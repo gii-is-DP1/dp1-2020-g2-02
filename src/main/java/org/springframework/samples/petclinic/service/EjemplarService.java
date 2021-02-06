@@ -32,12 +32,6 @@ public class EjemplarService {
 	public int ejemplarCount() {
 		return (int) EjemplarRepo.count();
 	}
-
-	@Transactional
-	public void delete(Ejemplar Ejemplar) {
-		EjemplarRepo.deleteById(Ejemplar.getId());
-
-	}
 	
 	@Transactional
 	public void save(@Valid Ejemplar Ejemplar) {

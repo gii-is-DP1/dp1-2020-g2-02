@@ -31,11 +31,6 @@ public class SugerenciaService {
 	public Optional<Sugerencia> findById(int id) {
 		return sugerenciaRepository.findById(id);
 	}
-
-	@Transactional
-	public void delete(Sugerencia sugerencia) {
-		sugerenciaRepository.deleteById(sugerencia.getId());
-	}
 	
 	@Transactional
 	public void save(@Valid Sugerencia sugerencia) {

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Editorial;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.EditorialService;
-import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -24,9 +23,6 @@ public class EditorialController {
 
 	@Autowired
 	private EditorialService editorialService;
-
-	@Autowired
-	private LibroService libroService;
 	
 	@GetMapping
 	public String listEditoriales(ModelMap model) {

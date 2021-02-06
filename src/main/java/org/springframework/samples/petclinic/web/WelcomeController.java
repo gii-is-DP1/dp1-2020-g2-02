@@ -1,6 +1,5 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;

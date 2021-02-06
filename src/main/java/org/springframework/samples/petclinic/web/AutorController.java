@@ -2,17 +2,13 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Autor;
-import org.springframework.samples.petclinic.model.Genero;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.AutorService;
-import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -28,9 +24,6 @@ public class AutorController {
 
 	@Autowired
 	private AutorService autorService;
-
-	@Autowired
-	private LibroService libroService;
 	
 	@GetMapping
 	public String listAutores(ModelMap model) {
