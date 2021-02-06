@@ -5,7 +5,13 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE petclinic;'
- 
+addons:
+  sonarcloud:
+    organization: "gii-is-dp1"
+    token:
+      secure: fc230c5c4fd37badc3916cfdbbe8780226210be0 # encrypted value of your token
+
 script:
-  # other script steps might be done before running the actual analysis
   - mvn test -Dspring-boot.run.profiles=mysql-travis
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=gii-is-DP1_dp1-2020-g2-02
