@@ -10,19 +10,27 @@
         	<div id="caja"></div>
 </petclinic:layout>
 
+<script>var pathArray = window.location.pathname.split('/');
+		if (pathArray[3] == null){var ruta = "http://localhost:8080/api/sugerencias/get"}
+		else{var ruta = "http://localhost:8080/api/sugerencias/get/"+pathArray[3]}
+</script>
+
+
 <script>
         
         $(document).ready(function() {
             $.ajax({
-                url: "http://localhost:8080/api/sugerencias/getAll",
+                url: ruta,
                 type: "GET",
                 dataType: "json",
             	success: function(data) {
             		var len = data.length;
-            		
-                	for(var i=0; i<len; i++){
-                		document.getElementById('caja').innerHTML += '<div style="border-radius: 10px;border-color: black;border-style: solid;background-color: white;padding: 1.5%;margin: 1.5%;"> <h3>' + data[i].tituloLibro + '</h3>\n<em> Autor: '+ data[i].nombreAutor +'</em></div>';
-                	}
+            		if(len == null){document.getElementById('caja').innerHTML += '<div style="border-radius: 10px;border-color: black;border-style: solid;background-color: white;padding: 1.5%;margin: 1.5%;"> <h3>' + data.tituloLibro + '</h3>\n<em> Autor: '+ data.nombreAutor +'</em></div>';}
+            		else{
+                		for(var i=0; i<len; i++){
+                			document.getElementById('caja').innerHTML += '<div style="border-radius: 10px;border-color: black;border-style: solid;background-color: white;padding: 1.5%;margin: 1.5%;"> <h3>' + data[i].tituloLibro + '</h3>\n<em> Autor: '+ data[i].nombreAutor +'</em></div>';
+                		}
+            		}
             	}
  			});
         });
