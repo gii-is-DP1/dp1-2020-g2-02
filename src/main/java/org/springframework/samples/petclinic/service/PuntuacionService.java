@@ -32,12 +32,6 @@ import org.springframework.stereotype.Service;
  		return PuntuacionRepo.findById(id);
  	}
 
-
- 	public void delete(Puntuacion Puntuacion) {
- 		PuntuacionRepo.deleteById(Puntuacion.getId());
-
- 	}
-
  	public void save(@Valid Puntuacion Puntuacion) {
  		PuntuacionRepo.save(Puntuacion);
 

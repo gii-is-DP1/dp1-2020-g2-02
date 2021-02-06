@@ -36,15 +36,8 @@ public class EditorialControllerTest {
 
 	@Autowired
 	EditorialController controller;
-	
-	@MockBean
-	LibroService libroService;
-
 	@MockBean
 	EditorialService editorialService;
-	
-	@MockBean
-	UserService userService;
 	
 	@Autowired
 	private MockMvc mockMvc;

@@ -34,10 +34,6 @@ public class ProveedorService {
 		return ProveedorRepo.findById(id);
 	}
 	
-	public void delete(Proveedor Proveedor) {
-		ProveedorRepo.deleteById(Proveedor.getId());
-	}
-	
 	public void save(@Valid Proveedor proveedor) {
 		ProveedorRepo.save(proveedor);
 		

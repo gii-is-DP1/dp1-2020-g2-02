@@ -36,12 +36,6 @@ public class MiembroService extends BaseEntity{
 		return MiembroRepo.findById(id);
 	}
 
-
-	public void delete(Miembro Miembro) {
-		MiembroRepo.deleteById(Miembro.getId());
-
-	}
-
 	public void save(@Valid Miembro miembro) {
 		MiembroRepo.save(miembro);
 		

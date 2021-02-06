@@ -31,12 +31,6 @@ public class EditorialService {
 		return EditorialRepo.findById(id);
 	}
 
-
-	public void delete(Editorial Editorial) {
-		EditorialRepo.deleteById(Editorial.getId());
-
-	}
-
 	public void save(@Valid Editorial Editorial) {
 		EditorialRepo.save(Editorial);
 

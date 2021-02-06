@@ -207,37 +207,6 @@ public class PrestamoControllerTest {
 	}
 	
 	@WithMockUser(value = "Us3r")
-    @Test
-    void testProcessCreationFormPrestamoSuccess() throws Exception {
-		mockMvc.perform(post("/prestamos/save")
-				.param("fechaPrestamo", "2020-02-12")
-				.param("finalizado", "false")
-			.with(csrf()))
-			.andExpect(view().name("prestamos/listPrestamo"))
-			.andExpect(model().attribute("message", "Prestamo guardado correctamente"));
-	}
-	
-	@WithMockUser(value = "Us3r")
-    @Test
-    void testProcessCreationFormPrestamoHasErrors() throws Exception {
-		mockMvc.perform(post("/prestamos/save")
-				.param("fechaPrestamo", "")
-				.param("finalizado", "")
-			.with(csrf()))
-			.andExpect(view().name("prestamos/editPrestamo"))
-			.andExpect(model().attributeHasErrors("prestamo"));
-	}
-	
-	@WithMockUser(value = "Us3r")
-	@Test
-	void testPublicarEncargo() throws Exception {
-		mockMvc.perform(get("/prestamos/new"))
-		.andExpect(status().isOk())
-		.andExpect(view().name("prestamos/editPrestamo"))
-		.andExpect(model().attributeExists("prestamo"));
-	}
-	
-	@WithMockUser(value = "Us3r")
 	@Test
 	void testConcederPrestamo() throws Exception {
 		mockMvc.perform(get("/prestamos/conceder/{prestamoId}",1))

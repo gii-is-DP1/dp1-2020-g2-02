@@ -33,12 +33,6 @@ public class LibroService {
 		return LibroRepo.findById(id);
 	}
 
-
-	public void delete(Libro Libro) {
-		LibroRepo.deleteById(Libro.getId());
-
-	}
-
 	public void save(@Valid Libro Libro) {
 		LibroRepo.save(Libro);
 
