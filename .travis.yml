@@ -9,7 +9,7 @@ addons:
   sonarcloud:
     organization: "gii-is-dp1"
     token:
-      secure: 3ffa109593a9fd216a5c8cf1a210c65451b49a63 # encrypted value of your token
+      secure: "YGPAvNxV/cGBA434/VpOrRShGk2UOiLFoycQ0F/rhdzzl7giIWFUhkoMjRJ1ZAXgkh/xaXYY9onC15o+2Fp9HgziwoRpl55KknWtBuJWDQgIF8WiTK4ivvYk3J7h7FhbkW2AXsnvjTPATgnTneadaVvXFxVUmP404WzWX10L3HCCwzWGUsXFyqOdyFYPk8DaXH1Tl+JQNtEXjf3xbANlJo/i2LyBlp2q10E7ZFXTOcsyaLMbhnOLSRrYKFLxX7rtVL9O1LwZ+4wzLXCAv98FO3gHeSxjQsWEmb0FzBBjYs+wSFDD+jLNiOch2UPQndeoByq79CvWpv6Ryn1zx6rpDl1kHtImeCzs/GOMtBrG73okM61k0q8MUZMrSVQ68566SHkgvkQoJl5L7Y4O2/tcK4acXx9BG9QxPPyBcfGNwOow8yKD5/Q2CtvwNpsROKV4hFEVUKDafLL+c1WQl0pNZPqg1S7oG3nijKq1CxsdPL/IOXG+NUWzu9yX3ltGapoQSk0ZzTf+2dBpqQvRs0iCjQb8zedUvPdCE2xaHz0VvC7zvtfaZTKbvmjjq9hKc49QTcF0Wk74ZgAM2W45T4UeKnW+EMIJp77m4ZItzdXsmSmksBanrOEiDiUWsNzgW6PJSn4hBlfOo1MUzoEnYRnGPHIZuRWzD4uQ0tqk/G/BIto="
 
 script:
   - mvn test -Dspring-boot.run.profiles=mysql-travis
