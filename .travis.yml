@@ -5,4 +5,15 @@ services:
   - mysql
 before_install:
   - mysql -e 'CREATE DATABASE petclinic;'
+ 
+ addons:
+  sonarcloud:
+    organization: "gii-is-dp1"
+    token:
+      secure: ${SONAR_TOKEN}
+    branches:
+      - master
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
 script: mvn test -Dspring-boot.run.profiles=mysql-travis
