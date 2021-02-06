@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,18 @@ public class EncargoServiceTest {
 		for(Encargo encargo:encargos) {
 			assertThat(encargo.getFechaRealizacion().isEqual(LocalDate.now()));
 		}
+	}
+	
+	@Test
+	public void testPedidosUrgentes() {
+		List<Encargo> encargos = encargoService.pedidosUrgentes();
+		assertThat(encargos.size()).isEqualTo(0);
+	}
+	
+	@Test
+	public void testFindEncargosHoy() {
+		Collection<Encargo> encargos = encargoService.findEncargosHoy();
+		assertThat(encargos.size()).isEqualTo(0);		
 	}
 	
 	@Test
