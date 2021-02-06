@@ -17,22 +17,22 @@ public class ProveedorControllerAlternativo {
 	@Autowired
 	private ProveedorService proveedorService;
 	
-	@RequestMapping(value="/getAll", method = RequestMethod.GET)
+	@RequestMapping(value="/get", method = RequestMethod.GET)
 	public @ResponseBody Iterable<Proveedor> getProveedores(){
 		return proveedorService.findAll();
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/get/{id}", method = RequestMethod.GET)
 	public @ResponseBody Proveedor getProveedor(@PathVariable int id){
 		return proveedorService.findById(id).get();
 	}
 	
-	@GetMapping(path="/verTodas")
+	@GetMapping(path="")
 	public String listProveedores() {
 		return "proveedores/proveedoresAPI";
 	}
 	
-	@GetMapping(path="/ver/{id}")
+	@GetMapping(path="/{id}")
 	public String listProveedor(@PathVariable int id) {
 		return "proveedores/proveedoresAPI";
 	}

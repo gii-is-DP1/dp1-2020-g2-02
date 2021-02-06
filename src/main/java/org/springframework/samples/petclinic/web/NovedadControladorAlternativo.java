@@ -22,17 +22,17 @@ public class NovedadControladorAlternativo {
 	@Autowired
 	private NovedadService novedadService;
 	
-	@RequestMapping(value="/getAll", method = RequestMethod.GET)
+	@RequestMapping(value="/get", method = RequestMethod.GET)
 	public @ResponseBody Iterable<Novedad> getNovedades(){
 		return novedadService.findAll();
 	}
 	
-	@RequestMapping(value="/getToday", method = RequestMethod.GET)
+	@RequestMapping(value="/get/Today", method = RequestMethod.GET)
 	public @ResponseBody Collection<Novedad> getNovedadesHoy(){
 		return novedadService.findNovedadesHoy();
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/get/{id}", method = RequestMethod.GET)
 	public @ResponseBody Novedad getNovedad(@PathVariable int id){
 		return novedadService.findById(id).get();
 	}
@@ -43,14 +43,18 @@ public class NovedadControladorAlternativo {
 	    novedadService.save(newNovedad);
 	  }
 	
-	@GetMapping(path="/verTodas")
+	@GetMapping(path="")
 	public String listNovedades() {
 		return "novedades/novedadesAPI";
 	}
 	
-	@GetMapping(path="/ver/{id}")
+	@GetMapping(path="/{id}")
 	public String listNovedad(@PathVariable int id) {
 		return "novedades/novedadesAPI";
 	}
 	
+	@GetMapping(path="/Today")
+	public String listNovedadesHoy() {
+		return "novedades/novedadesAPI";
+	}
 }
