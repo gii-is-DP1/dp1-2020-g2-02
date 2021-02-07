@@ -87,6 +87,19 @@ import org.springframework.web.servlet.ModelAndView;
 			User user = userService.findByUsername(principal.getName());
 			Miembro miembro = miembroService.findByUser(user);
 			prestamos = prestamoService.historialPrestamos(miembro);
+            Map<Prestamo,Puntuacion> puntuaciones = new HashMap<>();
+			Iterator<Prestamo> it = prestamos.iterator();
+			while (it.hasNext()) {
+				Prestamo p = it.next();
+				Iterator<Puntuacion> it2 = puntuacionService.findAll().iterator();
+				while (it2.hasNext()) {
+					Puntuacion punt = it2.next();
+					if (punt.getLibro().getId().equals(p.getEjemplar().getLibro().getId()) && punt.getMiembro().getId().equals(miembro.getId())) {
+						puntuaciones.put(p, punt);
+					}
+				}
+			} 
+			model.addAttribute("puntuaciones", puntuaciones);
 			model.addAttribute("prestamos", prestamos);
 			return vista;
 		}
