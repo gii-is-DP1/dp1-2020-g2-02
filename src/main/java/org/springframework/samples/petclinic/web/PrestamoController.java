@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
-import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.Puntuacion;
@@ -29,7 +28,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 	@Controller
 	@RequestMapping("/prestamos")
