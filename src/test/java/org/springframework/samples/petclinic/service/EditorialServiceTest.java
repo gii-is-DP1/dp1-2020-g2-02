@@ -1,5 +1,6 @@
 package org.springframework.samples.petclinic.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.samples.petclinic.model.Editorial;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
 public class EditorialServiceTest {
@@ -36,4 +38,18 @@ public class EditorialServiceTest {
 		assertTrue(libros.size()==2);
 	}
 	
+	@Test
+	@Transactional
+	public void testAddEditorial() {
+		int cuentaInicial = editorialService.findAll().size();
+		Editorial editorial = new Editorial();
+		editorial.setNombre("prueba");
+		editorial.setDireccion("prueba");
+		editorial.setEmail("a@a.com");
+		editorial.setNif("A1234567A");
+		editorial.setTelefono("123123123");
+		editorial.setWeb("www.a.com");
+		editorialService.save(editorial);
+		assertThat(editorialService.findAll().size()).isEqualTo(cuentaInicial+1);
+	}
 }

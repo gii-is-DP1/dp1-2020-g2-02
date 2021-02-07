@@ -13,11 +13,11 @@
         <thead>
         <tr>
             <th >Libro</th>
-            <th >Fecha del prÃ©stamo</th>   
-            <th >Fecha de devoluciÃ³n</th>
+            <th >Fecha del préstamo</th>   
+            <th >Fecha de devolución</th>
             <th >Concedido por</th>
             <th >Estado</th> 
-            <th >Tu valoraciÃ³n</th> 
+            <th >Tu valoración</th> 
             <th ></th>            
         </tr>
         </thead>
@@ -49,10 +49,19 @@
                 		<td>Pendiente de recoger</td>
                 	</c:when>
                 	<c:when test="${prestamo.ejemplar.disponibilidad=='EN_PRESTAMO'}">
-                		<td>En prÃ©stamo</td>
+                		<td>En préstamo</td>
                 	</c:when>
                 </c:choose>
                  <td>
+                	<c:set var="punt" value="-"/>
+                	<c:forEach items="${puntuaciones}" var="puntuacion">
+                		<c:if test="${puntuacion.key.id == prestamo.id}">
+                			<c:set var="punt" value="${puntuacion.value.puntaje}"/>
+                		</c:if> 
+                	</c:forEach>
+                	<c:out value="${punt}"/>
+                </td>
+                <td>
                 	<c:set var="punt" value="-"/>
                 	<c:forEach items="${puntuaciones}" var="puntuacion">
                 		<c:if test="${puntuacion.key.id == prestamo.id}">
