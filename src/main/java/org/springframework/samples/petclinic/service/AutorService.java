@@ -39,5 +39,7 @@ public class AutorService {
 		return (int) AutorRepo.count();
 	}
 	
-
+	public String getNombreCompleto(Autor autor) {
+		return autor.getNombre() + " " + autor.getApellidos();
+	}
 }

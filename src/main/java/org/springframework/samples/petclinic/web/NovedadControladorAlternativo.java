@@ -37,10 +37,11 @@ public class NovedadControladorAlternativo {
 		return novedadService.findById(id).get();
 	}
 	
-	@PostMapping("/postNovedad")
+	@RequestMapping(value= "/post", method = RequestMethod.POST)
 	@ResponseBody
-	public void postNovedad(@RequestBody Novedad newNovedad) {
+	public Novedad postNovedad(@RequestBody Novedad newNovedad) {
 	    novedadService.save(newNovedad);
+	    return newNovedad;
 	  }
 	
 	@GetMapping(path="")
