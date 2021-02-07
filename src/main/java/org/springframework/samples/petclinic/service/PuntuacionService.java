@@ -32,11 +32,6 @@ import org.springframework.stereotype.Service;
  		return PuntuacionRepo.findById(id);
  	}
 
- 	public void save(@Valid Puntuacion Puntuacion) {
- 		PuntuacionRepo.save(Puntuacion);
-
- 	}
- 	
  	
  	public void savePuntuacion(Puntuacion puntuacion) throws LibroNoPrestadoAnteriormenteException {
  		if(prestamoService.findAll().stream().noneMatch(x->x.getMiembro().getId().equals(puntuacion.getMiembro().getId()) && x.getEjemplar().getLibro().getId().equals(puntuacion.getLibro().getId())))

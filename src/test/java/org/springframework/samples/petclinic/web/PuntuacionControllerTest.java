@@ -92,6 +92,7 @@ public class PuntuacionControllerTest {
 		
 		Puntuacion puntuacion = new Puntuacion();
 		puntuacion.setId(1);
+		puntuacion.setPuntaje(2);
 		puntuacion.setMiembro(miembro);
 		puntuacion.setLibro(libro);
 		
@@ -119,7 +120,8 @@ public class PuntuacionControllerTest {
 	@WithMockUser(value = "Us3r")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "3")
+		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "2")
+				.param("miembro", "1")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Libro valorado correctamente"));
 	}
@@ -141,9 +143,9 @@ public class PuntuacionControllerTest {
     @Test
     void testProcessUpdateFormSuccess() throws Exception {
 		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4")
-				.param("libro", "1").param("autor", "1")
+				.param("libro", "1").param("miembro", "1")
 			.with(csrf()))
-			.andExpect(model().attribute("message", "Libro valorado correctamente"));
+			.andExpect(model().attribute("message", "Valoración actualizada correctamente"));
 	}
 	
 	
