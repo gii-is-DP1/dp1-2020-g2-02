@@ -30,13 +30,13 @@ INSERT INTO sugerencias(id, titulo_libro, nombre_autor, miembro_id) VALUES(2, 'E
 INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Norma', 'A1231123B', 'calle Ejemplo, 13, Barcelona', 650606544, 'norma@mail.com', 'www.norma.com');
 INSERT INTO editoriales(nombre,nif,direccion,telefono,email,web) VALUES ('Planeta', 'B1234567C', 'calle Ejemplo, 14, Sevilla', 650606545, 'planeta@mail.com', 'www.planeta.com');
 
-INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carriere', '1970-10-22');
-INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1981-02-11');
+INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Emmanuel', 'Carrière', '1957-01-07');
+INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('George', 'R.R. Martin', '1948-09-20');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Stephen', 'King', '1947-09-21');
 INSERT INTO autores(nombre,apellidos,fecha_nac) VALUES ('Fernando', 'Aramburu', '1959-04-17');
 
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2005-07-11', 1);
-INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '2004-10-11', 2);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234567890, 'El adversario', 'Español', '2000-01-31', 1);
+INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456789, 'Juego de tronos', 'Español', '1996-08-06', 2);
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (0123456433, 'El resplandor', 'Español', '1977-01-28', 2);
 INSERT INTO libros(ISBN,titulo,idioma,fecha_publicacion, editorial_id) VALUES (1234543216, 'Patria', 'Español', '2016-09-06', 1);
 
