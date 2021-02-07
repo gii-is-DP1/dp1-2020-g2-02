@@ -61,7 +61,7 @@ public class LibroServiceTest {
 	@Test
 	public void testGetNotaMedia() {
 		Libro l = libroService.findById(2).get();
-		assertTrue(libroService.getNotaMedia(l)==4);
+		assertTrue(libroService.getNotaMedia(l)==5);
 	}
 	
 }
