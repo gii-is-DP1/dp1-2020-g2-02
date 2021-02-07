@@ -17,7 +17,8 @@
             <th >Fecha de devolución</th>
             <th >Concedido por</th>
             <th >Estado</th> 
-            <th >Valoraciones</th>            
+            <th >Tu valoración</th> 
+            <th ></th>            
         </tr>
         </thead>
         <tbody>
