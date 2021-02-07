@@ -107,7 +107,7 @@ public class BibliotecarioControllerTests {
 	
 	@WithMockUser(value = "Us3r")
 	@Test
-	void testProcessCreationFormBibliotecarioHasErrors() throws Exception {
+	void testProcessCreationFormBibliotecarioWrongPhone() throws Exception {
 		mockMvc.perform(post("/bibliotecarios/save")
 				.with(csrf())
 				.param("nombre", "Manuel")
@@ -119,10 +119,44 @@ public class BibliotecarioControllerTests {
 				.param("user.password", "Pass1234"))
 		.andExpect(model().attributeHasErrors("bibliotecario"))
 		.andExpect(status().isOk())
-		.andExpect(view().name("bibliotecarios/editBibliotecario"));
-		
-		
+		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
 	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testProcessCreationFormBibliotecarioHasErrorsEnDNI() throws Exception {
+		mockMvc.perform(post("/bibliotecarios/save")
+				.with(csrf())
+				.param("nombre", "Manuel")
+				.param("apellidos", "Ruiz Lorca")
+				.param("dni", "a")
+				.param("telefono", "650666999")
+				.param("email", "marulo@gmail.com")
+				.param("user.username", "marulo")
+				.param("user.password", "Pass1234"))
+		.andExpect(model().attributeHasErrors("bibliotecario"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
+	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testProcessCreationFormBibliotecarioHasErrorsEnEmail() throws Exception {
+		mockMvc.perform(post("/bibliotecarios/save")
+				.with(csrf())
+				.param("nombre", "Manuel")
+				.param("apellidos", "Ruiz Lorca")
+				.param("dni", "49387445P")
+				.param("telefono", "650666999")
+				.param("email", "marulogmail.com")
+				.param("user.username", "marulo")
+				.param("user.password", "Pass1234"))
+		.andExpect(model().attributeHasErrors("bibliotecario"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
+	}
+	
+	
 	
 	@WithMockUser(value = "Us3r")
 	@Test
