@@ -107,7 +107,7 @@ import org.springframework.web.servlet.ModelAndView;
 						puntuaciones.put(p, punt);
 					}
 				}
-			}
+			} 
 			model.addAttribute("puntuaciones", puntuaciones);
 			model.addAttribute("prestamos", prestamos);
 			return vista;
