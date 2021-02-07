@@ -4,18 +4,24 @@ package org.springframework.samples.petclinic.web;
 import java.security.Principal;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Bibliotecario;
 import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
+import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
+import org.springframework.samples.petclinic.model.Puntuacion;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.BibliotecarioService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
+import org.springframework.samples.petclinic.service.PuntuacionService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,6 +46,9 @@ import org.springframework.web.servlet.ModelAndView;
 		
 		@Autowired
 		BibliotecarioService bibliotecarioService;
+		
+		@Autowired
+		PuntuacionService puntuacionService;
 		
 		@GetMapping
 		public String listPrestamos(ModelMap model, @RequestParam(required = false) Boolean b) {
@@ -87,6 +96,19 @@ import org.springframework.web.servlet.ModelAndView;
 			User user = userService.findByUsername(principal.getName());
 			Miembro miembro = miembroService.findByUser(user);
 			prestamos = prestamoService.historialPrestamos(miembro);
+			Map<Prestamo,Puntuacion> puntuaciones = new HashMap<>();
+			Iterator<Prestamo> it = prestamos.iterator();
+			while (it.hasNext()) {
+				Prestamo p = it.next();
+				Iterator<Puntuacion> it2 = puntuacionService.findAll().iterator();
+				while (it2.hasNext()) {
+					Puntuacion punt = it2.next();
+					if (punt.getLibro().getId().equals(p.getEjemplar().getLibro().getId()) && punt.getMiembro().getId().equals(miembro.getId())) {
+						puntuaciones.put(p, punt);
+					}
+				}
+			}
+			model.addAttribute("puntuaciones", puntuaciones);
 			model.addAttribute("prestamos", prestamos);
 			return vista;
 		}

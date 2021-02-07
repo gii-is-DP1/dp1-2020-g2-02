@@ -62,10 +62,10 @@ INSERT INTO pertenece_a(genero_id,libro_id) VALUES (6, 4);
 INSERT INTO pertenece_a(genero_id,libro_id) VALUES (7, 3);
 
 
-INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(5,2,1);
-INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(2,1,1);
 INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(5,2,2);
-INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(3,1,2);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(2,3,1);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(5,3,2);
+INSERT INTO puntuaciones(puntaje,miembro_id,libro_id) VALUES(3,1,1);
 
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (1,1,'Primera página arrancada.','DISPONIBLE');
 INSERT INTO ejemplares(id,libro_id,estado,disponibilidad) VALUES (2,1,'Cubierta doblada.','RESERVADO');
