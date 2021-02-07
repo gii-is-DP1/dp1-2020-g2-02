@@ -13,8 +13,8 @@
         <thead>
         <tr>
             <th >Libro</th>
-            <th >Fecha del préstamo</th>   
-            <th >Fecha de devolución</th>
+            <th >Fecha del prÃ©stamo</th>   
+            <th >Fecha de devoluciÃ³n</th>
             <th >Concedido por</th>
             <th >Estado</th> 
             <th >Valoraciones</th>            
@@ -48,9 +48,18 @@
                 		<td>Pendiente de recoger</td>
                 	</c:when>
                 	<c:when test="${prestamo.ejemplar.disponibilidad=='EN_PRESTAMO'}">
-                		<td>En préstamo</td>
+                		<td>En prÃ©stamo</td>
                 	</c:when>
                 </c:choose>
+                 <td>
+                	<c:set var="punt" value="-"/>
+                	<c:forEach items="${puntuaciones}" var="puntuacion">
+                		<c:if test="${puntuacion.key.id == prestamo.id}">
+                			<c:set var="punt" value="${puntuacion.value.puntaje}"/>
+                		</c:if> 
+                	</c:forEach>
+                	<c:out value="${punt}"/>
+                </td>
                 <td>
                 	<sec:authorize access="hasAuthority('miembro')">
                 		<spring:url value="/puntuacion/valorar/{libroId}" var="libroUrl">
