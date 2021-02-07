@@ -9,6 +9,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 
@@ -17,6 +18,7 @@ import lombok.Data;
 @Table(name = "users")
 public class User{
 	@Id
+	@Size(min = 3,message = "El nombre de usuario debe contener al menos 3 caracteres")
 	String username;
 	
 	@NotEmpty

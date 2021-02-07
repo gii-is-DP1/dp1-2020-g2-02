@@ -39,13 +39,13 @@
     <br>
     <br>
     <h2>APIs REST</h2>
-    <a href='/api/libros'>Libros</a>
+    <a href='/api/libros/verTodas'>Libros</a>
     <br>
-    <a href='/api/novedades'>Novedades</a>
+    <a href='/api/novedades/get'>Novedades</a>
     <br>
-    <a href='/api/sugerencias'>Sugerencias</a>
+    <a href='/api/sugerencias/get'>Sugerencias</a>
     <br>
-    <a href='/api/proveedores'>Proveedores</a>
+    <a href='/api/proveedores/get'>Proveedores</a>
     
 </petclinic:layout>
 

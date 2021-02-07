@@ -71,6 +71,7 @@ public class BibliotecarioControllerTests {
 		
 		
 		given(this.bibliotecarioService.findById(1)).willReturn(Optional.of(bibliotecario));
+		given(this.userService.findUser("alecagar")).willReturn(Optional.of(usuario));
 		bibliotecarioService.save(bibliotecario);
 		//given(this.bibliotecarioService.save(bibliotecario));
 		
@@ -144,6 +145,40 @@ public class BibliotecarioControllerTests {
 	}
 	
 	@WithMockUser(value = "Us3r")
+    @Test
+    void testGuardarBibliotecarioExistente() throws Exception {
+		mockMvc.perform(post("/bibliotecarios/save")
+				.param("nombre", "Alejandro")
+				.param("apellidos", "Castro Garcia")
+				.param("dni", "49586958D")
+				.param("telefono", "123456789")
+				.param("email", "alecagar@gmail.com")
+				.param("user.username", "alecagar")
+				.param("user.pass","Ale123456")
+			.with(csrf()))
+			.andExpect(model().attribute("message", "Usuario ya existente"));
+		
+		
+		/*
+		 * User usuario = new User();
+		usuario.setUsername("alecagar");
+		usuario.setPassword("Ale123456");
+		usuario.setEnabled(true);
+	
+		
+		Bibliotecario bibliotecario = new Bibliotecario();
+		bibliotecario.setId(1);
+		bibliotecario.setNombre("Alejandro");
+		bibliotecario.setApellidos("Castro Garcia");
+		bibliotecario.setDni("49586958D");
+		bibliotecario.setTelefono("123456789");
+		bibliotecario.setEmail("alecagar@gmail.com");
+		bibliotecario.setUser(usuario);
+		bibliotecario.setNovedades(new HashSet<Novedad>());
+		 */
+	}
+	
+	@WithMockUser(value = "Us3r")
 	@Test
 	void testHabilitarBibliotecarioHasErrors() throws Exception {
 		mockMvc.perform(get("/bibliotecarios/habilitar/{biblioId}",5))
@@ -190,23 +225,22 @@ public class BibliotecarioControllerTests {
 				.param("email", "alecagar@gmail.com")
 				.param("user.username", "alecagar")
 				.param("user.password", "Pass1234"))
-		.andExpect(model().attributeExists("bibliotecarios"))
 		.andExpect(model().attribute("message", "Usuario ya existente"))
 		.andExpect(status().isOk())
 		.andExpect(view().name("bibliotecarios/editBibliotecario"));	
 		
 	}
 	
-//	@WithMockUser(value = "Us3r")
-//    @Test
-//    void testProcessCreationFormHasErrors() throws Exception {
-//		mockMvc.perform(post("/bibliotecarios/save")
-//						.with(csrf())
-//						.param("nombre", "P"))
-//			.andExpect(status().isOk())
-//			.andExpect(model().attributeHasErrors("bibliotecario"))
-//			.andExpect(model().attributeHasFieldErrors("bibliotecario", "apellidos"))
-//			.andExpect(view().name("bibliotecarios/editBibliotecario"));
-//	}
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testProcessCreationFormHasErrors() throws Exception {
+		mockMvc.perform(post("/bibliotecarios/save")
+						.with(csrf())
+						.param("nombre", "P"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeHasErrors("bibliotecario"))
+			.andExpect(model().attributeHasFieldErrors("bibliotecario", "apellidos"))
+			.andExpect(view().name("bibliotecarios/editBibliotecario"));
+	}
 
 }

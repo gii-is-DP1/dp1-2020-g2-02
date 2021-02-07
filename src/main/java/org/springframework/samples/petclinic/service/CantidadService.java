@@ -25,12 +25,6 @@ public class CantidadService {
 		return CantidadRepo.findById(id);
 	}
 
-
-	public void delete(Cantidad Cantidad) {
-		CantidadRepo.deleteById(Cantidad.getId());
-
-	}
-
 	public void save(@Valid Cantidad Cantidad) {
 		CantidadRepo.save(Cantidad);
 

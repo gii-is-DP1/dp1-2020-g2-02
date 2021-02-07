@@ -26,12 +26,6 @@ public class GeneroService {
 		return GeneroRepo.findById(id);
 	}
 
-
-	public void delete(Genero Genero) {
-		GeneroRepo.deleteById(Genero.getId());
-
-	}
-
 	public void save(@Valid Genero Genero) {
 		GeneroRepo.save(Genero);
 
