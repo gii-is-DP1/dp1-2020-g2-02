@@ -19,6 +19,8 @@ import org.springframework.samples.petclinic.configuration.SecurityConfiguration
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.AutorService;
+import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.SugerenciaService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -42,6 +44,12 @@ public class SugerenciaControllerTests {
 	
 	@MockBean
 	MiembroService miembroService;
+	
+	@MockBean
+ 	LibroService libroService;
+	
+	@MockBean
+ 	AutorService autorService;
 		
 	@MockBean
  	UserService userService;

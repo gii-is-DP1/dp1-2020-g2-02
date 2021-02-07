@@ -52,6 +52,15 @@
                 		<td>En préstamo</td>
                 	</c:when>
                 </c:choose>
+                 <td>
+                	<c:set var="punt" value="-"/>
+                	<c:forEach items="${puntuaciones}" var="puntuacion">
+                		<c:if test="${puntuacion.key.id == prestamo.id}">
+                			<c:set var="punt" value="${puntuacion.value.puntaje}"/>
+                		</c:if> 
+                	</c:forEach>
+                	<c:out value="${punt}"/>
+                </td>
                 <td>
                 	<c:set var="punt" value="-"/>
                 	<c:forEach items="${puntuaciones}" var="puntuacion">
