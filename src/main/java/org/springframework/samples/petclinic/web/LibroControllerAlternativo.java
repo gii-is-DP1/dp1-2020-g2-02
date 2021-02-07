@@ -21,18 +21,23 @@ public class LibroControllerAlternativo {
 	LibroService libroService;
 	
 	
-	@RequestMapping(value="/getAll", method = RequestMethod.GET)
+	@RequestMapping(value="/get", method = RequestMethod.GET)
 	public @ResponseBody Collection<Libro> getLibros(){
 		return libroService.findAll();
 	}
 	
-	@RequestMapping(value="/{id}", method = RequestMethod.GET)
+	@RequestMapping(value="/get/{id}", method = RequestMethod.GET)
 	public @ResponseBody Libro getLibro(@PathVariable int id){
 		return libroService.findById(id).get();
 	}
 	
-	@GetMapping(path="/verTodas")
+	@GetMapping(path="")
 	public String listLibros() {
+		return "libros/librosAPI";
+	}
+	
+	@GetMapping(path="/{id}")
+	public String listLibro(@PathVariable int id) {
 		return "libros/librosAPI";
 	}
 
