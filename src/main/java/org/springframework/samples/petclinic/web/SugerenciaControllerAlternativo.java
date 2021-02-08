@@ -30,12 +30,6 @@ public class SugerenciaControllerAlternativo {
 		return sugerenciaService.findById(id).get();
 	}
 	
-	@PostMapping("/postSugerencia")
-	@ResponseBody
-	public void postSugerencia(@RequestBody Sugerencia newSugerencia) {
-		sugerenciaService.save(newSugerencia);
-	 }
-	
 	@GetMapping(path="")
 	public String listSugerencias() {
 		return "sugerencias/sugerenciasAPI";

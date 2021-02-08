@@ -36,13 +36,6 @@ public class NovedadControladorAlternativo {
 		return novedadService.findById(id).get();
 	}
 	
-	@RequestMapping(value= "/post", method = RequestMethod.POST)
-	@ResponseBody
-	public Novedad postNovedad(@RequestBody Novedad newNovedad) {
-	    novedadService.save(newNovedad);
-	    return newNovedad;
-	  }
-	
 	@GetMapping(path="")
 	public String listNovedades() {
 		return "novedades/novedadesAPI";
