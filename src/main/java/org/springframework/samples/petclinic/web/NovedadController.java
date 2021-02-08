@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/novedades")
 public class NovedadController {
@@ -46,6 +49,7 @@ public class NovedadController {
 		if(result.hasErrors()) {
 			modelmap.addAttribute("novedad", novedad);
 			modelmap.addAttribute("message", "Hay fallos en el formulario.");
+			log.warn("Datos de la novedad incorrectos " + result.getAllErrors());
 			return "novedades/editNovedad";
 		}else {
 			User user = userService.findByUsername(principal.getName());
@@ -54,6 +58,7 @@ public class NovedadController {
 			novedadService.save(novedad);
 			modelmap.addAttribute("message", "Novedad guardada correctamente.");
 			vista = listNovedades(modelmap);
+			log.info("Novedad con id: " + novedad.getId() + " guardado correctamente");
 		}
 		return vista;
 	}

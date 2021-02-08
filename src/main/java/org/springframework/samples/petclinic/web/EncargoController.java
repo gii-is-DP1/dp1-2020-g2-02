@@ -27,6 +27,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/encargos") 
 @SessionAttributes("lineasPedido")
@@ -77,6 +80,7 @@ public class EncargoController {
 		if(request.getParameter("guardar")!=null) {
 			if (result.hasErrors()) {
 				modelmap.addAttribute("encargo", encargo);
+				log.warn("Datos del encargo incorrectos " + result.getAllErrors());
 			} else {
 				try {
 					encargo.setCantidad(lineasPedido);
@@ -87,8 +91,10 @@ public class EncargoController {
 					}
 					modelmap.addAttribute("message", "Encargo guardado correctamente");
 					vista = listEncargos(modelmap);
+					log.info("Encargo con id: " + encargo.getId() + " guardado correctamente");
 				} catch (LimiteEjemplaresException e) {
 					modelmap.addAttribute("message", "Demasiados ejemplares del libro");
+					log.warn("Demasiados ejemplares del libro");
 				}
 			}
 		} 
@@ -108,10 +114,11 @@ public class EncargoController {
 				
 				modelmap.addAttribute("lineasPedido", lineasPedido);
 				modelmap.addAttribute("message", "Añadido libro al pedido.");
-				
+				log.info("Libro " + idLibro + " y cantidad " + numEjemplares + " añadidos al pedido");
 			}
 			catch(Exception e) {
 				modelmap.addAttribute("message", "Error al añadir libros al pedido.");
+				log.warn("Error al añadir libros al pedido.");
 			}
 		}
 			

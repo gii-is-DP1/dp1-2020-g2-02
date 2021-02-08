@@ -7,7 +7,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Sugerencia;
@@ -24,6 +23,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/sugerencias")
 public class SugerenciaController {
@@ -68,6 +70,7 @@ public class SugerenciaController {
 		
 		if (result.hasErrors()) {
 			modelmap.addAttribute("sugerencia", sugerencia);
+			log.warn("Datos de la sugerencia incorrectos: " + result.getAllErrors());
 			return "sugerencias/editSugerencia";
 		} else {
 			boolean b = false;
@@ -82,10 +85,12 @@ public class SugerenciaController {
 			}
 			if (b) {
 				modelmap.addAttribute("message", "Libro ya en catálogo");
+				log.warn("Libro con nombre: " + sugerencia.getTituloLibro() + " ya se encuentra en el catálogo");
 				vista = listSugerencias(modelmap);
 			} else {
 				sugerenciaService.save(sugerencia);
 				modelmap.addAttribute("message", "Sugerencia guardada correctamente");
+				log.info("Sugerencia con id: " + sugerencia.getId() + " guardada correctamente");
 				vista = listSugerencias(modelmap);
 			}
 		}
