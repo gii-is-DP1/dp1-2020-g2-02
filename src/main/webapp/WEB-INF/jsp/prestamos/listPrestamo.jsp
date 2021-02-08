@@ -9,6 +9,19 @@
 <petclinic:layout pageName="prestamos">
 	
     <h2>Prestamos</h2>
+     <form action="/prestamos" method="get">
+        	<div class="row" style="margin-bottom:1%">
+        		<label class="col-sm-3 control-label">Filtrar por préstamos con retraso</label>
+        		<div class="col-sm-1">
+        		<c:if test="${!param.b}">
+            		<input style="transform: scale(2);" name="b" value="true" type="checkbox" onChange="this.form.submit()"/>
+        		</c:if>
+        		<c:if test="${param.b}">
+        			<input style="transform: scale(2);" name="b" value="false" type="checkbox" onChange="this.form.submit()" checked/>
+        		</c:if>
+        		</div>
+    		</div>
+        </form>
         <table id="prestamosTable" class="table table-striped">
         <thead>
         <tr>
