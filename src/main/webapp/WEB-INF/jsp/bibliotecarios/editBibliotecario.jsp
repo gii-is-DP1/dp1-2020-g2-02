@@ -14,10 +14,10 @@
     </h2>
     <form:form modelAttribute="bibliotecario" class="form-horizontal" id="add-bibliotecario-form" action="/bibliotecarios/save">
         <div class="form-group has-feedback">
-            <petclinic:inputField label="First Name" name="nombre"/>
-            <petclinic:inputField label="Last Name" name="apellidos"/>
+            <petclinic:inputField label="Nombre" name="nombre"/>
+            <petclinic:inputField label="Apellidos" name="apellidos"/>
             <petclinic:inputField label="DNI" name="dni"/>
-            <petclinic:inputField label="Telephone" name="telefono"/>
+            <petclinic:inputField label="Teléfono" name="telefono"/>
             <petclinic:inputField label="Email" name="email"/>
             <petclinic:inputField label="Nombre de usuario" name="user.username"/>
             <petclinic:inputField label="Password" name="user.password"/>

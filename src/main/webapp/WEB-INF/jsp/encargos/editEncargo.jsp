@@ -27,7 +27,7 @@
 					</div>
 				</div>
 				<div class="row">
-            		<label class="col-sm-2 control-label">numEjemplares</label>
+            		<label class="col-sm-2 control-label">Cantidad y Precio</label>
             		<div class="col-sm-2">
 						<input class="form-control" type="number" name="numEjemplares" id="numEjemplares" value="1"/>
 					</div>
