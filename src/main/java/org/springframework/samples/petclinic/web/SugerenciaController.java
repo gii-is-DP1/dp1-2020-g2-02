@@ -7,7 +7,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Autor;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Sugerencia;
