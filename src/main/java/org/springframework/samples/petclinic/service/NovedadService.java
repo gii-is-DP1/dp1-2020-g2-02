@@ -32,13 +32,11 @@ public class NovedadService {
 
 	@Transactional(readOnly = true)
 	public Optional<Novedad> findById(int id) {
-		// TODO Auto-generated method stub
 		return novedadRepo.findById(id);
 	}
 	
 	@Transactional(readOnly = true)
 	public Collection<Novedad> findNovedadesHoy() {
-		// TODO Auto-generated method stub
 		return novedadRepo.findByFechaPublicacion(LocalDate.now());
 	}
 
