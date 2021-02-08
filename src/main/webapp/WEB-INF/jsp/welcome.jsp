@@ -28,9 +28,9 @@
     			padding: 1.5%;
     			margin: 1.5%;
     		">
-    	<h2>Estadísticas del día anterior en la biblioteca:</h2>
+    	<h2>EstadÃ­sticas del dÃ­a anterior en la biblioteca:</h2>
     	<ul>
-    		<li>Se realizaron ${datos.prestamos} préstamos.</li>
+    		<li>Se realizaron ${datos.prestamos} prÃ©stamos.</li>
     		<li>Se publicaron ${datos.novedades} novedades.</li>
     		<li>Se realizaron ${datos.encargos} encargos.</li>
     	</ul>
@@ -39,7 +39,7 @@
     <br>
     <br>
     <h2>APIs REST</h2>
-    <a href='/swagger-ui.html'>Especificación con OpenAPI</a>
+    <a href='/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config'>EspecificaciÃ³n con OpenAPI</a>
     <br>
     <a href='/api/libros'>Libros</a>
     <br>
@@ -54,10 +54,10 @@
 <script>
 function myFunction() {
     if("${prestamoUrgente}"){
-        alert("Tiene un préstamo pendiente de devolver en los próximos días, por favor acuda a la biblioteca.");
+        alert("Tiene un prÃ©stamo pendiente de devolver en los prÃ³ximos dÃ­as, por favor acuda a la biblioteca.");
     }
     if("${pedidoUrgente}"){
-        alert("Envío pendiente en los próximos días, permanezca atento para su recogida.");
+        alert("EnvÃ­o pendiente en los prÃ³ximos dÃ­as, permanezca atento para su recogida.");
     }
 }
 window.onload = myFunction;
