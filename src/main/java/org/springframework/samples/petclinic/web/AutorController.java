@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/autores")
 public class AutorController {
@@ -38,11 +41,13 @@ public class AutorController {
 		String vista = "autores/listAutor";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("autor", autor);
+			log.warn("Datos de autor incorrectos " + result.getAllErrors());
 			return "autores/editAutor";
 		}else {
 			autorService.save(autor);
 			modelmap.addAttribute("message", "Autor guardado correctamente");
 			vista = listAutores(modelmap);
+			log.info("Autor con id: " + autor.getId() + " guardado correctamente");
 		}
 		return vista;
 	}
@@ -60,7 +65,6 @@ public class AutorController {
 		Autor autor = this.autorService.findById(autorId).get();
 		mav.addObject("autor", autor);
 		Collection<Libro> libros = autor.getLibros();
-		
 		mav.addObject("libros", libros);
 		return mav;
 	}

@@ -22,6 +22,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/ejemplares")
 public class EjemplarController {
@@ -54,12 +57,14 @@ public class EjemplarController {
 		String vista = "ejemplares/listEjemplar";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("ejemplar", ejemplar);
+			log.warn("Datos del ejemplar incorrectos " + result.getAllErrors());
 			return "ejemplares/editEjemplar";
 		}else {
 			ejemplar.setDisponibilidad(Disponibilidad.DISPONIBLE);
 			ejemplaresService.save(ejemplar);
 			modelmap.addAttribute("message", "Ejemplar guardado correctamente");
 			vista = listEjemplares(modelmap);
+			log.info("Ejemplar con id: " + ejemplar.getId() + " guardado correctamente");
 		}
 		return vista;
 	}
@@ -78,11 +83,13 @@ public class EjemplarController {
 		if (ejemplar.isPresent()) {
 			if(ejemplar.get().getDisponibilidad()!=Disponibilidad.DISPONIBLE) {
 				modelmap.addAttribute("message", "No se puede descatalogar el ejemplar: Se encuentra en un préstamo actualmente.");
+				log.info("Ejemplar con id: " + ejemplarId + " No se puede descatalogar, se encuentra en un préstamo actualmente");
 			}
 			else {
 				ejemplar.get().setDisponibilidad(Disponibilidad.DESCATALOGADO);
 				ejemplaresService.save(ejemplar.get());
 				modelmap.addAttribute("message", "Ejemplar descatalogado con éxito");
+				log.info("Ejemplar con id: " + ejemplarId + " descatalogado correctamente");
 			}
 		}
 		else {
@@ -114,11 +121,13 @@ public class EjemplarController {
         String vista = "ejemplares/listEjemplar";
         if(result.hasErrors()) {
             modelmap.addAttribute("ejemplar", ejemplar);
+            log.warn("Datos del estado del ejemplar incorrectos " + result.getAllErrors());
             return "ejemplares/editEstado";
         }else {
             ejemplaresService.save(ejemplar);
             modelmap.addAttribute("message", "Estado del ejemplar modificado correctamente");
             vista = listEjemplares(modelmap);
+            log.info("Ejemplar con id: " + ejemplar.getId() + " estado modificado correctamente");
         }
         return vista;
     }
