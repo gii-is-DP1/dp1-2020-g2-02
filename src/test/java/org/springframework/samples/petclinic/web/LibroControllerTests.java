@@ -146,7 +146,17 @@ public class LibroControllerTests {
 			.andExpect(view().name("libros/listLibro"));
 	}
 	
-
+	@WithMockUser(value = "alecasgar")
+	@Test
+	void testLibrosListBusqueda() throws Exception {
+		mockMvc.perform(get("/libros")
+				.param("q","A")
+				.param("qAutor","B")
+				.param("qEditorial","C"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("libros"))
+			.andExpect(view().name("libros/listLibro"));
+	}
 	
 	@WithMockUser(value = "alecasgar")
 	@Test
