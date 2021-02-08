@@ -9,23 +9,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Optional;
 
-import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Proveedor;
+import org.springframework.samples.petclinic.model.Encargo;
+import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.service.CantidadService;
 import org.springframework.samples.petclinic.service.EncargoService;
 import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.ProveedorService;
+import org.springframework.samples.petclinic.service.exceptions.LimiteEjemplaresException;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 
 @WebMvcTest(controllers=EncargoController.class,
@@ -52,6 +56,13 @@ public class EncargoControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 	
+	@BeforeEach
+	void setup() {
+		Libro libro = new Libro();
+		libro.setId(1);
+		
+		given(libroService.findById(1)).willReturn(Optional.of(libro));
+	}
 	
 	
 	@WithMockUser(value = "Us3r")
@@ -80,6 +91,70 @@ public class EncargoControllerTests {
 				.with(csrf()))
 			.andExpect(model().attribute("message", "Encargo guardado correctamente"));
 
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testDemasiadosEjemplares() throws Exception {
+		Mockito.doThrow(new LimiteEjemplaresException()).when(encargoService).save(any(Encargo.class));
+		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2022")
+				.param("fechaEntrega", "12/12/2200").param("guardar", "true")
+				.with(csrf()))
+			.andExpect(model().attribute("message", "Demasiados ejemplares del libro"));
+
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testAddCantidad() throws Exception {
+		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2022")
+				.param("fechaEntrega", "12/12/2200")
+				.param("libroEncargo","1")
+				.param("numEjemplares","1")
+				.param("precioUnitario","1")
+				.param("addLibro", "true")
+				.with(csrf()))
+			.andExpect(model().attribute("message", "Añadido libro al pedido."));
+
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testAddCantidadErrorCantidadInvalida() throws Exception {
+		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2022")
+				.param("fechaEntrega", "12/12/2200")
+				.param("libroEncargo","1")
+				.param("numEjemplares","cantidad invalida")
+				.param("precioUnitario","1.2")
+				.param("addLibro", "true")
+				.with(csrf()))
+			.andExpect(model().attribute("message", "Error al añadir libros al pedido."));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testAddCantidadErrorPrecioInvalido() throws Exception {
+		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2022")
+				.param("fechaEntrega", "12/12/2200")
+				.param("libroEncargo","1")
+				.param("numEjemplares","1")
+				.param("precioUnitario","precio invalido")
+				.param("addLibro", "true")
+				.with(csrf()))
+			.andExpect(model().attribute("message", "Error al añadir libros al pedido."));
+	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testAddCantidadErrorLibroNoExistente() throws Exception {
+		mockMvc.perform(post("/encargos/save").param("fechaRealizacion", "11/11/2022")
+				.param("fechaEntrega", "12/12/2200")
+				.param("libroEncargo","2")
+				.param("numEjemplares","1")
+				.param("precioUnitario","1.2")
+				.param("addLibro", "true")
+				.with(csrf()))
+			.andExpect(model().attribute("message", "Error al añadir libros al pedido."));
 	}
 	
 	@WithMockUser(value = "Us3r")

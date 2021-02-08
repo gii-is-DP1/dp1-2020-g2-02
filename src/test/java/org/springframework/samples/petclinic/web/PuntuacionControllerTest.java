@@ -9,6 +9,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -70,12 +72,6 @@ public class PuntuacionControllerTest {
 		libro.setTitulo("Prueba");
 		libro.setIdioma("Prueba");
 		
-		Libro libro2 = new Libro();
-		libro2.setId(2);
-		libro2.setISBN("1234567890");
-		libro2.setTitulo("Prueba");
-		libro2.setIdioma("Prueba");
-
 		User usuario = new User();
 		usuario.setUsername("alecasgar");
 		usuario.setPassword("Ale123456");
@@ -96,17 +92,18 @@ public class PuntuacionControllerTest {
 		puntuacion.setMiembro(miembro);
 		puntuacion.setLibro(libro);
 		
+		Collection<Puntuacion> puntuaciones = new HashSet<>();
+		puntuaciones.add(puntuacion);
+		
 		given(this.libroService.findById(1)).willReturn(Optional.of(libro));
-		given(this.libroService.findById(2)).willReturn(Optional.of(libro2));
-		given(this.miembroService.findById(1)).willReturn(Optional.of(miembro));
 		given(this.puntuacionService.findById(1)).willReturn(Optional.of(puntuacion));
 		given(this.userService.findByUsername("alecasgar")).willReturn(usuario);
 		given(this.miembroService.findByUser(usuario)).willReturn(miembro);
-		
+		given(this.puntuacionService.findAll()).willReturn(puntuaciones);
 		
 	}
 	
-	@WithMockUser(value="Us3r")
+	@WithMockUser(value="alecasgar")
 	@Test
 	void testInitCreationForm() throws Exception {
 		
@@ -117,42 +114,44 @@ public class PuntuacionControllerTest {
 			.andExpect(view().name("libros/valorarLibro"));
 	}
 
-	@WithMockUser(value = "Us3r")
+	@WithMockUser(value = "alecasgar")
     @Test
     void testProcessCreationFormSuccess() throws Exception {
-		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "2")
-				.param("miembro", "1")
+		mockMvc.perform(post("/puntuacion/save")
+				.param("puntaje", "4")
+				.param("libro.id", "2")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Libro valorado correctamente"));
 	}
 	
 	
-	@WithMockUser(value = "Us3r")
+	@WithMockUser(value = "alecasgar")
     @Test
     void testProcessCreationFormHasErrors() throws Exception {
 		mockMvc.perform(post("/puntuacion/save")
 						.with(csrf())
-						.param("libro", "2"))
+						.param("libro.id", "2"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeHasErrors("puntuacion"))
 			.andExpect(model().attributeHasFieldErrors("puntuacion", "puntaje"))
 			.andExpect(view().name("libros/valorarLibro"));
 	}
 	
-	@WithMockUser(value = "Us3r")
+	@WithMockUser(value = "alecasgar")
     @Test
     void testProcessUpdateFormSuccess() throws Exception {
-		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4")
-				.param("libro", "1").param("miembro", "1")
+		mockMvc.perform(post("/puntuacion/save")
+				.param("puntaje", "4")
+				.param("libro.id", "1")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Valoración actualizada correctamente"));
 	}
 	
 	
-	@WithMockUser(value = "Us3r")
+	@WithMockUser(value = "alecasgar")
     @Test
     void testProcessCreationFormPuntajeFueraDeRango() throws Exception {
-		mockMvc.perform(post("/puntuacion/save").param("puntaje", "8").param("libro", "3")
+		mockMvc.perform(post("/puntuacion/save").param("puntaje", "8").param("libro.id", "3")
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Hay fallos en el formulario"));
 	}
@@ -161,7 +160,7 @@ public class PuntuacionControllerTest {
     @Test
     void testProcessCreationFormLibroNoPrestado() throws Exception {
 		Mockito.doThrow(new LibroNoPrestadoAnteriormenteException()).when(puntuacionService).savePuntuacion(any(Puntuacion.class));
-		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro", "2")				
+		mockMvc.perform(post("/puntuacion/save").param("puntaje", "4").param("libro.id", "1")				
 			.with(csrf()))
 			.andExpect(model().attribute("message", "Este libro no ha sido prestado por usted anteriormente"));
 	}
