@@ -36,6 +36,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/libros")
 public class LibroController {
@@ -147,11 +150,13 @@ public class LibroController {
 		String vista = "libros/listLibro";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("libro", libro);
+			log.warn("Datos del libro incorrectos " + result.getAllErrors());
 			return "libros/editLibro";
 		}else {
 			librosService.save(libro);
 			modelmap.addAttribute("message", "Libro guardado correctamente");
 			vista = listLibros(modelmap,null,null,null);
+			log.info("Libro con id: " + libro.getId() + " guardado correctamente");
 		}
 		return vista;
 	}

@@ -6,23 +6,26 @@ import java.util.Iterator;
 
 import javax.validation.Valid;
 
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.samples.petclinic.model.Miembro;
- import org.springframework.samples.petclinic.model.Puntuacion;
- import org.springframework.samples.petclinic.model.User;
- import org.springframework.samples.petclinic.service.LibroService;
- import org.springframework.samples.petclinic.service.MiembroService;
- import org.springframework.samples.petclinic.service.PuntuacionService;
- import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Miembro;
+import org.springframework.samples.petclinic.model.Puntuacion;
+import org.springframework.samples.petclinic.model.User;
+import org.springframework.samples.petclinic.service.LibroService;
+import org.springframework.samples.petclinic.service.MiembroService;
+import org.springframework.samples.petclinic.service.PuntuacionService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoPrestadoAnteriormenteException;
 import org.springframework.stereotype.Controller;
- import org.springframework.ui.ModelMap;
- import org.springframework.validation.BindingResult;
- import org.springframework.web.bind.annotation.GetMapping;
- import org.springframework.web.bind.annotation.PathVariable;
- import org.springframework.web.bind.annotation.PostMapping;
- import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+ @Slf4j
  @Controller
  @RequestMapping("/puntuacion")
  public class PuntuacionController {
@@ -58,6 +61,7 @@ import org.springframework.stereotype.Controller;
  		if(result.hasErrors()) {
  			modelmap.addAttribute("puntuacion", puntuacion);
  			modelmap.addAttribute("message", "Hay fallos en el formulario");
+ 			log.warn("Datos de la puntuación incorrectos " + result.getAllErrors());
  			return "libros/valorarLibro";
  		}
  		else {
@@ -75,6 +79,7 @@ import org.springframework.stereotype.Controller;
  		 				p.setPuntaje(puntuacion.getPuntaje());
  		 				puntuacionService.savePuntuacion(p);
  		 	 			modelmap.addAttribute("message", "Valoración actualizada correctamente");
+ 		 	 			log.info("Valoración con id: " + puntuacion.getId() + " actualizada correctamente");
  		 	 			b = false;
  		 	 			break;
  		 			}
@@ -82,10 +87,12 @@ import org.springframework.stereotype.Controller;
  				if (b) {
  					puntuacionService.savePuntuacion(puntuacion);
  	 	 			modelmap.addAttribute("message", "Libro valorado correctamente");
+ 	 	 			log.info("Libro con id: " + puntuacion.getLibro().getId() + " valorado correctamente");
  				}
  			}
  			catch (LibroNoPrestadoAnteriormenteException e) {
  				modelmap.addAttribute("message", "Este libro no ha sido prestado por usted anteriormente");
+ 				log.warn("Libro con id: " + puntuacion.getLibro().getId() + " no ha sido prestado por usted anteriormente");
  			}
  			
  		}

@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/generos")
 public class GeneroController {
@@ -38,11 +41,13 @@ public class GeneroController {
 		if(result.hasErrors()) {
 			modelmap.addAttribute("genero", genero);
 			modelmap.addAttribute("message", "Hay fallos en el formulario.");
+			log.warn("Datos del género incorrectos " + result.getAllErrors());
 			return "generos/editGenero";
 		}else {
 			generoService.save(genero);
 			modelmap.addAttribute("message", "Género guardado correctamente");
 			vista = listGeneros(modelmap);
+			log.info("Género con id: " + genero.getId() + " guardado correctamente");
 		}
 		return vista;
 	}

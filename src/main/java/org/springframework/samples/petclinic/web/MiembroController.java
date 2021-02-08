@@ -18,6 +18,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jdk.internal.org.jline.utils.Log;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/miembros")
 public class MiembroController {
@@ -41,15 +45,18 @@ public class MiembroController {
 		String vista = "miembros/listMiembro";
 		if (result.hasErrors()) {
 			modelmap.addAttribute("miembro", miembro);
+			log.warn("Datos del miembro incorrectos " + result.getAllErrors());
 			return "miembros/editMiembro";
 		} else if (userService.findUser(miembro.getUser().getUsername()).isPresent()) {
 			modelmap.addAttribute("message", "Usuario ya existente");
 			modelmap.addAttribute("miembro", miembro);
+			log.warn("Miembro con nombre de usuario " + miembro.getUser().getUsername() + " ya existente");
 			return "miembros/editMiembro";
 		} else {
 			miembrosService.save(miembro);
 			modelmap.addAttribute("message", "Miembro guardado correctamente");
 			vista = listMiembros(modelmap);
+			log.info("Miembro con id: " + miembro.getId() + " guardado correctamente");
 		}
 		return vista;
 	}
@@ -71,8 +78,10 @@ public class MiembroController {
 			userService.save(user);
 			modelmap.addAttribute("message", "Miembro habilitado correctamente");
 			vista = listMiembros(modelmap);
+			log.info("Miembro con id: " + miembroId + " habilitado correctamente");
 		} else {
 			modelmap.addAttribute("message", "Miembro no encontrado");
+			log.warn("Miembro con id: " + miembroId + " no encontrado");
 		}
 		vista = listMiembros(modelmap);
 		return vista;
@@ -88,8 +97,10 @@ public class MiembroController {
 			userService.save(user);
 			modelmap.addAttribute("message", "Miembro deshabilitado correctamente");
 			vista = listMiembros(modelmap);
+			log.info("Miembro con id: " + miembroId + " deshabilitado correctamente");
 		} else {
 			modelmap.addAttribute("message", "Miembro no encontrado");
+			log.warn("Miembro con id: " + miembroId + " no encontrado");
 		}
 		vista = listMiembros(modelmap);
 		return vista;

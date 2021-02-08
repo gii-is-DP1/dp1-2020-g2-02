@@ -29,6 +29,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import lombok.extern.slf4j.Slf4j;
+	@Slf4j
 	@Controller
 	@RequestMapping("/prestamos")
 	public class PrestamoController {
@@ -69,6 +71,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 			Optional<Prestamo> p = prestamoService.findById(prestamoId);
 			if(!p.isPresent()) {
 				modelmap.addAttribute("message", "El préstamo no existe.");
+				log.warn("El préstamo con id: " + prestamoId + " no existe");
 				return vista;
 			}
 			Prestamo prestamo = p.get();
@@ -81,8 +84,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 				prestamo.setBibliotecario(biblio);
 				prestamoService.save(prestamo);
 				modelmap.addAttribute("message", "Préstamo concedido correctamente.");
+				log.info("El préstamo con id: " + prestamoId + " ha sido concedido correctamente");
 			} else {
 				modelmap.addAttribute("message", "El préstamo no se puede conceder (Ya ha finalizado o el ejemplar no se encuentra reservado).");
+				log.warn("El préstamo con id: " + prestamoId + "no se puede conceder (Ya ha finalizado o el ejemplar no se encuentra reservado)");
 			}
 			return vista;
 		}
@@ -117,6 +122,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 			Optional<Prestamo> p = prestamoService.findById(prestamoId);
 			if(!p.isPresent()) {
 				modelmap.addAttribute("message", "El préstamo no existe.");
+				log.warn("El préstamo con id: " + prestamoId + " no existe");
 				return vista;
 			}
 			Prestamo prestamo = p.get();
@@ -127,8 +133,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 				prestamo.setFinalizado(true);
 				prestamoService.save(prestamo);
 				modelmap.addAttribute("message", "Préstamo finalizado correctamente.");
+				log.info("El préstamo con id: " + prestamoId + " ha finalizado correctamente");
 			} else {
 				modelmap.addAttribute("message", "El préstamo no se puede finalizar (Ya ha finalizado o el ejemplar no se encuentra en préstamo).");
+				log.warn("El préstamo con id: " + prestamoId + "no puede finalizar (Ya ha finalizado o el ejemplar no se encuentra en préstamo)");
 			}
 			return vista;
 		}
@@ -139,6 +147,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 			Optional<Prestamo> p = prestamoService.findById(prestamoId);
 			if(!p.isPresent()) {
 				modelmap.addAttribute("message", "El préstamo no existe.");
+				log.warn("El préstamo con id: " + prestamoId + " no existe");
 				return vista;
 			}
 			Prestamo prestamo = p.get();
@@ -149,8 +158,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 				prestamo.setFinalizado(true);
 				prestamoService.save(prestamo);
 				modelmap.addAttribute("message", "Préstamo rechazado correctamente.");
+				log.info("El préstamo con id: " + prestamoId + " ha sido rechazado correctamente");
 			} else {
 				modelmap.addAttribute("message", "El préstamo no se puede rechazar (Ya ha finalizado o el ejemplar no se encuentra reservado).");
+				log.warn("El préstamo con id: " + prestamoId + "no se puede rechazar (Ya ha finalizado o el ejemplar no se encuentra reservado)");
 			}
 			return vista;
 		}

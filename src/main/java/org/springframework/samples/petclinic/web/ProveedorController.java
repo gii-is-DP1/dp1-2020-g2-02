@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 @RequestMapping("/proveedores")
 public class ProveedorController {
@@ -36,11 +38,13 @@ public class ProveedorController {
 		String vista = "proveedores/listProveedor";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("proveedor", proveedor);
+			log.warn("Datos del proveedor incorrectos " + result.getAllErrors());
 			return "proveedores/editProveedor";
 		}else {
 			proveedorService.save(proveedor);
 			modelmap.addAttribute("message", "Proveedor guardado correctamente");
 			vista = listProveedores(modelmap);
+			log.info("Proveedor con id: " + proveedor.getId() + " guardado correctamente");
 		}
 		return vista;
 	}
