@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/bibliotecarios")
 public class BibliotecarioController {
@@ -41,15 +44,18 @@ public class BibliotecarioController {
 		String vista = "bibliotecarios/listBibliotecario";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("bibliotecario", bibliotecario);
+			log.warn("Datos de bibliotecario incorrectos " + result.getAllErrors());
 			return "bibliotecarios/editBibliotecario";
 		} else if(userService.findUser(bibliotecario.getUser().getUsername()).isPresent()) {
 			modelmap.addAttribute("message", "Usuario ya existente");
 			modelmap.addAttribute("bibliotecario", bibliotecario);
+			log.warn("Bibliotecario ya existente");
 			return "bibliotecarios/editBibliotecario";
 		} else {
 			bibliotecariosService.save(bibliotecario);
 			modelmap.addAttribute("message", "Bibliotecario guardado correctamente");
 			vista = listBibliotecarios(modelmap);
+			log.info("Bibliotecario con id: " + bibliotecario.getId() + " guardado correctamente");
 		}
 		return vista;
 	}
@@ -60,6 +66,7 @@ public class BibliotecarioController {
 		modelmap.addAttribute("bibliotecario", new Bibliotecario());
 		return vista;
 	}
+	
 	@GetMapping(path="/habilitar/{biblioId}")
 	public String habilitarMiembro(@PathVariable("biblioId") int biblioId, ModelMap modelmap) {
 		String vista = "miembros/listMiembros";
@@ -69,8 +76,10 @@ public class BibliotecarioController {
 			user.setEnabled(true);
 			userService.save(user);
 			modelmap.addAttribute("message", "Bibliotecario habilitado correctamente");
+			log.info("Bibliotecario con id: " + biblioId + " habilitado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Bibliotecario no encontrado");
+			log.info("Bibliotecario con id: " + biblioId + " no encontrado");
 		}
 		vista = listBibliotecarios(modelmap);
 		return vista;
@@ -84,24 +93,12 @@ public class BibliotecarioController {
 			user.setEnabled(false);
 			userService.save(user);
 			modelmap.addAttribute("message", "Bibliotecario deshabilitado correctamente");
+			log.info("Bibliotecario con id: " + biblioId + " deshabilitado correctamente");
 		}else {
 			modelmap.addAttribute("message", "Bibliotecario no encontrado");
+			log.info("Bibliotecario con id: " + biblioId + " no encontrado");
 		}
 		vista = listBibliotecarios(modelmap);
 		return vista;
 	}
-	/*@GetMapping(path="/delete/{bibliotecarioId}")
-	public String borrarBibliotecario(@PathVariable("bibliotecarioId") int bibliotecarioId, ModelMap modelmap) {
-		String vista = "bibliotecarios/listBibliotecario";
-		Optional<Bibliotecario> bibliotecario = bibliotecariosService.findById(bibliotecarioId);
-		if(bibliotecario.isPresent()) {
-			bibliotecariosService.delete(bibliotecario.get());
-			modelmap.addAttribute("message", "Bibliotecario eliminado correctamente");
-			vista = listBibliotecarios(modelmap);
-		}else {
-			modelmap.addAttribute("message", "Bibliotecario no encontrado");
-		}
-		vista = listBibliotecarios(modelmap);
-		return vista;
-	}*/
 }

@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/editoriales")
 public class EditorialController {
@@ -37,11 +40,13 @@ public class EditorialController {
 		String vista = "editoriales/listEditorial";
 		if(result.hasErrors()) {
 			modelmap.addAttribute("editorial", editorial);
+			log.warn("Datos de la editorial incorrectos " + result.getAllErrors());
 			return "editoriales/editEditorial";
 		}else {
 			editorialService.save(editorial);
 			modelmap.addAttribute("message", "Editorial guardada correctamente");
 			vista = listEditoriales(modelmap);
+			log.info("Editorial con id: " + editorial.getId() + " guardada correctamente");
 		}
 		return vista;
 	}
