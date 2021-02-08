@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jdk.internal.org.jline.utils.Log;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -105,14 +104,4 @@ public class MiembroController {
 		vista = listMiembros(modelmap);
 		return vista;
 	}
-	/*
-	 * @GetMapping(path="/delete/{miembroId}") public String
-	 * borrarMiembro(@PathVariable("miembroId") int miembroId, ModelMap modelmap) {
-	 * String vista = "miembros/listMiembros"; Optional<Miembro> miembro =
-	 * miembrosService.findById(miembroId); if(miembro.isPresent()) {
-	 * miembrosService.delete(miembro.get()); modelmap.addAttribute("message",
-	 * "Miembro eliminado correctamente"); vista = listMiembros(modelmap); }else {
-	 * modelmap.addAttribute("message", "Miembro no encontrado"); } vista =
-	 * listMiembros(modelmap); return vista; }
-	 */
 }

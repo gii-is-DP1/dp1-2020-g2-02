@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-
 @Controller
 @RequestMapping("/api/novedades")
 public class NovedadControladorAlternativo {
