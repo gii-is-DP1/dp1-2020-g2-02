@@ -39,7 +39,7 @@
     <br>
     <br>
     <h2>APIs REST</h2>
-    <a href='/swagger-ui.html'>Especificación con OpenAPI</a>
+    <a href='/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config'>Especificación con OpenAPI</a>
     <br>
     <a href='/api/libros'>Libros</a>
     <br>
