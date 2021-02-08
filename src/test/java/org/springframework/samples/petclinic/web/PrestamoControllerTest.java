@@ -1,9 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -28,14 +26,10 @@ import org.springframework.samples.petclinic.model.Miembro;
 import org.springframework.samples.petclinic.model.Novedad;
 import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.User;
-import org.springframework.samples.petclinic.service.AutorService;
 import org.springframework.samples.petclinic.service.BibliotecarioService;
-import org.springframework.samples.petclinic.service.EditorialService;
-import org.springframework.samples.petclinic.service.EjemplarService;
-import org.springframework.samples.petclinic.service.GeneroService;
-import org.springframework.samples.petclinic.service.LibroService;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.PrestamoService;
+import org.springframework.samples.petclinic.service.PuntuacionService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoDisponibleException;
 import org.springframework.samples.petclinic.service.exceptions.LibroNoExistenteException;
@@ -66,6 +60,9 @@ public class PrestamoControllerTest {
 	
 	@MockBean
 	BibliotecarioService bibliotecarioService;
+	
+	@MockBean
+	PuntuacionService puntuacionService;
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -201,6 +198,16 @@ public class PrestamoControllerTest {
 	@Test
 	void testPrestamosList() throws Exception {
 		mockMvc.perform(get("/prestamos"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("prestamos"))
+			.andExpect(view().name("prestamos/listPrestamo"));
+	}
+	
+	@WithMockUser(value = "Us3r")
+	@Test
+	void testPrestamosListFiltrado() throws Exception {
+		mockMvc.perform(get("/prestamos")
+				.param("b", "true"))
 			.andExpect(status().isOk())
 			.andExpect(model().attributeExists("prestamos"))
 			.andExpect(view().name("prestamos/listPrestamo"));

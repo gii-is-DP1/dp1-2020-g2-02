@@ -146,7 +146,17 @@ public class LibroControllerTests {
 			.andExpect(view().name("libros/listLibro"));
 	}
 	
-
+	@WithMockUser(value = "alecasgar")
+	@Test
+	void testLibrosListBusqueda() throws Exception {
+		mockMvc.perform(get("/libros")
+				.param("q","A")
+				.param("qAutor","B")
+				.param("qEditorial","C"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("libros"))
+			.andExpect(view().name("libros/listLibro"));
+	}
 	
 	@WithMockUser(value = "alecasgar")
 	@Test
@@ -205,8 +215,8 @@ public class LibroControllerTests {
 		mockMvc.perform(post("/libros/save")
 				.param("ISBN", "1111111111")
 				.param("titulo", "Titulo Prueba")
-				.param("Idioma", "Idioma Prueba")
-				.param("fechaPublicacion", "01/01/2000")
+				.param("idioma", "Idioma Prueba")
+				.param("fecha_publicacion", "01/01/2000")
 			.with(csrf()))
 			.andExpect(view().name("libros/listLibro"))
 			.andExpect(model().attribute("message", "Libro guardado correctamente"));
@@ -218,7 +228,7 @@ public class LibroControllerTests {
 		mockMvc.perform(post("/libros/save")
 				.param("ISBN", "1")
 				.param("titulo", "Titulo Prueba")
-				.param("Idioma", "Idioma Prueba")
+				.param("idioma", "Idioma Prueba")
 				.param("fecha_publicacion", "01/01/2000")
 			.with(csrf()))
 			.andExpect(view().name("libros/editLibro"))
@@ -232,7 +242,7 @@ public class LibroControllerTests {
 		mockMvc.perform(post("/libros/save")
 				.param("ISBN", "1111111111")
 				.param("titulo", "Titulo Prueba")
-				.param("Idioma", "Idioma Prueba")
+				.param("idioma", "Idioma Prueba")
 				.param("fecha_publicacion", "01/01/2200")
 			.with(csrf()))
 			.andExpect(view().name("libros/editLibro"))
