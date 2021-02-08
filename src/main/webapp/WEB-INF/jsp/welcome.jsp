@@ -39,6 +39,8 @@
     <br>
     <br>
     <h2>APIs REST</h2>
+    <a href='/swagger-ui.html'>Especificación con OpenAPI</a>
+    <br>
     <a href='/api/libros'>Libros</a>
     <br>
     <a href='/api/novedades'>Novedades</a>
