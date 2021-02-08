@@ -65,6 +65,7 @@ public class NovedadControllerTests {
     void testProcessCreationFormSuccess() throws Exception {
 		mockMvc.perform(post("/novedades/save").param("titulo", "A").param("contenido", "A")
 			.with(csrf()))
+			.andExpect(view().name("novedades/listNovedad"))
 			.andExpect(model().attribute("message", "Novedad guardada correctamente."));
 	}
 	
