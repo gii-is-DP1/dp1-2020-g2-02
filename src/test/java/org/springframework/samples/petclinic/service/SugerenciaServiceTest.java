@@ -19,6 +19,11 @@ public class SugerenciaServiceTest {
 	@Autowired
 	private SugerenciaService sugerenciaService;
 	
+	@Test
+	public void testCountWithInitialData() {
+		int count=sugerenciaService.sugerenciaCount();
+		assertTrue(count==3);
+	}
 	
 	@Test
 	public void testFindAll() {
@@ -45,21 +50,5 @@ public class SugerenciaServiceTest {
 		assertTrue(sugerencias.size()+1==sugerenciaService.findAllOrderByTituloLibro().size());
 	}
 	
-	//Esto es una prueba para travis
-	
-	/*@Test
-	@Transactional
-	public void testAddSugerenciaHasErrors() {
-		Collection<Sugerencia> sugerencias = sugerenciaService.findAllOrderByTituloLibro();
-		Sugerencia sugerencia = new Sugerencia();
-		sugerencia.setNombreAutor("Brandon Sanderson");
-		try {
-			sugerenciaService.save(sugerencia);
-			assertTrue(false);
-		}
-		catch(Exception e) {
-			assertTrue(true);
-		}
-	}*/
 
 }

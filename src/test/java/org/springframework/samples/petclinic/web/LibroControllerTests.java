@@ -248,4 +248,13 @@ public class LibroControllerTests {
 			.andExpect(view().name("libros/editLibro"))
 			.andExpect(model().attributeHasErrors("libro"));
 	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testInitCreationForm() throws Exception {
+		mockMvc.perform(get("/libros/new"))
+			.andExpect(status().isOk())
+			.andExpect(model().attributeExists("libro"))
+			.andExpect(view().name("libros/editLibro"));
+	}
 }
