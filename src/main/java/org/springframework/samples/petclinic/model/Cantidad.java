@@ -6,6 +6,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +19,11 @@ public class Cantidad extends BaseEntity{
 
 	@Column(name = "unidades")
 	@Min(1)
+	@NotNull
 	private Integer unidades;
 	
 	@Column(name = "precio_unitario")
+	@NotNull
 	private Double precioUnitario;
 	
 	@ManyToOne
