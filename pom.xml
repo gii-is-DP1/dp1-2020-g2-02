@@ -295,10 +295,10 @@
     </dependencies>
     			<configuration>
         			<targetClasses>
-            			<param>org.springframework.samples.petclinic.service.AutorService*</param>
+            			<param>org.springframework.samples.petclinic.service.NovedadService*</param>
         			</targetClasses>
         			<targetTests>
-            			<param>org.springframework.samples.petclinic.service.AutorServiceTest*</param>
+            			<param>org.springframework.samples.petclinic.service.NovedadServiceTest*</param>
 					</targetTests>
      			</configuration>
 			</plugin>
