@@ -52,4 +52,10 @@ public class AutorServiceTest {
 		Collection<Libro> libros = autorService.findById(1).get().getLibros();
 		assertThat(libros.size()).isEqualTo(1);
 	}
+	
+    @Test
+    public void testGetNombreCompleto() {
+        String nombreCompleto = autorService.getNombreCompleto(autorService.findById(4).get());
+        assertThat(nombreCompleto).isEqualTo("Fernando Aramburu");
+    }
 }

@@ -8,7 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,12 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.samples.petclinic.configuration.SecurityConfiguration;
-import org.springframework.samples.petclinic.model.Bibliotecario;
-import org.springframework.samples.petclinic.model.Disponibilidad;
-import org.springframework.samples.petclinic.model.Ejemplar;
-import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
-import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.MiembroService;
 import org.springframework.samples.petclinic.service.UserService;
@@ -182,4 +176,22 @@ public class MiembroControllerTests {
 			.andExpect(model().attribute("message", "Miembro no encontrado"))
 			.andExpect(view().name("miembros/listMiembro"));
 	}
+	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testHabilitarMiembroSuccess() throws Exception {
+        mockMvc.perform(get("/miembros/habilitar/{miembroId}", 1))
+            .andExpect(status().isOk())
+            .andExpect(model().attribute("message", "Miembro habilitado correctamente"))
+            .andExpect(view().name("miembros/listMiembro"));
+    }
+    
+    @WithMockUser(value = "Us3r")
+    @Test
+    void testHabilitarMiembroNoExistente() throws Exception {
+        mockMvc.perform(get("/miembros/habilitar/{miembroId}", 2))
+            .andExpect(status().isOk())
+            .andExpect(model().attribute("message", "Miembro no encontrado"))
+            .andExpect(view().name("miembros/listMiembro"));
+    }
 }

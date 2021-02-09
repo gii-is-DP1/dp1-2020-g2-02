@@ -9,8 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +24,6 @@ import org.springframework.samples.petclinic.model.Disponibilidad;
 import org.springframework.samples.petclinic.model.Ejemplar;
 import org.springframework.samples.petclinic.model.Libro;
 import org.springframework.samples.petclinic.model.Miembro;
-import org.springframework.samples.petclinic.model.Novedad;
 import org.springframework.samples.petclinic.model.Prestamo;
 import org.springframework.samples.petclinic.model.User;
 import org.springframework.samples.petclinic.service.EjemplarService;
@@ -181,7 +178,36 @@ public class EjemplarControllerTests {
 		
 	}
 	
-	
+	@WithMockUser(value = "Us3r")
+    @Test
+    void testInitEditFormNotFound() throws Exception {
+        mockMvc.perform(get("/ejemplares/edit/{ejemplarId}",99))
+        .andExpect(status().isOk())
+        .andExpect(view().name("ejemplares/listEjemplar"))
+        .andExpect(model().attribute("message","Ejemplar no encontrado"));
+        
+    }
+    
+    @WithMockUser(value = "Us3r")
+    @Test
+    void testProcessEditFormSuccess() throws Exception {
+        mockMvc.perform(post("/ejemplares/saveEstado")
+                .with(csrf())
+                .param("ejemplar.id", "1")
+                .param("estado", "A"))
+            .andExpect(model().attribute("message", "Estado del ejemplar modificado correctamente"))
+            .andExpect(view().name("ejemplares/listEjemplar"));
+        
+    }
+    
+    @WithMockUser(value = "Us3r")
+    @Test
+    void testProcessEditFormHasErrors() throws Exception {
+        mockMvc.perform(post("/ejemplares/saveEstado")
+                .with(csrf())
+                .param("ejemplar.id", "1"))
+            .andExpect(view().name("ejemplares/editEstado"));
+    }
 	
 	
 
