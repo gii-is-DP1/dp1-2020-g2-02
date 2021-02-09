@@ -3,6 +3,9 @@ package org.springframework.samples.petclinic.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
+import java.util.Collection;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,4 +109,42 @@ public class PrestamoServiceTest {
 		
 		Assertions.assertThrows(LimitePrestamosException.class,() ->{prestamoService.realizarReserva(4, miembro);});
 	}
+	
+	@Test
+    @Transactional
+    public void testPrestamosMiembrosUrgente() throws Exception {
+        User user = userService.findUser("ivasan1").get();
+        Miembro miembro = miembroService.findByUser(user);
+        
+        Collection<Prestamo> prestamosUrgentes = prestamoService.prestamosMiembrosUrgentes(miembro);
+        
+        assertThat(prestamosUrgentes.size()).isEqualTo(1);
+    }
+    
+    @Test
+    @Transactional
+    public void testHistorialPrestamosMiembro() throws Exception {
+        User user = userService.findUser("raulla1").get();
+        Miembro miembro = miembroService.findByUser(user);
+        
+        Collection<Prestamo> prestamosMiembro = prestamoService.historialPrestamos(miembro);
+        
+        assertThat(prestamosMiembro.size()).isEqualTo(2);
+    }
+    
+    @Test
+    @Transactional
+    public void testPrestamosFechaDevolucionTardia() throws Exception {
+        Collection<Prestamo> prestamosRetrasados = prestamoService.prestamosConFechaDevolucionTardia(LocalDate.now());
+        
+        assertThat(prestamosRetrasados.size()).isEqualTo(1);
+    }
+    
+    @Test
+    @Transactional
+    public void testPrestamosHoy() throws Exception {
+        Collection<Prestamo> prestamosHoy = prestamoService.findPrestamosHoy();
+        
+        assertThat(prestamosHoy.size()).isEqualTo(2);
+    }
 }
